@@ -15,6 +15,7 @@ public class PaasProfile {
 	@SerializedName("url")
 	@Expose
 	private String url;
+
 	@SerializedName("status")
 	@Expose
 	private String status;
@@ -51,6 +52,44 @@ public class PaasProfile {
 	@SerializedName("infrastructures")
 	@Expose
 	private List<Object> infrastructures = null;
+
+	boolean failed = false;
+
+	public PaasProfile(String name, String revision, String url, String status, String statusSince, String type,
+			Hosting hosting, List<Pricing> pricings, Scaling scaling, List<Runtime> runtimes,
+			List<Middleware> middlewares, List<Framework> frameworks, Services services, Boolean extensible,
+			List<Object> infrastructures) {
+		super();
+		this.name = name;
+		this.revision = revision;
+		this.url = url;
+		this.status = status;
+		this.statusSince = statusSince;
+		this.type = type;
+		this.hosting = hosting;
+		this.pricings = pricings;
+		this.scaling = scaling;
+		this.runtimes = runtimes;
+		this.middlewares = middlewares;
+		this.frameworks = frameworks;
+		this.services = services;
+		this.extensible = extensible;
+		this.infrastructures = infrastructures;
+	}
+
+	/**
+	 * This Constructor is used if an error occured during scanning a JSON File
+	 * 
+	 * @param failed
+	 */
+	public PaasProfile(boolean errorOccurred) {
+		if (errorOccurred == true)
+			this.failed = true;
+	}
+
+	public boolean isFailed() {
+		return failed;
+	}
 
 	public String getName() {
 		return name;
