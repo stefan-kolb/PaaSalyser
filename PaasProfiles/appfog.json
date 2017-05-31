@@ -1,0 +1,293 @@
+{
+  "name": "AppFog",
+  "revision": "2016-09-30",
+  "url": "https://www.ctl.io/appfog/",
+  "status": "production",
+  "status_since": "2012-07-15",
+  "type": "Generic",
+  "platform": "Cloud Foundry",
+  "hosting": {
+    "public": true,
+    "private": true
+  },
+  "pricings": [
+    {
+      "model": "fixed",
+      "period": "monthly"
+    }
+  ],
+  "scaling": {
+    "vertical": true,
+    "horizontal": true,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "java",
+      "versions": [
+        "1.7.0"
+      ]
+    },
+    {
+      "language": "node",
+      "versions": [
+        "0.4.12",
+        "0.6.17",
+        "0.8.14",
+        "0.10.29"
+      ]
+    },
+    {
+      "language": "php",
+      "versions": [
+        "5.3.10",
+        "5.4.33",
+        "5.5.17",
+        "5.6.1"
+      ]
+    },
+    {
+      "language": "python",
+      "versions": [
+        "2.7.3"
+      ]
+    },
+    {
+      "language": "ruby",
+      "versions": [
+        "1.8.7",
+        "1.9.2",
+        "1.9.3"
+      ]
+    }
+  ],
+  "middlewares": [
+    {
+      "name": "gunicorn",
+      "runtime": "python",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "tomcat",
+      "runtime": "java",
+      "versions": [
+        "6"
+      ]
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "django",
+      "runtime": "python",
+      "versions": [
+        "1.3",
+        "1.4"
+      ]
+    },
+    {
+      "name": "flask",
+      "runtime": "python",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "rails",
+      "runtime": "ruby",
+      "versions": [
+        "3.0",
+        "3.1"
+      ]
+    }
+  ],
+  "services": {
+    "native": [
+      {
+        "name": "mongodb",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+          "1.8",
+          "2.4.8"
+        ]
+      },
+      {
+        "name": "mysql",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+          "5.1"
+        ]
+      },
+      {
+        "name": "postgresql",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+          "9.1"
+        ]
+      },
+      {
+        "name": "rabbitmq",
+        "description": "",
+        "type": "worker",
+        "versions": [
+          "2.4"
+        ]
+      },
+      {
+        "name": "redis",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+          "2.2"
+        ]
+      }
+    ],
+    "addon": [
+      {
+        "name": "blitz",
+        "url": "https://www.blitz.io/",
+        "description": "",
+        "type": "analytics"
+      },
+      {
+        "name": "cedexis",
+        "url": "http://www.cedexis.com/",
+        "description": "",
+        "type": "other"
+      },
+      {
+        "name": "cleardb",
+        "url": "http://www.cleardb.com/",
+        "description": "",
+        "type": "datastore"
+      },
+      {
+        "name": "cloudamqp",
+        "url": "http://cloudamqp.com/",
+        "description": "",
+        "type": "worker"
+      },
+      {
+        "name": "cloudinary",
+        "url": "http://cloudinary.com/",
+        "description": "",
+        "type": "media"
+      },
+      {
+        "name": "cloudmailin",
+        "url": "http://www.cloudmailin.com/",
+        "description": "",
+        "type": "messaging"
+      },
+      {
+        "name": "elephantsql",
+        "url": "http://www.elephantsql.com/",
+        "description": "",
+        "type": "datastore"
+      },
+      {
+        "name": "ironmq",
+        "url": "http://www.iron.io/mq",
+        "description": "",
+        "type": "worker"
+      },
+      {
+        "name": "ironworker",
+        "url": "http://www.iron.io/worker",
+        "description": "",
+        "type": "worker"
+      },
+      {
+        "name": "logentries",
+        "url": "https://logentries.com/",
+        "description": "",
+        "type": "analytics"
+      },
+      {
+        "name": "mailgun",
+        "url": "http://www.mailgun.com/",
+        "description": "",
+        "type": "messaging"
+      },
+      {
+        "name": "memcached cloud",
+        "url": "http://garantiadata.com/memcached",
+        "description": "",
+        "type": "datastore"
+      },
+      {
+        "name": "memcachier",
+        "url": "http://www.memcachier.com/",
+        "description": "",
+        "type": "datastore"
+      },
+      {
+        "name": "compose mongodb",
+        "url": "https://www.compose.io/mongodb/",
+        "description": "",
+        "type": "datastore"
+      },
+      {
+        "name": "mongolab",
+        "url": "https://mongolab.com/",
+        "description": "",
+        "type": "datastore"
+      },
+      {
+        "name": "nexmo",
+        "url": "http://nexmo.com/",
+        "description": "",
+        "type": "messaging"
+      },
+      {
+        "name": "redis cloud",
+        "url": "http://redis-cloud.com/",
+        "description": "",
+        "type": "datastore"
+      },
+      {
+        "name": "searchify",
+        "url": "http://www.searchify.com/",
+        "description": "",
+        "type": "search"
+      },
+      {
+        "name": "sendgrid",
+        "url": "http://sendgrid.com/",
+        "description": "",
+        "type": "messaging"
+      },
+      {
+        "name": "statsmix",
+        "url": "https://www.statsmix.com/",
+        "description": "",
+        "type": "analytics"
+      },
+      {
+        "name": "tempodb",
+        "url": "http://tempo-db.com/",
+        "description": "",
+        "type": "datastore"
+      }
+    ]
+  },
+  "extensible": true,
+  "infrastructures": [
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "US East",
+      "provider": "CenturyLink"
+    },
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "US West",
+      "provider": "CenturyLink"
+    }
+  ]
+}

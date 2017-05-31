@@ -1,0 +1,41 @@
+{
+  "name": "TwoSpot",
+  "revision": "2013-07-05T17:47:54+02:00",
+  "url": "https://code.google.com/p/twospot/",
+  "status": "eol",
+  "status_since": null,
+  "type": "polyglot",
+  "hosting": {
+    "public": false,
+    "private": true
+  },
+  "pricings": [
+
+  ],
+  "scaling": {
+    "vertical": false,
+    "horizontal": true,
+    "auto": true
+  },
+  "runtimes": [
+    {
+      "language": "java",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "python",
+      "versions": [
+
+      ]
+    }
+  ],
+  "middlewares": null,
+  "frameworks": null,
+  "services": null,
+  "extensible": false,
+  "infrastructures": [
+
+  ]
+}

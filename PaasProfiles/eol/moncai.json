@@ -1,0 +1,39 @@
+{
+  "name": "Moncai",
+  "revision": "2015-01-23",
+  "url": "http://moncai.com/",
+  "status": "eol",
+  "status_since": "2015-01-23",
+  "type": "Generic",
+  "hosting": {
+    "public": true,
+    "private": false
+  },
+  "pricings": [
+
+  ],
+  "scaling": {
+    "vertical": false,
+    "horizontal": false,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "dotnet",
+      "versions": [
+
+      ]
+    }
+  ],
+  "middlewares": [
+
+  ],
+  "frameworks": [
+
+  ],
+  "services": null,
+  "extensible": false,
+  "infrastructures": [
+
+  ]
+}

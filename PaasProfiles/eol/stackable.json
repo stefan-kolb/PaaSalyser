@@ -1,0 +1,50 @@
+{
+  "name": "Stackable",
+  "revision": "2014-04-23",
+  "url": "http://stackable.com/",
+  "status": "eol",
+  "status_since": "2014-02-01",
+  "type": "language-specific",
+  "hosting": {
+    "public": true,
+    "private": false
+  },
+  "pricings": [
+    {
+      "model": "",
+      "period": "monthly"
+    }
+  ],
+  "scaling": {
+    "vertical": true,
+    "horizontal": true,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "php",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "python",
+      "versions": [
+
+      ]
+    }
+  ],
+  "middlewares": [
+
+  ],
+  "frameworks": null,
+  "services": null,
+  "extensible": false,
+  "infrastructures": [
+    {
+      "continent": "NA",
+      "country": "",
+      "region": ""
+    }
+  ]
+}

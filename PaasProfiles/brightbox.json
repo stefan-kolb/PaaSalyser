@@ -1,0 +1,66 @@
+{
+  "name": "brightbox",
+  "revision": "2013-07-15",
+  "url": "http://www.brightbox.co.uk/",
+  "status": "production",
+  "status_since": "2007-10-15",
+  "type": "IaaS-centric",
+  "hosting": {
+    "public": true,
+    "private": false
+  },
+  "pricings": [
+    {
+      "model": "fixed",
+      "period": "monthly"
+    }
+  ],
+  "scaling": {
+    "vertical": true,
+    "horizontal": true,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "ruby",
+      "versions": [
+        "1.8.7",
+        "1.9.3"
+      ]
+    }
+  ],
+  "middlewares": [
+
+  ],
+  "frameworks": [
+
+  ],
+  "services": {
+    "native": [
+      {
+        "name": "mysql",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+          "5.0"
+        ]
+      }
+    ],
+    "addon": [
+      {
+        "name": "new relic",
+        "url": "http://newrelic.com/",
+        "description": "",
+        "type": "analytics"
+      }
+    ]
+  },
+  "extensible": false,
+  "infrastructures": [
+    {
+      "continent": "EU",
+      "country": "GB",
+      "region": ""
+    }
+  ]
+}

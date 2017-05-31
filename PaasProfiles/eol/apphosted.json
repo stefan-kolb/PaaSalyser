@@ -1,0 +1,42 @@
+{
+  "name": "AppHosted",
+  "revision": "2013-07-05T18:00:44+02:00",
+  "url": "http://apphosted.com/",
+  "status": "eol",
+  "status_since": null,
+  "type": "language-specific",
+  "hosting": {
+    "public": true,
+    "private": false
+  },
+  "pricings": [
+    {
+      "model": "metered",
+      "period": ""
+    }
+  ],
+  "scaling": {
+    "vertical": false,
+    "horizontal": false,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "python",
+      "versions": [
+
+      ]
+    }
+  ],
+  "middlewares": null,
+  "frameworks": null,
+  "services": null,
+  "extensible": false,
+  "infrastructures": [
+    {
+      "continent": "NA",
+      "country": "",
+      "region": ""
+    }
+  ]
+}

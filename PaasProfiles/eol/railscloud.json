@@ -1,0 +1,83 @@
+{
+  "name": "Railscloud",
+  "revision": "2016-01-16",
+  "url": "https://railscloud.de",
+  "status": "eol",
+  "status_since": "",
+  "type": "IaaS-centric",
+  "hosting": {
+    "public": true,
+    "private": false
+  },
+  "pricings": [
+    {
+      "model": "fixed",
+      "period": "monthly"
+    }
+  ],
+  "scaling": {
+    "vertical": false,
+    "horizontal": false,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "ruby",
+      "versions": [
+        "1.9.3",
+        "2.0.0"
+      ]
+    }
+  ],
+  "middlewares": [
+
+  ],
+  "frameworks": null,
+  "services": {
+    "native": [
+      {
+        "name": "mysql",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "postgresql",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "redis",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "sqlite",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      }
+    ],
+    "addon": [
+
+    ]
+  },
+  "extensible": false,
+  "infrastructures": [
+    {
+      "continent": "EU",
+      "country": "DE",
+      "region": "Bremen"
+    }
+  ]
+}

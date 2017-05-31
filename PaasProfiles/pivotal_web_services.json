@@ -1,0 +1,265 @@
+{
+  "name": "Pivotal Web Services",
+  "revision": "2014-05-22",
+  "url": "https://run.pivotal.io/",
+  "status": "production",
+  "status_since": "2014-05-07",
+  "type": "Generic",
+  "platform": "Cloud Foundry",
+  "hosting": {
+    "public": true,
+    "private": false
+  },
+  "pricings": [
+    {
+      "model": "metered",
+      "period": "monthly"
+    }
+  ],
+  "scaling": {
+    "vertical": true,
+    "horizontal": true,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "groovy",
+      "versions": [
+        "1.5.*",
+        "1.6.*",
+        "1.7.*",
+        "1.8.*",
+        "2.0.*",
+        "2.1.*"
+      ]
+    },
+    {
+      "language": "java",
+      "versions": [
+        "1.6.*",
+        "1.7.*",
+        "1.8.*"
+      ]
+    },
+    {
+      "language": "node",
+      "versions": [
+        "0.4.*",
+        "0.6.*",
+        "0.8.*",
+        "0.10.*"
+      ]
+    },
+    {
+      "language": "ruby",
+      "versions": [
+        "1.8.7",
+        "1.9.2",
+        "1.9.3",
+        "2.0.0"
+      ]
+    },
+    {
+      "language": "scala",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "go",
+      "versions": [
+        "1.1",
+        "1.2"
+      ]
+    }
+  ],
+  "middlewares": [
+    {
+      "name": "tomcat",
+      "runtime": "java",
+      "versions": [
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "grails",
+      "runtime": "groovy",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "play",
+      "runtime": "java",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "spring",
+      "runtime": "java",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "rails",
+      "runtime": "ruby",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "sinatra",
+      "runtime": "ruby",
+      "versions": [
+
+      ]
+    }
+  ],
+  "services": {
+    "native": [
+
+    ],
+    "addon": [
+      {
+        "name": "searchify",
+        "url": "",
+        "description": "Custom search you control",
+        "type": ""
+      },
+      {
+        "name": "blazemeter",
+        "url": "",
+        "description": "The JMeter Load Testing Cloud",
+        "type": ""
+      },
+      {
+        "name": "rediscloud",
+        "url": "",
+        "description": "Enterprise-Class Redis for Developers",
+        "type": ""
+      },
+      {
+        "name": "cleardb",
+        "url": "",
+        "description": "Highly available MySQL for your Apps.",
+        "type": ""
+      },
+      {
+        "name": "cloudamqp",
+        "url": "",
+        "description": "Managed HA RabbitMQ servers in the cloud",
+        "type": ""
+      },
+      {
+        "name": "elephantsql",
+        "url": "",
+        "description": "PostgreSQL as a Service",
+        "type": ""
+      },
+      {
+        "name": "sendgrid",
+        "url": "",
+        "description": "Email Delivery. Simplified.",
+        "type": ""
+      },
+      {
+        "name": "mongolab",
+        "url": "",
+        "description": "Fully-managed MongoDB-as-a-Service",
+        "type": ""
+      },
+      {
+        "name": "newrelic",
+        "url": "",
+        "description": "Manage and monitor your apps",
+        "type": ""
+      },
+      {
+        "name": "loadimpact",
+        "url": "",
+        "description": "Automated and on-demand performance testing",
+        "type": ""
+      },
+      {
+        "name": "memcachier",
+        "url": "",
+        "description": "The easiest, most advanced memcache.",
+        "type": ""
+      },
+      {
+        "name": "memcachedcloud",
+        "url": "",
+        "description": "Enterprise-Class Memcached for Developers",
+        "type": ""
+      },
+      {
+        "name": "searchly",
+        "url": "",
+        "description": "Search Made Simple. Powered-by Elasticsearch",
+        "type": ""
+      },
+      {
+        "name": "cloudforge",
+        "url": "",
+        "description": "Development Tools In The Cloud",
+        "type": ""
+      },
+      {
+        "name": "ironworker",
+        "url": "",
+        "description": "Scalable Background and Async Processing",
+        "type": ""
+      },
+      {
+        "name": "ironmq",
+        "url": "",
+        "description": "Powerful Durable Message Queueing Service",
+        "type": ""
+      },
+      {
+        "name": "pubnub",
+        "url": "",
+        "description": "Build Realtime Apps that Scale",
+        "type": ""
+      },
+      {
+        "name": "cine",
+        "url": "",
+        "description": "instant global live video streaming",
+        "type": ""
+      },
+      {
+        "name": "cedexisopenmix",
+        "url": "",
+        "description": "Openmix Global Cloud & Data Center Load Balancer",
+        "type": ""
+      },
+      {
+        "name": "cedexisradar",
+        "url": "",
+        "description": "Free Website &amp; Mobile App Performance Reports",
+        "type": ""
+      },
+      {
+        "name": "statica",
+        "url": "",
+        "description": "Enterprise Static IP Addresses",
+        "type": ""
+      }
+    ]
+  },
+  "extensible": true,
+  "infrastructures": [
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "Northern Virginia",
+      "provider": "AWS"
+    }
+  ]
+}

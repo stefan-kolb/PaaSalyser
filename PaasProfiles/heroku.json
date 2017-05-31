@@ -1,0 +1,1115 @@
+{
+  "name": "Heroku",
+  "revision": "2017-04-12",
+  "url": "http://www.heroku.com/",
+  "status": "production",
+  "status_since": "2009-04-24",
+  "type": "Generic",
+  "hosting": {
+    "public": true,
+    "virtual_private": true,
+    "private": false
+  },
+  "pricings": [
+    {
+      "model": "metered",
+      "period": "monthly"
+    },
+    {
+      "model": "free"
+    }
+  ],
+  "scaling": {
+    "vertical": true,
+    "horizontal": true,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "clojure",
+      "versions": [
+        "*.*"
+      ]
+    },
+    {
+      "language": "groovy",
+      "versions": [
+        "*.*"
+      ]
+    },
+    {
+      "language": "java",
+      "versions": [
+        "1.7.*",
+        "1.8.*"
+      ]
+    },
+    {
+      "language": "node",
+      "versions": [
+        "0.4.*",
+        "0.6.*",
+        "0.8.*",
+        "0.10.*",
+        "0.12.*",
+	"4.0"
+      ]
+    },
+    {
+      "language": "php",
+      "versions": [
+        "5.5",
+        "5.6",
+	"7.0",
+	"7.1"
+      ]
+    },
+    {
+      "language": "python",
+      "versions": [
+        "2.7.11",
+        "3.6.1"
+      ]
+    },
+    {
+      "language": "ruby",
+      "versions": [
+        "1.8.7",
+        "1.9.2",
+        "1.9.3",
+        "2.0.0",
+        "2.1.8",
+        "2.2.7",
+	"2.3.4",
+	"2.4.1"
+      ]
+    },
+    {
+      "language": "go",
+      "versions": [
+        "1.8",
+	"1.7"
+      ]
+    },
+    {
+      "language": "scala",
+      "versions": [
+        "*.*"
+      ]
+    }
+  ],
+  "middlewares": [
+
+  ],
+  "frameworks": [
+    {
+      "name": "play",
+      "runtime": "java",
+      "versions": [
+        "1.*",
+        "2.*"
+      ]
+    },
+    {
+      "name": "rails",
+      "runtime": "ruby",
+      "versions": [
+        "2.*",
+        "3.*",
+        "4.*"
+      ]
+    },
+    {
+      "name": "grails",
+      "runtime": "groovy",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "django",
+      "runtime": "python",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "flask",
+      "runtime": "python",
+      "versions": [
+
+      ]
+    }
+  ],
+  "services": {
+    "native": [
+      {
+        "name": "postgresql",
+        "type": "datastore",
+        "versions": [
+		  "9.5",
+          "9.4",
+          "9.3",
+          "9.2",
+          "9.1"
+        ]
+      },
+      {
+        "name": "redis",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      }
+    ],
+    "addon": [
+      {
+        "name": "adept scale",
+        "url": "http://www.adeptscale.com/",
+        "description": "Auto scaling for Heroku",
+        "type": "devops"
+      },
+      {
+        "name": "adminium",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "airbrake",
+        "url": "https://airbrake.io",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "appsignal",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "bablic",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "blitline",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "blitz",
+        "url": "https://www.blitz.io/",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "bomberman",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "bonsai",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "bounscale",
+        "description": "Auto scaling for Heroku",
+        "type": "devops"
+      },
+      {
+        "name": "cameratag",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "fastly",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "chargify",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "circle ci",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "cleardb",
+        "url": "http://www.cleardb.com/",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "cloudamqp",
+        "url": "http://cloudamqp.com/",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "cloudinary",
+        "url": "http://cloudinary.com/",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "cloudmailin",
+        "url": "http://www.cloudmailin.com/",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "cloudmqtt",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "cloudvertical",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "codeship",
+        "url": "https://www.codeship.io/",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "dbinsights",
+        "url": "https://dbinsights.herokuapp.com/",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "docraptor",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "dyn",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "eltanin",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "errorapp",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "filepicker",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "flydata",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "flying sphinx",
+        "url": "",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "gemfury",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "groupdocs",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "honeybadger",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "hosted graphite",
+        "url": "https://www.hostedgraphite.com/",
+        "description": "",
+        "type": "analytics"
+      },
+      {
+        "name": "ironcache",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "ironmq",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "ironworker",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "librato",
+        "description": "",
+        "type": "",
+        "url": "https://metrics.librato.com/"
+      },
+      {
+        "name": "loader.io",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "logentries",
+        "description": "",
+        "type": "",
+        "url": "https://logentries.com/"
+      },
+      {
+        "name": "mailgun",
+        "description": "",
+        "type": "",
+        "url": "http://www.mailgun.com/"
+      },
+      {
+        "name": "mailtrap",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "mandrill",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "memcachier",
+        "description": "",
+        "type": "",
+        "url": "http://www.memcachier.com/"
+      },
+      {
+        "name": "compose mongodb",
+        "description": "datastore",
+        "type": "",
+        "url": "https://www.compose.io/mongodb/"
+      },
+      {
+        "name": "mongolab",
+        "description": "",
+        "type": "",
+        "url": "https://mongolab.com/"
+      },
+      {
+        "name": "new relic",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "nodetime",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "openredis",
+        "description": "",
+        "type": "",
+        "url": "https://openredis.com/"
+      },
+      {
+        "name": "pandastream",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "papertrail",
+        "description": "",
+        "type": "",
+        "url": "https://papertrailapp.com/"
+      },
+      {
+        "name": "phraseapp",
+        "description": "",
+        "type": "",
+        "url": "https://phraseapp.com/"
+      },
+      {
+        "name": "postmark",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "proximo",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "pubnub",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "pusher",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "ranger",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "redis cloud",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "redisgreen",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "redis to go",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "rollbar",
+        "description": "",
+        "type": "",
+        "url": "https://rollbar.com/"
+      },
+      {
+        "name": "runtimeerror",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "scheduler",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "searchbox",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "searchify",
+        "description": "",
+        "type": "",
+        "url": "http://www.searchify.com/"
+      },
+      {
+        "name": "semaphore",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "sendgrid",
+        "description": "",
+        "type": "",
+        "url": "http://sendgrid.com/"
+      },
+      {
+        "name": "sentry",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "signature",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "spreedly",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "ssl",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "statsmix",
+        "description": "",
+        "type": "",
+        "url": "https://www.statsmix.com/"
+      },
+      {
+        "name": "statuspage",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "stillalive",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "stormpath",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "swiftype",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "telapi",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "temporize",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "tinfoil security",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "treasure data",
+        "description": "",
+        "type": "",
+        "url": "http://www.treasure-data.com/"
+      },
+      {
+        "name": "twist",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "websolr",
+        "description": "",
+        "type": "",
+        "url": "http://www.websolr.com/"
+      },
+      {
+        "name": "wercker",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "wwwhisper",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "zencoder",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "zerigo dns",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "zeropush",
+        "description": "",
+        "type": ""
+      },
+      {
+        "name": "auth0",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "blazemeter",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "boomerang",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "bugsnag",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "cornerstore",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "exceptiontrap",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "fortifyondemand",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "found",
+        "url": "http://www.found.no/",
+        "type": "search"
+      },
+      {
+        "name": "gamerocket",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "graphenedb",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "hypdf",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "mail2webhook",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "memcached cloud",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "mongosoup",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "pointdns",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "quotaguard",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "rcmmndr",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "redismonitor",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "statushub",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "strongloop",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "traceview",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "transloadit",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "usersnap",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "keen",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "chain",
+        "url": "https://chain.com/",
+        "type": "payments"
+      },
+      {
+        "name": "cine",
+        "url": "https://www.cine.io/",
+        "type": "media"
+      },
+      {
+        "name": "cloudsponge",
+        "url": "https://www.cloudsponge.com/",
+        "type": ""
+      },
+      {
+        "name": "codacy",
+        "url": "https://www.codacy.com/",
+        "type": "devops"
+      },
+      {
+        "name": "informant",
+        "url": "https://www.informantapp.com/",
+        "type": "analytics"
+      },
+      {
+        "name": "oauthio",
+        "url": "https://oauth.io/",
+        "type": ""
+      },
+      {
+        "name": "raygun",
+        "url": "https://raygun.io/",
+        "type": ""
+      },
+      {
+        "name": "3scale",
+        "url": "http://www.3scale.net/",
+        "type": ""
+      },
+      {
+        "name": "Airbrake Bug Tracker",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Algolia Realtime Search",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Aspose for Cloud",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Autobus",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Blackfire Profiler",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Blower.io SMS",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Bonsai Elasticsearch",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Boomerang.io",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "cine.io",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "CircleCI",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Clearbit",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "ClearDB MySQL Database",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Clerk",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "6px",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "CloudSponge Contact Importer",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "datawaki",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Dead Man's Snitch",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Deploy Hooks",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Dyn: DynECT Managed DNS",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Ebook Glue",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "elastic.io Contact Sync",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Eltanin Eye for Facebook",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Expedited SSL",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Fastly ",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Filepicker.io",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Fortify on Demand",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Found Elasticsearch",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Gioco Pro",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Graph Story",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Heroku Connect",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Heroku Postgres",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "The Informant",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "JawsDB MySQL",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Keen IO",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Mailtrap by Railsware",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Mandrill by MailChimp",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "New Relic APM",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "OAuth.io",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "PostgreSQL Studio",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "PhraseApp - Translate Software Better",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Planter",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Process Scheduler",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "QuotaGuard Static",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "RabbitMQ Bigwig",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Rainforest QA",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Raygun.io",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Ruppell's Sockets",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "ScaleDrone",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Heroku Scheduler",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "SearchBox Elasticsearch",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Secure Key",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Shared Workforce",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Stormpath User Management",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Swiftype Search & Autocomplete",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Solano CI",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Temporize Scheduler",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "ThingFabric ",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Treasure Data Hadoop",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Wrangler",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Xplenty",
+        "url": "",
+        "type": ""
+      },
+      {
+        "name": "Ziggeo",
+        "url": "",
+        "type": ""
+      }
+    ]
+  },
+  "extensible": true,
+  "infrastructures": [
+    {
+      "continent": "EU",
+      "country": "IE",
+      "region": "Dublin",
+      "provider": "AWS"
+    },
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "Northern Virginia",
+      "provider": "AWS"
+    }
+  ]
+}

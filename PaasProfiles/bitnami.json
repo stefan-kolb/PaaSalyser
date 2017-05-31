@@ -1,0 +1,100 @@
+{
+  "name": "BitNami",
+  "revision": "2013-07-05T17:47:54+02:00",
+  "url": "http://bitnami.org/cloud",
+  "status": "production",
+  "status_since": null,
+  "type": "IaaS-centric",
+  "hosting": {
+    "public": true,
+    "private": false
+  },
+  "pricings": [
+    {
+      "model": "hybrid",
+      "period": "monthly"
+    },
+    {
+      "model": "free"
+    }
+  ],
+  "scaling": {
+    "vertical": true,
+    "horizontal": false,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "java",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "node",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "php",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "python",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "ruby",
+      "versions": [
+
+      ]
+    }
+  ],
+  "middlewares": [
+
+  ],
+  "frameworks": [
+
+  ],
+  "services": {
+    "native": [
+
+    ],
+    "addon": [
+
+    ]
+  },
+  "extensible": false,
+  "infrastructures": [
+    {
+      "continent": "AS",
+      "country": "",
+      "region": ""
+    },
+    {
+      "continent": "EU",
+      "country": "",
+      "region": ""
+    },
+    {
+      "continent": "NA",
+      "country": "",
+      "region": ""
+    },
+    {
+      "continent": "OC",
+      "country": "",
+      "region": ""
+    },
+    {
+      "continent": "SA",
+      "country": "",
+      "region": ""
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "name": "Tsuru",
+  "revision": "2016-08-04",
+  "url": "http://www.tsuru.io/",
+  "status": "production",
+  "status_since": "2016-07-02",
+  "type": "Generic",
+  "hosting": {
+    "public": true,
+    "private": true
+  },
+  "pricings": [
+    {
+      "model": "free"
+    }
+  ],
+  "scaling": {
+    "vertical": false,
+    "horizontal": true,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "go",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "node",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "php",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "python",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "ruby",
+      "versions": [
+
+      ]
+    }
+  ],
+  "middlewares": [
+
+  ],
+  "frameworks": [
+    {
+      "name": "django",
+      "runtime": "python",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "rails",
+      "runtime": "ruby",
+      "versions": [
+
+      ]
+    }
+  ],
+  "services": {
+    "native": [
+      {
+        "name": "mongodb",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "mysql",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      }
+    ],
+    "addon": [
+
+    ]
+  },
+  "extensible": true,
+  "infrastructures": [
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "Northern Virginia",
+      "provider": "AWS"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "name": "fortrabbit",
+  "revision": "2016-03-06",
+  "url": "https://www.fortrabbit.com/",
+  "vendor_verified": "2013-07-10",
+  "status": "production",
+  "status_since": "2012-10-04",
+  "type": "Generic",
+  "hosting": {
+    "public": true,
+    "private": false
+  },
+  "pricings": [
+    {
+      "model": "fixed",
+      "period": "daily"
+    },
+    {
+      "model": "fixed",
+      "period": "monthly"
+    }
+  ],
+  "scaling": {
+    "vertical": true,
+    "horizontal": true,
+    "auto": false
+  },
+  "runtimes": [
+    {
+      "language": "php",
+      "versions": [
+        "5.4",
+        "5.5"
+      ]
+    }
+  ],
+  "middlewares": [
+
+  ],
+  "frameworks": [
+    {
+      "name": "phalcon",
+      "runtime": "php",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "drupal",
+      "runtime": "php",
+      "versions": [
+        "8"
+      ]
+    },
+    {
+      "name": "symfony",
+      "runtime": "php",
+      "versions": [
+        "2"
+      ]
+    },
+    {
+      "name": "laravel",
+      "runtime": "php",
+      "versions": [
+        "3",
+        "4"
+      ]
+    }
+  ],
+  "services": {
+    "native": [
+      {
+        "name": "memcached",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "mysql",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      }
+    ],
+    "addon": [
+
+    ]
+  },
+  "extensible": false,
+  "infrastructures": [
+    {
+      "continent": "EU",
+      "country": "IE",
+      "region": "Dublin",
+      "provider": "AWS"
+    },
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "Northern Virginia",
+      "provider": "AWS"
+    }
+  ]
+}
