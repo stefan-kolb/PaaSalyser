@@ -1,4 +1,4 @@
-package main;
+package scanner;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class DirectoryScanner {
 
 	}
 
-	public List<PaasProfile> scanDirectoryForJsonFiles(Path rootDirectory) throws IOException {
+	public static List<PaasProfile> scanDirectoryForJsonFiles(Path rootDirectory) throws IOException {
 		List<PaasProfile> profilesList = new LinkedList<PaasProfile>();
 		Gson gson = new Gson();
 		if (!Files.isDirectory(rootDirectory)) {
@@ -35,8 +35,8 @@ public class DirectoryScanner {
 							System.out.println("Profile - " + profile.getName());
 							profilesList.add(profile);
 						} catch (IOException e) {
-							// Insert empty PaasProfile if
 							System.out.println("Failed");
+							// Insert empty PaasProfile if IO-Error occurred
 							profilesList.add(new PaasProfile(true));
 						}
 					}

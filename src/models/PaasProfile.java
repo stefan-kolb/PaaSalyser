@@ -211,4 +211,13 @@ public class PaasProfile {
 		this.infrastructures = infrastructures;
 	}
 
+	@Override
+	public String toString() {
+		return "PaasProfile [name=" + name + ", revision=" + revision + ", url=" + url + ", status=" + status
+				+ ", statusSince=" + statusSince + ", type=" + type + ", hosting=" + hosting + ", pricings=" + pricings
+				+ ", scaling=" + scaling + ", runtimes=" + runtimes + ", middlewares=" + middlewares + ", frameworks="
+				+ frameworks + ", services=" + services + ", extensible=" + extensible + ", infrastructures="
+				+ infrastructures + ", failed=" + failed + "]";
+	}
+
 }
