@@ -14,11 +14,16 @@ public class Pricing {
 	private PricingPeriod period;
 
 	public PricingPeriod getPeriod() {
-		return period;
+		if (period != null)
+			return period;
+		else return PricingPeriod.empty;
 	}
 
 	public PricingModel getModel() {
-		return model;
+		if (model != null)
+			return model;
+		else
+			return PricingModel.empty;
 	}
 
 }

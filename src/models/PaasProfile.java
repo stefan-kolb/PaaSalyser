@@ -1,5 +1,6 @@
 package models;
 
+import java.util.LinkedList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -79,7 +80,8 @@ public class PaasProfile {
 	/**
 	 * This Constructor is used if an error occured during scanning a JSON File
 	 * 
-	 * @param failed true if scan failed
+	 * @param failed
+	 *            true if scan failed
 	 */
 	public PaasProfile(boolean errorOccurred) {
 		if (errorOccurred == true)
@@ -123,7 +125,10 @@ public class PaasProfile {
 	}
 
 	public List<Pricing> getPricings() {
-		return pricings;
+		if (this.pricings != null)
+			return pricings;
+		else
+			return new LinkedList<Pricing>();
 	}
 
 	public Scaling getScaling() {

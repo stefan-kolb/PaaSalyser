@@ -14,5 +14,7 @@ public enum PricingPeriod {
 	
 	@SerializedName("anually")
 	@Expose
-	anually
+	anually,
+	
+	empty
 }

@@ -18,5 +18,7 @@ public enum PricingModel {
 	
 	@SerializedName("hybrid")
 	@Expose
-	hybrid
+	hybrid,
+	
+	empty
 }
