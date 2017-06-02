@@ -11,9 +11,9 @@ public class Pricing {
 
 	@SerializedName("period")
 	@Expose
-	private String period;
+	private PricingPeriod period;
 
-	public String getPeriod() {
+	public PricingPeriod getPeriod() {
 		return period;
 	}
 
