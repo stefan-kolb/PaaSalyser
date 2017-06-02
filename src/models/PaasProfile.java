@@ -124,7 +124,11 @@ public class PaasProfile {
 	}
 
 	public String getStatusSince() {
-		return statusSince;
+		if (this.statusSince == null) {
+			return "null";
+		} else {
+			return statusSince;
+		}
 	}
 
 	public void setStatusSince(String statusSince) {

@@ -3,9 +3,9 @@ package statistics;
 public class EvaluationResult {
 
 	private final String name;
-	private final int number;
+	private final long number;
 
-	public EvaluationResult(String name, int number) {
+	public EvaluationResult(String name, long number) {
 		this.name = name;
 		this.number = number;
 	}
@@ -14,7 +14,7 @@ public class EvaluationResult {
 		return name;
 	}
 
-	public int getNumber() {
+	public long getNumber() {
 		return number;
 	}
 }

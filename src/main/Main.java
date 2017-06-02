@@ -31,12 +31,27 @@ public class Main {
 		String statusResult1 = "\n" + resultList.get(0).getName() + " - " + resultList.get(0).getNumber();
 		String statusResult2 = "\n" + resultList.get(1).getName() + " - " + resultList.get(1).getNumber();
 		String statusResult3 = "\n" + resultList.get(2).getName() + " - " + resultList.get(2).getNumber();
-		System.out.println("Results for Status are: " + statusResult1 + statusResult2 + statusResult3);
+		System.out.println("\nResults for Status are: " + statusResult1 + statusResult2 + statusResult3);
+		
+		resultList = Statistics.evalStatusSince(profilesList);
+		String statusSinceResult1 = "\n" + resultList.get(0).getName() + " - " + resultList.get(0).getNumber();
+		String statusSinceResult2 = "\n" + resultList.get(1).getName() + " - " + resultList.get(1).getNumber();
+		String statusSinceResult3 = "\n" + resultList.get(2).getName() + " - " + resultList.get(2).getNumber();
+		System.out.println("\nResults for StatusSince are: " + statusSinceResult1 + statusSinceResult2 + statusSinceResult3);
 
 		resultList = Statistics.evalType(profilesList);
 		String typeResult1 = "\n" + resultList.get(0).getName() + " - " + resultList.get(0).getNumber();
 		String typeResult2 = "\n" + resultList.get(1).getName() + " - " + resultList.get(1).getNumber();
 		String typeResult3 = "\n" + resultList.get(2).getName() + " - " + resultList.get(2).getNumber();
-		System.out.println("Results for Status are: " + typeResult1 + typeResult2 + typeResult3);
+		System.out.println("\nResults for Type are: " + typeResult1 + typeResult2 + typeResult3);
+		
+		resultList = Statistics.evalRevision(profilesList);
+		String revResult1 = "\n" + resultList.get(0).getName() + " - " + resultList.get(0).getNumber();
+		String revResult2 = "\n" + resultList.get(1).getName() + " - " + resultList.get(1).getNumber();
+		String revResult3 = "\n" + resultList.get(2).getName() + " - " + resultList.get(2).getNumber();
+		System.out.println("\nResults for Revision are: " + revResult1 + revResult2 + revResult3);
+		
+		System.out.println();
+		profilesList.forEach(x -> System.out.println(x.getPricings()));
 	}
 }

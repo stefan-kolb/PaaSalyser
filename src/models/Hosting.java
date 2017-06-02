@@ -15,11 +15,11 @@ public class Hosting {
 	@Expose
 	private Boolean _virtual_private;
 
-	public Boolean get_virtual_private() {
+	public Boolean getVirtualPrivate() {
 		return _virtual_private;
 	}
 
-	public void set_virtual_private(Boolean _virtual_private) {
+	public void setVirtualPrivate(Boolean _virtual_private) {
 		this._virtual_private = _virtual_private;
 	}
 
