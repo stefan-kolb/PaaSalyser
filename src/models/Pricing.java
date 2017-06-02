@@ -7,7 +7,7 @@ public class Pricing {
 
 	@SerializedName("model")
 	@Expose
-	private String model;
+	private PricingModel model;
 
 	@SerializedName("period")
 	@Expose
@@ -17,7 +17,7 @@ public class Pricing {
 		return period;
 	}
 
-	public String getModel() {
+	public PricingModel getModel() {
 		return model;
 	}
 
