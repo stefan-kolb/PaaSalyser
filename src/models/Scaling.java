@@ -19,24 +19,12 @@ public class Scaling {
 		return vertical;
 	}
 
-	public void setVertical(Boolean vertical) {
-		this.vertical = vertical;
-	}
-
 	public Boolean getHorizontal() {
 		return horizontal;
 	}
 
-	public void setHorizontal(Boolean horizontal) {
-		this.horizontal = horizontal;
-	}
-
 	public Boolean getAuto() {
 		return auto;
-	}
-
-	public void setAuto(Boolean auto) {
-		this.auto = auto;
 	}
 
 }

@@ -15,7 +15,6 @@ public class PaasProfile {
 	@SerializedName("url")
 	@Expose
 	private String url;
-
 	@SerializedName("status")
 	@Expose
 	private String status;
@@ -80,7 +79,7 @@ public class PaasProfile {
 	/**
 	 * This Constructor is used if an error occured during scanning a JSON File
 	 * 
-	 * @param failed
+	 * @param failed true if scan failed
 	 */
 	public PaasProfile(boolean errorOccurred) {
 		if (errorOccurred == true)
@@ -95,32 +94,16 @@ public class PaasProfile {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getRevision() {
 		return revision;
-	}
-
-	public void setRevision(String revision) {
-		this.revision = revision;
 	}
 
 	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
 	public String getStatus() {
 		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public String getStatusSince() {
@@ -131,88 +114,44 @@ public class PaasProfile {
 		}
 	}
 
-	public void setStatusSince(String statusSince) {
-		this.statusSince = statusSince;
-	}
-
 	public String getType() {
 		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public Hosting getHosting() {
 		return hosting;
 	}
 
-	public void setHosting(Hosting hosting) {
-		this.hosting = hosting;
-	}
-
 	public List<Pricing> getPricings() {
 		return pricings;
-	}
-
-	public void setPricings(List<Pricing> pricings) {
-		this.pricings = pricings;
 	}
 
 	public Scaling getScaling() {
 		return scaling;
 	}
 
-	public void setScaling(Scaling scaling) {
-		this.scaling = scaling;
-	}
-
 	public List<Runtime> getRuntimes() {
 		return runtimes;
-	}
-
-	public void setRuntimes(List<Runtime> runtimes) {
-		this.runtimes = runtimes;
 	}
 
 	public List<Middleware> getMiddlewares() {
 		return middlewares;
 	}
 
-	public void setMiddlewares(List<Middleware> middlewares) {
-		this.middlewares = middlewares;
-	}
-
 	public List<Framework> getFrameworks() {
 		return frameworks;
-	}
-
-	public void setFrameworks(List<Framework> frameworks) {
-		this.frameworks = frameworks;
 	}
 
 	public Services getServices() {
 		return services;
 	}
 
-	public void setServices(Services services) {
-		this.services = services;
-	}
-
 	public Boolean getExtensible() {
 		return extensible;
 	}
 
-	public void setExtensible(Boolean extensible) {
-		this.extensible = extensible;
-	}
-
 	public List<Object> getInfrastructures() {
 		return infrastructures;
-	}
-
-	public void setInfrastructures(List<Object> infrastructures) {
-		this.infrastructures = infrastructures;
 	}
 
 	@Override

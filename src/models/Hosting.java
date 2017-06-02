@@ -19,24 +19,12 @@ public class Hosting {
 		return _virtual_private;
 	}
 
-	public void setVirtualPrivate(Boolean _virtual_private) {
-		this._virtual_private = _virtual_private;
-	}
-
 	public Boolean getPublic() {
 		return _public;
 	}
 
-	public void setPublic(Boolean _public) {
-		this._public = _public;
-	}
-
 	public Boolean getPrivate() {
 		return _private;
-	}
-
-	public void setPrivate(Boolean _private) {
-		this._private = _private;
 	}
 
 }

@@ -21,24 +21,12 @@ public class Middleware {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getRuntime() {
 		return runtime;
 	}
 
-	public void setRuntime(String runtime) {
-		this.runtime = runtime;
-	}
-
 	public List<String> getVersions() {
 		return versions;
-	}
-
-	public void setVersions(List<String> versions) {
-		this.versions = versions;
 	}
 
 }

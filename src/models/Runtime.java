@@ -17,16 +17,8 @@ public class Runtime {
 		return language;
 	}
 
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
 	public List<String> getVersions() {
 		return versions;
-	}
-
-	public void setVersions(List<String> versions) {
-		this.versions = versions;
 	}
 
 }

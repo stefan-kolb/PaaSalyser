@@ -29,39 +29,19 @@ public class Infrastructure {
 		return continent;
 	}
 
-	public void setContinent(String continent) {
-		this.continent = continent;
-	}
-
 	public String getCountry() {
 		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
 	}
 
 	public String getRegion() {
 		return region;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
 	public String getRegion_code() {
 		return region_code;
 	}
 
-	public void setRegion_code(String region_code) {
-		this.region_code = region_code;
-	}
-
 	public String getProvider() {
 		return provider;
-	}
-
-	public void setProvider(String provider) {
-		this.provider = provider;
 	}
 }

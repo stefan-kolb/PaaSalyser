@@ -17,16 +17,8 @@ public class Services {
 		return _native;
 	}
 
-	public void setNative(List<Object> _native) {
-		this._native = _native;
-	}
-
 	public List<Object> getAddon() {
 		return addon;
-	}
-
-	public void setAddon(List<Object> addon) {
-		this.addon = addon;
 	}
 
 }

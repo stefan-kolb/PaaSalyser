@@ -19,15 +19,7 @@ public class Quality {
 		return uptime;
 	}
 
-	public void setUptime(float uptime) {
-		this.uptime = uptime;
-	}
-
 	public List<String> getCompliance() {
 		return compliance;
-	}
-
-	public void setCompliance(List<String> compliance) {
-		this.compliance = compliance;
 	}
 }

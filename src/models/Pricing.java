@@ -17,16 +17,8 @@ public class Pricing {
 		return period;
 	}
 
-	public void setPeriod(String period) {
-		this.period = period;
-	}
-
 	public String getModel() {
 		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
 	}
 
 }
