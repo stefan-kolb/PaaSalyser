@@ -6,12 +6,16 @@ import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
 import models.PaasProfile;
 
 public class Statistics {
 
-	public Statistics() {
+	DescriptiveStatistics stats;
 
+	public Statistics() {
+		stats = new DescriptiveStatistics();
 	}
 
 	public static List<EvaluationResult> evalRevision(List<PaasProfile> profiles) {
@@ -125,6 +129,24 @@ public class Statistics {
 		});
 		resultList.sort((r1, r2) -> ((Long) r2.getNumber()).compareTo((Long) r1.getNumber()));
 		return resultList;
+	}
+
+	public static List<EvaluationResult> evalPricing(List<PaasProfile> profiles) {
+		List<EvaluationResult> resultList = new LinkedList<EvaluationResult>();
+		resultList.add(new EvaluationResult("counter", 0));
+		resultList.add(new EvaluationResult("free", 0));
+		resultList.add(new EvaluationResult("fixed", 0));
+		resultList.add(new EvaluationResult("metered", 0));
+		resultList.add(new EvaluationResult("hybrid", 0));
+		resultList.add(new EvaluationResult("model-empty", 0));
+		resultList.add(new EvaluationResult("daily", 0));
+		resultList.add(new EvaluationResult("monthly", 0));
+		resultList.add(new EvaluationResult("anually", 0));
+		resultList.add(new EvaluationResult("period-empty", 0));
+		profiles.forEach(profile -> {
+
+		});
+		return null;
 	}
 
 }
