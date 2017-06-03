@@ -3,6 +3,7 @@ package main;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 import models.PaasProfile;
 import scanner.DirectoryScanner;
@@ -13,7 +14,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		List<PaasProfile> profilesList = null;
-		List<EvaluationResult> resultList = null;
 		try {
 			profilesList = DirectoryScanner.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
 			profilesList.forEach(profile -> {
@@ -27,38 +27,11 @@ public class Main {
 		} catch (IOException e) {
 			System.out.println("Failed");
 		}
-		resultList = Statistics.evalStatus(profilesList);
-		String statusResult1 = "\n" + resultList.get(0).getName() + " - " + resultList.get(0).getNumber();
-		String statusResult2 = "\n" + resultList.get(1).getName() + " - " + resultList.get(1).getNumber();
-		String statusResult3 = "\n" + resultList.get(2).getName() + " - " + resultList.get(2).getNumber();
-		System.out.println("\nResults for Status are: " + statusResult1 + statusResult2 + statusResult3);
-
-		resultList = Statistics.evalStatusSince(profilesList);
-		String statusSinceResult1 = "\n" + resultList.get(0).getName() + " - " + resultList.get(0).getNumber();
-		String statusSinceResult2 = "\n" + resultList.get(1).getName() + " - " + resultList.get(1).getNumber();
-		String statusSinceResult3 = "\n" + resultList.get(2).getName() + " - " + resultList.get(2).getNumber();
-		System.out.println(
-				"\nResults for StatusSince are: " + statusSinceResult1 + statusSinceResult2 + statusSinceResult3);
-
-		resultList = Statistics.evalType(profilesList);
-		String typeResult1 = "\n" + resultList.get(0).getName() + " - " + resultList.get(0).getNumber();
-		String typeResult2 = "\n" + resultList.get(1).getName() + " - " + resultList.get(1).getNumber();
-		String typeResult3 = "\n" + resultList.get(2).getName() + " - " + resultList.get(2).getNumber();
-		System.out.println("\nResults for Type are: " + typeResult1 + typeResult2 + typeResult3);
-
-		resultList = Statistics.evalRevision(profilesList);
-		String revResult1 = "\n" + resultList.get(0).getName() + " - " + resultList.get(0).getNumber();
-		String revResult2 = "\n" + resultList.get(1).getName() + " - " + resultList.get(1).getNumber();
-		String revResult3 = "\n" + resultList.get(2).getName() + " - " + resultList.get(2).getNumber();
-		System.out.println("\nResults for Revision are: " + revResult1 + revResult2 + revResult3);
-
-		System.out.println();
-		profilesList.forEach(x -> {
-			System.out.println();
-			x.getPricings().forEach(y -> {
-				System.out.println(y.getModel().toString() + " - " + y.getPeriod().toString());
-			});
-			;
-		});
+		System.out.println(Statistics.evalRevision(profilesList).toString());
+		System.out.println(Statistics.evalStatus(profilesList).toString());
+		System.out.println(Statistics.evalStatusSince(profilesList).toString());
+		System.out.println(Statistics.evalType(profilesList).toString());
+		System.out.println(Statistics.evalHosting(profilesList).toString());
+		System.out.println(Statistics.evalPricing(profilesList).toString());
 	}
 }

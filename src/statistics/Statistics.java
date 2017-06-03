@@ -3,12 +3,15 @@ package statistics;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import models.PaasProfile;
+import models.PricingModel;
+import models.PricingPeriod;
 
 public class Statistics {
 
@@ -18,135 +21,164 @@ public class Statistics {
 		stats = new DescriptiveStatistics();
 	}
 
-	public static List<EvaluationResult> evalRevision(List<PaasProfile> profiles) {
-		List<EvaluationResult> results = new LinkedList<EvaluationResult>();
-		results.add(new EvaluationResult("latest", Long.MAX_VALUE));
-		results.add(new EvaluationResult("oldest", Long.MIN_VALUE));
-		results.add(new EvaluationResult("mean", 0));
-
+	public static Map<String, Long> evalRevision(List<PaasProfile> profiles) {
+		Map<String, Long> results = new HashMap<String, Long>();
+		results.put("latest", (long) 0);
+		results.put("oldest", (long) 0);
+		results.put("mean", (long) 0);
 		profiles.forEach(profile -> {
-			long interval = 0;
+			long revisionAge = 0;
 			try {
-				interval = ChronoUnit.DAYS.between(LocalDate.parse(profile.getRevision().substring(0, 10)),
+				revisionAge = ChronoUnit.DAYS.between(LocalDate.parse(profile.getRevision().substring(0, 10)),
 						LocalDate.now());
-				if (interval != 0 && interval < results.get(0).getNumber()) {
-					results.set(0, new EvaluationResult("latest", interval));
+				if (revisionAge != 0 && revisionAge < results.get("latest")) {
+					results.replace("latest", results.get("latest"), revisionAge);
 				}
-				if (interval != 0 && interval > results.get(1).getNumber()) {
-					results.set(1, new EvaluationResult("oldest", interval));
+				if (revisionAge != 0 && revisionAge > results.get("oldest")) {
+					results.replace("oldest", results.get("oldest"), revisionAge);
 				}
-				results.set(2, new EvaluationResult("mean", results.get(2).getNumber() + interval));
+				results.replace("mean", results.get("mean"), results.get("mean") + revisionAge);
 			} catch (DateTimeParseException e) {
 				System.out.println("x");
 				System.out.println(e.getMessage());
 			}
 		});
-		if (results.get(2).getNumber() != 0) {
-			results.set(2, new EvaluationResult("mean", results.get(2).getNumber() / profiles.size()));
-		}
-
+		results.replace("mean", results.get("mean"), results.get("mean") / profiles.size());
 		return results;
 	}
 
-	public static List<EvaluationResult> evalStatus(List<PaasProfile> profiles) {
-		List<EvaluationResult> resultList = new LinkedList<EvaluationResult>();
-		resultList.add(new EvaluationResult("production", 0));
-		resultList.add(new EvaluationResult("alpha", 0));
-		resultList.add(new EvaluationResult("beta", 0));
+	public static Map<String, Long> evalStatus(List<PaasProfile> profiles) {
+		Map<String, Long> results = new HashMap<String, Long>();
+		results.put("production", (long) 0);
+		results.put("alpha", (long) 0);
+		results.put("beta", (long) 0);
 		profiles.forEach(profile -> {
 			if (profile.getStatus().equalsIgnoreCase("production")) {
-				resultList.set(0, new EvaluationResult("producation", resultList.get(0).getNumber() + 1));
+				results.replace("production", results.get("production"), results.get("production") + 1);
 			} else if (profile.getStatus().equalsIgnoreCase("alpha")) {
-				resultList.set(1, new EvaluationResult("alpha", resultList.get(1).getNumber() + 1));
+				results.replace("alpha", results.get("alpha"), results.get("alpha") + 1);
 			} else if (profile.getStatus().equalsIgnoreCase("beta")) {
-				resultList.set(2, new EvaluationResult("beta", resultList.get(2).getNumber() + 1));
+				results.replace("beta", results.get("beta"), results.get("beta") + 1);
 			}
 		});
-		resultList.sort((r1, r2) -> ((Long) r2.getNumber()).compareTo((Long) r1.getNumber()));
-		return resultList;
+		return results;
 	}
 
-	public static List<EvaluationResult> evalStatusSince(List<PaasProfile> profiles) {
-		List<EvaluationResult> results = new LinkedList<EvaluationResult>();
-		results.add(new EvaluationResult("latest", Long.MAX_VALUE));
-		results.add(new EvaluationResult("oldest", Long.MIN_VALUE));
-		results.add(new EvaluationResult("mean", 0));
-
+	public static Map<String, Long> evalStatusSince(List<PaasProfile> profiles) {
+		Map<String, Long> results = new HashMap<String, Long>();
+		results.put("latest", Long.MAX_VALUE);
+		results.put("oldest", Long.MIN_VALUE);
+		results.put("mean", (long) 0);
 		profiles.forEach(profile -> {
-			long interval = 0;
+			long statusSinceAge = 0;
 			if (!profile.getStatusSince().equalsIgnoreCase("null")) {
 				try {
-					interval = ChronoUnit.DAYS.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)),
+					statusSinceAge = ChronoUnit.DAYS.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)),
 							LocalDate.now());
-					if (interval != 0 && interval < results.get(0).getNumber()) {
-						results.set(0, new EvaluationResult("latest", interval));
+					if (statusSinceAge != 0 && statusSinceAge < results.get("latest")) {
+						results.replace("latest", results.get("latest"), statusSinceAge);
 					}
-					if (interval != 0 && interval > results.get(1).getNumber()) {
-						results.set(1, new EvaluationResult("oldest", interval));
+					if (statusSinceAge != 0 && statusSinceAge > results.get("oldest")) {
+						results.replace("oldest", results.get("oldest"), statusSinceAge);
 					}
-					results.set(2, new EvaluationResult("mean", results.get(2).getNumber() + interval));
+					results.replace("mean", results.get("mean"), results.get("mean") + statusSinceAge);
 				} catch (DateTimeParseException e) {
 					System.out.println("x");
 					System.out.println(e.getMessage());
 				}
 			}
 		});
-		results.set(2, new EvaluationResult("mean", results.get(2).getNumber() / profiles.size()));
+		results.replace("mean", results.get("mean"), results.get("mean") / profiles.size());
 		return results;
 	}
 
-	public static List<EvaluationResult> evalType(List<PaasProfile> profiles) {
-		List<EvaluationResult> resultList = new LinkedList<EvaluationResult>();
-		resultList.add(new EvaluationResult("SaaS-centric", 0));
-		resultList.add(new EvaluationResult("Generic", 0));
-		resultList.add(new EvaluationResult("IaaS-centric", 0));
+	public static Map<String, Long> evalType(List<PaasProfile> profiles) {
+		Map<String, Long> results = new HashMap<String, Long>();
+		results.put("SaaS-centric", (long) 0);
+		results.put("Generic", (long) 0);
+		results.put("IaaS-centric", (long) 0);
 		profiles.forEach(profile -> {
 			if (profile.getType().equalsIgnoreCase("SaaS-centric")) {
-				resultList.set(0, new EvaluationResult("SaaS-centric", resultList.get(0).getNumber() + 1));
+				results.replace("SaaS-centric", results.get("SaaS-centric"), results.get("SaaS-centric") + 1);
 			} else if (profile.getType().equalsIgnoreCase("Generic")) {
-				resultList.set(1, new EvaluationResult("Generic", resultList.get(1).getNumber() + 1));
+				results.replace("Generic", results.get("Generic"), results.get("Generic") + 1);
 			} else if (profile.getType().equalsIgnoreCase("IaaS-centric")) {
-				resultList.set(2, new EvaluationResult("IaaS-centric", resultList.get(2).getNumber() + 1));
+				results.replace("IaaS-centric", results.get("IaaS-centric"), results.get("IaaS-centric") + 1);
 			}
 		});
-		resultList.sort((r1, r2) -> ((Long) r2.getNumber()).compareTo((Long) r1.getNumber()));
-		return resultList;
+		return results;
 	}
 
-	public static List<EvaluationResult> evalHosting(List<PaasProfile> profiles) {
-		List<EvaluationResult> resultList = new LinkedList<EvaluationResult>();
-		resultList.add(new EvaluationResult("public", 0));
-		resultList.add(new EvaluationResult("private", 0));
-		resultList.add(new EvaluationResult("virtual_private", 0));
+	public static Map<String, Long> evalHosting(List<PaasProfile> profiles) {
+		Map<String, Long> results = new HashMap<String, Long>();
+		results.put("public", (long) 0);
+		results.put("private", (long) 0);
+		results.put("virtual_private", (long) 0);
 		profiles.forEach(profile -> {
 			if (profile.getHosting().getPublic()) {
-				resultList.set(0, new EvaluationResult("public", resultList.get(0).getNumber() + 1));
+				results.replace("public", results.get("public"), results.get("public") + 1);
 			} else if (profile.getHosting().getPrivate()) {
-				resultList.set(1, new EvaluationResult("private", resultList.get(1).getNumber() + 1));
+				results.replace("private", results.get("private"), results.get("private") + 1);
 			} else if (profile.getHosting().getVirtualPrivate()) {
-				resultList.set(2, new EvaluationResult("virtual_private", resultList.get(2).getNumber() + 1));
+				results.replace("virtual_private", results.get("virtual_private"), results.get("virtual_private") + 1);
 			}
 		});
-		resultList.sort((r1, r2) -> ((Long) r2.getNumber()).compareTo((Long) r1.getNumber()));
-		return resultList;
+		return results;
 	}
 
-	public static List<EvaluationResult> evalPricing(List<PaasProfile> profiles) {
-		List<EvaluationResult> resultList = new LinkedList<EvaluationResult>();
-		resultList.add(new EvaluationResult("counter", 0));
-		resultList.add(new EvaluationResult("free", 0));
-		resultList.add(new EvaluationResult("fixed", 0));
-		resultList.add(new EvaluationResult("metered", 0));
-		resultList.add(new EvaluationResult("hybrid", 0));
-		resultList.add(new EvaluationResult("model-empty", 0));
-		resultList.add(new EvaluationResult("daily", 0));
-		resultList.add(new EvaluationResult("monthly", 0));
-		resultList.add(new EvaluationResult("anually", 0));
-		resultList.add(new EvaluationResult("period-empty", 0));
+	public static Map<String, Long> evalPricing(List<PaasProfile> profiles) {
+		Map<String, Long> results = new HashMap<String, Long>();
+		results.put("modelcounter0", (long) 0);
+		results.put("modelcounter1", (long) 0);
+		results.put("modelcounter2", (long) 0);
+		results.put("modelcounter3", (long) 0);
+		results.put("modelcounter4", (long) 0);
+		results.put("free", (long) 0);
+		results.put("fixed", (long) 0);
+		results.put("metered", (long) 0);
+		results.put("hybrid", (long) 0);
+		results.put("model-empty", (long) 0);
+		results.put("daily", (long) 0);
+		results.put("monthly", (long) 0);
+		results.put("anually", (long) 0);
+		results.put("period-empty", (long) 0);
 		profiles.forEach(profile -> {
+			if (profile.getPricings().size() == 0) {
+				results.replace("modelcounter0", results.get("modelcounter0"), results.get("modelcounter0") + 1);
+			} else if (profile.getPricings().size() == 1) {
+				results.replace("modelcounter1", results.get("modelcounter1"), results.get("modelcounter1") + 1);
+			} else if (profile.getPricings().size() == 2) {
+				results.replace("modelcounter2", results.get("modelcounter2"), results.get("modelcounter2") + 1);
+			} else if (profile.getPricings().size() == 3) {
+				results.replace("modelcounter3", results.get("modelcounter3"), results.get("modelcounter3") + 1);
+			} else if (profile.getPricings().size() == 4) {
+				results.replace("modelcounter4", results.get("modelcounter4"), results.get("modelcounter4") + 1);
+			}
+			profile.getPricings().forEach(pricing -> {
+				if (pricing.getModel().equals(PricingModel.free)) {
+					results.replace("free", results.get("free"), results.get("free") + 1);
+				} else if (pricing.getModel().equals(PricingModel.fixed)) {
+					results.replace("fixed", results.get("fixed"), results.get("fixed") + 1);
+				} else if (pricing.getModel().equals(PricingModel.metered)) {
+					results.replace("metered", results.get("metered"), results.get("metered") + 1);
+				} else if (pricing.getModel().equals(PricingModel.hybrid)) {
+					results.replace("hybrid", results.get("hybrid"), results.get("hybrid") + 1);
+				} else if (pricing.getModel().equals(PricingModel.empty)) {
+					results.replace("model-empty", results.get("model-empty"), results.get("model-empty") + 1);
+				}
 
+				if (pricing.getPeriod().equals(PricingPeriod.daily)) {
+					results.replace("daily", results.get("daily"), results.get("daily") + 1);
+				} else if (pricing.getPeriod().equals(PricingPeriod.monthly)) {
+					results.replace("monthly", results.get("monthly"), results.get("monthly") + 1);
+				} else if (pricing.getPeriod().equals(PricingPeriod.anually)) {
+					results.replace("anually", results.get("anually"), results.get("anually") + 1);
+				} else if (pricing.getPeriod().equals(PricingPeriod.empty)) {
+					results.replace("period-empty", results.get("period-empty"), results.get("period-empty") + 1);
+				}
+			});
 		});
-		return null;
+		return results;
 	}
 
 }
