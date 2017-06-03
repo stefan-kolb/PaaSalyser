@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
 import models.PaasProfile;
 import models.PricingModel;
@@ -64,31 +66,39 @@ public class Statistics {
 		return results;
 	}
 
-	public static Map<String, Long> evalStatusSince(List<PaasProfile> profiles) {
-		Map<String, Long> results = new HashMap<String, Long>();
-		results.put("latest", Long.MAX_VALUE);
-		results.put("oldest", Long.MIN_VALUE);
-		results.put("mean", (long) 0);
+	public static Map<String, Double> evalStatusSince(List<PaasProfile> profiles) {
+		Map<String, Double> results = new HashMap<String, Double>();
+		results.put("latest", Double.MAX_VALUE);
+		results.put("oldest", Double.MIN_VALUE);
+		results.put("mean", 0.0);
+		results.put("stdev", 0.0);
+		
+		double[] statusSince = new double[profiles.size()];
+		int i = 0;
+		
 		profiles.forEach(profile -> {
-			long statusSinceAge = 0;
+			double statusSinceAge = 0;
 			if (!profile.getStatusSince().equalsIgnoreCase("null")) {
 				try {
 					statusSinceAge = ChronoUnit.DAYS.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)),
 							LocalDate.now());
+					statusSince[i] = statusSinceAge;
 					if (statusSinceAge != 0 && statusSinceAge < results.get("latest")) {
 						results.replace("latest", results.get("latest"), statusSinceAge);
 					}
 					if (statusSinceAge != 0 && statusSinceAge > results.get("oldest")) {
 						results.replace("oldest", results.get("oldest"), statusSinceAge);
 					}
-					results.replace("mean", results.get("mean"), results.get("mean") + statusSinceAge);
 				} catch (DateTimeParseException e) {
 					System.out.println("x");
 					System.out.println(e.getMessage());
 				}
 			}
 		});
-		results.replace("mean", results.get("mean"), results.get("mean") / profiles.size());
+//		results.replace("mean", results.get("mean"), results.get("mean") / profiles.size());
+		// TODO Fix Calculations
+		results.replace("mean", results.get("mean"), new Mean().evaluate(statusSince));
+		results.replace("stdev", results.get("stdev"), new StandardDeviation().evaluate(statusSince));
 		return results;
 	}
 

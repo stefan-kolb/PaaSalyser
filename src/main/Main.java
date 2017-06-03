@@ -3,11 +3,9 @@ package main;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
 
 import models.PaasProfile;
 import scanner.DirectoryScanner;
-import statistics.EvaluationResult;
 import statistics.Statistics;
 
 public class Main {
