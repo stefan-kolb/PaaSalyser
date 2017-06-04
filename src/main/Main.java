@@ -6,7 +6,7 @@ import java.util.List;
 
 import models.PaasProfile;
 import scanner.DirectoryScanner;
-import statistics.Statistics;
+import statistics.StatisticsImpl;
 
 public class Main {
 
@@ -25,11 +25,13 @@ public class Main {
 		} catch (IOException e) {
 			System.out.println("Failed");
 		}
-		System.out.println(Statistics.evalRevision(profilesList).toString());
-		System.out.println(Statistics.evalStatus(profilesList).toString());
-		System.out.println(Statistics.evalStatusSince(profilesList).toString());
-		System.out.println(Statistics.evalType(profilesList).toString());
-		System.out.println(Statistics.evalHosting(profilesList).toString());
-		System.out.println(Statistics.evalPricing(profilesList).toString());
+
+		StatisticsImpl statistics = new StatisticsImpl();
+		System.out.println(statistics.evalRevision(profilesList).toString());
+		System.out.println(statistics.evalStatus(profilesList).toString());
+		System.out.println(statistics.evalStatusSince(profilesList).toString());
+		System.out.println(statistics.evalType(profilesList).toString());
+		System.out.println(statistics.evalHosting(profilesList).toString());
+		System.out.println(statistics.evalPricing(profilesList).toString());
 	}
 }
