@@ -27,13 +27,13 @@ public class Main {
 			System.out.println("Failed");
 		}
 
-		DataPreprocessing statistics = new DataPreprocessingImpl();
-		System.out.println(statistics.evalRevision(profilesList).toString());
-		System.out.println(statistics.evalStatus(profilesList).toString());
-		System.out.println(statistics.evalStatusSince(profilesList).toString());
-		System.out.println(statistics.evalType(profilesList).toString());
-		System.out.println(statistics.evalHosting(profilesList).toString());
-		System.out.println(statistics.evalPricing(profilesList).toString());
-		System.out.println(statistics.evalRuntimes(profilesList).toString());
+		DataPreprocessing dataPreprocessor = new DataPreprocessingImpl();
+		System.out.println(dataPreprocessor.evalRevision(profilesList).toString());
+		System.out.println(dataPreprocessor.evalStatus(profilesList).toString());
+		System.out.println(dataPreprocessor.evalStatusSince(profilesList).toString());
+		System.out.println(dataPreprocessor.evalType(profilesList).toString());
+		System.out.println(dataPreprocessor.evalHosting(profilesList).toString());
+		System.out.println(dataPreprocessor.evalPricing(profilesList).toString());
+		System.out.println(dataPreprocessor.evalRuntimes(profilesList).toString());
 	}
 }

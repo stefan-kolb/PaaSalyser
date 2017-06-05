@@ -17,25 +17,24 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 	}
 
-	public Map<String, Long> evalRevision(List<PaasProfile> profiles) {
-		Map<String, Long> results = new HashMap<String, Long>();
-		results.put("latest", (long) 0);
-		results.put("oldest", (long) 0);
-		results.put("mean", (long) 0);
+	public Map<String, Double> evalRevision(List<PaasProfile> profiles) {
+		Map<String, Double> results = new HashMap<String, Double>();
+		results.put("latest", Double.MAX_VALUE);
+		results.put("oldest", Double.MIN_VALUE);
+		results.put("mean", 0.0);
 		profiles.forEach(profile -> {
 			long revisionAge = 0;
 			try {
 				revisionAge = ChronoUnit.DAYS.between(LocalDate.parse(profile.getRevision().substring(0, 10)),
 						LocalDate.now());
 				if (revisionAge != 0 && revisionAge < results.get("latest")) {
-					results.replace("latest", results.get("latest"), revisionAge);
+					results.replace("latest", results.get("latest"), (double) revisionAge);
 				}
 				if (revisionAge != 0 && revisionAge > results.get("oldest")) {
-					results.replace("oldest", results.get("oldest"), revisionAge);
+					results.replace("oldest", results.get("oldest"), (double) revisionAge);
 				}
 				results.replace("mean", results.get("mean"), results.get("mean") + revisionAge);
 			} catch (DateTimeParseException e) {
-				System.out.println("x");
 				System.out.println(e.getMessage());
 			}
 		});
@@ -104,7 +103,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		});
 		return results;
 	}
-	
+
 	@Override
 	public Map<String, Long> evalPlatform(List<PaasProfile> profiles) {
 		// TODO Auto-generated method stub
@@ -209,7 +208,8 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 		// Iterates through profiles and puts the each version of each language
 		// for each profile/runtime into results or increments if the version of
-		// the language is already contained
+		// the language is already contained. The Format is
+		// ("language"|"version")
 		profiles.forEach(profile -> {
 			profile.getRuntimes().forEach(runtime -> {
 				String language = runtime.getLanguage();
@@ -252,8 +252,23 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 	@Override
 	public Map<String, Long> evalExtensible(List<PaasProfile> profiles) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Long> results = new HashMap<String, Long>();
+		results.put("true", (long) 0);
+		results.put("false", (long) 0);
+		results.put("unknown", (long) 0);
+
+		profiles.forEach(profile -> {
+			if (profile.getExtensible().equals("true")) {
+				results.replace("true", results.get("true"), results.get("true") + 1);
+			}
+			if (profile.getExtensible().equals("false")) {
+				results.replace("false", results.get("false"), results.get("false") + 1);
+			}
+			if (profile.getExtensible().equals("unknown")) {
+				results.replace("unknown", results.get("unknown"), results.get("unknown") + 1);
+			}
+		});
+		return results;
 	}
 
 	@Override
