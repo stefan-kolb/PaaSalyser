@@ -4,23 +4,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import models.PaasProfile;
 import models.PricingModel;
 import models.PricingPeriod;
 
-public class StatisticsImpl implements Statistics {
+public class DataPreprocessingImpl implements DataPreprocessing {
 
-	DescriptiveStatistics stats;
-
-	public StatisticsImpl() {
-		stats = new DescriptiveStatistics();
+	public DataPreprocessingImpl() {
 	}
 
 	public Map<String, Long> evalRevision(List<PaasProfile> profiles) {
@@ -206,14 +199,6 @@ public class StatisticsImpl implements Statistics {
 
 	public Map<String, Long> evalRuntimes(List<PaasProfile> profiles) {
 		Map<String, Long> results = new HashMap<String, Long>();
-		Set<String> languageList = new HashSet<String>();
-
-		// Iterates through all profiles and collects all languages
-		profiles.forEach(profile -> {
-			profile.getRuntimes().forEach(runtime -> {
-				languageList.add(runtime.getLanguage());
-			});
-		});
 
 		// Iterates through profiles and puts the each version of each language
 		// for each profile/runtime into results or increments if the version of
@@ -221,16 +206,14 @@ public class StatisticsImpl implements Statistics {
 		profiles.forEach(profile -> {
 			profile.getRuntimes().forEach(runtime -> {
 				String language = runtime.getLanguage();
-				if (languageList.contains(language)) {
-					runtime.getVersions().forEach(version -> {
-						if (!results.containsKey(language + "|" + version)) {
-							results.put(language + "|" + version, (long) 1);
-						} else {
-							results.replace(language + "|" + version, results.get(language + "|" + version),
-									results.get(language + "|" + version) + 1);
-						}
-					});
-				}
+				runtime.getVersions().forEach(version -> {
+					if (!results.containsKey(language + "|" + version)) {
+						results.put(language + "|" + version, (long) 1);
+					} else {
+						results.replace(language + "|" + version, results.get(language + "|" + version),
+								results.get(language + "|" + version) + 1);
+					}
+				});
 			});
 		});
 
