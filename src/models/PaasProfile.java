@@ -25,12 +25,18 @@ public class PaasProfile {
 	@SerializedName("type")
 	@Expose
 	private String type;
+	@SerializedName("platform")
+	@Expose
+	private String platform;
 	@SerializedName("hosting")
 	@Expose
 	private Hosting hosting;
 	@SerializedName("pricings")
 	@Expose
 	private List<Pricing> pricings = null;
+	@SerializedName("qos")
+	@Expose
+	private Qos qos;
 	@SerializedName("scaling")
 	@Expose
 	private Scaling scaling;
@@ -48,17 +54,17 @@ public class PaasProfile {
 	private Services services;
 	@SerializedName("extensible")
 	@Expose
-	private Boolean extensible;
+	private String extensible;
 	@SerializedName("infrastructures")
 	@Expose
-	private List<Object> infrastructures = null;
+	private List<Infrastructure> infrastructures = null;
 
 	boolean failed = false;
 
 	public PaasProfile(String name, String revision, String url, String status, String statusSince, String type,
 			Hosting hosting, List<Pricing> pricings, Scaling scaling, List<Runtime> runtimes,
-			List<Middleware> middlewares, List<Framework> frameworks, Services services, Boolean extensible,
-			List<Object> infrastructures) {
+			List<Middleware> middlewares, List<Framework> frameworks, Services services, String extensible,
+			List<Infrastructure> infrastructures) {
 		super();
 		this.name = name;
 		this.revision = revision;
@@ -93,19 +99,35 @@ public class PaasProfile {
 	}
 
 	public String getName() {
-		return name;
+		if (this.name == null) {
+			return "null";
+		} else {
+			return name;
+		}
 	}
 
 	public String getRevision() {
-		return revision;
+		if (this.revision == null) {
+			return "null";
+		} else {
+			return revision;
+		}
 	}
 
 	public String getUrl() {
-		return url;
+		if (this.url == null) {
+			return "null";
+		} else {
+			return url;
+		}
 	}
 
 	public String getStatus() {
-		return status;
+		if (this.status == null) {
+			return "null";
+		} else {
+			return status;
+		}
 	}
 
 	public String getStatusSince() {
@@ -116,47 +138,100 @@ public class PaasProfile {
 		}
 	}
 
+	public String getPlatform() {
+		if (this.platform == null) {
+			return "null";
+		} else {
+			return platform;
+		}
+	}
+
+	public Qos getQos() {
+		if (this.qos == null) {
+			return new Qos();
+		} else {
+			return qos;
+		}
+	}
+
 	public String getType() {
-		return type;
+		if (this.type == null) {
+			return "null";
+		} else {
+			return type;
+		}
 	}
 
 	public Hosting getHosting() {
-		return hosting;
+		if (this.hosting == null) {
+			return new Hosting();
+		} else {
+			return hosting;
+		}
 	}
 
 	public List<Pricing> getPricings() {
-		if (this.pricings != null)
-			return pricings;
-		else
+		if (this.pricings == null) {
 			return new LinkedList<Pricing>();
+		} else {
+			return pricings;
+		}
 	}
 
 	public Scaling getScaling() {
-		return scaling;
+		if (this.scaling == null) {
+			return new Scaling();
+		} else {
+			return scaling;
+		}
 	}
 
 	public List<Runtime> getRuntimes() {
-		return runtimes;
+		if (this.runtimes == null) {
+			return new LinkedList<Runtime>();
+		} else {
+			return runtimes;
+		}
 	}
 
 	public List<Middleware> getMiddlewares() {
-		return middlewares;
+		if (this.middlewares == null) {
+			return new LinkedList<Middleware>();
+		} else {
+			return middlewares;
+		}
 	}
 
 	public List<Framework> getFrameworks() {
-		return frameworks;
+		if (this.frameworks == null) {
+			return new LinkedList<Framework>();
+		} else {
+			return frameworks;
+		}
 	}
 
 	public Services getServices() {
-		return services;
+		if (this.services == null) {
+			return new Services();
+		} else {
+			return services;
+		}
 	}
 
-	public Boolean getExtensible() {
-		return extensible;
+	public String getExtensible() {
+		if (this.extensible == null) {
+			return "null";
+		} else {
+			return extensible;
+		}
 	}
 
-	public List<Object> getInfrastructures() {
-		return infrastructures;
+	public List<Infrastructure> getInfrastructures() {
+		if (this.infrastructures == null) {
+			return new LinkedList<Infrastructure>();
+		} else {
+			return infrastructures;
+		}
 	}
 
 	@Override

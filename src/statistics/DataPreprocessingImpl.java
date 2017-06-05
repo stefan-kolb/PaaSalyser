@@ -104,6 +104,12 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		});
 		return results;
 	}
+	
+	@Override
+	public Map<String, Long> evalPlatform(List<PaasProfile> profiles) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public Map<String, Long> evalHosting(List<PaasProfile> profiles) {
 		Map<String, Long> results = new HashMap<String, Long>();
@@ -226,75 +232,6 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		return results;
 	}
 
-	public Map<String, Long> evalRuntimesAlt(List<PaasProfile> profiles) {
-		Map<String, Long> results = new HashMap<String, Long>();
-		results.put("apex", (long) 0);
-		results.put("clojure", (long) 0);
-		results.put("cobol", (long) 0);
-		results.put("dotnet", (long) 0);
-		results.put("erlang", (long) 0);
-		results.put("go", (long) 0);
-		results.put("groovy", (long) 0);
-		results.put("haskell", (long) 0);
-		results.put("java", (long) 0);
-		results.put("lua", (long) 0);
-		results.put("node", (long) 0);
-		results.put("perl", (long) 0);
-		results.put("php", (long) 0);
-		results.put("python", (long) 0);
-		results.put("ruby", (long) 0);
-		results.put("scala", (long) 0);
-
-		profiles.forEach(profile -> {
-
-			profile.getRuntimes().forEach(runtime -> {
-				if (runtime.getLanguage().equalsIgnoreCase("apex")) {
-					results.replace("apex", results.get("apex"), results.get("apex") + 1);
-					runtime.getVersions().forEach(version -> {
-						if (!results.containsKey("apex-version_" + version)) {
-							results.replace("apex-version_" + version, results.get("apex-version_" + version),
-									results.get("apex-version_" + version) + 1);
-						} else {
-							results.put("apex-version_" + version, (long) 1);
-						}
-					});
-				} else if (runtime.getLanguage().equalsIgnoreCase("clojure")) {
-					results.replace("clojure", results.get("clojure"), results.get("clojure") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("cobol")) {
-					results.replace("cobol", results.get("cobol"), results.get("cobol") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("dotnet")) {
-					results.replace("dotnet", results.get("dotnet"), results.get("dotnet") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("erlang")) {
-					results.replace("erlang", results.get("erlang"), results.get("erlang") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("go")) {
-					results.replace("go", results.get("go"), results.get("go") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("groovy")) {
-					results.replace("groovy", results.get("groovy"), results.get("groovy") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("haskell")) {
-					results.replace("haskell", results.get("haskell"), results.get("haskell") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("java")) {
-					results.replace("java", results.get("java"), results.get("java") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("lua")) {
-					results.replace("lua", results.get("lua"), results.get("lua") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("node")) {
-					results.replace("node", results.get("node"), results.get("node") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("perl")) {
-					results.replace("perl", results.get("perl"), results.get("perl") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("php")) {
-					results.replace("php", results.get("php"), results.get("php") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("python")) {
-					results.replace("python", results.get("python"), results.get("python") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("ruby")) {
-					results.replace("ruby", results.get("ruby"), results.get("ruby") + 1);
-				} else if (runtime.getLanguage().equalsIgnoreCase("scala")) {
-					results.replace("scala", results.get("scala"), results.get("scala") + 1);
-				}
-			});
-		});
-
-		return results;
-	}
-
 	@Override
 	public Map<String, Long> evalMiddleware(List<PaasProfile> profiles) {
 		// TODO Auto-generated method stub
@@ -321,6 +258,12 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 	@Override
 	public Map<String, Long> evalInfrastructures(List<PaasProfile> profiles) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Long> evalQos(List<PaasProfile> profiles) {
 		// TODO Auto-generated method stub
 		return null;
 	}

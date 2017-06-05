@@ -1,5 +1,6 @@
 package models;
 
+import java.util.LinkedList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -18,7 +19,15 @@ public class Runtime {
 	}
 
 	public List<String> getVersions() {
-		return versions;
+		if (versions == null) {
+			versions = new LinkedList<String>();
+			versions.add("unknown");
+			return versions;
+		} else if (versions.isEmpty()) {
+			versions.add("unknown");
+			return versions;
+		} else
+			return versions;
 	}
 
 }

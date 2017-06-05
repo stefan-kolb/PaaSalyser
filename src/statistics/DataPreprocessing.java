@@ -14,6 +14,10 @@ public interface DataPreprocessing {
 	public Map<String, Double> evalStatusSince(List<PaasProfile> profiles);
 
 	public Map<String, Long> evalType(List<PaasProfile> profiles);
+	
+	public Map<String, Long> evalQos(List<PaasProfile> profiles);
+	
+	public Map<String,Long> evalPlatform(List<PaasProfile> profiles);
 
 	public Map<String, Long> evalHosting(List<PaasProfile> profiles);
 

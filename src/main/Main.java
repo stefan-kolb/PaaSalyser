@@ -34,5 +34,6 @@ public class Main {
 		System.out.println(statistics.evalType(profilesList).toString());
 		System.out.println(statistics.evalHosting(profilesList).toString());
 		System.out.println(statistics.evalPricing(profilesList).toString());
+		System.out.println(statistics.evalRuntimes(profilesList).toString());
 	}
 }
