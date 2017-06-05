@@ -14,6 +14,7 @@ import models.PricingPeriod;
 public class DataPreprocessingImpl implements DataPreprocessing {
 
 	public DataPreprocessingImpl() {
+
 	}
 
 	public Map<String, Long> evalRevision(List<PaasProfile> profiles) {
