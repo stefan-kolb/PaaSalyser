@@ -6,8 +6,8 @@ import java.util.List;
 
 import models.PaasProfile;
 import scanner.DirectoryScanner;
-import statistics.Statistics;
-import statistics.StatisticsImpl;
+import statistics.DataPreprocessing;
+import statistics.DataPreprocessingImpl;
 
 public class Main {
 
@@ -27,7 +27,7 @@ public class Main {
 			System.out.println("Failed");
 		}
 
-		Statistics statistics = new StatisticsImpl();
+		DataPreprocessing statistics = new DataPreprocessingImpl();
 		System.out.println(statistics.evalRevision(profilesList).toString());
 		System.out.println(statistics.evalStatus(profilesList).toString());
 		System.out.println(statistics.evalStatusSince(profilesList).toString());

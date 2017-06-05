@@ -5,7 +5,7 @@ import java.util.Map;
 
 import models.PaasProfile;
 
-public interface Statistics {
+public interface DataPreprocessing {
 
 	public Map<String, Long> evalRevision(List<PaasProfile> profiles);
 
