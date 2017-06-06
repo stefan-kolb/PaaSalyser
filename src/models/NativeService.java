@@ -6,14 +6,17 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Middleware {
+public class NativeService {
 
 	@SerializedName("name")
 	@Expose
 	private String name;
-	@SerializedName("runtime")
+	@SerializedName("type")
 	@Expose
-	private String runtime;
+	private String type;
+	@SerializedName("description")
+	@Expose
+	private String description;
 	@SerializedName("versions")
 	@Expose
 	private List<String> versions = null;
@@ -22,8 +25,12 @@ public class Middleware {
 		return name;
 	}
 
-	public String getRuntime() {
-		return runtime;
+	public String getType() {
+		return type;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public List<String> getVersions() {

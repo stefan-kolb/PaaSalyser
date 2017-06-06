@@ -1,6 +1,7 @@
 
 package models;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
@@ -20,7 +21,11 @@ public class Qos {
     }
 
     public List<String> getCompliance() {
-        return compliance;
+    	if (compliance != null) {
+			return compliance;
+		} else {
+			return new LinkedList<String>();
+		}
     }
 
 }

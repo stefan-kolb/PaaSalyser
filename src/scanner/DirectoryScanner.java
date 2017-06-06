@@ -36,7 +36,6 @@ public class DirectoryScanner {
 							profilesList.add(profile);
 						} catch (IOException e) {
 							System.out.println("Failed");
-							// Insert empty PaasProfile if IO-Error occurred
 							profilesList.add(new PaasProfile(true));
 						}
 					}

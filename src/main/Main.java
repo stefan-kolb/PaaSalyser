@@ -34,6 +34,14 @@ public class Main {
 		System.out.println(dataPreprocessor.evalType(profilesList).toString());
 		System.out.println(dataPreprocessor.evalHosting(profilesList).toString());
 		System.out.println(dataPreprocessor.evalPricing(profilesList).toString());
+		System.out.println(dataPreprocessor.evalQos(profilesList).toString());
+		System.out.println(dataPreprocessor.evalHosting(profilesList).toString());
+		System.out.println(dataPreprocessor.evalScaling(profilesList).toString());
 		System.out.println(dataPreprocessor.evalRuntimes(profilesList).toString());
+		System.out.println(dataPreprocessor.evalMiddleware(profilesList).toString());
+		System.out.println(dataPreprocessor.evalFrameworks(profilesList).toString());
+		System.out.println(dataPreprocessor.evalServices(profilesList).toString());
+		System.out.println(dataPreprocessor.evalExtensible(profilesList).toString());
+		System.out.println(dataPreprocessor.evalInfrastructures(profilesList).toString());
 	}
 }

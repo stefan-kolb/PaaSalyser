@@ -106,8 +106,16 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 	@Override
 	public Map<String, Long> evalPlatform(List<PaasProfile> profiles) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Long> results = new HashMap<String, Long>();
+		profiles.forEach(profile -> {
+			if (!results.containsKey(profile.getPlatform())) {
+				results.put(profile.getPlatform(), (long) 1);
+			} else {
+				results.replace(profile.getPlatform(), results.get(profile.getPlatform()),
+						results.get(profile.getPlatform()) + 1);
+			}
+		});
+		return results;
 	}
 
 	public Map<String, Long> evalHosting(List<PaasProfile> profiles) {
@@ -234,20 +242,50 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 	@Override
 	public Map<String, Long> evalMiddleware(List<PaasProfile> profiles) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Long> results = new HashMap<String, Long>();
+		profiles.forEach(profile -> {
+			profile.getMiddlewares().forEach(middleware -> {
+				if (!results.containsKey(middleware.getName())) {
+					results.put(middleware.getName(), (long) 1);
+				} else {
+					results.replace(middleware.getName(), results.get(middleware.getName()),
+							results.get(middleware.getName()) + 1);
+				}
+			});
+		});
+		return results;
 	}
 
 	@Override
 	public Map<String, Long> evalFrameworks(List<PaasProfile> profiles) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Long> results = new HashMap<String, Long>();
+		profiles.forEach(profile -> {
+			profile.getFrameworks().forEach(framework -> {
+				if (!results.containsKey(framework.getName())) {
+					results.put(framework.getName(), (long) 1);
+				} else {
+					results.replace(framework.getName(), results.get(framework.getName()),
+							results.get(framework.getName()) + 1);
+				}
+			});
+		});
+		return results;
 	}
 
 	@Override
 	public Map<String, Long> evalServices(List<PaasProfile> profiles) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Long> results = new HashMap<String, Long>();
+		profiles.forEach(profile -> {
+			profile.getServices().getNative().forEach(nativeService -> {
+				if (!results.containsKey(nativeService.getName())) {
+					results.put(nativeService.getName(), (long) 1);
+				} else {
+					results.replace(nativeService.getName(), results.get(nativeService.getName()),
+							results.get(nativeService.getName()) + 1);
+				}
+			});
+		});
+		return results;
 	}
 
 	@Override
@@ -273,14 +311,14 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 	@Override
 	public Map<String, Long> evalInfrastructures(List<PaasProfile> profiles) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Long> results = new HashMap<String, Long>();
+		return results;
 	}
 
 	@Override
 	public Map<String, Long> evalQos(List<PaasProfile> profiles) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Long> results = new HashMap<String, Long>();
+		return results;
 	}
 
 }
