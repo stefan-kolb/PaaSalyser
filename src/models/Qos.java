@@ -9,23 +9,26 @@ import com.google.gson.annotations.SerializedName;
 
 public class Qos {
 
-    @SerializedName("uptime")
-    @Expose
+	@SerializedName("uptime")
+	@Expose
 	private String uptime;
-    @SerializedName("compliance")
-    @Expose
-    private List<String> compliance = null;
+	@SerializedName("compliance")
+	@Expose
+	private List<String> compliance = null;
 
-    public double getUptime() {
-        return Double.parseDouble(uptime);
-    }
+	public double getUptime() {
+		if (uptime != null)
+			return Double.parseDouble(uptime);
+		else
+			return Double.NaN;
+	}
 
-    public List<String> getCompliance() {
-    	if (compliance != null) {
+	public List<String> getCompliance() {
+		if (compliance != null) {
 			return compliance;
 		} else {
 			return new LinkedList<String>();
 		}
-    }
+	}
 
 }

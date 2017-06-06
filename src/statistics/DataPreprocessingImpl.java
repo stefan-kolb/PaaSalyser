@@ -220,13 +220,10 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		// ("language"|"version")
 		profiles.forEach(profile -> {
 			profile.getRuntimes().forEach(runtime -> {
-				String language = runtime.getLanguage();
 				runtime.getVersions().forEach(version -> {
-					if (!results.containsKey(language + "|" + version)) {
-						results.put(language + "|" + version, (long) 1);
-					} else {
-						results.replace(language + "|" + version, results.get(language + "|" + version),
-								results.get(language + "|" + version) + 1);
+					String key = runtime.getLanguage() + "|" + version;
+					if (results.putIfAbsent(key, (long) 1) != null) {
+						results.replace(key, results.get(key), results.get(key) + 1);
 					}
 				});
 			});
@@ -245,12 +242,12 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		Map<String, Long> results = new HashMap<String, Long>();
 		profiles.forEach(profile -> {
 			profile.getMiddlewares().forEach(middleware -> {
-				if (!results.containsKey(middleware.getName())) {
-					results.put(middleware.getName(), (long) 1);
-				} else {
-					results.replace(middleware.getName(), results.get(middleware.getName()),
-							results.get(middleware.getName()) + 1);
-				}
+				middleware.getVersions().forEach(version -> {
+					String key = middleware.getName() + "|" + version;
+					if (results.putIfAbsent(key, (long) 1) != null) {
+						results.replace(key, results.get(key), results.get(key) + 1);
+					}
+				});
 			});
 		});
 		return results;
@@ -261,12 +258,12 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		Map<String, Long> results = new HashMap<String, Long>();
 		profiles.forEach(profile -> {
 			profile.getFrameworks().forEach(framework -> {
-				if (!results.containsKey(framework.getName())) {
-					results.put(framework.getName(), (long) 1);
-				} else {
-					results.replace(framework.getName(), results.get(framework.getName()),
-							results.get(framework.getName()) + 1);
-				}
+				framework.getVersions().forEach(version -> {
+					String key = framework.getName() + "|" + framework.getRuntime() + "|" + version;
+					if (results.putIfAbsent(key, (long) 1) != null) {
+						results.replace(key, results.get(key), results.get(key) + 1);
+					}
+				});
 			});
 		});
 		return results;
@@ -277,12 +274,12 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		Map<String, Long> results = new HashMap<String, Long>();
 		profiles.forEach(profile -> {
 			profile.getServices().getNative().forEach(nativeService -> {
-				if (!results.containsKey(nativeService.getName())) {
-					results.put(nativeService.getName(), (long) 1);
-				} else {
-					results.replace(nativeService.getName(), results.get(nativeService.getName()),
-							results.get(nativeService.getName()) + 1);
-				}
+				nativeService.getVersions().forEach(version -> {
+					String key = nativeService.getName() + "|" + nativeService.getType() + "|" + version;
+					if (results.putIfAbsent(key, (long) 1) != null) {
+						results.replace(key, results.get(key), results.get(key) + 1);
+					}
+				});
 			});
 		});
 		return results;
@@ -312,12 +309,41 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	@Override
 	public Map<String, Long> evalInfrastructures(List<PaasProfile> profiles) {
 		Map<String, Long> results = new HashMap<String, Long>();
+		profiles.forEach(profile -> {
+			profile.getInfrastructures().forEach(infrastructure -> {
+				String key = infrastructure.getContinent() + "|" + infrastructure.getCountry() + "|"
+						+ infrastructure.getRegion() + "|" + infrastructure.getProvider();
+				if (results.putIfAbsent(key, (long) 1) != null) {
+					results.replace(key, results.get(key), results.get(key) + 1);
+				}
+			});
+		});
 		return results;
 	}
 
 	@Override
-	public Map<String, Long> evalQos(List<PaasProfile> profiles) {
-		Map<String, Long> results = new HashMap<String, Long>();
+	public Map<String, Double> evalQos(List<PaasProfile> profiles) {
+		Map<String, Double> results = new HashMap<String, Double>();
+		results.put("max", 0.0);
+		results.put("min", 0.0);
+		results.put("mean", 0.0);
+
+		int profileCount = 0;
+
+		for (PaasProfile profile : profiles) {
+			if (!Double.isNaN(profile.getQos().getUptime())) {
+				System.out.println(profile.getQos().getUptime());
+				results.replace("mean", results.get("mean").doubleValue(), results.get("mean").doubleValue() + profile.getQos().getUptime());
+				profileCount++;
+			}
+			profile.getQos().getCompliance().forEach(compliance -> {
+				String key = compliance;
+				if (results.putIfAbsent(key, 1.0) != null) {
+					results.replace(key, results.get(key), results.get(key) + 1.0);
+				}
+			});
+		}
+		results.replace("mean", results.get("mean"), results.get("mean") / profileCount);
 		return results;
 	}
 

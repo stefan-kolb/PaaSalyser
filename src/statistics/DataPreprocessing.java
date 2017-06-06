@@ -27,7 +27,7 @@ public interface DataPreprocessing {
 
 	public Map<String, Long> evalType(List<PaasProfile> profiles);
 
-	public Map<String, Long> evalQos(List<PaasProfile> profiles);
+	public Map<String, Double> evalQos(List<PaasProfile> profiles);
 
 	public Map<String, Long> evalPlatform(List<PaasProfile> profiles);
 
