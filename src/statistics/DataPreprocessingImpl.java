@@ -22,11 +22,15 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		results.put("latest", Double.MAX_VALUE);
 		results.put("oldest", Double.MIN_VALUE);
 		results.put("mean", 0.0);
+		results.put("size", (double) profiles.size());
 		profiles.forEach(profile -> {
 			long revisionAge = 0;
+			int i = 0;
 			try {
 				revisionAge = ChronoUnit.DAYS.between(LocalDate.parse(profile.getRevision().substring(0, 10)),
 						LocalDate.now());
+				results.putIfAbsent("revision" + i, (double) revisionAge);
+				i++;
 				if (revisionAge != 0 && revisionAge < results.get("latest")) {
 					results.replace("latest", results.get("latest"), (double) revisionAge);
 				}
@@ -38,7 +42,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 				System.out.println(e.getMessage());
 			}
 		});
-		results.replace("mean", results.get("mean"), results.get("mean") / profiles.size());
+		results.replace("mean", results.get("mean"), results.get("mean") / results.get("size"));
 		return results;
 	}
 
@@ -327,13 +331,19 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		results.put("max", 0.0);
 		results.put("min", 0.0);
 		results.put("mean", 0.0);
+		results.put("amount", 0.0);
 
 		int profileCount = 0;
 
 		for (PaasProfile profile : profiles) {
-			if (!Double.isNaN(profile.getQos().getUptime())) {
-				System.out.println(profile.getQos().getUptime());
-				results.replace("mean", results.get("mean").doubleValue(), results.get("mean").doubleValue() + profile.getQos().getUptime());
+			double uptime = profile.getQos().getUptime();
+			if (!Double.isNaN(uptime)) {
+				if (uptime > results.get("max")) {
+					results.replace("max", results.get("max"), uptime);
+				} else if (uptime < results.get("min")) {
+					results.replace("min", results.get("min"), uptime);
+				}
+				results.replace("mean", results.get("mean").doubleValue(), results.get("mean").doubleValue() + uptime);
 				profileCount++;
 			}
 			profile.getQos().getCompliance().forEach(compliance -> {
@@ -344,6 +354,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 			});
 		}
 		results.replace("mean", results.get("mean"), results.get("mean") / profileCount);
+		results.replace("amount", 0.0, (double) profileCount);
 		return results;
 	}
 

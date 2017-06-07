@@ -1,40 +1,37 @@
 package statistics;
 
-import java.util.List;
 import java.util.Map;
-
-import models.PaasProfile;
 
 public interface Statistics {
 
-	public Map<String, String> evalRevision(List<PaasProfile> profiles);
+	public Map<String, String> evalRevision(Map<String, Double> preprocessedData);
 
-	public Map<String, String> evalStatus(List<PaasProfile> profiles);
+	public Map<String, String> evalStatus(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalStatusSince(List<PaasProfile> profiles);
+	public Map<String, String> evalStatusSince(Map<String, Double> preprocessedData);
 
-	public Map<String, String> evalType(List<PaasProfile> profiles);
+	public Map<String, String> evalType(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalQos(List<PaasProfile> profiles);
+	public Map<String, String> evalQos(Map<String, Double> preprocessedData);
 
-	public Map<String, String> evalPlatform(List<PaasProfile> profiles);
+	public Map<String, String> evalPlatform(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalHosting(List<PaasProfile> profiles);
+	public Map<String, String> evalHosting(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalPricing(List<PaasProfile> profiles);
+	public Map<String, String> evalPricing(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalScaling(List<PaasProfile> profiles);
+	public Map<String, String> evalScaling(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalRuntimes(List<PaasProfile> profiles);
+	public Map<String, String> evalRuntimes(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalMiddleware(List<PaasProfile> profiles);
+	public Map<String, String> evalMiddleware(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalFrameworks(List<PaasProfile> profiles);
+	public Map<String, String> evalFrameworks(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalServices(List<PaasProfile> profiles);
+	public Map<String, String> evalServices(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalExtensible(List<PaasProfile> profiles);
+	public Map<String, String> evalExtensible(Map<String, Long> preprocessedData);
 
-	public Map<String, String> evalInfrastructures(List<PaasProfile> profiles);
+	public Map<String, String> evalInfrastructures(Map<String, Long> preprocessedData);
 
 }
