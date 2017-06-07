@@ -19,13 +19,9 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 	public Map<String, Double> evalRevision(List<PaasProfile> profiles) {
 		Map<String, Double> results = new HashMap<String, Double>();
-		results.put("latest", Double.MAX_VALUE);
-		results.put("oldest", Double.MIN_VALUE);
-		results.put("mean", 0.0);
-		results.put("size", (double) profiles.size());
-		profiles.forEach(profile -> {
+		int i = 0;
+		for (PaasProfile profile : profiles) {
 			long revisionAge = 0;
-			int i = 0;
 			try {
 				revisionAge = ChronoUnit.DAYS.between(LocalDate.parse(profile.getRevision().substring(0, 10)),
 						LocalDate.now());
@@ -41,7 +37,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 			} catch (DateTimeParseException e) {
 				System.out.println(e.getMessage());
 			}
-		});
+		}
 		results.replace("mean", results.get("mean"), results.get("mean") / results.get("size"));
 		return results;
 	}

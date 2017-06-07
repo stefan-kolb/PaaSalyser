@@ -17,12 +17,7 @@ public class StatisticsImpl implements Statistics {
 				values.add(preprocessedData.get(key));
 			}
 		});
-		// preprocessedData.entrySet().forEach(entry -> {
-		// results.putIfAbsent(entry.getKey(), entry.getValue().toString());
-		// });
-		// Double [] values = new Double
-		// [preprocessedData.get("size").intValue()];
-		// values = preprocessedData.values().toArray(values);
+
 		return results;
 	}
 
