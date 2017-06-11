@@ -13,7 +13,7 @@ public interface DataPreprocessing {
 	 * @param profiles
 	 * @return A Map with keys: latest, oldest, mean and their value in Days.
 	 */
-	public Map<String, Double> evalRevision(List<PaasProfile> profiles);
+	public Map<String, Long> evalRevision(List<PaasProfile> profiles);
 
 	public Map<String, Long> evalStatus(List<PaasProfile> profiles);
 
@@ -23,7 +23,7 @@ public interface DataPreprocessing {
 	 * @param profiles
 	 * @return A Map with keys: latest, oldest, mean and their value in Days.
 	 */
-	public Map<String, Double> evalStatusSince(List<PaasProfile> profiles);
+	public Map<String, Long> evalStatusSince(List<PaasProfile> profiles);
 
 	public Map<String, Long> evalType(List<PaasProfile> profiles);
 

@@ -8,6 +8,8 @@ import models.PaasProfile;
 import scanner.DirectoryScanner;
 import statistics.DataPreprocessing;
 import statistics.DataPreprocessingImpl;
+import statistics.Statistics;
+import statistics.StatisticsImpl;
 
 public class Main {
 
@@ -32,10 +34,10 @@ public class Main {
 		System.out.println(dataPreprocessor.evalStatus(profilesList).toString());
 		System.out.println(dataPreprocessor.evalStatusSince(profilesList).toString());
 		System.out.println(dataPreprocessor.evalType(profilesList).toString());
+		System.out.println(dataPreprocessor.evalPlatform(profilesList).toString());
 		System.out.println(dataPreprocessor.evalHosting(profilesList).toString());
 		System.out.println(dataPreprocessor.evalPricing(profilesList).toString());
 		System.out.println(dataPreprocessor.evalQos(profilesList).toString());
-		System.out.println(dataPreprocessor.evalHosting(profilesList).toString());
 		System.out.println(dataPreprocessor.evalScaling(profilesList).toString());
 		System.out.println(dataPreprocessor.evalRuntimes(profilesList).toString());
 		System.out.println(dataPreprocessor.evalMiddleware(profilesList).toString());
@@ -43,5 +45,22 @@ public class Main {
 		System.out.println(dataPreprocessor.evalServices(profilesList).toString());
 		System.out.println(dataPreprocessor.evalExtensible(profilesList).toString());
 		System.out.println(dataPreprocessor.evalInfrastructures(profilesList).toString());
+
+		Statistics statistics = new StatisticsImpl();
+		System.out.println(statistics.evalRevision(dataPreprocessor.evalRevision(profilesList)).toString());
+		System.out.println(statistics.evalStatus(dataPreprocessor.evalStatus(profilesList)).toString());
+		System.out.println(statistics.evalStatusSince(dataPreprocessor.evalStatusSince(profilesList)).toString());
+		System.out.println(statistics.evalType(dataPreprocessor.evalType(profilesList)).toString());
+		System.out.println(statistics.evalQos(dataPreprocessor.evalQos(profilesList)).toString());
+		System.out.println(statistics.evalPlatform(dataPreprocessor.evalPlatform(profilesList)).toString());
+		System.out.println(statistics.evalHosting(dataPreprocessor.evalHosting(profilesList)).toString());
+		System.out.println(statistics.evalPricing(dataPreprocessor.evalPricing(profilesList)).toString());
+		System.out.println(statistics.evalScaling(dataPreprocessor.evalScaling(profilesList)).toString());
+		System.out.println(statistics.evalRuntimes(dataPreprocessor.evalRuntimes(profilesList)).toString());
+		System.out.println(statistics.evalMiddleware(dataPreprocessor.evalMiddleware(profilesList)).toString());
+		System.out.println(statistics.evalFrameworks(dataPreprocessor.evalFrameworks(profilesList)).toString());
+		System.out.println(statistics.evalServices(dataPreprocessor.evalServices(profilesList)).toString());
+		System.out.println(statistics.evalExtensible(dataPreprocessor.evalExtensible(profilesList)).toString());
+		System.out.println(statistics.evalInfrastructures(dataPreprocessor.evalInfrastructures(profilesList)).toString());
 	}
 }
