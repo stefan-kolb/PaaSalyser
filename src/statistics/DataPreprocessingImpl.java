@@ -17,33 +17,27 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 	}
 
-	public Map<String, Double> evalRevision(List<PaasProfile> profiles) {
-		Map<String, Double> results = new HashMap<String, Double>();
+	public Map<String, Long> evalRevision(List<PaasProfile> profiles) {
+		Map<String, Long> results = new HashMap<String, Long>();
 		int i = 0;
 		for (PaasProfile profile : profiles) {
 			long revisionAge = 0;
 			try {
+				// The first 10 chars of the revision is always only the date
 				revisionAge = ChronoUnit.DAYS.between(LocalDate.parse(profile.getRevision().substring(0, 10)),
 						LocalDate.now());
-				results.putIfAbsent("revision" + i, (double) revisionAge);
+				results.putIfAbsent("revision" + i, revisionAge);
 				i++;
-				if (revisionAge != 0 && revisionAge < results.get("latest")) {
-					results.replace("latest", results.get("latest"), (double) revisionAge);
-				}
-				if (revisionAge != 0 && revisionAge > results.get("oldest")) {
-					results.replace("oldest", results.get("oldest"), (double) revisionAge);
-				}
-				results.replace("mean", results.get("mean"), results.get("mean") + revisionAge);
 			} catch (DateTimeParseException e) {
 				System.out.println(e.getMessage());
 			}
 		}
-		results.replace("mean", results.get("mean"), results.get("mean") / results.get("size"));
 		return results;
 	}
 
 	public Map<String, Long> evalStatus(List<PaasProfile> profiles) {
 		Map<String, Long> results = new HashMap<String, Long>();
+		results.put("size", (long) profiles.size());
 		results.put("production", (long) 0);
 		results.put("alpha", (long) 0);
 		results.put("beta", (long) 0);
@@ -59,39 +53,35 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		return results;
 	}
 
-	public Map<String, Double> evalStatusSince(List<PaasProfile> profiles) {
-		Map<String, Double> results = new HashMap<String, Double>();
-		results.put("latest", Double.MAX_VALUE);
-		results.put("oldest", Double.MIN_VALUE);
-		results.put("mean", 0.0);
-
-		profiles.forEach(profile -> {
-			double statusSinceAge = 0;
-			if (!profile.getStatusSince().equalsIgnoreCase("null")) {
+	public Map<String, Long> evalStatusSince(List<PaasProfile> profiles) {
+		Map<String, Long> results = new HashMap<String, Long>();
+		int i = 0;
+		long statusSince = 0;
+		for (PaasProfile profile : profiles) {
+			if (!profile.getStatusSince().contains("null")) {
 				try {
-					statusSinceAge = ChronoUnit.DAYS.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)),
+					// The first 10 chars of the revision is always only the
+					// date
+					statusSince = ChronoUnit.DAYS.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)),
 							LocalDate.now());
-					if (statusSinceAge != 0 && statusSinceAge < results.get("latest")) {
-						results.replace("latest", results.get("latest"), statusSinceAge);
-					}
-					if (statusSinceAge != 0 && statusSinceAge > results.get("oldest")) {
-						results.replace("oldest", results.get("oldest"), statusSinceAge);
-					}
-					results.replace("mean", results.get("mean"), results.get("mean") + statusSinceAge);
+					results.putIfAbsent("statusSince" + i, statusSince);
+					i++;
 				} catch (DateTimeParseException e) {
 					System.out.println(e.getMessage());
 				}
 			}
-		});
-		results.replace("mean", results.get("mean"), results.get("mean") / profiles.size());
+		}
+		results.put("size", (long) (i + 1));
 		return results;
 	}
 
 	public Map<String, Long> evalType(List<PaasProfile> profiles) {
 		Map<String, Long> results = new HashMap<String, Long>();
+		results.put("size", (long) profiles.size());
 		results.put("SaaS-centric", (long) 0);
 		results.put("Generic", (long) 0);
 		results.put("IaaS-centric", (long) 0);
+
 		profiles.forEach(profile -> {
 			if (profile.getType().equalsIgnoreCase("SaaS-centric")) {
 				results.replace("SaaS-centric", results.get("SaaS-centric"), results.get("SaaS-centric") + 1);
@@ -324,33 +314,30 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	@Override
 	public Map<String, Double> evalQos(List<PaasProfile> profiles) {
 		Map<String, Double> results = new HashMap<String, Double>();
-		results.put("max", 0.0);
-		results.put("min", 0.0);
-		results.put("mean", 0.0);
-		results.put("amount", 0.0);
+		results.put("profilesWithCompliance", 0.0);
 
-		int profileCount = 0;
-
+		int i = 0;
 		for (PaasProfile profile : profiles) {
 			double uptime = profile.getQos().getUptime();
 			if (!Double.isNaN(uptime)) {
-				if (uptime > results.get("max")) {
-					results.replace("max", results.get("max"), uptime);
-				} else if (uptime < results.get("min")) {
-					results.replace("min", results.get("min"), uptime);
-				}
-				results.replace("mean", results.get("mean").doubleValue(), results.get("mean").doubleValue() + uptime);
-				profileCount++;
+				results.put("qos" + i, uptime);
+				i++;
 			}
-			profile.getQos().getCompliance().forEach(compliance -> {
-				String key = compliance;
-				if (results.putIfAbsent(key, 1.0) != null) {
-					results.replace(key, results.get(key), results.get(key) + 1.0);
-				}
-			});
+
+			// Check if List of Compliances is empty
+			if (profile.getQos().getCompliance().isEmpty()) {
+				results.replace("profilesWithCompliance", results.get("profilesWithCompliance"),
+						results.get("profilesWithCompliance") + 1.0);
+			} else {
+				//If List is not empty --> Check for all Compliances
+				profile.getQos().getCompliance().forEach(compliance -> {
+					String key = compliance;
+					if (results.putIfAbsent(key, 1.0) != null) {
+						results.replace(key, results.get(key), results.get(key) + 1.0);
+					}
+				});
+			}
 		}
-		results.replace("mean", results.get("mean"), results.get("mean") / profileCount);
-		results.replace("amount", 0.0, (double) profileCount);
 		return results;
 	}
 

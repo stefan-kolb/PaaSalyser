@@ -4,34 +4,34 @@ import java.util.Map;
 
 public interface Statistics {
 
-	public Map<String, String> evalRevision(Map<String, Double> preprocessedData);
+	public Map<String, Double> evalRevision(Map<String, Long> data);
 
-	public Map<String, String> evalStatus(Map<String, Long> preprocessedData);
+	public Map<String, String> evalStatus(Map<String, Long> data);
 
-	public Map<String, String> evalStatusSince(Map<String, Double> preprocessedData);
+	public Map<String, Double> evalStatusSince(Map<String, Long> data);
 
-	public Map<String, String> evalType(Map<String, Long> preprocessedData);
+	public Map<String, String> evalType(Map<String, Long> data);
 
-	public Map<String, String> evalQos(Map<String, Double> preprocessedData);
+	public Map<String, Double> evalQos(Map<String, Double> data);
 
-	public Map<String, String> evalPlatform(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalPlatform(Map<String, Long> data);
 
-	public Map<String, String> evalHosting(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalHosting(Map<String, Long> data);
 
-	public Map<String, String> evalPricing(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalPricing(Map<String, Long> data);
 
-	public Map<String, String> evalScaling(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalScaling(Map<String, Long> data);
 
-	public Map<String, String> evalRuntimes(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalRuntimes(Map<String, Long> data);
 
-	public Map<String, String> evalMiddleware(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalMiddleware(Map<String, Long> data);
 
-	public Map<String, String> evalFrameworks(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalFrameworks(Map<String, Long> data);
 
-	public Map<String, String> evalServices(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalServices(Map<String, Long> data);
 
-	public Map<String, String> evalExtensible(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalExtensible(Map<String, Long> data);
 
-	public Map<String, String> evalInfrastructures(Map<String, Long> preprocessedData);
+	public Map<String, Double> evalInfrastructures(Map<String, Long> data);
 
 }
