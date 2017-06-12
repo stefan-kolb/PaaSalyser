@@ -48,29 +48,48 @@ public class StatisticsImpl implements Statistics {
 	}
 
 	@Override
-	public Map<String, String> evalStatus(Map<String, Long> data) {
-		Map<String, String> results = new HashMap<String, String>();
+	public Map<String, Long> evalStatus(Map<String, Long> data) {
+		Map<String, Long> results = new HashMap<String, Long>();
 
 		// Remove size from the actual values
-		results.put("size", "" + data.remove("size"));
-		results.put("production", "" + data.get("production"));
-		results.put("alpha", "" + data.get("alpha"));
-		results.put("beta", "" + data.get("beta"));
-		results.put("mode", "");
+		results.put("size", data.remove("size"));
+		results.put("production", data.get("production"));
+		results.put("alpha", data.get("alpha"));
+		results.put("beta", data.get("beta"));
+		results.put("mode", (long) 0);
 
-		long max = 0;
+		long modeCount = 0;
+		results.put("mode" + modeCount, (long) 0);
+
 		for (Entry<String, Long> entry : data.entrySet()) {
-			if (entry.getValue() > max) {
-				max = entry.getValue();
-				results.replace("mode", results.get("mode"), entry.getKey() + "|" + entry.getValue());
-			} else if (entry.getValue() == max) {
-				// Add the current entries' name if its value is equal
-				// to the current max value
-				results.replace("mode", results.get("mode"),
-						results.get("mode").substring(0, results.get("mode").indexOf("|")) + "," + entry.getKey() + "|"
-								+ entry.getValue());
+
+			if (!entry.getKey().equals("null")) {
+				results.put(entry.getKey(), entry.getValue());
+
+				if (entry.getValue() > results.get("mode0")) {
+
+					// Falls es nur einen Modus gibt
+					if (modeCount == 0) {
+						results.replace("mode" + modeCount, results.get("mode" + modeCount), entry.getValue());
+					} else if (modeCount > 0) {
+						// Falls es mehr als einen Modus gibt
+						for (; modeCount > 0; modeCount--) {
+							// Lösche alle Modi um wieder bei mode0 zu beginnen
+							results.remove("mode" + modeCount);
+						}
+						results.put("mode0", entry.getValue());
+					}
+				} else if (entry.getValue() == results.get("mode")) {
+					// Add another mode
+					modeCount++;
+					results.put("mode" + modeCount, entry.getValue());
+				}
+
+			} else {
+				results.put("noPlatform", entry.getValue());
 			}
 		}
+		results.put("modeCount", modeCount);
 
 		return results;
 	}
@@ -247,15 +266,56 @@ public class StatisticsImpl implements Statistics {
 	}
 
 	@Override
-	public Map<String, Double> evalPlatform(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Long> evalPlatform(Map<String, Long> data) {
+		Map<String, Long> results = new HashMap<String, Long>();
+
+		results.putAll(getQualitativeMode(data));
+
+		long modeCount = 0;
+		results.put("mode" + modeCount, (long) 0);
+
+		for (Entry<String, Long> entry : data.entrySet()) {
+
+			if (!entry.getKey().equals("null")) {
+				results.put(entry.getKey(), entry.getValue());
+
+				if (entry.getValue() > results.get("mode0")) {
+
+					// Falls es nur einen Modus gibt
+					if (modeCount == 0) {
+						results.replace("mode" + modeCount, results.get("mode" + modeCount), entry.getValue());
+					} else if (modeCount > 0) {
+						// Falls es mehr als einen Modus gibt
+						for (; modeCount > 0; modeCount--) {
+							// Lösche alle Modi um wieder bei mode0 zu beginnen
+							results.remove("mode" + modeCount);
+						}
+						results.put("mode0", entry.getValue());
+					}
+				} else if (entry.getValue() == results.get("mode")) {
+					// Add another mode
+					modeCount++;
+					results.put("mode" + modeCount, entry.getValue());
+				}
+
+			} else {
+				results.put("noPlatform", entry.getValue());
+			}
+		}
+		results.put("modeCount", modeCount);
+
+		return results;
 	}
 
 	@Override
-	public Map<String, Double> evalHosting(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Long> evalHosting(Map<String, Long> data) {
+		Map<String, Long> results = new HashMap<String, Long>();
+
+		results.putAll(getQualitativeMode(data));
+
+		data.entrySet().stream().map(entry -> results.put(entry.getKey(), entry.getValue()));
+
+		return results;
 	}
 
 	@Override
@@ -304,6 +364,41 @@ public class StatisticsImpl implements Statistics {
 	public Map<String, Double> evalInfrastructures(Map<String, Long> data) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	private Map<String, Long> getQualitativeMode(Map<String, Long> data) {
+		Map<String, Long> results = new HashMap<String, Long>();
+
+		long modeCount = 0;
+		results.put("mode" + modeCount, (long) 0);
+
+		for (Entry<String, Long> entry : data.entrySet()) {
+
+			if (!entry.getKey().equals("null")) {
+
+				if (entry.getValue() > results.get("mode0")) {
+
+					// Falls es nur einen Modus gibt
+					if (modeCount == 0) {
+						results.replace("mode" + modeCount, results.get("mode" + modeCount), entry.getValue());
+					} else if (modeCount > 0) {
+						// Falls es mehr als einen Modus gibt
+						for (; modeCount > 0; modeCount--) {
+							// Lösche alle Modi um wieder bei mode0 zu beginnen
+							results.remove("mode" + modeCount);
+						}
+						results.put("mode0", entry.getValue());
+					}
+				} else if (entry.getValue() == results.get("mode")) {
+					// Add another mode
+					modeCount++;
+					results.put("mode" + modeCount, entry.getValue());
+				}
+
+			}
+		}
+		results.put("modeCount", modeCount);
+		return results;
 	}
 
 }

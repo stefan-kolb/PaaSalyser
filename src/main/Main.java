@@ -30,8 +30,9 @@ public class Main {
 		}
 
 		System.out.println("---------------------------------------------------");
-
 		DataPreprocessing dataPreprocessor = new DataPreprocessingImpl();
+		System.out.println(dataPreprocessor.evalHosting(profilesList).toString());
+		System.out.println("---------------------------------------------------");
 		Statistics statistics = new StatisticsImpl();
 		System.out.println(statistics.evalRevision(dataPreprocessor.evalRevision(profilesList)).toString());
 		System.out.println(statistics.evalStatus(dataPreprocessor.evalStatus(profilesList)).toString());

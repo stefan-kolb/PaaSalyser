@@ -6,7 +6,7 @@ public interface Statistics {
 
 	public Map<String, Double> evalRevision(Map<String, Long> data);
 
-	public Map<String, String> evalStatus(Map<String, Long> data);
+	public Map<String, Long> evalStatus(Map<String, Long> data);
 
 	public Map<String, Double> evalStatusSince(Map<String, Long> data);
 
@@ -18,9 +18,9 @@ public interface Statistics {
 	
 	public Map<String, String> evalSpecificCompliance(Map<String, Long> data);
 
-	public Map<String, Double> evalPlatform(Map<String, Long> data);
+	public Map<String, Long> evalPlatform(Map<String, Long> data);
 
-	public Map<String, Double> evalHosting(Map<String, Long> data);
+	public Map<String, Long> evalHosting(Map<String, Long> data);
 
 	public Map<String, Double> evalPricing(Map<String, Long> data);
 
