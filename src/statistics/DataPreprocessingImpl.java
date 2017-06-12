@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,8 @@ import models.PricingModel;
 import models.PricingPeriod;
 
 public class DataPreprocessingImpl implements DataPreprocessing {
+
+	List<PaasProfile> complianceProfiles = new LinkedList<PaasProfile>();
 
 	public DataPreprocessingImpl() {
 
@@ -314,8 +317,6 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	@Override
 	public Map<String, Double> evalQos(List<PaasProfile> profiles) {
 		Map<String, Double> results = new HashMap<String, Double>();
-		results.put("#with", 0.0);
-		results.put("#w/o", 0.0);
 
 		int i = 0;
 		for (PaasProfile profile : profiles) {
@@ -327,26 +328,31 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 			}
 
 			// Check if List of Compliances is empty else continue computation
-			if (profile.getQos().getCompliance().isEmpty()) {
-				results.replace("#w/o", results.get("#w/o"), results.get("#w/o") + 1.0);
-			} else {
-				// Increment number of profiles with compliances
-				results.replace("#with", results.get("#with"), results.get("#with") + 1.0);
+			if (!profile.getQos().getCompliance().isEmpty()) {
+				complianceProfiles.add(profile);
+			}
+		}
+		return results;
+	}
 
-				// Put a counter for compliances into result map
-				results.put("#Comp|" + profile.getName(), 0.0);
+	public Map<String, Long> evalCompliance() {
+		Map<String, Long> results = new HashMap<String, Long>();
 
-				for (String compliance : profile.getQos().getCompliance()) {
+		results.put("size", (long) complianceProfiles.size());
 
-					// Count number of compliances for this profile
-					results.replace("#Comp|" + profile.getName(), results.get("#Comp|" + profile.getName()),
-							results.get("#Comp|" + profile.getName()) + 1.0);
+		for (PaasProfile profile : complianceProfiles) {
+			
+			// "#c-" Counter for number of compliances in this profile
+			results.put("#c-" + profile.getName(), (long) 0);
+			for (String compliance : profile.getQos().getCompliance()) {
+				results.replace("#c-" + profile.getName(), results.get("#c-" + profile.getName()),
+						results.get("#c-" + profile.getName()) + 1);
 
-					if (results.putIfAbsent(compliance, 1.0) != null) {
-						// Count number of appereances of this compliance in all
-						// profiles
-						results.replace(compliance, results.get(compliance), results.get(compliance) + 1.0);
-					}
+				if (results.putIfAbsent("comp|" + compliance, (long) 1) != null) {
+					// Count number of appereances of this compliance in all
+					// profiles
+					results.replace("comp|" + compliance, results.get("comp|" + compliance),
+							results.get("comp|" + compliance) + 1);
 				}
 			}
 		}

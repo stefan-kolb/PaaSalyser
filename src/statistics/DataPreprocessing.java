@@ -27,7 +27,22 @@ public interface DataPreprocessing {
 
 	public Map<String, Long> evalType(List<PaasProfile> profiles);
 
+	/**
+	 * Evaluates the Qos of the profiles and puts all profiles that have
+	 * compliances into a list.
+	 * 
+	 * @param profiles
+	 * @return
+	 */
 	public Map<String, Double> evalQos(List<PaasProfile> profiles);
+
+	/**
+	 * Uses the profiles gathered in evalQos that have compliances for
+	 * computation
+	 * 
+	 * @return
+	 */
+	public Map<String, Long> evalCompliance();
 
 	public Map<String, Long> evalPlatform(List<PaasProfile> profiles);
 

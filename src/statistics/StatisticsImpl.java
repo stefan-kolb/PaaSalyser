@@ -1,5 +1,6 @@
 package statistics;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,8 +12,16 @@ import org.apache.commons.math3.stat.descriptive.rank.Median;
 
 public class StatisticsImpl implements Statistics {
 
+	// As every profile has a revision this gets set when evalRevision is
+	// evaluated
+	int profilesCount = 0;
+
 	@Override
 	public Map<String, Double> evalRevision(Map<String, Long> data) {
+
+		// Set number of profiles
+		profilesCount = data.size();
+
 		Map<String, Double> results = new HashMap<String, Double>();
 
 		double[] values = new double[data.size()];
@@ -124,39 +133,115 @@ public class StatisticsImpl implements Statistics {
 		Map<String, Double> results = new HashMap<String, Double>();
 		List<Double> qosList = new LinkedList<Double>();
 
-		// Evaluate the Qos
-		
+		// Put data of map in according list to make a double[] out of it later
 		for (Entry<String, Double> entry : data.entrySet()) {
 			if (entry.getKey().startsWith("qos")) {
 				qosList.add(entry.getValue());
 			}
 		}
 
-		double[] values = new double[qosList.size()];
+		// Put Values into double array because apache.commoms.maths
+		// computations use double arrays
+		double[] qosValues = new double[qosList.size()];
 		int i = 0;
 		for (Double entry : qosList) {
-			values[i] = entry.doubleValue();
+			qosValues[i] = entry.doubleValue();
 			i++;
 		}
 
-		results.put("qossize", (double) values.length);
-		results.put("qosmean", StatUtils.mean(values));
-		results.put("qosmedian", new Median().evaluate(values));
+		// Evaluate Qos
+		results.put("size", (double) qosValues.length);
+		results.put("percentWithQos", (double) data.size());
+		results.put("mean", StatUtils.mean(qosValues));
+		results.put("median", new Median().evaluate(qosValues));
 		i = 0;
-		for (double mode : StatUtils.mode(values)) {
-			results.put("qosmode" + i, mode);
+		for (double mode : StatUtils.mode(qosValues)) {
+			results.put("mode" + i, mode);
 			i++;
 		}
-		results.put("qosvariance", StatUtils.populationVariance(values));
-		results.put("qosstdev", Math.sqrt(results.get("qosvariance")));
-		results.put("qosmin", StatUtils.min(values));
-		results.put("qosmax", StatUtils.max(values));
-		
-		// Evaluate the Compliance
-		data.entrySet().forEach(entry -> {
-			if (!entry.getKey().startsWith("qos")) {
+		results.put("variance", StatUtils.populationVariance(qosValues));
+		results.put("stdev", Math.sqrt(results.get("variance")));
+		results.put("min", StatUtils.min(qosValues));
+		results.put("max", StatUtils.max(qosValues));
+
+		return results;
+	}
+
+	@Override
+	public Map<String, Double> evalOverallCompliance(Map<String, Long> data) {
+		Map<String, Double> results = new HashMap<String, Double>();
+
+		List<Long> compList = new LinkedList<Long>();
+
+		// Put data of map in according list to make a double[] out of it later
+		for (Entry<String, Long> entry : data.entrySet()) {
+			if (entry.getKey().startsWith("#c-")) {
+				compList.add(entry.getValue());
 			}
-		});
+		}
+		// Put Values into double array because apache.commoms.maths
+		// computations use double arrays
+		double[] compValues = new double[compList.size()];
+		int i = 0;
+		for (Long entry : compList) {
+			compValues[i] = entry.doubleValue();
+			i++;
+		}
+
+		// Compute overall Statistics of Compliance
+		results.put("size", (double) data.get("size"));
+		results.put("percentWithCompliance", (double) (data.get("size") / profilesCount) * 100);
+		results.put("mean", StatUtils.mean(compValues));
+		results.put("median", new Median().evaluate(compValues));
+		i = 0;
+		for (double mode : StatUtils.mode(compValues)) {
+			results.put("mode" + i, mode);
+			i++;
+		}
+		results.put("variance", StatUtils.populationVariance(compValues));
+		results.put("stdev", Math.sqrt(results.get("variance")));
+		results.put("min", StatUtils.min(compValues));
+		results.put("max", StatUtils.max(compValues));
+
+		return results;
+	}
+
+	@Override
+	public Map<String, String> evalSpecificCompliance(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
+
+		List<Entry<String, Long>> compList = new LinkedList<Entry<String, Long>>();
+
+		for (Entry<String, Long> entry : data.entrySet()) {
+			if (entry.getKey().startsWith("comp|")) {
+				compList.add(new AbstractMap.SimpleEntry<String, Long>(
+						entry.getKey().substring(entry.getKey().indexOf("|") + 1), entry.getValue()));
+			}
+		}
+
+		results.put("mode", "");
+		results.put("min", "");
+
+		long max = 0;
+		long min = Long.MAX_VALUE;
+		for (Entry<String, Long> entry : compList) {
+			if (entry.getValue() > max) {
+				max = entry.getValue();
+				results.replace("mode", results.get("mode"), entry.getKey() + "|" + entry.getValue());
+			} else if (entry.getValue() == max) {
+				results.replace("mode", results.get("mode"),
+						results.get("mode").substring(0, results.get("mode").indexOf("|")) + "&" + entry.getKey() + "|"
+								+ entry.getValue());
+			}
+			if (entry.getValue() < min) {
+				min = entry.getValue();
+				results.replace("min", results.get("min"), entry.getKey() + "|" + entry.getValue());
+			} else if (entry.getValue() == min) {
+				results.replace("min", results.get("min"),
+						results.get("min").substring(0, results.get("min").indexOf("|")) + "&" + entry.getKey() + "|"
+								+ entry.getValue());
+			}
+		}
 
 		return results;
 	}

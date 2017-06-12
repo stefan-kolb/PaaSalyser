@@ -13,6 +13,10 @@ public interface Statistics {
 	public Map<String, String> evalType(Map<String, Long> data);
 
 	public Map<String, Double> evalQos(Map<String, Double> data);
+	
+	public Map<String, Double> evalOverallCompliance(Map<String, Long> data);
+	
+	public Map<String, String> evalSpecificCompliance(Map<String, Long> data);
 
 	public Map<String, Double> evalPlatform(Map<String, Long> data);
 
