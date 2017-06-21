@@ -22,7 +22,7 @@ public interface Statistics {
 
 	public Map<String, Long> evalHosting(Map<String, Long> data);
 
-	public Map<String, Double> evalPricing(Map<String, Long> data);
+	public Map<String, Long> evalPricing(Map<String, Long> data);
 
 	public Map<String, Double> evalScaling(Map<String, Long> data);
 

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.stat.descriptive.rank.Median;
@@ -312,16 +313,39 @@ public class StatisticsImpl implements Statistics {
 		Map<String, Long> results = new HashMap<String, Long>();
 
 		results.putAll(getQualitativeMode(data));
-
-		data.entrySet().stream().map(entry -> results.put(entry.getKey(), entry.getValue()));
+		results.putAll(data);
 
 		return results;
 	}
 
 	@Override
-	public Map<String, Double> evalPricing(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Long> evalPricing(Map<String, Long> data) {
+		Map<String, Long> results = new HashMap<String, Long>();
+
+		// Evaluate PricingModel
+		Map<String, Long> tempMap = new HashMap<String, Long>();
+
+		Predicate<Entry<String, Long>> isModel = entry -> entry.getKey().startsWith("model");
+		Predicate<Entry<String, Long>> isCounter = entry -> entry.getKey().contains("counter");
+
+		// Compute modelCounterMode
+		data.entrySet().stream().filter(isModel.and(isCounter))
+				.map(entry -> tempMap.put(entry.getKey(), entry.getValue()));
+		System.out.println("xyz");
+		System.out.println(tempMap);
+		getQualitativeMode(tempMap).entrySet().stream()
+				.map(entry -> results.put("modelcountermode|" + entry.getKey(), entry.getValue()));
+		System.out.println(getQualitativeMode(tempMap));
+
+		// Compute modelMode
+		tempMap.clear();
+		data.entrySet().stream()
+				.filter(entry -> entry.getKey().startsWith("model") && !entry.getKey().contains("counter"))
+				.map(entry -> tempMap.put(entry.getKey(), entry.getValue()));
+		getQualitativeMode(tempMap).entrySet().stream()
+				.map(entry -> results.put("modelmode|" + entry.getKey(), entry.getValue()));
+
+		return results;
 	}
 
 	@Override
@@ -369,30 +393,32 @@ public class StatisticsImpl implements Statistics {
 	private Map<String, Long> getQualitativeMode(Map<String, Long> data) {
 		Map<String, Long> results = new HashMap<String, Long>();
 
-		long modeCount = 0;
-		results.put("mode" + modeCount, (long) 0);
+		long modeCount = 1;
+		results.put("mode" + (modeCount - 1), (long) 0);
 
 		for (Entry<String, Long> entry : data.entrySet()) {
 
 			if (!entry.getKey().equals("null")) {
 
-				if (entry.getValue() > results.get("mode0")) {
+				if (entry.getValue() > results.get("mode" + (modeCount - 1))) {
 
 					// Falls es nur einen Modus gibt
-					if (modeCount == 0) {
-						results.replace("mode" + modeCount, results.get("mode" + modeCount), entry.getValue());
-					} else if (modeCount > 0) {
+					if (modeCount == 1) {
+						results.replace("mode" + (modeCount - 1), results.get("mode" + (modeCount - 1)),
+								entry.getValue());
+					} else if (modeCount > 1) {
 						// Falls es mehr als einen Modus gibt
-						for (; modeCount > 0; modeCount--) {
+						for (; modeCount > 1; modeCount--) {
 							// Lösche alle Modi um wieder bei mode0 zu beginnen
-							results.remove("mode" + modeCount);
+							results.remove("mode" + (modeCount - 1));
 						}
-						results.put("mode0", entry.getValue());
+						// Setze anschließend wieder mode0
+						results.put("mode" + (modeCount - 1), entry.getValue());
 					}
-				} else if (entry.getValue() == results.get("mode")) {
+				} else if (entry.getValue() == results.get("mode" + (modeCount - 1))) {
 					// Add another mode
 					modeCount++;
-					results.put("mode" + modeCount, entry.getValue());
+					results.put("mode" + (modeCount - 1), entry.getValue());
 				}
 
 			}

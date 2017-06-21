@@ -135,15 +135,16 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		results.put("modelcounter2", (long) 0);
 		results.put("modelcounter3", (long) 0);
 		results.put("modelcounter4", (long) 0);
-		results.put("free", (long) 0);
-		results.put("fixed", (long) 0);
-		results.put("metered", (long) 0);
-		results.put("hybrid", (long) 0);
-		results.put("model-empty", (long) 0);
-		results.put("daily", (long) 0);
-		results.put("monthly", (long) 0);
-		results.put("anually", (long) 0);
-		results.put("period-empty", (long) 0);
+		results.put("modelfree", (long) 0);
+		results.put("modelfixed", (long) 0);
+		results.put("modelmetered", (long) 0);
+		results.put("modelhybrid", (long) 0);
+		results.put("modelempty", (long) 0);
+
+		results.put("perioddaily", (long) 0);
+		results.put("periodmonthly", (long) 0);
+		results.put("periodanually", (long) 0);
+		results.put("periodempty", (long) 0);
 
 		profiles.forEach(profile -> {
 			if (profile.getPricings().size() == 0) {
@@ -159,25 +160,25 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 			}
 			profile.getPricings().forEach(pricing -> {
 				if (pricing.getModel().equals(PricingModel.free)) {
-					results.replace("free", results.get("free"), results.get("free") + 1);
+					results.replace("modelfree", results.get("modelfree"), results.get("modelfree") + 1);
 				} else if (pricing.getModel().equals(PricingModel.fixed)) {
-					results.replace("fixed", results.get("fixed"), results.get("fixed") + 1);
+					results.replace("modelfixed", results.get("modelfixed"), results.get("modelfixed") + 1);
 				} else if (pricing.getModel().equals(PricingModel.metered)) {
-					results.replace("metered", results.get("metered"), results.get("metered") + 1);
+					results.replace("modelmetered", results.get("modelmetered"), results.get("modelmetered") + 1);
 				} else if (pricing.getModel().equals(PricingModel.hybrid)) {
-					results.replace("hybrid", results.get("hybrid"), results.get("hybrid") + 1);
+					results.replace("modelhybrid", results.get("modelhybrid"), results.get("modelhybrid") + 1);
 				} else if (pricing.getModel().equals(PricingModel.empty)) {
-					results.replace("model-empty", results.get("model-empty"), results.get("model-empty") + 1);
+					results.replace("modelempty", results.get("modelempty"), results.get("modelempty") + 1);
 				}
 
 				if (pricing.getPeriod().equals(PricingPeriod.daily)) {
-					results.replace("daily", results.get("daily"), results.get("daily") + 1);
+					results.replace("perioddaily", results.get("perioddaily"), results.get("perioddaily") + 1);
 				} else if (pricing.getPeriod().equals(PricingPeriod.monthly)) {
-					results.replace("monthly", results.get("monthly"), results.get("monthly") + 1);
+					results.replace("periodmonthly", results.get("periodmonthly"), results.get("periodmonthly") + 1);
 				} else if (pricing.getPeriod().equals(PricingPeriod.anually)) {
-					results.replace("anually", results.get("anually"), results.get("anually") + 1);
+					results.replace("periodanually", results.get("periodanually"), results.get("periodanually") + 1);
 				} else if (pricing.getPeriod().equals(PricingPeriod.empty)) {
-					results.replace("period-empty", results.get("period-empty"), results.get("period-empty") + 1);
+					results.replace("periodempty", results.get("periodempty"), results.get("periodempty") + 1);
 				}
 			});
 		});
@@ -341,7 +342,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		results.put("size", (long) complianceProfiles.size());
 
 		for (PaasProfile profile : complianceProfiles) {
-			
+
 			// "#c-" Counter for number of compliances in this profile
 			results.put("#c-" + profile.getName(), (long) 0);
 			for (String compliance : profile.getQos().getCompliance()) {
