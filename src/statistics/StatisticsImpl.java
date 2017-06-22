@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.stat.descriptive.rank.Median;
@@ -267,145 +268,187 @@ public class StatisticsImpl implements Statistics {
 	}
 
 	@Override
-	public Map<String, Long> evalPlatform(Map<String, Long> data) {
-		Map<String, Long> results = new HashMap<String, Long>();
+	public Map<String, String> evalPlatform(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
 
-		results.putAll(getQualitativeMode(data));
+		results.putAll(data.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> "" + e.getValue())));
 
-		long modeCount = 0;
-		results.put("mode" + modeCount, (long) 0);
-
-		for (Entry<String, Long> entry : data.entrySet()) {
-
-			if (!entry.getKey().equals("null")) {
-				results.put(entry.getKey(), entry.getValue());
-
-				if (entry.getValue() > results.get("mode0")) {
-
-					// Falls es nur einen Modus gibt
-					if (modeCount == 0) {
-						results.replace("mode" + modeCount, results.get("mode" + modeCount), entry.getValue());
-					} else if (modeCount > 0) {
-						// Falls es mehr als einen Modus gibt
-						for (; modeCount > 0; modeCount--) {
-							// Lˆsche alle Modi um wieder bei mode0 zu beginnen
-							results.remove("mode" + modeCount);
-						}
-						results.put("mode0", entry.getValue());
-					}
-				} else if (entry.getValue() == results.get("mode")) {
-					// Add another mode
-					modeCount++;
-					results.put("mode" + modeCount, entry.getValue());
-				}
-
-			} else {
-				results.put("noPlatform", entry.getValue());
-			}
-		}
-		results.put("modeCount", modeCount);
+		results.putAll(getQualitativeMode(data).entrySet().stream()
+				.collect(Collectors.toMap(e -> "platformMode|" + e.getKey(), e -> e.getValue())));
 
 		return results;
 	}
 
 	@Override
-	public Map<String, Long> evalHosting(Map<String, Long> data) {
-		Map<String, Long> results = new HashMap<String, Long>();
+	public Map<String, String> evalHosting(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
 
-		results.putAll(getQualitativeMode(data));
-		results.putAll(data);
+		results.putAll(data.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> "" + e.getValue())));
+		results.putAll(getQualitativeMode(data).entrySet().stream()
+				.collect(Collectors.toMap(e -> "hostingMode|" + e.getKey(), e -> e.getValue())));
 
 		return results;
 	}
 
 	@Override
-	public Map<String, Long> evalPricing(Map<String, Long> data) {
-		Map<String, Long> results = new HashMap<String, Long>();
+	public Map<String, String> evalPricing(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
+		Map<String, Long> tempMap;
+
+		results.putAll(data.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> "" + e.getValue())));
 
 		// Evaluate PricingModel
-		Map<String, Long> tempMap = new HashMap<String, Long>();
-
 		Predicate<Entry<String, Long>> isModel = entry -> entry.getKey().startsWith("model");
 		Predicate<Entry<String, Long>> isCounter = entry -> entry.getKey().contains("counter");
+		Predicate<Entry<String, Long>> isPeriod = entry -> entry.getKey().startsWith("period");
 
 		// Compute modelCounterMode
-		data.entrySet().stream().filter(isModel.and(isCounter))
-				.map(entry -> tempMap.put(entry.getKey(), entry.getValue()));
-		System.out.println("xyz");
-		System.out.println(tempMap);
-		getQualitativeMode(tempMap).entrySet().stream()
-				.map(entry -> results.put("modelcountermode|" + entry.getKey(), entry.getValue()));
-		System.out.println(getQualitativeMode(tempMap));
+		tempMap = data.entrySet().stream().filter(isModel.and(isCounter))
+				.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+		results.putAll(getQualitativeMode(tempMap).entrySet().stream()
+				.collect(Collectors.toMap(e -> "modelcountermode|" + e.getKey(), e -> "" + e.getValue())));
 
 		// Compute modelMode
-		tempMap.clear();
-		data.entrySet().stream()
-				.filter(entry -> entry.getKey().startsWith("model") && !entry.getKey().contains("counter"))
-				.map(entry -> tempMap.put(entry.getKey(), entry.getValue()));
-		getQualitativeMode(tempMap).entrySet().stream()
-				.map(entry -> results.put("modelmode|" + entry.getKey(), entry.getValue()));
+		tempMap = data.entrySet().stream().filter(isModel.and(isCounter.negate()))
+				.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+		results.putAll(getQualitativeMode(tempMap).entrySet().stream()
+				.collect(Collectors.toMap(e -> "modelmode|" + e.getKey(), e -> "" + e.getValue())));
+
+		// Compute periodMode
+		tempMap = data.entrySet().stream().filter(isPeriod)
+				.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+		results.putAll(getQualitativeMode(tempMap).entrySet().stream()
+				.collect(Collectors.toMap(e -> "periodmode|" + e.getKey(), e -> "" + e.getValue())));
 
 		return results;
 	}
 
 	@Override
-	public Map<String, Double> evalScaling(Map<String, Long> data) {
+	public Map<String, String> evalScaling(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
+
+		results.putAll(data.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> "" + e.getValue())));
+
+		results.putAll(getQualitativeMode(data).entrySet().stream()
+				.collect(Collectors.toMap(e -> "scalingMode|" + e.getKey(), e -> e.getValue())));
+
+		return results;
+	}
+
+	@Override
+	public Map<String, String> evalRuntimes(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
+
+		results.putAll(data.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> "" + e.getValue())));
+
+		// Scan for programming languages
+		data.entrySet().forEach(entry -> {
+			// Check for current language
+			if (entry.getKey().contains("|") && !entry.getKey().contains("Amount")) {
+				String currentLanguage = entry.getKey().substring(0, entry.getKey().indexOf("|"));
+				if (results.putIfAbsent("." + currentLanguage, "" + 1) != null) {
+					results.replace("." + currentLanguage,
+							Long.toString((Long.parseLong(results.get("." + currentLanguage)) + 1)));
+				}
+			}
+		});
+
+		double[] runAmounts = data.entrySet().stream().filter(e -> e.getKey().startsWith("runAmount"))
+				.mapToDouble(e -> e.getValue().doubleValue()).toArray();
+		results.put("runMean", "" + StatUtils.mean(runAmounts));
+		results.put("runVar", "" + StatUtils.populationVariance(runAmounts));
+		results.put("runStdev", "" + Math.sqrt(Double.parseDouble(results.get("runVar"))));
+		results.put("runStdev", "" + new Median().evaluate(runAmounts));
+		results.put("runMin", "" + StatUtils.min(runAmounts));
+		results.put("runMax", "" + StatUtils.max(runAmounts));
+
+		double[] verAmounts = data.entrySet().stream().filter(e -> e.getKey().startsWith("verAmount"))
+				.mapToDouble(e -> e.getValue().doubleValue()).toArray();
+		results.put("verMean", "" + StatUtils.mean(verAmounts));
+		results.put("verVar", "" + StatUtils.populationVariance(verAmounts));
+		results.put("verStdev", "" + Math.sqrt(Double.parseDouble(results.get("verVar"))));
+		results.put("verStdev", "" + new Median().evaluate(verAmounts));
+		results.put("verMin", "" + StatUtils.min(verAmounts));
+		results.put("verMax", "" + StatUtils.max(verAmounts));
+
+		return results;
+	}
+
+	@Override
+	public Map<String, String> evalMiddleware(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
+
+		results.putAll(
+				data.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> "" + e.getValue())));
+
+		// Scan for Middlewares
+		data.entrySet().forEach(entry -> {
+			// Check for current language
+			if (entry.getKey().contains("|") && !entry.getKey().contains("Amount")) {
+				String currentLanguage = entry.getKey().substring(0, entry.getKey().indexOf("|"));
+				if (results.putIfAbsent(currentLanguage, "" + 1) != null) {
+					results.replace(currentLanguage, Long.toString((Long.parseLong(results.get(currentLanguage)) + 1)));
+				}
+			}
+		});
+		
+		double[] midAmounts = data.entrySet().stream().filter(e -> e.getKey().startsWith("midAmount"))
+				.mapToDouble(e -> e.getValue().doubleValue()).toArray();
+		results.put("verMean", "" + StatUtils.mean(midAmounts));
+		results.put("verVar", "" + StatUtils.populationVariance(midAmounts));
+		results.put("verStdev", "" + Math.sqrt(Double.parseDouble(results.get("verVar"))));
+		results.put("verStdev", "" + new Median().evaluate(midAmounts));
+		results.put("verMin", "" + StatUtils.min(midAmounts));
+		results.put("verMax", "" + StatUtils.max(midAmounts));
+
+		return results;
+	}
+
+	@Override
+	public Map<String, String> evalFrameworks(Map<String, Long> data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Map<String, Double> evalRuntimes(Map<String, Long> data) {
+	public Map<String, String> evalServices(Map<String, Long> data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Map<String, Double> evalMiddleware(Map<String, Long> data) {
+	public Map<String, String> evalExtensible(Map<String, Long> data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Map<String, Double> evalFrameworks(Map<String, Long> data) {
+	public Map<String, String> evalInfrastructures(Map<String, Long> data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Map<String, Double> evalServices(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Double> evalExtensible(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Double> evalInfrastructures(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private Map<String, Long> getQualitativeMode(Map<String, Long> data) {
-		Map<String, Long> results = new HashMap<String, Long>();
+	private Map<String, String> getQualitativeMode(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
 
 		long modeCount = 1;
-		results.put("mode" + (modeCount - 1), (long) 0);
+		results.put("mode" + (modeCount - 1), "|" + (long) 0);
 
 		for (Entry<String, Long> entry : data.entrySet()) {
 
+			// Gets the current mode from the results map and puts its value
+			// with the name into a variable
+			long currentMode = Long.parseLong(results.get("mode" + (modeCount - 1))
+					.substring(results.get("mode" + (modeCount - 1)).indexOf("|") + 1));
+
 			if (!entry.getKey().equals("null")) {
 
-				if (entry.getValue() > results.get("mode" + (modeCount - 1))) {
+				if (entry.getValue() > currentMode) {
 
 					// Falls es nur einen Modus gibt
 					if (modeCount == 1) {
 						results.replace("mode" + (modeCount - 1), results.get("mode" + (modeCount - 1)),
-								entry.getValue());
+								entry.getKey() + "|" + entry.getValue());
 					} else if (modeCount > 1) {
 						// Falls es mehr als einen Modus gibt
 						for (; modeCount > 1; modeCount--) {
@@ -413,17 +456,17 @@ public class StatisticsImpl implements Statistics {
 							results.remove("mode" + (modeCount - 1));
 						}
 						// Setze anschlieﬂend wieder mode0
-						results.put("mode" + (modeCount - 1), entry.getValue());
+						results.put("mode" + (modeCount - 1), entry.getKey() + "|" + entry.getValue());
 					}
-				} else if (entry.getValue() == results.get("mode" + (modeCount - 1))) {
+				} else if (entry.getValue() == currentMode) {
 					// Add another mode
 					modeCount++;
-					results.put("mode" + (modeCount - 1), entry.getValue());
+					results.put("mode" + (modeCount - 1), entry.getKey() + "|" + entry.getValue());
 				}
 
 			}
 		}
-		results.put("modeCount", modeCount);
+		results.put("modeCount", "" + modeCount);
 		return results;
 	}
 

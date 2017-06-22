@@ -18,24 +18,24 @@ public interface Statistics {
 	
 	public Map<String, String> evalSpecificCompliance(Map<String, Long> data);
 
-	public Map<String, Long> evalPlatform(Map<String, Long> data);
+	public Map<String, String> evalPlatform(Map<String, Long> data);
 
-	public Map<String, Long> evalHosting(Map<String, Long> data);
+	public Map<String, String> evalHosting(Map<String, Long> data);
 
-	public Map<String, Long> evalPricing(Map<String, Long> data);
+	public Map<String, String> evalPricing(Map<String, Long> data);
 
-	public Map<String, Double> evalScaling(Map<String, Long> data);
+	public Map<String, String> evalScaling(Map<String, Long> data);
 
-	public Map<String, Double> evalRuntimes(Map<String, Long> data);
+	public Map<String, String> evalRuntimes(Map<String, Long> data);
+	
+	public Map<String, String> evalMiddleware(Map<String, Long> data);
 
-	public Map<String, Double> evalMiddleware(Map<String, Long> data);
+	public Map<String, String> evalFrameworks(Map<String, Long> data);
 
-	public Map<String, Double> evalFrameworks(Map<String, Long> data);
+	public Map<String, String> evalServices(Map<String, Long> data);
 
-	public Map<String, Double> evalServices(Map<String, Long> data);
+	public Map<String, String> evalExtensible(Map<String, Long> data);
 
-	public Map<String, Double> evalExtensible(Map<String, Long> data);
-
-	public Map<String, Double> evalInfrastructures(Map<String, Long> data);
+	public Map<String, String> evalInfrastructures(Map<String, Long> data);
 
 }

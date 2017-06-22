@@ -8,9 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import models.Middleware;
 import models.PaasProfile;
 import models.PricingModel;
 import models.PricingPeriod;
+import models.Runtime;
 
 public class DataPreprocessingImpl implements DataPreprocessing {
 
@@ -207,26 +209,58 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 
 	public Map<String, Long> evalRuntimes(List<PaasProfile> profiles) {
 		Map<String, Long> results = new HashMap<String, Long>();
+		Map<String, Long> runtimeAmounts = new HashMap<String, Long>();
+		Map<String, Long> versionAmounts = new HashMap<String, Long>();
+
+		long maxAmountRuntimes = 0;
+		long maxAmountVersions = 0;
 
 		// Iterates through profiles and puts the each version of each language
 		// for each profile/runtime into results or increments if the version of
 		// the language is already contained. The Format is
 		// ("language"|"version")
-		profiles.forEach(profile -> {
-			profile.getRuntimes().forEach(runtime -> {
-				runtime.getVersions().forEach(version -> {
+		for (PaasProfile profile : profiles) {
+			long numberOfRuntimes = profile.getRuntimes().size();
+
+			// Count number of runtimes per profile
+			if (numberOfRuntimes > maxAmountRuntimes) {
+				maxAmountRuntimes = numberOfRuntimes;
+			}
+			if (runtimeAmounts.containsKey("runAmount|" + numberOfRuntimes)) {
+				runtimeAmounts.replace("runAmount|" + numberOfRuntimes,
+						runtimeAmounts.get("runAmount|" + numberOfRuntimes) + 1);
+			} else {
+				runtimeAmounts.put("runAmount|" + numberOfRuntimes, (long) 1);
+			}
+			for (Runtime runtime : profile.getRuntimes()) {
+				// Begin Version Evaluation
+				long numberOfVersions = runtime.getVersions().size();
+
+				// Count number of runtimes per profile
+				if (numberOfVersions > maxAmountVersions) {
+					maxAmountVersions = numberOfVersions;
+				}
+
+				if (versionAmounts.containsKey("verAmount|" + numberOfVersions)) {
+					versionAmounts.replace("verAmount|" + numberOfVersions,
+							versionAmounts.get("verAmount|" + numberOfVersions) + 1);
+				} else {
+					versionAmounts.put("verAmount|" + numberOfVersions, (long) 1);
+				}
+
+				for (String version : runtime.getVersions()) {
 					String key = runtime.getLanguage() + "|" + version;
 					if (results.putIfAbsent(key, (long) 1) != null) {
 						results.replace(key, results.get(key), results.get(key) + 1);
 					}
-				});
-			});
-		});
+				}
+			}
+		}
 
-		// results.keySet().forEach(key -> {
-		// if (key.startsWith("apex"))
-		// results.get(key);
-		// });
+		results.putAll(runtimeAmounts);
+		results.putAll(versionAmounts);
+		results.put("maxRuntimes", maxAmountRuntimes);
+		results.put("maxVersions", maxAmountRuntimes);
 
 		return results;
 	}
@@ -234,16 +268,33 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	@Override
 	public Map<String, Long> evalMiddleware(List<PaasProfile> profiles) {
 		Map<String, Long> results = new HashMap<String, Long>();
-		profiles.forEach(profile -> {
-			profile.getMiddlewares().forEach(middleware -> {
+
+		Map<String, Long> middlewares = new HashMap<String, Long>();
+
+		long maxAmount = 0;
+
+		for (PaasProfile profile : profiles) {
+			long numberOfMiddlewares = profile.getMiddlewares().size();
+			if (numberOfMiddlewares > maxAmount) {
+				maxAmount = numberOfMiddlewares;
+			}
+			if (middlewares.containsKey("midAmount|" + numberOfMiddlewares)) {
+				middlewares.replace("midAmount|" + numberOfMiddlewares,
+						middlewares.get("midAmount|" + numberOfMiddlewares) + 1);
+			} else {
+				middlewares.put("midAmount|" + numberOfMiddlewares, (long) 1);
+			}
+			for (Middleware middleware : profile.getMiddlewares()) {
 				middleware.getVersions().forEach(version -> {
 					String key = middleware.getName() + "|" + version;
 					if (results.putIfAbsent(key, (long) 1) != null) {
 						results.replace(key, results.get(key), results.get(key) + 1);
 					}
 				});
-			});
-		});
+			}
+		}
+		results.putAll(middlewares);
+		results.put("max", maxAmount);
 		return results;
 	}
 
