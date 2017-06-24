@@ -339,13 +339,16 @@ public class StatisticsImpl implements Statistics {
 	public Map<String, String> evalRuntimes(Map<String, Long> data) {
 		Map<String, String> results = new HashMap<String, String>();
 
-		results.putAll(data.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> "" + e.getValue())));
+		// results.putAll(data.entrySet().stream().collect(Collectors.toMap(e ->
+		// e.getKey(), e -> "" + e.getValue())));
 
 		// Scan for programming languages
 		data.entrySet().forEach(entry -> {
 			// Check for current language
 			if (entry.getKey().contains("|") && !entry.getKey().contains("Amount")) {
 				String currentLanguage = entry.getKey().substring(0, entry.getKey().indexOf("|"));
+
+				// Count each language and mark it with a "."
 				if (results.putIfAbsent("." + currentLanguage, "" + 1) != null) {
 					results.replace("." + currentLanguage,
 							Long.toString((Long.parseLong(results.get("." + currentLanguage)) + 1)));
@@ -378,53 +381,146 @@ public class StatisticsImpl implements Statistics {
 	public Map<String, String> evalMiddleware(Map<String, Long> data) {
 		Map<String, String> results = new HashMap<String, String>();
 
-		results.putAll(
-				data.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> "" + e.getValue())));
+		// results.putAll(data.entrySet().stream().collect(Collectors.toMap(e ->
+		// e.getKey(), e -> "" + e.getValue())));
 
 		// Scan for Middlewares
 		data.entrySet().forEach(entry -> {
 			// Check for current language
 			if (entry.getKey().contains("|") && !entry.getKey().contains("Amount")) {
 				String currentLanguage = entry.getKey().substring(0, entry.getKey().indexOf("|"));
-				if (results.putIfAbsent(currentLanguage, "" + 1) != null) {
-					results.replace(currentLanguage, Long.toString((Long.parseLong(results.get(currentLanguage)) + 1)));
+				if (results.putIfAbsent("." + currentLanguage, "" + 1) != null) {
+					results.replace("." + currentLanguage,
+							Long.toString((Long.parseLong(results.get("." + currentLanguage)) + 1)));
 				}
 			}
 		});
-		
+
 		double[] midAmounts = data.entrySet().stream().filter(e -> e.getKey().startsWith("midAmount"))
 				.mapToDouble(e -> e.getValue().doubleValue()).toArray();
-		results.put("verMean", "" + StatUtils.mean(midAmounts));
-		results.put("verVar", "" + StatUtils.populationVariance(midAmounts));
-		results.put("verStdev", "" + Math.sqrt(Double.parseDouble(results.get("verVar"))));
-		results.put("verStdev", "" + new Median().evaluate(midAmounts));
-		results.put("verMin", "" + StatUtils.min(midAmounts));
-		results.put("verMax", "" + StatUtils.max(midAmounts));
+		results.put("midMean", "" + StatUtils.mean(midAmounts));
+		results.put("midVar", "" + StatUtils.populationVariance(midAmounts));
+		results.put("midStdev", "" + Math.sqrt(Double.parseDouble(results.get("midVar"))));
+		results.put("midStdev", "" + new Median().evaluate(midAmounts));
+		results.put("midMin", "" + StatUtils.min(midAmounts));
+		results.put("midMax", "" + StatUtils.max(midAmounts));
 
 		return results;
 	}
 
 	@Override
 	public Map<String, String> evalFrameworks(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> results = new HashMap<String, String>();
+
+		// results.putAll(data.entrySet().stream().collect(Collectors.toMap(e ->
+		// e.getKey(), e -> "" + e.getValue())));
+
+		Map<String, Long> frameworkMap = new HashMap<String, Long>();
+		Map<String, Long> runtimeMap = new HashMap<String, Long>();
+
+		data.entrySet().forEach(entry -> {
+			int indexOfFirstMarker = entry.getKey().indexOf("|");
+			int indexOfSecondMarker = entry.getKey().indexOf("|", indexOfFirstMarker + 1);
+			String framework = entry.getKey().substring(0, entry.getKey().indexOf("|"));
+			String runtime = entry.getKey().substring(indexOfFirstMarker + 1, indexOfSecondMarker);
+			long value = entry.getValue();
+			if (frameworkMap.putIfAbsent(framework, value) != null) {
+				frameworkMap.replace(framework, frameworkMap.get(framework) + value);
+			}
+			if (runtimeMap.putIfAbsent(runtime, value) != null) {
+				runtimeMap.replace(runtime, runtimeMap.get(runtime) + value);
+			}
+		});
+
+		results = frameworkMap.entrySet().stream()
+				.collect(Collectors.toMap(e -> "fra|" + e.getKey(), e -> "" + e.getValue()));
+		results.putAll(runtimeMap.entrySet().stream()
+				.collect(Collectors.toMap(e -> "run|" + e.getKey(), e -> "" + e.getValue())));
+
+		double[] fraAmounts = frameworkMap.entrySet().stream().mapToDouble(e -> e.getValue().doubleValue()).toArray();
+		results.put("fraMean", "" + StatUtils.mean(fraAmounts));
+		results.put("fraVar", "" + StatUtils.populationVariance(fraAmounts));
+		results.put("fraStdev", "" + Math.sqrt(Double.parseDouble(results.get("fraVar"))));
+		results.put("fraStdev", "" + new Median().evaluate(fraAmounts));
+		results.put("fraMin", "" + StatUtils.min(fraAmounts));
+		results.put("fraMax", "" + StatUtils.max(fraAmounts));
+
+		double[] runAmounts = runtimeMap.entrySet().stream().mapToDouble(e -> e.getValue().doubleValue()).toArray();
+		results.put("runMean", "" + StatUtils.mean(runAmounts));
+		results.put("runVar", "" + StatUtils.populationVariance(runAmounts));
+		results.put("runStdev", "" + Math.sqrt(Double.parseDouble(results.get("runVar"))));
+		results.put("runStdev", "" + new Median().evaluate(runAmounts));
+		results.put("runMin", "" + StatUtils.min(runAmounts));
+		results.put("runMax", "" + StatUtils.max(runAmounts));
+
+		return results;
 	}
 
 	@Override
 	public Map<String, String> evalServices(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> results = new HashMap<String, String>();
+
+		Map<String, Long> serviceMap = new HashMap<String, Long>();
+		Map<String, Long> typeMap = new HashMap<String, Long>();
+
+		data.entrySet().forEach(entry -> {
+			int indexOfFirstMarker = entry.getKey().indexOf("|");
+			int indexOfSecondMarker = entry.getKey().indexOf("|", indexOfFirstMarker + 1);
+			String service = entry.getKey().substring(0, entry.getKey().indexOf("|"));
+			String type = entry.getKey().substring(indexOfFirstMarker + 1, indexOfSecondMarker);
+			long value = entry.getValue();
+			if (serviceMap.putIfAbsent(service, value) != null) {
+				serviceMap.replace(service, serviceMap.get(service) + value);
+			}
+			if (typeMap.putIfAbsent(type, value) != null) {
+				typeMap.replace(type, typeMap.get(type) + value);
+			}
+		});
+
+		results = serviceMap.entrySet().stream()
+				.collect(Collectors.toMap(e -> "ser|" + e.getKey(), e -> "" + e.getValue()));
+		results.putAll(typeMap.entrySet().stream()
+				.collect(Collectors.toMap(e -> "typ|" + e.getKey(), e -> "" + e.getValue())));
+
+		double[] serAmounts = serviceMap.entrySet().stream().mapToDouble(e -> e.getValue().doubleValue()).toArray();
+		results.put("serMean", "" + StatUtils.mean(serAmounts));
+		results.put("serVar", "" + StatUtils.populationVariance(serAmounts));
+		results.put("serStdev", "" + Math.sqrt(Double.parseDouble(results.get("serVar"))));
+		results.put("serStdev", "" + new Median().evaluate(serAmounts));
+		results.put("serMin", "" + StatUtils.min(serAmounts));
+		results.put("serMax", "" + StatUtils.max(serAmounts));
+
+		double[] typAmounts = typeMap.entrySet().stream().mapToDouble(e -> e.getValue().doubleValue()).toArray();
+		results.put("typMean", "" + StatUtils.mean(typAmounts));
+		results.put("typVar", "" + StatUtils.populationVariance(typAmounts));
+		results.put("typStdev", "" + Math.sqrt(Double.parseDouble(results.get("typVar"))));
+		results.put("typStdev", "" + new Median().evaluate(typAmounts));
+		results.put("typMin", "" + StatUtils.min(typAmounts));
+		results.put("typMax", "" + StatUtils.max(typAmounts));
+
+		return results;
 	}
 
 	@Override
 	public Map<String, String> evalExtensible(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> results = new HashMap<String, String>();
+
+		results.putAll(data.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> "" + e.getValue())));
+
+		results.putAll(getQualitativeMode(data));
+
+		return results;
 	}
 
 	@Override
 	public Map<String, String> evalInfrastructures(Map<String, Long> data) {
-		// TODO Auto-generated method stub
+		// Eval Continent
+		
+		// Eval Country
+		
+		// Eval Region
+		
+		// Eval Provier
 		return null;
 	}
 
