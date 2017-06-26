@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 import java.util.List;
 
 import gsonUtility.GsonAdapter;
@@ -18,21 +19,35 @@ import statistics.StatisticsImpl;
 public class Main {
 
 	public static void main(String[] args) {
-		List<PaasProfile> profilesList = null;
+		Path directoryToScan = Paths.get("PaasProfiles");
+		Path outputPath = Paths.get("Reports/PaaSReport_"
+				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyyHHmmss")) + ".json");
 		try {
-			profilesList = GsonAdapter.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
-			profilesList.forEach(profile -> {
-				if (profile.isFailed() == true) {
-					System.out.println("Something went wrong.");
-					System.exit(0);
-				} else {
-					System.out.println(profile.toString());
-				}
-			});
+			new Main().evaluateDirectory(directoryToScan, outputPath);
+			System.out.println("Finished scanning.");
 		} catch (IOException e) {
-			System.out.println("Failed");
+			System.out.println("A Problem occured while scanning: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			System.out.println("Exit.");
+			System.exit(0);
 		}
+	}
 
+	private void evaluateDirectory(Path directory, Path outputPath) throws IOException {
+		List<PaasProfile> profilesList = new LinkedList<PaasProfile>();
+
+		profilesList = GsonAdapter.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
+
+		for (PaasProfile profile : profilesList) {
+			if (profile.isFailed() == true) {
+				throw new IOException("Failed to scan profiles at: " + profile.getName());
+			}
+		}
+		new Main().generateReport(profilesList, outputPath);
+	}
+
+	private void generateReport(List<PaasProfile> profilesList, Path outputPath) throws IOException {
 		DataPreprocessing dataPreprocessor = new DataPreprocessingImpl();
 		Statistics statistics = new StatisticsImpl();
 
@@ -54,16 +69,6 @@ public class Main {
 				statistics.evalExtensible(dataPreprocessor.evalExtensible(profilesList)),
 				statistics.evalInfrastructures(dataPreprocessor.evalInfrastructures(profilesList)));
 
-		// Get the file reference
-		Path path = Paths.get("D:/Dokumente/Studium/paasalyser/Reports/"
-				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyyHHmmss")) + ".json");
-		
-		try {
-			GsonAdapter.createReportAsJsonFile(report, path);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		GsonAdapter.createReportAsJsonFile(report, outputPath);
 	}
 }

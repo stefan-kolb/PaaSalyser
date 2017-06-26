@@ -33,20 +33,18 @@ public class GsonAdapter {
 			throw new IOException(rootDirectory + " is no existing directory.");
 		} else {
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(rootDirectory)) {
-				stream.forEach(path -> {
+				for (Path path : stream) {
 					if (path.toString().endsWith("json")) {
 						try (InputStream in = Files.newInputStream(path);
 								BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
 							PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
-							System.out.println("Profile - " + profile.getName());
 							profilesList.add(profile);
 						} catch (IOException e) {
-							System.out.println("Failed");
 							profilesList.add(new PaasProfile(true));
 						}
 					}
 					System.out.println("Scanned - " + path.toString());
-				});
+				}
 			}
 		}
 		return profilesList;
