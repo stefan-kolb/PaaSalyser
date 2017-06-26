@@ -514,14 +514,65 @@ public class StatisticsImpl implements Statistics {
 
 	@Override
 	public Map<String, String> evalInfrastructures(Map<String, Long> data) {
-		// Eval Continent
-		
-		// Eval Country
-		
-		// Eval Region
-		
-		// Eval Provier
-		return null;
+		Map<String, String> results = new HashMap<String, String>();
+
+		Map<String, Long> continentMap = new HashMap<String, Long>();
+		Map<String, Long> countryMap = new HashMap<String, Long>();
+		Map<String, Long> regionMap = new HashMap<String, Long>();
+		Map<String, Long> providerMap = new HashMap<String, Long>();
+
+		data.entrySet().forEach(entry -> {
+			int indexOfFirstMarker = entry.getKey().indexOf("|");
+			int indexOfSecondMarker = entry.getKey().indexOf("|", indexOfFirstMarker + 1);
+			int indexOfThirdMarker = entry.getKey().indexOf("|", indexOfSecondMarker + 1);
+
+			String continent = entry.getKey().substring(0, indexOfFirstMarker);
+			String country = entry.getKey().substring(indexOfFirstMarker + 1, indexOfSecondMarker);
+			String region = entry.getKey().substring(indexOfSecondMarker + 1, indexOfThirdMarker);
+			String provider = entry.getKey().substring(indexOfThirdMarker + 1);
+
+			// Eval Continent
+			if (!continent.isEmpty()) {
+				continentMap.put(continent, entry.getValue());
+			}
+
+			// Eval Country
+			if (!country.isEmpty()) {
+				countryMap.put(country, entry.getValue());
+			}
+
+			// Eval Region
+			if (!region.isEmpty()) {
+				regionMap.put(region, entry.getValue());
+			}
+
+			// Eval Provider
+			if (!provider.isEmpty()) {
+				providerMap.put(provider, entry.getValue());
+			}
+		});
+
+		results.put("continentSize", "" + continentMap.size());
+		results.putAll(continentMap.entrySet().stream()
+				.collect(Collectors.toMap(e -> "continent|" + e.getKey(), e -> "" + e.getValue())));
+
+		results.put("countrySize", "" + countryMap.size());
+		results.putAll(countryMap.entrySet().stream()
+				.collect(Collectors.toMap(e -> "country|" + e.getKey(), e -> "" + e.getValue())));
+
+		results.put("regionSize", "" + regionMap.size());
+		results.putAll(regionMap.entrySet().stream()
+				.collect(Collectors.toMap(e -> "region|" + e.getKey(), e -> "" + e.getValue())));
+
+		results.put("providerSize", "" + providerMap.size());
+		results.putAll(providerMap.entrySet().stream()
+				.collect(Collectors.toMap(e -> "provider|" + e.getKey(), e -> "" + e.getValue())));
+
+		// Top 5
+//		continentMap.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue().reversed()).limit(5)
+//				.collect(Collectors.toList());
+
+		return results;
 	}
 
 	private Map<String, String> getQualitativeMode(Map<String, Long> data) {
