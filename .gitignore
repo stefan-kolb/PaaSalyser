@@ -6,3 +6,4 @@ bin/
 # Log file
 *.log
 
+/Reports

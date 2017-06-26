@@ -19,12 +19,12 @@ public class StatisticsImpl implements Statistics {
 	int profilesCount = 0;
 
 	@Override
-	public Map<String, Double> evalRevision(Map<String, Long> data) {
+	public Map<String, String> evalRevision(Map<String, Long> data) {
 
 		// Set number of profiles
 		profilesCount = data.size();
 
-		Map<String, Double> results = new HashMap<String, Double>();
+		Map<String, String> results = new HashMap<String, String>();
 
 		double[] values = new double[data.size()];
 
@@ -34,71 +34,41 @@ public class StatisticsImpl implements Statistics {
 			i++;
 		}
 
-		results.put("size", (double) values.length);
-		results.put("mean", StatUtils.mean(values));
-		results.put("median", new Median().evaluate(values));
+		results.put("size", "" + (double) values.length);
+		results.put("mean", "" + StatUtils.mean(values));
+		results.put("median", "" + new Median().evaluate(values));
 		i = 0;
 		for (double mode : StatUtils.mode(values)) {
-			results.put("mode" + i, mode);
+			results.put("mode" + i, "" + mode);
 			i++;
 		}
-		results.put("variance", StatUtils.populationVariance(values));
-		results.put("stdev", Math.sqrt(results.get("variance")));
-		results.put("min", StatUtils.min(values));
-		results.put("max", StatUtils.max(values));
+		results.put("modeCount", "" + i);
+		results.put("variance", "" + StatUtils.populationVariance(values));
+		results.put("stdev", "" + Math.sqrt(Double.parseDouble(results.get("variance"))));
+		results.put("min", "" + StatUtils.min(values));
+		results.put("max", "" + StatUtils.max(values));
 		return results;
 	}
 
 	@Override
-	public Map<String, Long> evalStatus(Map<String, Long> data) {
-		Map<String, Long> results = new HashMap<String, Long>();
+	public Map<String, String> evalStatus(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
 
 		// Remove size from the actual values
-		results.put("size", data.remove("size"));
-		results.put("production", data.get("production"));
-		results.put("alpha", data.get("alpha"));
-		results.put("beta", data.get("beta"));
-		results.put("mode", (long) 0);
+		results.put("size", "" + data.remove("size"));
+		results.put("production", "" + data.get("production"));
+		results.put("alpha", "" + data.get("alpha"));
+		results.put("beta", "" + data.get("beta"));
 
-		long modeCount = 0;
-		results.put("mode" + modeCount, (long) 0);
-
-		for (Entry<String, Long> entry : data.entrySet()) {
-
-			if (!entry.getKey().equals("null")) {
-				results.put(entry.getKey(), entry.getValue());
-
-				if (entry.getValue() > results.get("mode0")) {
-
-					// Falls es nur einen Modus gibt
-					if (modeCount == 0) {
-						results.replace("mode" + modeCount, results.get("mode" + modeCount), entry.getValue());
-					} else if (modeCount > 0) {
-						// Falls es mehr als einen Modus gibt
-						for (; modeCount > 0; modeCount--) {
-							// Lösche alle Modi um wieder bei mode0 zu beginnen
-							results.remove("mode" + modeCount);
-						}
-						results.put("mode0", entry.getValue());
-					}
-				} else if (entry.getValue() == results.get("mode")) {
-					// Add another mode
-					modeCount++;
-					results.put("mode" + modeCount, entry.getValue());
-				}
-
-			} else {
-				results.put("noPlatform", entry.getValue());
-			}
-		}
-		results.put("modeCount", modeCount);
+		results.putAll(getQualitativeMode(data.entrySet().stream().filter(e -> !e.getKey().contains("size"))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))));
 
 		return results;
 	}
 
 	@Override
-	public Map<String, Double> evalStatusSince(Map<String, Long> data) {
-		Map<String, Double> results = new HashMap<String, Double>();
+	public Map<String, String> evalStatusSince(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
 
 		double[] values = new double[data.size()];
 
@@ -108,18 +78,18 @@ public class StatisticsImpl implements Statistics {
 			i++;
 		}
 
-		results.put("size", (double) values.length);
-		results.put("mean", StatUtils.mean(values));
-		results.put("median", new Median().evaluate(values));
+		results.put("size", "" + (double) values.length);
+		results.put("mean", "" + StatUtils.mean(values));
+		results.put("median", "" + new Median().evaluate(values));
 		i = 0;
 		for (double mode : StatUtils.mode(values)) {
-			results.put("mode" + i, mode);
+			results.put("mode" + i, "" + mode);
 			i++;
 		}
-		results.put("variance", StatUtils.populationVariance(values));
-		results.put("stdev", Math.sqrt(results.get("variance")));
-		results.put("min", StatUtils.min(values));
-		results.put("max", StatUtils.max(values));
+		results.put("variance", "" + StatUtils.populationVariance(values));
+		results.put("stdev", "" + Math.sqrt(Double.parseDouble(results.get("variance"))));
+		results.put("min", "" + StatUtils.min(values));
+		results.put("max", "" + StatUtils.max(values));
 		return results;
 	}
 
@@ -138,11 +108,10 @@ public class StatisticsImpl implements Statistics {
 		for (Entry<String, Long> entry : data.entrySet()) {
 			if (entry.getValue() > max) {
 				max = entry.getValue();
-				results.replace("mode", results.get("mode"), entry.getKey() + "|" + entry.getValue());
+				results.replace("mode", entry.getKey() + "|" + entry.getValue());
 			} else if (entry.getValue() == max) {
-				results.replace("mode", results.get("mode"),
-						results.get("mode").substring(0, results.get("mode").indexOf("|")) + "," + entry.getKey() + "|"
-								+ entry.getValue());
+				results.replace("mode", results.get("mode").substring(0, results.get("mode").indexOf("|")) + ","
+						+ entry.getKey() + "|" + entry.getValue());
 			}
 		}
 
@@ -150,8 +119,8 @@ public class StatisticsImpl implements Statistics {
 	}
 
 	@Override
-	public Map<String, Double> evalQos(Map<String, Double> data) {
-		Map<String, Double> results = new HashMap<String, Double>();
+	public Map<String, String> evalQos(Map<String, Double> data) {
+		Map<String, String> results = new HashMap<String, String>();
 		List<Double> qosList = new LinkedList<Double>();
 
 		// Put data of map in according list to make a double[] out of it later
@@ -171,26 +140,26 @@ public class StatisticsImpl implements Statistics {
 		}
 
 		// Evaluate Qos
-		results.put("size", (double) qosValues.length);
-		results.put("percentWithQos", (double) data.size());
-		results.put("mean", StatUtils.mean(qosValues));
-		results.put("median", new Median().evaluate(qosValues));
+		results.put("size", "" + (double) qosValues.length);
+		results.put("percentWithQos", "" + (double) data.size());
+		results.put("mean", "" + StatUtils.mean(qosValues));
+		results.put("median", "" + new Median().evaluate(qosValues));
 		i = 0;
 		for (double mode : StatUtils.mode(qosValues)) {
-			results.put("mode" + i, mode);
+			results.put("mode" + i, "" + mode);
 			i++;
 		}
-		results.put("variance", StatUtils.populationVariance(qosValues));
-		results.put("stdev", Math.sqrt(results.get("variance")));
-		results.put("min", StatUtils.min(qosValues));
-		results.put("max", StatUtils.max(qosValues));
+		results.put("variance", "" + StatUtils.populationVariance(qosValues));
+		results.put("stdev", "" + Math.sqrt(Double.parseDouble(results.get("variance"))));
+		results.put("min", "" + StatUtils.min(qosValues));
+		results.put("max", "" + StatUtils.max(qosValues));
 
 		return results;
 	}
 
 	@Override
-	public Map<String, Double> evalOverallCompliance(Map<String, Long> data) {
-		Map<String, Double> results = new HashMap<String, Double>();
+	public Map<String, String> evalOverallCompliance(Map<String, Long> data) {
+		Map<String, String> results = new HashMap<String, String>();
 
 		List<Long> compList = new LinkedList<Long>();
 
@@ -210,19 +179,19 @@ public class StatisticsImpl implements Statistics {
 		}
 
 		// Compute overall Statistics of Compliance
-		results.put("size", (double) data.get("size"));
-		results.put("percentWithCompliance", (double) (data.get("size") / profilesCount) * 100);
-		results.put("mean", StatUtils.mean(compValues));
-		results.put("median", new Median().evaluate(compValues));
+		results.put("size", "" + (double) data.get("size"));
+		results.put("percentWithCompliance", "" + (double) (data.get("size") / profilesCount) * 100);
+		results.put("mean", "" + StatUtils.mean(compValues));
+		results.put("median", "" + new Median().evaluate(compValues));
 		i = 0;
 		for (double mode : StatUtils.mode(compValues)) {
-			results.put("mode" + i, mode);
+			results.put("mode" + i, "" + mode);
 			i++;
 		}
-		results.put("variance", StatUtils.populationVariance(compValues));
-		results.put("stdev", Math.sqrt(results.get("variance")));
-		results.put("min", StatUtils.min(compValues));
-		results.put("max", StatUtils.max(compValues));
+		results.put("variance", "" + StatUtils.populationVariance(compValues));
+		results.put("stdev", "" + Math.sqrt(Double.parseDouble(results.get("variance"))));
+		results.put("min", "" + StatUtils.min(compValues));
+		results.put("max", "" + StatUtils.max(compValues));
 
 		return results;
 	}
@@ -569,8 +538,9 @@ public class StatisticsImpl implements Statistics {
 				.collect(Collectors.toMap(e -> "provider|" + e.getKey(), e -> "" + e.getValue())));
 
 		// Top 5
-//		continentMap.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue().reversed()).limit(5)
-//				.collect(Collectors.toList());
+		// continentMap.entrySet().stream().sorted(Map.Entry.<String,
+		// Long>comparingByValue().reversed()).limit(5)
+		// .collect(Collectors.toList());
 
 		return results;
 	}

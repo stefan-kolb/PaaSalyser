@@ -4,17 +4,17 @@ import java.util.Map;
 
 public interface Statistics {
 
-	public Map<String, Double> evalRevision(Map<String, Long> data);
+	public Map<String, String> evalRevision(Map<String, Long> data);
 
-	public Map<String, Long> evalStatus(Map<String, Long> data);
+	public Map<String, String> evalStatus(Map<String, Long> data);
 
-	public Map<String, Double> evalStatusSince(Map<String, Long> data);
+	public Map<String, String> evalStatusSince(Map<String, Long> data);
 
 	public Map<String, String> evalType(Map<String, Long> data);
 
-	public Map<String, Double> evalQos(Map<String, Double> data);
+	public Map<String, String> evalQos(Map<String, Double> data);
 	
-	public Map<String, Double> evalOverallCompliance(Map<String, Long> data);
+	public Map<String, String> evalOverallCompliance(Map<String, Long> data);
 	
 	public Map<String, String> evalSpecificCompliance(Map<String, Long> data);
 

@@ -1,11 +1,15 @@
 package main;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import gsonUtility.GsonAdapter;
 import models.PaasProfile;
-import scanner.DirectoryScanner;
+import models.Report;
 import statistics.DataPreprocessing;
 import statistics.DataPreprocessingImpl;
 import statistics.Statistics;
@@ -16,7 +20,7 @@ public class Main {
 	public static void main(String[] args) {
 		List<PaasProfile> profilesList = null;
 		try {
-			profilesList = DirectoryScanner.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
+			profilesList = GsonAdapter.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
 			profilesList.forEach(profile -> {
 				if (profile.isFailed() == true) {
 					System.out.println("Something went wrong.");
@@ -29,28 +33,37 @@ public class Main {
 			System.out.println("Failed");
 		}
 
-		System.out.println("---------------------------------------------------");
 		DataPreprocessing dataPreprocessor = new DataPreprocessingImpl();
-		System.out.println(dataPreprocessor.evalInfrastructures(profilesList).toString());
-		System.out.println("---------------------------------------------------");
 		Statistics statistics = new StatisticsImpl();
-		System.out.println(statistics.evalRevision(dataPreprocessor.evalRevision(profilesList)).toString());
-		System.out.println(statistics.evalStatus(dataPreprocessor.evalStatus(profilesList)).toString());
-		System.out.println(statistics.evalStatusSince(dataPreprocessor.evalStatusSince(profilesList)).toString());
-		System.out.println(statistics.evalType(dataPreprocessor.evalType(profilesList)).toString());
-		System.out.println(statistics.evalQos(dataPreprocessor.evalQos(profilesList)).toString());
-		System.out.println(statistics.evalOverallCompliance(dataPreprocessor.evalCompliance()).toString());
-		System.out.println(statistics.evalSpecificCompliance(dataPreprocessor.evalCompliance()).toString());
-		System.out.println(statistics.evalPlatform(dataPreprocessor.evalPlatform(profilesList)).toString());
-		System.out.println(statistics.evalHosting(dataPreprocessor.evalHosting(profilesList)).toString());
-		System.out.println(statistics.evalPricing(dataPreprocessor.evalPricing(profilesList)).toString());
-		System.out.println(statistics.evalScaling(dataPreprocessor.evalScaling(profilesList)).toString());
-		System.out.println(statistics.evalRuntimes(dataPreprocessor.evalRuntimes(profilesList)).toString());
-		System.out.println(statistics.evalMiddleware(dataPreprocessor.evalMiddleware(profilesList)).toString());
-		System.out.println(statistics.evalFrameworks(dataPreprocessor.evalFrameworks(profilesList)).toString());
-		System.out.println(statistics.evalServices(dataPreprocessor.evalServices(profilesList)).toString());
-		System.out.println(statistics.evalExtensible(dataPreprocessor.evalExtensible(profilesList)).toString());
-		System.out
-				.println(statistics.evalInfrastructures(dataPreprocessor.evalInfrastructures(profilesList)).toString());
+
+		Report report = new Report(statistics.evalRevision(dataPreprocessor.evalRevision(profilesList)),
+				statistics.evalStatus(dataPreprocessor.evalStatus(profilesList)),
+				statistics.evalStatusSince(dataPreprocessor.evalStatusSince(profilesList)),
+				statistics.evalType(dataPreprocessor.evalType(profilesList)),
+				statistics.evalQos(dataPreprocessor.evalQos(profilesList)),
+				statistics.evalOverallCompliance(dataPreprocessor.evalCompliance()),
+				statistics.evalSpecificCompliance(dataPreprocessor.evalCompliance()),
+				statistics.evalPlatform(dataPreprocessor.evalPlatform(profilesList)),
+				statistics.evalHosting(dataPreprocessor.evalHosting(profilesList)),
+				statistics.evalPricing(dataPreprocessor.evalPricing(profilesList)),
+				statistics.evalScaling(dataPreprocessor.evalScaling(profilesList)),
+				statistics.evalRuntimes(dataPreprocessor.evalRuntimes(profilesList)),
+				statistics.evalMiddleware(dataPreprocessor.evalMiddleware(profilesList)),
+				statistics.evalFrameworks(dataPreprocessor.evalFrameworks(profilesList)),
+				statistics.evalServices(dataPreprocessor.evalServices(profilesList)),
+				statistics.evalExtensible(dataPreprocessor.evalExtensible(profilesList)),
+				statistics.evalInfrastructures(dataPreprocessor.evalInfrastructures(profilesList)));
+
+		// Get the file reference
+		Path path = Paths.get("D:/Dokumente/Studium/paasalyser/Reports/"
+				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyyHHmmss")) + ".json");
+		
+		try {
+			GsonAdapter.createReportAsJsonFile(report, path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }
