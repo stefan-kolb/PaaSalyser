@@ -17,15 +17,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import models.PaasProfile;
-import models.Report;
+import report.models.supermodels.Report;
 
 public class GsonAdapter {
 
 	static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-	public GsonAdapter() {
-
-	}
 
 	public static List<PaasProfile> scanDirectoryForJsonFiles(Path rootDirectory) throws IOException {
 		List<PaasProfile> profilesList = new LinkedList<PaasProfile>();
