@@ -55,24 +55,24 @@ public class Main {
 		DataPreprocessing dataPreprocessor = new DataPreprocessingImpl();
 		Statistics statistics = new StatisticsImpl();
 
-		Report report = new Report(statistics.evalRevision(dataPreprocessor.evalRevision(profilesList)),
-				statistics.evalStatus(dataPreprocessor.evalStatus(profilesList)),
-				statistics.evalStatusSince(dataPreprocessor.evalStatusSince(profilesList)),
-				statistics.evalType(dataPreprocessor.evalType(profilesList)),
-				statistics.evalQos(dataPreprocessor.evalQos(profilesList)),
-				statistics.evalOverallCompliance(dataPreprocessor.evalCompliance()),
-				statistics.evalSpecificCompliance(dataPreprocessor.evalCompliance()),
-				statistics.evalPlatform(dataPreprocessor.evalPlatform(profilesList)),
-				statistics.evalHosting(dataPreprocessor.evalHosting(profilesList)),
-				statistics.evalPricing(dataPreprocessor.evalPricing(profilesList)),
-				statistics.evalScaling(dataPreprocessor.evalScaling(profilesList)),
-				statistics.evalRuntimes(dataPreprocessor.evalRuntimes(profilesList)),
-				statistics.evalMiddleware(dataPreprocessor.evalMiddleware(profilesList)),
-				statistics.evalFrameworks(dataPreprocessor.evalFrameworks(profilesList)),
-				statistics.evalServices(dataPreprocessor.evalServices(profilesList)),
-				statistics.evalExtensible(dataPreprocessor.evalExtensible(profilesList)),
-				statistics.evalInfrastructures(dataPreprocessor.evalInfrastructures(profilesList)));
+//		Report report = new Report(statistics.evalRevision(dataPreprocessor.evalRevision(profilesList)),
+//				statistics.evalStatus(dataPreprocessor.evalStatus(profilesList)),
+//				statistics.evalStatusSince(dataPreprocessor.evalStatusSince(profilesList)),
+//				statistics.evalType(dataPreprocessor.evalType(profilesList)),
+//				statistics.evalQos(dataPreprocessor.evalQos(profilesList)),
+//				statistics.evalOverallCompliance(dataPreprocessor.evalCompliance()),
+//				statistics.evalSpecificCompliance(dataPreprocessor.evalCompliance()),
+//				statistics.evalPlatform(dataPreprocessor.evalPlatform(profilesList)),
+//				statistics.evalHosting(dataPreprocessor.evalHosting(profilesList)),
+//				statistics.evalPricing(dataPreprocessor.evalPricing(profilesList)),
+//				statistics.evalScaling(dataPreprocessor.evalScaling(profilesList)),
+//				statistics.evalRuntimes(dataPreprocessor.evalRuntimes(profilesList)),
+//				statistics.evalMiddleware(dataPreprocessor.evalMiddleware(profilesList)),
+//				statistics.evalFrameworks(dataPreprocessor.evalFrameworks(profilesList)),
+//				statistics.evalServices(dataPreprocessor.evalServices(profilesList)),
+//				statistics.evalExtensible(dataPreprocessor.evalExtensible(profilesList)),
+//				statistics.evalInfrastructures(dataPreprocessor.evalInfrastructures(profilesList)));
 
-		GsonAdapter.createReportAsJsonFile(report, outputPath);
+//		GsonAdapter.createReportAsJsonFile(report, outputPath);
 	}
 }
