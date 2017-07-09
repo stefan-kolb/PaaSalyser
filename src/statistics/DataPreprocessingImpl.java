@@ -370,13 +370,11 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	public Map<String, Double> evalQos(List<PaasProfile> profiles) {
 		Map<String, Double> results = new HashMap<String, Double>();
 
-		int i = 0;
 		for (PaasProfile profile : profiles) {
 			// Count Qos in profiles
 			double uptime = profile.getQos().getUptime();
 			if (!Double.isNaN(uptime)) {
-				results.put("qos" + i, uptime);
-				i++;
+				results.put(profile.getName(), uptime);
 			}
 
 			// Check if List of Compliances is empty else continue computation

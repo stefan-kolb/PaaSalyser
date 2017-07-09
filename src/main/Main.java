@@ -10,7 +10,7 @@ import java.util.List;
 
 import gsonUtility.GsonAdapter;
 import models.PaasProfile;
-import models.Report;
+import report.models.supermodels.Report;
 import statistics.DataPreprocessing;
 import statistics.DataPreprocessingImpl;
 import statistics.Statistics;
@@ -21,9 +21,12 @@ public class Main {
 	public static void main(String[] args) {
 		Path directoryToScan = Paths.get("PaasProfiles");
 		Path outputPath = Paths.get("Reports/PaaSReport_"
-				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyyHHmmss")) + ".json");
+				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy-HHmmss")) + ".json");
 		try {
-			new Main().evaluateDirectory(directoryToScan, outputPath);
+			
+			// This is where the magic happens.
+			evaluateDirectory(directoryToScan, outputPath);
+			
 			System.out.println("Finished scanning.");
 		} catch (IOException e) {
 			System.out.println("A Problem occured while scanning: " + e.getMessage());
@@ -34,7 +37,7 @@ public class Main {
 		}
 	}
 
-	private void evaluateDirectory(Path directory, Path outputPath) throws IOException {
+	private static void evaluateDirectory(Path directory, Path outputPath) throws IOException {
 		List<PaasProfile> profilesList = new LinkedList<PaasProfile>();
 
 		profilesList = GsonAdapter.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
@@ -44,10 +47,11 @@ public class Main {
 				throw new IOException("Failed to scan profiles at: " + profile.getName());
 			}
 		}
-		new Main().generateReport(profilesList, outputPath);
+		
+		generateReport(profilesList, outputPath);
 	}
 
-	private void generateReport(List<PaasProfile> profilesList, Path outputPath) throws IOException {
+	private static void generateReport(List<PaasProfile> profilesList, Path outputPath) throws IOException {
 		DataPreprocessing dataPreprocessor = new DataPreprocessingImpl();
 		Statistics statistics = new StatisticsImpl();
 
