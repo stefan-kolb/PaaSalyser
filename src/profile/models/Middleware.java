@@ -1,11 +1,12 @@
-package models;
+package profile.models;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Framework {
+public class Middleware {
 
 	@SerializedName("name")
 	@Expose

@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * This class is to determine the quality of service the vendors promise in the
+ * profiles.
+ */
 public class QosReport {
 
 	private int numberOfProfiles;
@@ -14,7 +18,7 @@ public class QosReport {
 	private double stdev;
 	private List<Map.Entry<String, Double>> minFive = new ArrayList<>();
 	private List<Map.Entry<String, Double>> topFive = new ArrayList<>();
-	
+
 	public QosReport(int numberOfProfiles, double mean, double median, double variance, double stdev,
 			List<Entry<String, Double>> minFive, List<Entry<String, Double>> topFive) {
 		super();

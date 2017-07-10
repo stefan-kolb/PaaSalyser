@@ -16,8 +16,8 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import models.PaasProfile;
-import report.models.supermodels.Report;
+import profile.PaasProfile;
+import report.Report;
 
 public class GsonAdapter {
 

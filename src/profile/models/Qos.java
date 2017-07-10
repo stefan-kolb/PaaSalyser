@@ -1,5 +1,5 @@
 
-package models;
+package profile.models;
 
 import java.util.LinkedList;
 import java.util.List;

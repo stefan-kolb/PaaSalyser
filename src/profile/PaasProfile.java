@@ -1,9 +1,19 @@
-package models;
+package profile;
 
 import java.util.LinkedList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import profile.models.Framework;
+import profile.models.Hosting;
+import profile.models.Infrastructure;
+import profile.models.Middleware;
+import profile.models.Pricing;
+import profile.models.Qos;
+import profile.models.Runtime;
+import profile.models.Scaling;
+import profile.models.Services;
 
 public class PaasProfile {
 

@@ -3,7 +3,7 @@ package statistics;
 import java.util.List;
 import java.util.Map;
 
-import models.PaasProfile;
+import profile.PaasProfile;
 
 public interface DataPreprocessing {
 

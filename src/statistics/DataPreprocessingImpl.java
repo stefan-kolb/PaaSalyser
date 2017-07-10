@@ -8,11 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import models.Middleware;
-import models.PaasProfile;
-import models.PricingModel;
-import models.PricingPeriod;
-import models.Runtime;
+import profile.PaasProfile;
+import profile.models.Middleware;
+import profile.models.PricingModel;
+import profile.models.PricingPeriod;
+import profile.models.Runtime;
 
 public class DataPreprocessingImpl implements DataPreprocessing {
 

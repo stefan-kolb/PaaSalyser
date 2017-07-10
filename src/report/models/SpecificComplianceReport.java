@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import report.models.supermodels.QuantitativeModel;
+import report.QuantitativeModel;
 
+/**
+ * This class is to determine how many of each compliance is present in the data
+ * set
+ */
 public class SpecificComplianceReport extends QuantitativeModel {
-	
+
 	List<Map.Entry<String, Long>> compliances = new ArrayList<>();
 
 	public SpecificComplianceReport(int numberOfProfiles, double mean, double median, double variance, double stdev,

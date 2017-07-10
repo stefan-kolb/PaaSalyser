@@ -3,8 +3,13 @@ package report.models;
 import java.util.List;
 import java.util.Map.Entry;
 
-import report.models.supermodels.QualitativeModel;
+import report.QualitativeModel;
 
+/**
+ * This class is to determine how the PaaS vendor landscape is currently setup
+ * regarding types of services. The profile can either be set up as a generic
+ * PaaS or more towards IaaS or SaaS.
+ */
 public class TypeReport extends QualitativeModel {
 
 	private long saasCentric;

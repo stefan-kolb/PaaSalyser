@@ -67,17 +67,13 @@ public class StatisticsImplWithModels implements StatisticsWithModels {
 
 	@Override
 	public OverallComplianceReport evalOverallCompliance(Map<String, Long> data) {
-		double[] values = data.entrySet().stream().mapToDouble(e -> e.getValue().doubleValue()).toArray();
-		double variance = StatUtils.populationVariance(values);
-
-		// Collect all compliances into a list
-		List<Map.Entry<String, Long>> entries = data.entrySet().stream()
-				.filter(entry -> entry.getKey().startsWith("comp|"))
-				.map(e -> new AbstractMap.SimpleEntry<String, Long>(e.getKey().substring(e.getKey().indexOf("-") + 1),
-						e.getValue()))
-				.collect(Collectors.toCollection(ArrayList::new));
-
-		return new OverallComplianceReport(values.length, getMinFiveLong(data), getTopFiveLong(data), entries);
+		// Collect all profiles with compliances into a list to evaluate
+		Map<String, Long> entries = data.entrySet().stream().filter(entry -> entry.getKey().startsWith("#c-"))
+				.collect(Collectors.toMap(entry -> (entry.getKey().substring(entry.getKey().indexOf("-") + 1)),
+						entry -> entry.getValue()));
+		double percentWithCompliances = (entries.size() / data.size()) * 100;
+		return new OverallComplianceReport(data.size(), getMinFiveLong(entries), getTopFiveLong(entries),
+				percentWithCompliances);
 	}
 
 	@Override

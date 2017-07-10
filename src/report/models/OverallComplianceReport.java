@@ -1,24 +1,26 @@
 package report.models;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
-import report.models.supermodels.QualitativeModel;
+import report.QuantitativeModel;
 
-public class OverallComplianceReport extends QualitativeModel {
+/**
+ * This class is to determine how many of all profiles of the current data set
+ * even have compliances.
+ */
+public class OverallComplianceReport extends QuantitativeModel {
+
+	private double percentWithCompliance;
 	
-	List<Map.Entry<String, Long>> profilesWithCompliances = new ArrayList<>();
-
-	public OverallComplianceReport(long numberOfProfiles, List<Entry<String, Long>> minFive,
-			List<Entry<String, Long>> topFive, List<Entry<String, Long>> profilesWithCompliances) {
-		super(numberOfProfiles, minFive, topFive);
-		this.profilesWithCompliances = profilesWithCompliances;
+	public OverallComplianceReport(int numberOfProfiles, double mean, double median, double variance, double stdev,
+			List<Entry<String, Long>> minFive, List<Entry<String, Long>> topFive, double percentWithCompliance) {
+		super(numberOfProfiles, mean, median, variance, stdev, minFive, topFive);
+		this.percentWithCompliance = percentWithCompliance;
 	}
 
-	public List<Map.Entry<String, Long>> getEntries() {
-		return profilesWithCompliances;
+	public double getPercentWithCompliance() {
+		return percentWithCompliance;
 	}
 
 }

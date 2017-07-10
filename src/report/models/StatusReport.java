@@ -3,8 +3,12 @@ package report.models;
 import java.util.List;
 import java.util.Map.Entry;
 
-import report.models.supermodels.QualitativeModel;
+import report.QualitativeModel;
 
+/**
+ * This class is to determine how many of each status are in present in the data
+ * set.
+ */
 public class StatusReport extends QualitativeModel {
 
 	private long production;

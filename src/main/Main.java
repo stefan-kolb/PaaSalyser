@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import gsonUtility.GsonAdapter;
-import models.PaasProfile;
-import report.models.supermodels.Report;
+import profile.PaasProfile;
+import report.Report;
 import statistics.DataPreprocessing;
 import statistics.DataPreprocessingImpl;
 import statistics.Statistics;

@@ -1,4 +1,4 @@
-package report.models.supermodels;
+package report;
 
 import java.util.ArrayList;
 import java.util.List;
