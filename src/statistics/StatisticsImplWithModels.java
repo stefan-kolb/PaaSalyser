@@ -1,6 +1,5 @@
 package statistics;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -68,18 +67,29 @@ public class StatisticsImplWithModels implements StatisticsWithModels {
 	@Override
 	public OverallComplianceReport evalOverallCompliance(Map<String, Long> data) {
 		// Collect all profiles with compliances into a list to evaluate
-		Map<String, Long> entries = data.entrySet().stream().filter(entry -> entry.getKey().startsWith("#c-"))
+		Map<String, Long> entries = data.entrySet().stream()
+				//
+				.filter(entry -> entry.getKey().startsWith("#c-"))
 				.collect(Collectors.toMap(entry -> (entry.getKey().substring(entry.getKey().indexOf("-") + 1)),
 						entry -> entry.getValue()));
+
+		double[] values = entries.entrySet().stream().mapToDouble(e -> e.getValue().doubleValue()).toArray();
+		double variance = StatUtils.populationVariance(values);
+
 		double percentWithCompliances = (entries.size() / data.size()) * 100;
-		return new OverallComplianceReport(data.size(), getMinFiveLong(entries), getTopFiveLong(entries),
-				percentWithCompliances);
+
+		return new OverallComplianceReport(entries.size(), StatUtils.mean(values), new Median().evaluate(values),
+				variance, Math.sqrt(variance), getMinFiveLong(entries), getTopFiveLong(entries), percentWithCompliances);
 	}
 
 	@Override
 	public SpecificComplianceReport evalSpecificCompliance(Map<String, Long> data) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Long> entries = data.entrySet().stream()
+				//
+				.filter(entry -> entry.getKey().startsWith("comp|"))
+				.collect(Collectors.toMap(entry -> (entry.getKey().substring(entry.getKey().indexOf("|") + 1)),
+						entry -> entry.getValue()));
+		return new SpecificComplianceReport(entries.size(), getMinFiveLong(entries), getTopFiveLong(entries));
 	}
 
 	@Override

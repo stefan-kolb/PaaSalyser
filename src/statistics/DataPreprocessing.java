@@ -1,9 +1,6 @@
 package statistics;
 
-import java.util.List;
 import java.util.Map;
-
-import profile.PaasProfile;
 
 public interface DataPreprocessing {
 
@@ -13,9 +10,9 @@ public interface DataPreprocessing {
 	 * @param profiles
 	 * @return A Map with keys: latest, oldest, mean and their value in Days.
 	 */
-	public Map<String, Long> evalRevision(List<PaasProfile> profiles);
+	public Map<String, Long> evalRevision();
 
-	public Map<String, Long> evalStatus(List<PaasProfile> profiles);
+	public Map<String, Long> evalStatus();
 
 	/**
 	 * Evaluates the age of StatusSince of a PaasProfile in Days
@@ -23,9 +20,9 @@ public interface DataPreprocessing {
 	 * @param profiles
 	 * @return A Map with keys: latest, oldest, mean and their value in Days.
 	 */
-	public Map<String, Long> evalStatusSince(List<PaasProfile> profiles);
+	public Map<String, Long> evalStatusSince();
 
-	public Map<String, Long> evalType(List<PaasProfile> profiles);
+	public Map<String, Long> evalType();
 
 	/**
 	 * Evaluates the Qos of the profiles and puts all profiles that have
@@ -34,23 +31,17 @@ public interface DataPreprocessing {
 	 * @param profiles
 	 * @return
 	 */
-	public Map<String, Double> evalQos(List<PaasProfile> profiles);
+	public Map<String, Double> evalQos();
 
-	/**
-	 * Uses the profiles gathered in evalQos that have compliances for
-	 * computation
-	 * 
-	 * @return
-	 */
 	public Map<String, Long> evalCompliance();
 
-	public Map<String, Long> evalPlatform(List<PaasProfile> profiles);
+	public Map<String, Long> evalPlatform();
 
-	public Map<String, Long> evalHosting(List<PaasProfile> profiles);
+	public Map<String, Long> evalHosting();
 
-	public Map<String, Long> evalPricing(List<PaasProfile> profiles);
+	public Map<String, Long> evalPricing();
 
-	public Map<String, Long> evalScaling(List<PaasProfile> profiles);
+	public Map<String, Long> evalScaling();
 
 	/**
 	 * Evaluates the Runtime of a PaasProfile. A Profile might have multiple
@@ -62,16 +53,16 @@ public interface DataPreprocessing {
 	 * @param profiles
 	 * @return Map with language and version as a key and its frequency as value
 	 */
-	public Map<String, Long> evalRuntimes(List<PaasProfile> profiles);
+	public Map<String, Long> evalRuntimes();
 
-	public Map<String, Long> evalMiddleware(List<PaasProfile> profiles);
+	public Map<String, Long> evalMiddleware();
 
-	public Map<String, Long> evalFrameworks(List<PaasProfile> profiles);
+	public Map<String, Long> evalFrameworks();
 
-	public Map<String, Long> evalServices(List<PaasProfile> profiles);
+	public Map<String, Long> evalServices();
 
-	public Map<String, Long> evalExtensible(List<PaasProfile> profiles);
+	public Map<String, Long> evalExtensible();
 
-	public Map<String, Long> evalInfrastructures(List<PaasProfile> profiles);
+	public Map<String, Long> evalInfrastructures();
 
 }

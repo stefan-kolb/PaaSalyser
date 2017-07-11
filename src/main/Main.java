@@ -52,7 +52,7 @@ public class Main {
 	}
 
 	private static void generateReport(List<PaasProfile> profilesList, Path outputPath) throws IOException {
-		DataPreprocessing dataPreprocessor = new DataPreprocessingImpl();
+		DataPreprocessing dataPreprocessor = new DataPreprocessingImpl(profilesList);
 		Statistics statistics = new StatisticsImpl();
 
 //		Report report = new Report(statistics.evalRevision(dataPreprocessor.evalRevision(profilesList)),

@@ -23,8 +23,8 @@ public class QuantitativeModel {
 		this.median = median;
 		this.variance = variance;
 		this.stdev = stdev;
-		minFive.addAll(minFive);
-		topFive.addAll(topFive);
+		this.minFive.addAll(minFive);
+		this.topFive.addAll(topFive);
 	}
 
 	public int getNumberOfProfiles() {

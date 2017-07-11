@@ -3,8 +3,8 @@ package statistics;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,13 +16,13 @@ import profile.models.Runtime;
 
 public class DataPreprocessingImpl implements DataPreprocessing {
 
-	List<PaasProfile> complianceProfiles = new LinkedList<PaasProfile>();
+	private List<PaasProfile> profiles = new ArrayList<PaasProfile>();
 
-	public DataPreprocessingImpl() {
-
+	public DataPreprocessingImpl(List<PaasProfile> profiles) {
+		this.profiles.addAll(profiles);
 	}
 
-	public Map<String, Long> evalRevision(List<PaasProfile> profiles) {
+	public Map<String, Long> evalRevision() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		int i = 0;
 		for (PaasProfile profile : profiles) {
@@ -40,7 +40,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		return results;
 	}
 
-	public Map<String, Long> evalStatus(List<PaasProfile> profiles) {
+	public Map<String, Long> evalStatus() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		results.put("size", (long) profiles.size());
 		results.put("production", (long) 0);
@@ -58,7 +58,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		return results;
 	}
 
-	public Map<String, Long> evalStatusSince(List<PaasProfile> profiles) {
+	public Map<String, Long> evalStatusSince() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		int i = 0;
 		long statusSince = 0;
@@ -80,7 +80,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		return results;
 	}
 
-	public Map<String, Long> evalType(List<PaasProfile> profiles) {
+	public Map<String, Long> evalType() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		results.put("size", (long) profiles.size());
 		results.put("SaaS-centric", (long) 0);
@@ -100,7 +100,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	}
 
 	@Override
-	public Map<String, Long> evalPlatform(List<PaasProfile> profiles) {
+	public Map<String, Long> evalPlatform() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		profiles.forEach(profile -> {
 			if (!results.containsKey(profile.getPlatform())) {
@@ -113,7 +113,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		return results;
 	}
 
-	public Map<String, Long> evalHosting(List<PaasProfile> profiles) {
+	public Map<String, Long> evalHosting() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		results.put("public", (long) 0);
 		results.put("private", (long) 0);
@@ -130,7 +130,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		return results;
 	}
 
-	public Map<String, Long> evalPricing(List<PaasProfile> profiles) {
+	public Map<String, Long> evalPricing() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		results.put("modelcounter0", (long) 0);
 		results.put("modelcounter1", (long) 0);
@@ -187,7 +187,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		return results;
 	}
 
-	public Map<String, Long> evalScaling(List<PaasProfile> profiles) {
+	public Map<String, Long> evalScaling() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		results.put("vertical", (long) 0);
 		results.put("horizontal", (long) 0);
@@ -207,7 +207,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 		return results;
 	}
 
-	public Map<String, Long> evalRuntimes(List<PaasProfile> profiles) {
+	public Map<String, Long> evalRuntimes() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		Map<String, Long> runtimeAmounts = new HashMap<String, Long>();
 		Map<String, Long> versionAmounts = new HashMap<String, Long>();
@@ -266,7 +266,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	}
 
 	@Override
-	public Map<String, Long> evalMiddleware(List<PaasProfile> profiles) {
+	public Map<String, Long> evalMiddleware() {
 		Map<String, Long> results = new HashMap<String, Long>();
 
 		Map<String, Long> middlewares = new HashMap<String, Long>();
@@ -299,7 +299,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	}
 
 	@Override
-	public Map<String, Long> evalFrameworks(List<PaasProfile> profiles) {
+	public Map<String, Long> evalFrameworks() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		profiles.forEach(profile -> {
 			profile.getFrameworks().forEach(framework -> {
@@ -315,7 +315,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	}
 
 	@Override
-	public Map<String, Long> evalServices(List<PaasProfile> profiles) {
+	public Map<String, Long> evalServices() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		profiles.forEach(profile -> {
 			profile.getServices().getNative().forEach(nativeService -> {
@@ -331,7 +331,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	}
 
 	@Override
-	public Map<String, Long> evalExtensible(List<PaasProfile> profiles) {
+	public Map<String, Long> evalExtensible() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		results.put("true", (long) 0);
 		results.put("false", (long) 0);
@@ -352,7 +352,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	}
 
 	@Override
-	public Map<String, Long> evalInfrastructures(List<PaasProfile> profiles) {
+	public Map<String, Long> evalInfrastructures() {
 		Map<String, Long> results = new HashMap<String, Long>();
 		profiles.forEach(profile -> {
 			profile.getInfrastructures().forEach(infrastructure -> {
@@ -367,7 +367,7 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	}
 
 	@Override
-	public Map<String, Double> evalQos(List<PaasProfile> profiles) {
+	public Map<String, Double> evalQos() {
 		Map<String, Double> results = new HashMap<String, Double>();
 
 		for (PaasProfile profile : profiles) {
@@ -376,11 +376,6 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 			if (!Double.isNaN(uptime)) {
 				results.put(profile.getName(), uptime);
 			}
-
-			// Check if List of Compliances is empty else continue computation
-			if (!profile.getQos().getCompliance().isEmpty()) {
-				complianceProfiles.add(profile);
-			}
 		}
 		return results;
 	}
@@ -388,21 +383,22 @@ public class DataPreprocessingImpl implements DataPreprocessing {
 	public Map<String, Long> evalCompliance() {
 		Map<String, Long> results = new HashMap<String, Long>();
 
-		results.put("size", (long) complianceProfiles.size());
+		results.put("size", (long) profiles.size());
 
-		for (PaasProfile profile : complianceProfiles) {
+		for (PaasProfile profile : profiles) {
 
-			// "#c-" Counter for number of compliances in this profile
+			// "#c-" Count number of compliances in this profile
 			results.put("#c-" + profile.getName(), (long) 0);
-			for (String compliance : profile.getQos().getCompliance()) {
-				results.replace("#c-" + profile.getName(), results.get("#c-" + profile.getName()),
-						results.get("#c-" + profile.getName()) + 1);
+			if(!profile.getQos().getCompliance().isEmpty()){
+				for (String compliance : profile.getQos().getCompliance()) {
+					results.replace("#c-" + profile.getName(), results.get("#c-" + profile.getName()),
+							results.get("#c-" + profile.getName()) + 1);
 
-				if (results.putIfAbsent("comp|" + compliance, (long) 1) != null) {
-					// Count number of appereances of this compliance in all
-					// profiles
-					results.replace("comp|" + compliance, results.get("comp|" + compliance),
-							results.get("comp|" + compliance) + 1);
+					if (results.putIfAbsent("comp|" + compliance, (long) 1) != null) {
+						// Count appereances of this compliance in all profiles
+						results.replace("comp|" + compliance, results.get("comp|" + compliance),
+								results.get("comp|" + compliance) + 1);
+					}
 				}
 			}
 		}
