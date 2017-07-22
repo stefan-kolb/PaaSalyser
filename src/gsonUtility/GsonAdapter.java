@@ -6,15 +6,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 import profile.PaasProfile;
 import report.Report;
@@ -24,32 +25,33 @@ public class GsonAdapter {
 	static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	public static List<PaasProfile> scanDirectoryForJsonFiles(Path rootDirectory) throws IOException {
-		List<PaasProfile> profilesList = new LinkedList<PaasProfile>();
 		if (!Files.isDirectory(rootDirectory)) {
 			throw new IOException(rootDirectory + " is no existing directory.");
 		} else {
-			try (DirectoryStream<Path> stream = Files.newDirectoryStream(rootDirectory)) {
-				for (Path path : stream) {
-					if (path.toString().endsWith("json")) {
+			return Files.walk(rootDirectory)
+					//
+					.filter(path -> path.toString().endsWith("json"))
+					//
+					.map(path -> {
 						try (InputStream in = Files.newInputStream(path);
 								BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
 							PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
-							profilesList.add(profile);
+							return profile;
 						} catch (IOException e) {
-							profilesList.add(new PaasProfile(true));
+							return new PaasProfile(true);
 						}
-					}
-					System.out.println("Scanned - " + path.toString());
-				}
-			}
+					}).collect(Collectors.toCollection(LinkedList::new));
 		}
-		return profilesList;
 	}
 
 	public static void createReportAsJsonFile(Report report, Path path) throws IOException {
 		try (BufferedWriter writer = Files.newBufferedWriter(path, Charset.defaultCharset(),
 				StandardOpenOption.CREATE)) {
-			gson.toJson(report, writer);
+			try {
+				gson.toJson(report, writer);
+			} catch (JsonIOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

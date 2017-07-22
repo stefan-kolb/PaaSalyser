@@ -1,0 +1,95 @@
+{
+  "metaInfo": {
+    "revisionReport": {
+      "numberOfProfiles": 71,
+      "mean": 765.5915492957746,
+      "median": 773.0,
+      "variance": 184383.65006943062,
+      "stdev": 429.39917334507135,
+      "minFive": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "topFive": [
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    "typeReport": {
+      "saasCentric": 11,
+      "generic": 48,
+      "iaasCentric": 12,
+      "numberOfProfiles": 71,
+      "minFive": [],
+      "topFive": []
+    }
+  },
+  "businessInfo": {
+    "statusReport": {
+      "production": 62,
+      "alpha": 1,
+      "beta": 8,
+      "numberOfProfiles": 71,
+      "minFive": [],
+      "topFive": []
+    },
+    "statusSinceReport": {
+      "numberOfProfiles": 66,
+      "mean": 1756.969696969697,
+      "median": 1619.0,
+      "variance": 1256986.9990817262,
+      "stdev": 1121.1543154631865,
+      "minFive": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "topFive": [
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    "qosReport": {
+      "numberOfProfiles": 7,
+      "mean": 99.92,
+      "median": 99.9,
+      "variance": 0.0011142857142854739,
+      "stdev": 0.03338091841584761,
+      "minFive": [],
+      "topFive": []
+    },
+    "overallComplianceReport": {
+      "percentWithCompliance": 0.0,
+      "numberOfProfiles": 71,
+      "mean": 0.2394366197183098,
+      "median": 0.0,
+      "variance": 2.4356278516167453,
+      "stdev": 1.5606498171007952,
+      "minFive": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "topFive": [
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    "specificComplianceReport": {
+      "numberOfProfiles": 17,
+      "minFive": [],
+      "topFive": []
+    }
+  },
+  "economicInfo": {}
+}
