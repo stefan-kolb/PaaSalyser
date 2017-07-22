@@ -22,9 +22,13 @@ import report.Report;
 
 public class GsonAdapter {
 
-	static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	private Gson gson;
 
-	public static List<PaasProfile> scanDirectoryForJsonFiles(Path rootDirectory) throws IOException {
+	public GsonAdapter() {
+		gson = new GsonBuilder().setPrettyPrinting().create();
+	}
+
+	public List<PaasProfile> scanDirectoryForJsonFiles(Path rootDirectory) throws IOException {
 		if (!Files.isDirectory(rootDirectory)) {
 			throw new IOException(rootDirectory + " is no existing directory.");
 		} else {
@@ -44,13 +48,13 @@ public class GsonAdapter {
 		}
 	}
 
-	public static void createReportAsJsonFile(Report report, Path path) throws IOException {
+	public void createReportAsJsonFile(Report report, Path path) throws IOException {
 		try (BufferedWriter writer = Files.newBufferedWriter(path, Charset.defaultCharset(),
 				StandardOpenOption.CREATE)) {
 			try {
 				gson.toJson(report, writer);
 			} catch (JsonIOException e) {
-				e.printStackTrace();
+				throw new IOException(e);
 			}
 		}
 	}

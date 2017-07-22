@@ -36,28 +36,17 @@ public class DataPreprocessing {
 	private Map<String, Long> infrastructures;
 
 	public DataPreprocessing(List<PaasProfile> profiles) {
-		// Copy list into profileList of this class
-		// this.profiles.addAll(profiles);
-		System.out.println("x");
 		this.profiles = profiles;
 
 		// Execute all evaluations
 		evalRevision();
-		System.out.println("x");
 		evalStatus();
-		System.out.println("y");
 		evalStatusSince();
-		System.out.println("z");
 		evalType();
-		System.out.println("1");
 		evalPlatform();
-		System.out.println("2");
 		evalHosting();
-		System.out.println("3");
 		evalPricing();
-		System.out.println("4");
 		evalScaling();
-		System.out.println("5");
 		evalRuntimes();
 		evalMiddleware();
 		evalFrameworks();
@@ -66,7 +55,6 @@ public class DataPreprocessing {
 		evalInfrastructures();
 		evalQos();
 		evalCompliance();
-		System.out.println("abc");
 	}
 
 	public List<PaasProfile> getProfiles() {
@@ -139,15 +127,13 @@ public class DataPreprocessing {
 
 	private void evalRevision() {
 		revision = new HashMap<String, Long>();
-		int i = 0;
 		for (PaasProfile profile : profiles) {
 			long revisionAge = 0;
 			try {
 				// The first 10 chars of the revision is always only the date
 				revisionAge = ChronoUnit.DAYS.between(LocalDate.parse(profile.getRevision().substring(0, 10)),
 						LocalDate.now());
-				revision.putIfAbsent("revision" + i, revisionAge);
-				i++;
+				revision.putIfAbsent(profile.getName(), revisionAge);
 			} catch (DateTimeParseException e) {
 				System.out.println(e.getMessage());
 			}
@@ -161,7 +147,7 @@ public class DataPreprocessing {
 		status.put("alpha", (long) 0);
 		status.put("beta", (long) 0);
 		status.put("eol", (long) 0);
-		// TODO Count EOL
+
 		profiles.forEach(profile -> {
 			if (profile.getStatus().equalsIgnoreCase("production")) {
 				status.replace("production", status.get("production"), status.get("production") + 1);
@@ -169,6 +155,8 @@ public class DataPreprocessing {
 				status.replace("alpha", status.get("alpha"), status.get("alpha") + 1);
 			} else if (profile.getStatus().equalsIgnoreCase("beta")) {
 				status.replace("beta", status.get("beta"), status.get("beta") + 1);
+			} else if (profile.getStatus().equalsIgnoreCase("eol")) {
+				status.replace("eol", status.get("eol"), status.get("eol") + 1);
 			}
 		});
 	}
@@ -239,7 +227,6 @@ public class DataPreprocessing {
 		hosting.put("private", (long) 0);
 		hosting.put("virtual_private", (long) 0);
 		profiles.forEach(profile -> {
-			System.out.println(profile.getName() + " - " + profile.getHosting().toString());
 			if (profile.getHosting().getPublic()) {
 				hosting.replace("public", hosting.get("public"), hosting.get("public") + 1);
 			}
@@ -249,12 +236,6 @@ public class DataPreprocessing {
 			if (profile.getHosting().getVirtualPrivate()) {
 				hosting.replace("virtual_private", hosting.get("virtual_private"), hosting.get("virtual_private") + 1);
 			} 
-//			else {
-//				if (hosting.putIfAbsent(profile.getHosting(), (long) 1) != null) {
-//					hosting.replace(profile.getHosting(), hosting.get(profile.getHosting()),
-//							hosting.get(profile.getHosting()) + 1);
-//				}
-//			}
 		});
 	}
 

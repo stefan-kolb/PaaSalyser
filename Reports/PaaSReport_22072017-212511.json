@@ -1,0 +1,94 @@
+{
+  "metaInfo": {
+    "numberOfProfiles": 122,
+    "revisionReport": {
+      "numberOfProfiles": 122,
+      "mean": 885.5327868852459,
+      "median": 895.0,
+      "variance": 212405.00302338088,
+      "stdev": 460.87417265820056,
+      "minFive": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "topFive": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    "typeReport": {
+      "saasCentric": 14,
+      "generic": 70,
+      "iaasCentric": 15,
+      "numberOfProfiles": 122,
+      "minFive": [],
+      "topFive": []
+    }
+  },
+  "businessInfo": {
+    "statusReport": {
+      "production": 62,
+      "alpha": 1,
+      "beta": 8,
+      "numberOfProfiles": 122,
+      "minFive": [],
+      "topFive": []
+    },
+    "statusSinceReport": {
+      "numberOfProfiles": 1,
+      "mean": 123.0,
+      "median": 123.0,
+      "variance": 0.0,
+      "stdev": 0.0,
+      "minFive": [
+        {}
+      ],
+      "topFive": [
+        {}
+      ]
+    },
+    "qosReport": {
+      "numberOfProfiles": 9,
+      "mean": 99.92666666666668,
+      "median": 99.9,
+      "variance": 0.001022222222222026,
+      "stdev": 0.031972210155415064,
+      "minFive": [],
+      "topFive": []
+    },
+    "overallComplianceReport": {
+      "percentWithCompliance": 0.0,
+      "numberOfProfiles": 122,
+      "mean": 0.17213114754098363,
+      "median": 0.0,
+      "variance": 1.5031577532921274,
+      "stdev": 1.2260333410197812,
+      "minFive": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "topFive": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    "specificComplianceReport": {
+      "numberOfProfiles": 20,
+      "minFive": [],
+      "topFive": []
+    }
+  },
+  "economicInfo": {}
+}

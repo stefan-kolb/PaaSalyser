@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.stat.descriptive.rank.Median;
 
+import report.models.EvaluationResult;
 import report.models.ExtensibleReport;
 import report.models.FrameworksReport;
 import report.models.HostingReport;
@@ -73,7 +74,7 @@ public class StatisticsImplWithModels {
 		evalInfrastructures();
 	}
 
-	public int profilesCount() {
+	public int getProfilesCount() {
 		return profilesCount;
 	}
 
@@ -150,8 +151,10 @@ public class StatisticsImplWithModels {
 				.mapToDouble(e -> e.getValue().doubleValue()).toArray();
 		double variance = StatUtils.populationVariance(values);
 		revision = new RevisionReport(values.length, StatUtils.mean(values), new Median().evaluate(values), variance,
-				Math.sqrt(variance), getMinFiveLong(dataPreProcessing.getRevision()),
-				getTopFiveLong(dataPreProcessing.getRevision()));
+				Math.sqrt(variance), getMinFiveLongEvaluationResult(dataPreProcessing.getRevision()),
+				getTopFiveLongEvaluationResult(dataPreProcessing.getRevision()));
+		System.out.println(revision.getMinFive());
+		System.out.println(revision.getTopFive());
 	}
 
 	private void evalStatus() {
@@ -255,65 +258,83 @@ public class StatisticsImplWithModels {
 	}
 
 	private List<Map.Entry<String, Long>> getTopFiveLong(Map<String, Long> data) {
-		List<Map.Entry<String, Long>> results = new ArrayList<>(data.size());
-
-		results.addAll(data.entrySet());
+		List<Map.Entry<String, Long>> results = data.entrySet().stream().collect(Collectors.toCollection(ArrayList::new));
 
 		// Sort descending
 		results.sort((x, y) -> y.getValue().compareTo(x.getValue()));
-		System.out.println("Results top: " + results);
 
 		// Return the Top 5 Elements
 		if (results.size() >= 5) {
-			return results.subList(0, 4);
+			return results.subList(0, 5);
+		} else
+			return results;
+	}
+	
+	private List<EvaluationResult> getTopFiveLongEvaluationResult(Map<String, Long> data) {
+		List<EvaluationResult> results = data.entrySet().stream().map(entry -> {
+			return new EvaluationResult(entry.getKey(),entry.getValue());
+		}).collect(Collectors.toCollection(ArrayList::new));
+
+		// Sort descending
+		results.sort((x, y) -> Long.compare(y.getValue(), x.getValue()));
+
+		// Return the Top 5 Elements
+		if (results.size() >= 5) {
+			return results.subList(0, 5);
 		} else
 			return results;
 	}
 
 	private List<Map.Entry<String, Long>> getMinFiveLong(Map<String, Long> data) {
-		List<Map.Entry<String, Long>> results = new ArrayList<>(data.size());
-
-		results.addAll(data.entrySet());
+		List<Map.Entry<String, Long>> results = data.entrySet().stream().collect(Collectors.toCollection(ArrayList::new));
 
 		// Sort descending
 		results.sort((x, y) -> x.getValue().compareTo(y.getValue()));
-		System.out.println("Results min: " + results);
 
 		// Return the Min 5 Elements
 		if (results.size() >= 5) {
-			return results.subList(0, 4);
+			return results.subList(0, 5);
+		} else
+			return results;
+	}
+	
+	private List<EvaluationResult> getMinFiveLongEvaluationResult(Map<String, Long> data) {
+		List<EvaluationResult> results = data.entrySet().stream().map(entry -> {
+			return new EvaluationResult(entry.getKey(),entry.getValue());
+		}).collect(Collectors.toCollection(ArrayList::new));
+
+		// Sort descending
+		results.sort((x, y) -> Long.compare(x.getValue(), y.getValue()));
+
+		// Return the Top 5 Elements
+		if (results.size() >= 5) {
+			return results.subList(0, 5);
 		} else
 			return results;
 	}
 
 	private List<Map.Entry<String, Double>> getTopFiveDouble(Map<String, Double> data) {
-		List<Map.Entry<String, Double>> results = new ArrayList<>(data.size());
-
-		results.addAll(data.entrySet());
+		List<Map.Entry<String, Double>> results = data.entrySet().stream().collect(Collectors.toCollection(ArrayList::new));
 
 		// Sort descending
 		results.sort((x, y) -> y.getValue().compareTo(x.getValue()));
-		System.out.println("Results top: " + results);
 
 		// Return the Top 5 Elements
 		if (results.size() >= 5) {
-			return results.subList(0, 4);
+			return results.subList(0, 5);
 		} else
 			return results;
 	}
 
 	private List<Map.Entry<String, Double>> getMinFiveDouble(Map<String, Double> data) {
-		List<Map.Entry<String, Double>> results = new ArrayList<>(data.size());
-
-		results.addAll(data.entrySet());
+		List<Map.Entry<String, Double>> results = data.entrySet().stream().collect(Collectors.toCollection(ArrayList::new));
 
 		// Sort descending
 		results.sort((x, y) -> x.getValue().compareTo(y.getValue()));
-		System.out.println("Results min: " + results);
 
 		// Return the Min 5 Elements
 		if (results.size() >= 5) {
-			return results.subList(0, 4);
+			return results.subList(0, 5);
 		} else
 			return results;
 	}

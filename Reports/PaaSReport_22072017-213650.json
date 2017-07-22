@@ -1,22 +1,55 @@
 {
   "metaInfo": {
+    "numberOfProfiles": 122,
     "revisionReport": {
       "numberOfProfiles": 122,
-      "mean": 885.532786885246,
+      "mean": 885.5327868852459,
       "median": 895.0,
-      "variance": 212405.0030233809,
-      "stdev": 460.8741726582006,
+      "variance": 212405.00302338088,
+      "stdev": 460.87417265820056,
       "minFive": [
-        {},
-        {},
-        {},
-        {}
+        {
+          "name": "Modulus",
+          "value": 87
+        },
+        {
+          "name": "Gondor",
+          "value": 87
+        },
+        {
+          "name": "Webappcabaret",
+          "value": 87
+        },
+        {
+          "name": "Heroku",
+          "value": 101
+        },
+        {
+          "name": "Apache Stratos",
+          "value": 135
+        }
       ],
       "topFive": [
-        {},
-        {},
-        {},
-        {}
+        {
+          "name": "BitNami",
+          "value": 1478
+        },
+        {
+          "name": "Orchestra",
+          "value": 1478
+        },
+        {
+          "name": "Nodester",
+          "value": 1478
+        },
+        {
+          "name": "Phenona",
+          "value": 1478
+        },
+        {
+          "name": "Nuage",
+          "value": 1478
+        }
       ]
     },
     "typeReport": {
@@ -70,9 +103,11 @@
         {},
         {},
         {},
+        {},
         {}
       ],
       "topFive": [
+        {},
         {},
         {},
         {},

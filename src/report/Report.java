@@ -12,7 +12,7 @@ public class Report {
 	private EconomicInfo economicInfo;
 
 	public Report(StatisticsImplWithModels statistics) {
-		metaInfo = new MetaInfo(statistics.getRevision(), statistics.getType());
+		metaInfo = new MetaInfo(statistics.getProfilesCount(), statistics.getRevision(), statistics.getType());
 		businessInfo = new BusinessInfo(statistics.getStatus(), statistics.getStatusSince(), statistics.getQos(),
 				statistics.getOverallCompliance(), statistics.getSpecificCompliance(), statistics.getPricing());
 		economicInfo = new EconomicInfo(statistics.getHosting(), statistics.getScaling(), statistics.getRuntimes(),

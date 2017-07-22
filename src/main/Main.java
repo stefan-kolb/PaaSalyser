@@ -15,8 +15,12 @@ import statistics.DataPreprocessing;
 import statistics.StatisticsImplWithModels;
 
 public class Main {
+	
+	static GsonAdapter gsonAdapter = new GsonAdapter();
 
 	public static void main(String[] args) {
+		System.out.println("Starting Execution.");
+		
 		Path directoryToScan = Paths.get("PaasProfiles");
 		Path outputPath = Paths.get("Reports/PaaSReport_"
 				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy-HHmmss")) + ".json");
@@ -38,8 +42,7 @@ public class Main {
 	private static void evaluateDirectory(Path directory, Path outputPath) throws IOException {
 		List<PaasProfile> profilesList = new LinkedList<PaasProfile>();
 
-		profilesList = GsonAdapter.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
-		System.out.println("yes");
+		profilesList = gsonAdapter.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
 		for (PaasProfile profile : profilesList) {
 			if (profile.isFailed() == true) {
 				throw new IOException("Failed to scan profiles at: " + profile.getName());
@@ -50,21 +53,10 @@ public class Main {
 	}
 
 	private static void generateReport(List<PaasProfile> profilesList, Path outputPath) throws IOException {
-		profilesList.forEach(System.out::println);
-		System.out.println("1");
-		
 		DataPreprocessing dataPreprocessing = new DataPreprocessing(profilesList);
-		System.out.println(dataPreprocessing);
-		System.out.println("2");
-		
 		StatisticsImplWithModels statistics = new StatisticsImplWithModels(dataPreprocessing);
-		System.out.println(statistics);
-		
 		Report report = new Report(statistics);
-		System.out.println(report);
-		System.out.println("3");
-
-		GsonAdapter.createReportAsJsonFile(report, outputPath);
-		System.out.println("4");
+		
+		gsonAdapter.createReportAsJsonFile(report, outputPath);
 	}
 }
