@@ -8,37 +8,30 @@ import java.util.stream.Collectors;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.stat.descriptive.rank.Median;
 
-import report.models.EvaluationResult;
 import report.models.ExtensibleReport;
 import report.models.FrameworksReport;
 import report.models.HostingReport;
 import report.models.InfrastructuresReport;
 import report.models.MiddlewareReport;
-import report.models.OverallComplianceReport;
 import report.models.PlatformReport;
 import report.models.PricingReport;
-import report.models.QosReport;
 import report.models.RevisionReport;
 import report.models.RuntimesReport;
 import report.models.ScalingReport;
 import report.models.ServicesReport;
-import report.models.SpecificComplianceReport;
 import report.models.StatusReport;
-import report.models.StatusSinceReport;
 import report.models.TypeReport;
+import statistics.models.SimpleResult;
 
 public class StatisticsImplWithModels {
 
 	private DataPreprocessing dataPreProcessing;
 
 	private int profilesCount;
+	private int eolProfiles;
 	private RevisionReport revision;
 	private StatusReport status;
-	private StatusSinceReport statusSince;
 	private TypeReport type;
-	private QosReport qos;
-	private OverallComplianceReport overallCompliance;
-	private SpecificComplianceReport specificCompliance;
 	private PlatformReport platform;
 	private HostingReport hosting;
 	private PricingReport pricing;
@@ -55,13 +48,10 @@ public class StatisticsImplWithModels {
 
 		// Evaluate Report
 		profilesCount = dataPreProcessing.getProfiles().size();
+		eolProfiles = (int) dataPreProcessing.getStatusData().getEol();
 		evalRevision();
 		evalStatus();
-		evalStatusSince();
 		evalType();
-		evalQos();
-		evalOverallCompliance();
-		evalSpecificCompliance();
 		evalPlatform();
 		evalHosting();
 		evalPricing();
@@ -77,6 +67,10 @@ public class StatisticsImplWithModels {
 	public int getProfilesCount() {
 		return profilesCount;
 	}
+	
+	public int getEolProfilesCount() {
+		return eolProfiles;
+	}
 
 	public RevisionReport getRevision() {
 		return revision;
@@ -86,24 +80,8 @@ public class StatisticsImplWithModels {
 		return status;
 	}
 
-	public StatusSinceReport getStatusSince() {
-		return statusSince;
-	}
-
 	public TypeReport getType() {
 		return type;
-	}
-
-	public QosReport getQos() {
-		return qos;
-	}
-
-	public OverallComplianceReport getOverallCompliance() {
-		return overallCompliance;
-	}
-
-	public SpecificComplianceReport getSpecificCompliance() {
-		return specificCompliance;
 	}
 
 	public PlatformReport getPlatform() {
@@ -147,78 +125,50 @@ public class StatisticsImplWithModels {
 	}
 
 	private void evalRevision() {
-		double[] values = dataPreProcessing.getRevision().entrySet().stream()
+		double[] values = dataPreProcessing.getRevisionData().getRevisions().entrySet().stream()
 				.mapToDouble(e -> e.getValue().doubleValue()).toArray();
 		double variance = StatUtils.populationVariance(values);
+
 		revision = new RevisionReport(values.length, StatUtils.mean(values), new Median().evaluate(values), variance,
-				Math.sqrt(variance), getMinFiveLongEvaluationResult(dataPreProcessing.getRevision()),
-				getTopFiveLongEvaluationResult(dataPreProcessing.getRevision()));
-		System.out.println(revision.getMinFive());
-		System.out.println(revision.getTopFive());
+				Math.sqrt(variance), getMinFive(dataPreProcessing.getRevisionData().getRevisions()),
+				getTopFive(dataPreProcessing.getRevisionData().getRevisions()));
 	}
 
 	private void evalStatus() {
-		status = new StatusReport(dataPreProcessing.getStatus().get("size").intValue(),
-				dataPreProcessing.getStatus().get("production"), dataPreProcessing.getStatus().get("alpha"),
-				dataPreProcessing.getStatus().get("beta"), getMinFiveLong(dataPreProcessing.getStatus()),
-				getTopFiveLong(dataPreProcessing.getStatus()));
-	}
+		List<SimpleResult> statusResults = new ArrayList<>();
+		statusResults.add(new SimpleResult("Alpha", dataPreProcessing.getStatusData().getAlpha()));
+		statusResults.add(new SimpleResult("Beta", dataPreProcessing.getStatusData().getBeta()));
+		statusResults.add(new SimpleResult("End of Lifetime", dataPreProcessing.getStatusData().getEol()));
+		statusResults.add(new SimpleResult("Production", dataPreProcessing.getStatusData().getProduction()));
 
-	private void evalStatusSince() {
-		double[] values = dataPreProcessing.getStatusSince().entrySet().stream()
+		double[] statusSinceValues = dataPreProcessing.getStatusData().getStatusSince().entrySet().stream()
 				.mapToDouble(e -> e.getValue().doubleValue()).toArray();
-		double variance = StatUtils.populationVariance(values);
-		statusSince = new StatusSinceReport(values.length, StatUtils.mean(values), new Median().evaluate(values),
-				variance, Math.sqrt(variance), getMinFiveLong(dataPreProcessing.getStatusSince()),
-				getTopFiveLong(dataPreProcessing.getStatusSince()));
+		double variance = StatUtils.populationVariance(statusSinceValues);
+
+		status = new StatusReport(getTopFive(statusResults), StatUtils.mean(statusSinceValues),
+				new Median().evaluate(statusSinceValues), variance, Math.sqrt(variance),
+				getTopFive(dataPreProcessing.getStatusData().getStatusSince()),
+				getMinFive(dataPreProcessing.getStatusData().getStatusSince()));
 	}
 
 	private void evalType() {
-		type = new TypeReport(dataPreProcessing.getType().get("size"), dataPreProcessing.getType().get("SaaS-centric"),
-				dataPreProcessing.getType().get("Generic"), dataPreProcessing.getType().get("IaaS-centric"),
-				getMinFiveLong(dataPreProcessing.getType()), getTopFiveLong(dataPreProcessing.getType()));
-	}
+		List<SimpleResult> statusResults = new ArrayList<>();
+		statusResults.add(new SimpleResult("SaaS-Centric", dataPreProcessing.getTypeData().getSaasCentric()));
+		statusResults.add(new SimpleResult("Generic", dataPreProcessing.getTypeData().getGeneric()));
+		statusResults.add(new SimpleResult("IaaS-Centric", dataPreProcessing.getTypeData().getIaasCentric()));
 
-	private void evalQos() {
-		double[] values = dataPreProcessing.getQos().entrySet().stream().mapToDouble(e -> e.getValue().doubleValue())
-				.toArray();
-		double variance = StatUtils.populationVariance(values);
-		qos = new QosReport(values.length, StatUtils.mean(values), new Median().evaluate(values), variance,
-				Math.sqrt(variance), getMinFiveDouble(dataPreProcessing.getQos()),
-				getTopFiveDouble(dataPreProcessing.getQos()));
-	}
-
-	private void evalOverallCompliance() {
-		// Collect all profiles with compliances into a list to evaluate
-		Map<String, Long> entries = dataPreProcessing.getCompliance().entrySet().stream()
-				//
-				.filter(entry -> entry.getKey().startsWith("#c-"))
-				.collect(Collectors.toMap(entry -> (entry.getKey().substring(entry.getKey().indexOf("-") + 1)),
-						entry -> entry.getValue()));
-
-		double[] values = entries.entrySet().stream().mapToDouble(e -> e.getValue().doubleValue()).toArray();
-		double variance = StatUtils.populationVariance(values);
-
-		double percentWithCompliances = (entries.size() / dataPreProcessing.getCompliance().size()) * 100;
-
-		overallCompliance = new OverallComplianceReport(entries.size(), StatUtils.mean(values),
-				new Median().evaluate(values), variance, Math.sqrt(variance), getMinFiveLong(entries),
-				getTopFiveLong(entries), percentWithCompliances);
-	}
-
-	private void evalSpecificCompliance() {
-		Map<String, Long> entries = dataPreProcessing.getCompliance().entrySet().stream()
-				//
-				.filter(entry -> entry.getKey().startsWith("comp|"))
-				.collect(Collectors.toMap(entry -> (entry.getKey().substring(entry.getKey().indexOf("|") + 1)),
-						entry -> entry.getValue()));
-		specificCompliance = new SpecificComplianceReport(entries.size(), getMinFiveLong(entries),
-				getTopFiveLong(entries));
+		type = new TypeReport(getTopFive(statusResults));
 	}
 
 	private void evalPlatform() {
-		platform = new PlatformReport(dataPreProcessing.getPlatform().size(),
-				getMinFiveLong(dataPreProcessing.getPlatform()), getTopFiveLong(dataPreProcessing.getPlatform()));
+		List<SimpleResult> platforms = dataPreProcessing.getPlatformData().getPlatforms().entrySet().stream()
+				.map(entry -> {
+					return new SimpleResult(entry.getKey(), entry.getValue());
+				}).collect(Collectors.toCollection(ArrayList::new));
+		
+		double platformProfilesPercent = dataPreProcessing.getPlatformData().getplatformProfiles() / profilesCount;
+
+		platform = new PlatformReport(platformProfilesPercent, getTopFive(platforms));
 	}
 
 	private void evalHosting() {
@@ -257,86 +207,50 @@ public class StatisticsImplWithModels {
 		// TODO Auto-generated method stub
 	}
 
-	private List<Map.Entry<String, Long>> getTopFiveLong(Map<String, Long> data) {
-		List<Map.Entry<String, Long>> results = data.entrySet().stream().collect(Collectors.toCollection(ArrayList::new));
-
-		// Sort descending
-		results.sort((x, y) -> y.getValue().compareTo(x.getValue()));
-
-		// Return the Top 5 Elements
-		if (results.size() >= 5) {
-			return results.subList(0, 5);
-		} else
-			return results;
-	}
-	
-	private List<EvaluationResult> getTopFiveLongEvaluationResult(Map<String, Long> data) {
-		List<EvaluationResult> results = data.entrySet().stream().map(entry -> {
-			return new EvaluationResult(entry.getKey(),entry.getValue());
+	private List<SimpleResult> getTopFive(Map<String, Long> list) {
+		List<SimpleResult> results = list.entrySet().stream().map(entry -> {
+			return new SimpleResult(entry.getKey(), entry.getValue());
 		}).collect(Collectors.toCollection(ArrayList::new));
-
 		// Sort descending
 		results.sort((x, y) -> Long.compare(y.getValue(), x.getValue()));
-
 		// Return the Top 5 Elements
-		if (results.size() >= 5) {
+		if (list.size() >= 5) {
 			return results.subList(0, 5);
 		} else
 			return results;
 	}
 
-	private List<Map.Entry<String, Long>> getMinFiveLong(Map<String, Long> data) {
-		List<Map.Entry<String, Long>> results = data.entrySet().stream().collect(Collectors.toCollection(ArrayList::new));
-
+	private List<SimpleResult> getTopFive(List<SimpleResult> list) {
 		// Sort descending
-		results.sort((x, y) -> x.getValue().compareTo(y.getValue()));
-
-		// Return the Min 5 Elements
-		if (results.size() >= 5) {
-			return results.subList(0, 5);
+		list.sort((x, y) -> Long.compare(y.getValue(), x.getValue()));
+		// Return the Top 5 Elements
+		if (list.size() >= 5) {
+			return list.subList(0, 5);
 		} else
-			return results;
+			return list;
 	}
-	
-	private List<EvaluationResult> getMinFiveLongEvaluationResult(Map<String, Long> data) {
-		List<EvaluationResult> results = data.entrySet().stream().map(entry -> {
-			return new EvaluationResult(entry.getKey(),entry.getValue());
-		}).collect(Collectors.toCollection(ArrayList::new));
 
+	private List<SimpleResult> getMinFive(Map<String, Long> list) {
+		List<SimpleResult> results = list.entrySet().stream().map(entry -> {
+			return new SimpleResult(entry.getKey(), entry.getValue());
+		}).collect(Collectors.toCollection(ArrayList::new));
 		// Sort descending
 		results.sort((x, y) -> Long.compare(x.getValue(), y.getValue()));
-
 		// Return the Top 5 Elements
-		if (results.size() >= 5) {
+		if (list.size() >= 5) {
 			return results.subList(0, 5);
 		} else
 			return results;
 	}
 
-	private List<Map.Entry<String, Double>> getTopFiveDouble(Map<String, Double> data) {
-		List<Map.Entry<String, Double>> results = data.entrySet().stream().collect(Collectors.toCollection(ArrayList::new));
-
+	private List<SimpleResult> getMinFive(List<SimpleResult> list) {
 		// Sort descending
-		results.sort((x, y) -> y.getValue().compareTo(x.getValue()));
-
-		// Return the Top 5 Elements
-		if (results.size() >= 5) {
-			return results.subList(0, 5);
-		} else
-			return results;
-	}
-
-	private List<Map.Entry<String, Double>> getMinFiveDouble(Map<String, Double> data) {
-		List<Map.Entry<String, Double>> results = data.entrySet().stream().collect(Collectors.toCollection(ArrayList::new));
-
-		// Sort descending
-		results.sort((x, y) -> x.getValue().compareTo(y.getValue()));
-
+		list.sort((x, y) -> Long.compare(x.getValue(), y.getValue()));
 		// Return the Min 5 Elements
-		if (results.size() >= 5) {
-			return results.subList(0, 5);
+		if (list.size() >= 5) {
+			return list.subList(0, 5);
 		} else
-			return results;
+			return list;
 	}
 
 }

@@ -1,38 +1,61 @@
 package report.models;
 
 import java.util.List;
-import java.util.Map.Entry;
 
-import report.QualitativeModel;
+import statistics.models.SimpleResult;
 
-/**
- * This class is to determine how many of each status are in present in the data
- * set.
- */
-public class StatusReport extends QualitativeModel {
+public class StatusReport {
 
-	private long production;
-	private long alpha;
-	private long beta;
+	// Status Statistics
+	private List<SimpleResult> topStatus;
 
-	public StatusReport(long numberOfProfiles, long production, long alpha, long beta,
-			List<Entry<String, Long>> minFive, List<Entry<String, Long>> topFive) {
-		super(numberOfProfiles, minFive, topFive);
-		this.production = production;
-		this.alpha = alpha;
-		this.beta = beta;
+	// StatusSince Statistics
+	private double meanStatusSince;
+	private double medianStatusSince;
+	private double varianceStatusSince;
+	private double stdevStatusSince;
+	private List<SimpleResult> topFiveStatusSince;
+	private List<SimpleResult> minFiveStatusSince;
+
+	public StatusReport(List<SimpleResult> topStatus, double meanStatusSince, double medianStatusSince,
+			double varianceStatusSince, double stdevStatusSince, List<SimpleResult> topFiveStatusSince,
+			List<SimpleResult> minFiveStatusSince) {
+		super();
+		this.topStatus = topStatus;
+		this.meanStatusSince = meanStatusSince;
+		this.medianStatusSince = medianStatusSince;
+		this.varianceStatusSince = varianceStatusSince;
+		this.stdevStatusSince = stdevStatusSince;
+		this.topFiveStatusSince = topFiveStatusSince;
+		this.minFiveStatusSince = minFiveStatusSince;
 	}
 
-	public long getProduction() {
-		return production;
+	public List<SimpleResult> getTopStatus() {
+		return topStatus;
 	}
 
-	public long getAlpha() {
-		return alpha;
+	public double getMeanStatusSince() {
+		return meanStatusSince;
 	}
 
-	public long getBeta() {
-		return beta;
+	public double getMedianStatusSince() {
+		return medianStatusSince;
+	}
+
+	public double getVarianceStatusSince() {
+		return varianceStatusSince;
+	}
+
+	public double getStdevStatusSince() {
+		return stdevStatusSince;
+	}
+
+	public List<SimpleResult> getTopFiveStatusSince() {
+		return topFiveStatusSince;
+	}
+
+	public List<SimpleResult> getMinFiveStatusSince() {
+		return minFiveStatusSince;
 	}
 
 }
