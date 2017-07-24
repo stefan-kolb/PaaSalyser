@@ -1,5 +1,6 @@
 package statistics.models;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class StatusData {
@@ -11,7 +12,7 @@ public class StatusData {
 	private long production = 0;
 
 	// StatusSince Statistics
-	private Map<String, Long> statusSince;
+	private Map<String, Long> statusSince = new HashMap<>();
 
 	public long getAlpha() {
 		return alpha;

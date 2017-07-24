@@ -1,9 +1,5 @@
 package report.models;
 
-import java.util.List;
-
-import statistics.models.SimpleResult;
-
 /**
  * This class is to determine how the PaaS vendor landscape is currently setup
  * regarding types of services. The profile can either be set up as a generic
@@ -11,15 +7,27 @@ import statistics.models.SimpleResult;
  */
 public class TypeReport {
 
-	private List<SimpleResult> topTypes;
+	private double saasCentricPercent = 0.0;
+	private double genericPercent = 0.0;
+	private double iaasCentricPercent = 0.0;
 
-	public TypeReport(List<SimpleResult> topTypes) {
+	public TypeReport(double saasCentricPercent, double genericPercent, double iaasCentricPercent) {
 		super();
-		this.topTypes = topTypes;
+		this.saasCentricPercent = saasCentricPercent;
+		this.genericPercent = genericPercent;
+		this.iaasCentricPercent = iaasCentricPercent;
 	}
 
-	public List<SimpleResult> getTopTypes() {
-		return topTypes;
+	public double getSaasCentricPercent() {
+		return saasCentricPercent;
+	}
+
+	public double getGenericPercent() {
+		return genericPercent;
+	}
+
+	public double getIaasCentricPercent() {
+		return iaasCentricPercent;
 	}
 
 }

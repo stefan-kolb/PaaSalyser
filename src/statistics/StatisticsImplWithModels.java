@@ -1,5 +1,6 @@
 package statistics;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -47,27 +48,42 @@ public class StatisticsImplWithModels {
 		this.dataPreProcessing = dataPreProcessing;
 
 		// Evaluate Report
+		System.out.println("profilesCount");
 		profilesCount = dataPreProcessing.getProfiles().size();
+		System.out.println("eolProfiles");
 		eolProfiles = (int) dataPreProcessing.getStatusData().getEol();
+		System.out.println("evalRevision");
 		evalRevision();
+		System.out.println("evalStatus");
 		evalStatus();
+		System.out.println("evalType");
 		evalType();
+		System.out.println("evalPlatform");
 		evalPlatform();
+		System.out.println("evalHosting");
 		evalHosting();
+		System.out.println("evalPricing");
 		evalPricing();
+		System.out.println("evalScaling");
 		evalScaling();
+		System.out.println("evalRuntimes");
 		evalRuntimes();
+		System.out.println("evalMiddleware");
 		evalMiddleware();
+		System.out.println("evalFrameworks");
 		evalFrameworks();
+		System.out.println("evalServices");
 		evalServices();
+		System.out.println("evalExtensible");
 		evalExtensible();
+		System.out.println("evalInfrastructures");
 		evalInfrastructures();
 	}
 
 	public int getProfilesCount() {
 		return profilesCount;
 	}
-	
+
 	public int getEolProfilesCount() {
 		return eolProfiles;
 	}
@@ -152,12 +168,9 @@ public class StatisticsImplWithModels {
 	}
 
 	private void evalType() {
-		List<SimpleResult> statusResults = new ArrayList<>();
-		statusResults.add(new SimpleResult("SaaS-Centric", dataPreProcessing.getTypeData().getSaasCentric()));
-		statusResults.add(new SimpleResult("Generic", dataPreProcessing.getTypeData().getGeneric()));
-		statusResults.add(new SimpleResult("IaaS-Centric", dataPreProcessing.getTypeData().getIaasCentric()));
-
-		type = new TypeReport(getTopFive(statusResults));
+		type = new TypeReport(calcPercent(dataPreProcessing.getTypeData().getSaasCentric(), profilesCount),
+				calcPercent(dataPreProcessing.getTypeData().getGeneric(), profilesCount),
+				calcPercent(dataPreProcessing.getTypeData().getIaasCentric(), profilesCount));
 	}
 
 	private void evalPlatform() {
@@ -165,18 +178,43 @@ public class StatisticsImplWithModels {
 				.map(entry -> {
 					return new SimpleResult(entry.getKey(), entry.getValue());
 				}).collect(Collectors.toCollection(ArrayList::new));
-		
-		double platformProfilesPercent = dataPreProcessing.getPlatformData().getplatformProfiles() / profilesCount;
 
-		platform = new PlatformReport(platformProfilesPercent, getTopFive(platforms));
+		platform = new PlatformReport(
+				calcPercent(dataPreProcessing.getPlatformData().getplatformProfiles(), profilesCount),
+				getTopFive(platforms));
 	}
 
 	private void evalHosting() {
-		// TODO Auto-generated method stub
+		hosting = new HostingReport(calcPercent(dataPreProcessing.getHostingData().getPrivate(), profilesCount),
+				calcPercent(dataPreProcessing.getHostingData().getPublic(), profilesCount),
+				calcPercent(dataPreProcessing.getHostingData().getVirtualPrivate(), profilesCount));
 	}
 
 	private void evalPricing() {
-		// TODO Auto-generated method stub
+		List<SimpleResult> numberOfModelsPerProfile = new ArrayList<>();
+		numberOfModelsPerProfile
+				.add(new SimpleResult("Zero Models", dataPreProcessing.getPricingData().getZeroModels()));
+		numberOfModelsPerProfile.add(new SimpleResult("One Models", dataPreProcessing.getPricingData().getOneModel()));
+		numberOfModelsPerProfile.add(new SimpleResult("Two Models", dataPreProcessing.getPricingData().getTwoModels()));
+		numberOfModelsPerProfile
+				.add(new SimpleResult("Three Models", dataPreProcessing.getPricingData().getThreeModels()));
+		numberOfModelsPerProfile
+				.add(new SimpleResult("Four Models", dataPreProcessing.getPricingData().getFourModels()));
+
+		List<SimpleResult> models = new ArrayList<>();
+		models.add(new SimpleResult("Free", dataPreProcessing.getPricingData().getFreeModel()));
+		models.add(new SimpleResult("Fixed", dataPreProcessing.getPricingData().getFixedModel()));
+		models.add(new SimpleResult("Metered", dataPreProcessing.getPricingData().getMeteredModel()));
+		models.add(new SimpleResult("Hybrid", dataPreProcessing.getPricingData().getHybridModel()));
+		models.add(new SimpleResult("Empty", dataPreProcessing.getPricingData().getEmptyModel()));
+
+		List<SimpleResult> periods = new ArrayList<>();
+		periods.add(new SimpleResult("Daily", dataPreProcessing.getPricingData().getDailyPeriod()));
+		periods.add(new SimpleResult("Monthly", dataPreProcessing.getPricingData().getMonthlyPeriod()));
+		periods.add(new SimpleResult("Anually", dataPreProcessing.getPricingData().getAnnuallyPariod()));
+		periods.add(new SimpleResult("Empty", dataPreProcessing.getPricingData().getEmptyPeriod()));
+
+		pricing = new PricingReport(getTopFive(numberOfModelsPerProfile), getTopFive(models), getTopFive(periods));
 	}
 
 	private void evalScaling() {
@@ -251,6 +289,12 @@ public class StatisticsImplWithModels {
 			return list.subList(0, 5);
 		} else
 			return list;
+	}
+
+	private double calcPercent(Number a, Number b) {
+		NumberFormat format = NumberFormat.getInstance();
+		format.setMaximumFractionDigits(2);
+		return (a.doubleValue() / b.doubleValue()) * 100;
 	}
 
 }

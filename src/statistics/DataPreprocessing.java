@@ -15,6 +15,7 @@ import profile.models.PricingPeriod;
 import profile.models.Runtime;
 import statistics.models.HostingData;
 import statistics.models.PlatformData;
+import statistics.models.PricingData;
 import statistics.models.RevisionData;
 import statistics.models.StatusData;
 import statistics.models.TypeData;
@@ -24,11 +25,11 @@ public class DataPreprocessing {
 	private List<PaasProfile> profiles = new ArrayList<PaasProfile>();
 
 	private RevisionData revisionData;
-	private StatusData statusData;
+	private StatusData statusData = new StatusData();;
 	private TypeData typeData;
 	private PlatformData platformData;
 	private HostingData hostingData;
-	private Map<String, Long> pricingData;
+	private PricingData pricingData;
 	private Map<String, Long> scalingData;
 	private Map<String, Long> runtimesData;
 	private Map<String, Long> middlewareData;
@@ -41,25 +42,38 @@ public class DataPreprocessing {
 		// Make sure that no eol-profile is being added to active profiles
 		profiles.forEach(profile -> {
 			if (profile.getStatus().equalsIgnoreCase("eol")) {
-				statusData.incrementEol();
+				 statusData.incrementEol();
 			} else {
-				profiles.add(profile);
+				this.profiles.add(profile);
 			}
 		});
 
 		// Execute all evaluations
+		System.out.println("evalRevision");
 		evalRevision();
+		System.out.println("evalStatus");
 		evalStatus();
+		System.out.println("evalType");
 		evalType();
+		System.out.println("evalPlatform");
 		evalPlatform();
+		System.out.println("evalHosting");
 		evalHosting();
+		System.out.println("evalPricing");
 		evalPricing();
+		System.out.println("evalScaling");
 		evalScaling();
+		System.out.println("evalRuntimes");
 		evalRuntimes();
+		System.out.println("evalMiddleware");
 		evalMiddleware();
+		System.out.println("evalFrameworks");
 		evalFrameworks();
+		System.out.println("evalServices");
 		evalServices();
+		System.out.println("evalExtensible");
 		evalExtensible();
+		System.out.println("evalInfrastructures");
 		evalInfrastructures();
 	}
 
@@ -87,7 +101,7 @@ public class DataPreprocessing {
 		return hostingData;
 	}
 
-	public Map<String, Long> getPricingData() {
+	public PricingData getPricingData() {
 		return pricingData;
 	}
 
@@ -133,7 +147,6 @@ public class DataPreprocessing {
 	}
 
 	private void evalStatus() {
-		statusData = new StatusData();
 		profiles.forEach(profile -> {
 			// Evaluate Status
 			if (profile.getStatus().equalsIgnoreCase("production")) {
@@ -144,14 +157,16 @@ public class DataPreprocessing {
 				statusData.incrementBeta();
 			}
 
-			// Evaluate StatusSince
-			try {
-				// The first 10 chars of the revision is always only the
-				// date
-				statusData.addStatusSince(profile.getName(), ChronoUnit.DAYS
-						.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), LocalDate.now()));
-			} catch (DateTimeParseException e) {
-				e.printStackTrace();
+			if (profile.getStatusSince() != null && !profile.getStatusSince().equals("null")) {
+				// Evaluate StatusSince
+				try {
+					// The first 10 chars of the revision is always only the
+					// date
+					statusData.addStatusSince(profile.getName(), ChronoUnit.DAYS
+							.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), LocalDate.now()));
+				} catch (DateTimeParseException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
@@ -182,7 +197,7 @@ public class DataPreprocessing {
 
 	public void evalHosting() {
 		hostingData = new HostingData();
-		
+
 		profiles.forEach(profile -> {
 			if (profile.getHosting().getPublic()) {
 				hostingData.incrementPublic();
@@ -197,67 +212,41 @@ public class DataPreprocessing {
 	}
 
 	private void evalPricing() {
-		pricingData = new HashMap<String, Long>();
-		pricingData.put("modelcounter0", (long) 0);
-		pricingData.put("modelcounter1", (long) 0);
-		pricingData.put("modelcounter2", (long) 0);
-		pricingData.put("modelcounter3", (long) 0);
-		pricingData.put("modelcounter4", (long) 0);
-		pricingData.put("modelfree", (long) 0);
-		pricingData.put("modelfixed", (long) 0);
-		pricingData.put("modelmetered", (long) 0);
-		pricingData.put("modelhybrid", (long) 0);
-		pricingData.put("modelempty", (long) 0);
-
-		pricingData.put("perioddaily", (long) 0);
-		pricingData.put("periodmonthly", (long) 0);
-		pricingData.put("periodanually", (long) 0);
-		pricingData.put("periodempty", (long) 0);
+		pricingData = new PricingData();
 
 		profiles.forEach(profile -> {
 			if (profile.getPricings().size() == 0) {
-				pricingData.replace("modelcounter0", pricingData.get("modelcounter0"),
-						pricingData.get("modelcounter0") + 1);
+				pricingData.incrementZeroModels();
 			} else if (profile.getPricings().size() == 1) {
-				pricingData.replace("modelcounter1", pricingData.get("modelcounter1"),
-						pricingData.get("modelcounter1") + 1);
+				pricingData.incrementOneModel();
 			} else if (profile.getPricings().size() == 2) {
-				pricingData.replace("modelcounter2", pricingData.get("modelcounter2"),
-						pricingData.get("modelcounter2") + 1);
+				pricingData.incrementTwoModels();
 			} else if (profile.getPricings().size() == 3) {
-				pricingData.replace("modelcounter3", pricingData.get("modelcounter3"),
-						pricingData.get("modelcounter3") + 1);
+				pricingData.incrementThreeModels();
 			} else if (profile.getPricings().size() == 4) {
-				pricingData.replace("modelcounter4", pricingData.get("modelcounter4"),
-						pricingData.get("modelcounter4") + 1);
+				pricingData.incrementFourModels();
 			}
 			profile.getPricings().forEach(profilePricing -> {
 				if (profilePricing.getModel().equals(PricingModel.free)) {
-					pricingData.replace("modelfree", pricingData.get("modelfree"), pricingData.get("modelfree") + 1);
+					pricingData.incrementFreeModels();
 				} else if (profilePricing.getModel().equals(PricingModel.fixed)) {
-					pricingData.replace("modelfixed", pricingData.get("modelfixed"), pricingData.get("modelfixed") + 1);
+					pricingData.incrementFixedModels();
 				} else if (profilePricing.getModel().equals(PricingModel.metered)) {
-					pricingData.replace("modelmetered", pricingData.get("modelmetered"),
-							pricingData.get("modelmetered") + 1);
+					pricingData.incrementMeteredModels();
 				} else if (profilePricing.getModel().equals(PricingModel.hybrid)) {
-					pricingData.replace("modelhybrid", pricingData.get("modelhybrid"),
-							pricingData.get("modelhybrid") + 1);
+					pricingData.incrementHybridModels();
 				} else if (profilePricing.getModel().equals(PricingModel.empty)) {
-					pricingData.replace("modelempty", pricingData.get("modelempty"), pricingData.get("modelempty") + 1);
+					pricingData.incrementEmptyModels();
 				}
 
 				if (profilePricing.getPeriod().equals(PricingPeriod.daily)) {
-					pricingData.replace("perioddaily", pricingData.get("perioddaily"),
-							pricingData.get("perioddaily") + 1);
+					pricingData.incrementDailyPeriod();
 				} else if (profilePricing.getPeriod().equals(PricingPeriod.monthly)) {
-					pricingData.replace("periodmonthly", pricingData.get("periodmonthly"),
-							pricingData.get("periodmonthly") + 1);
+					pricingData.incrementMonthlyPeriod();
 				} else if (profilePricing.getPeriod().equals(PricingPeriod.anually)) {
-					pricingData.replace("periodanually", pricingData.get("periodanually"),
-							pricingData.get("periodanually") + 1);
+					pricingData.incrementAnuallyPeriod();
 				} else if (profilePricing.getPeriod().equals(PricingPeriod.empty)) {
-					pricingData.replace("periodempty", pricingData.get("periodempty"),
-							pricingData.get("periodempty") + 1);
+					pricingData.incrementEmptyPeriod();
 				}
 			});
 		});
