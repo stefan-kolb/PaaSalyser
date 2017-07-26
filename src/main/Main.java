@@ -30,7 +30,7 @@ public class Main {
 			evaluateDirectory(directoryToScan, outputPath);
 
 			System.out.println();
-			System.out.println("Finished scanning.");
+			System.out.println("Finished.");
 			System.exit(0);
 		} catch (IOException e) {
 			System.out.println();

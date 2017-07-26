@@ -17,6 +17,8 @@ import statistics.models.HostingData;
 import statistics.models.PlatformData;
 import statistics.models.PricingData;
 import statistics.models.RevisionData;
+import statistics.models.RuntimeData;
+import statistics.models.ScalingData;
 import statistics.models.StatusData;
 import statistics.models.TypeData;
 
@@ -30,8 +32,8 @@ public class DataPreprocessing {
 	private PlatformData platformData;
 	private HostingData hostingData;
 	private PricingData pricingData;
-	private Map<String, Long> scalingData;
-	private Map<String, Long> runtimesData;
+	private ScalingData scalingData;
+	private RuntimeData runtimesData;
 	private Map<String, Long> middlewareData;
 	private Map<String, Long> frameworksData;
 	private Map<String, Long> servicesData;
@@ -42,7 +44,7 @@ public class DataPreprocessing {
 		// Make sure that no eol-profile is being added to active profiles
 		profiles.forEach(profile -> {
 			if (profile.getStatus().equalsIgnoreCase("eol")) {
-				 statusData.incrementEol();
+				statusData.incrementEol();
 			} else {
 				this.profiles.add(profile);
 			}
@@ -105,11 +107,11 @@ public class DataPreprocessing {
 		return pricingData;
 	}
 
-	public Map<String, Long> getScalingData() {
+	public ScalingData getScalingData() {
 		return scalingData;
 	}
 
-	public Map<String, Long> getRuntimesData() {
+	public RuntimeData getRuntimesData() {
 		return runtimesData;
 	}
 
@@ -253,78 +255,29 @@ public class DataPreprocessing {
 	}
 
 	private void evalScaling() {
-		scalingData = new HashMap<String, Long>();
-		scalingData.put("vertical", (long) 0);
-		scalingData.put("horizontal", (long) 0);
-		scalingData.put("auto", (long) 0);
+		scalingData = new ScalingData();
 
 		profiles.forEach(profile -> {
 			if (profile.getScaling().getVertical()) {
-				scalingData.replace("vertical", scalingData.get("vertical"), scalingData.get("vertical") + 1);
+				scalingData.incrementVertical();
 			}
 			if (profile.getScaling().getHorizontal()) {
-				scalingData.replace("horizontal", scalingData.get("horizontal"), scalingData.get("horizontal") + 1);
+				scalingData.incrementHorizontal();
 			}
 			if (profile.getScaling().getAuto()) {
-				scalingData.replace("auto", scalingData.get("auto"), scalingData.get("auto") + 1);
+				scalingData.incrementAuto();
 			}
 		});
 	}
 
 	private void evalRuntimes() {
-		runtimesData = new HashMap<String, Long>();
-		Map<String, Long> runtimeAmounts = new HashMap<String, Long>();
-		Map<String, Long> versionAmounts = new HashMap<String, Long>();
-
-		long maxAmountRuntimes = 0;
-		long maxAmountVersions = 0;
-
-		// Iterates through profiles and puts the each version of each language
-		// for each profile/runtime into results or increments if the version of
-		// the language is already contained. The Format is
-		// ("language"|"version")
+		runtimesData = new RuntimeData();
 		for (PaasProfile profile : profiles) {
-			long numberOfRuntimes = profile.getRuntimes().size();
-
-			// Count number of runtimes per profile
-			if (numberOfRuntimes > maxAmountRuntimes) {
-				maxAmountRuntimes = numberOfRuntimes;
-			}
-			if (runtimeAmounts.containsKey("runAmount|" + numberOfRuntimes)) {
-				runtimeAmounts.replace("runAmount|" + numberOfRuntimes,
-						runtimeAmounts.get("runAmount|" + numberOfRuntimes) + 1);
-			} else {
-				runtimeAmounts.put("runAmount|" + numberOfRuntimes, (long) 1);
-			}
+			runtimesData.addRuntimeCount(profile.getRuntimes().size());
 			for (Runtime runtime : profile.getRuntimes()) {
-				// Begin Version Evaluation
-				long numberOfVersions = runtime.getVersions().size();
-
-				// Count number of runtimes per profile
-				if (numberOfVersions > maxAmountVersions) {
-					maxAmountVersions = numberOfVersions;
-				}
-
-				if (versionAmounts.containsKey("verAmount|" + numberOfVersions)) {
-					versionAmounts.replace("verAmount|" + numberOfVersions,
-							versionAmounts.get("verAmount|" + numberOfVersions) + 1);
-				} else {
-					versionAmounts.put("verAmount|" + numberOfVersions, (long) 1);
-				}
-
-				for (String version : runtime.getVersions()) {
-					String key = runtime.getLanguage() + "|" + version;
-					if (runtimesData.putIfAbsent(key, (long) 1) != null) {
-						runtimesData.replace(key, runtimesData.get(key), runtimesData.get(key) + 1);
-					}
-				}
+				runtimesData.addRuntime(runtime.getLanguage());
 			}
 		}
-
-		runtimesData.putAll(runtimeAmounts);
-		runtimesData.putAll(versionAmounts);
-		runtimesData.put("maxRuntimes", maxAmountRuntimes);
-		runtimesData.put("maxVersions", maxAmountVersions);
 	}
 
 	private void evalMiddleware() {

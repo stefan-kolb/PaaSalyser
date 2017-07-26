@@ -218,7 +218,9 @@ public class StatisticsImplWithModels {
 	}
 
 	private void evalScaling() {
-		// TODO Auto-generated method stub
+		scaling = new ScalingReport(calcPercent(dataPreProcessing.getScalingData().getVertical(), profilesCount),
+				calcPercent(dataPreProcessing.getScalingData().getHorizontal(), profilesCount),
+				calcPercent(dataPreProcessing.getScalingData().getAuto(), profilesCount));
 	}
 
 	private void evalRuntimes() {
