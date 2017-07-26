@@ -2,14 +2,14 @@ package report.models;
 
 import java.util.List;
 
-import statistics.models.SimpleResult;
+import statistics.models.SimpleResultLong;
 
 public class PlatformReport {
 
 	private double platformProfilesPercent = 0.0;
-	private List<SimpleResult> topPlatforms;
+	private List<SimpleResultLong> topPlatforms;
 
-	public PlatformReport(double platformProfilesPercent, List<SimpleResult> topPlatforms) {
+	public PlatformReport(double platformProfilesPercent, List<SimpleResultLong> topPlatforms) {
 		super();
 		this.platformProfilesPercent = platformProfilesPercent;
 		this.topPlatforms = topPlatforms;
@@ -19,7 +19,7 @@ public class PlatformReport {
 		return platformProfilesPercent;
 	}
 
-	public List<SimpleResult> getTopPlatforms() {
+	public List<SimpleResultLong> getTopPlatforms() {
 		return topPlatforms;
 	}
 

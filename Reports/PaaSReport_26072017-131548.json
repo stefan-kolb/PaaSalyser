@@ -4,52 +4,52 @@
     "numberOfEolProfiles": 51,
     "revisionReport": {
       "numberOfProfiles": 71,
-      "mean": 767.5915492957746,
-      "median": 775.0,
+      "mean": 769.5915492957746,
+      "median": 777.0,
       "variance": 184383.65006943062,
       "stdev": 429.39917334507135,
       "minFive": [
         {
           "key": "Heroku",
-          "value": 103
+          "value": 105
         },
         {
           "key": "PodSpace",
-          "value": 140
+          "value": 142
         },
         {
           "key": "Convox",
-          "value": 160
+          "value": 162
         },
         {
           "key": "d2c",
-          "value": 164
+          "value": 166
         },
         {
           "key": "Amazon Elastic Beanstalk",
-          "value": 217
+          "value": 219
         }
       ],
       "topFive": [
         {
           "key": "BitNami",
-          "value": 1480
+          "value": 1482
         },
         {
           "key": "Software AG Live",
-          "value": 1480
+          "value": 1482
         },
         {
           "key": "CatN",
-          "value": 1480
+          "value": 1482
         },
         {
           "key": "Pagoda Box",
-          "value": 1480
+          "value": 1482
         },
         {
           "key": "Cloudify",
-          "value": 1480
+          "value": 1482
         }
       ]
     },
@@ -79,52 +79,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 1784.9846153846152,
-      "medianStatusSince": 1636.0,
+      "meanStatusSince": 1786.9846153846152,
+      "medianStatusSince": 1638.0,
       "varianceStatusSince": 1231658.0459171599,
       "stdevStatusSince": 1109.8009037287543,
       "topFiveStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5940
+          "value": 5942
         },
         {
           "key": "Mendix",
-          "value": 4587
+          "value": 4589
         },
         {
           "key": "EngineYard",
-          "value": 3979
+          "value": 3981
         },
         {
           "key": "Software AG Live",
-          "value": 3591
+          "value": 3593
         },
         {
           "key": "brightbox",
-          "value": 3570
+          "value": 3572
         }
       ],
       "minFiveStatusSince": [
         {
           "key": "PodSpace",
-          "value": 173
+          "value": 175
         },
         {
           "key": "d2c",
-          "value": 195
+          "value": 197
         },
         {
           "key": "APPUiO",
-          "value": 292
+          "value": 294
         },
         {
           "key": "Swisscom Application Cloud",
-          "value": 297
+          "value": 299
         },
         {
           "key": "Predix",
-          "value": 336
+          "value": 338
         }
       ]
     },
@@ -198,6 +198,115 @@
       "privateHostingPercent": 47.88732394366197,
       "publicHostingPercent": 76.05633802816901,
       "virtualPrivateHostingPercent": 9.859154929577464
+    },
+    "scalingReport": {
+      "verticalPercent": 69.01408450704226,
+      "horizontalPercent": 81.69014084507043,
+      "autoPercent": 43.66197183098591
+    },
+    "runtimesReport": {
+      "languageSpecific": 20,
+      "polyglot": 51,
+      "meanNumberOfRuntimes": 4.295774647887324,
+      "medianNumberOfRuntimes": 4.0,
+      "varianceNumberOfRuntimes": 7.982939892878401,
+      "stdevNumberOfRuntimes": 2.825409685847063,
+      "topFiveNumberOfRuntimes": [
+        {
+          "key": "Atos Cloud Foundry",
+          "value": 11
+        },
+        {
+          "key": "HPE Helion Stackato",
+          "value": 10
+        },
+        {
+          "key": "Heroku",
+          "value": 9
+        },
+        {
+          "key": "Scalingo",
+          "value": 9
+        },
+        {
+          "key": "Flynn",
+          "value": 9
+        }
+      ],
+      "runtimesShare": [
+        {
+          "key": "java",
+          "value": 69.01408450704226
+        },
+        {
+          "key": "php",
+          "value": 69.01408450704226
+        },
+        {
+          "key": "ruby",
+          "value": 61.97183098591549
+        },
+        {
+          "key": "python",
+          "value": 56.33802816901409
+        },
+        {
+          "key": "node",
+          "value": 54.929577464788736
+        },
+        {
+          "key": "go",
+          "value": 29.577464788732392
+        },
+        {
+          "key": "scala",
+          "value": 22.535211267605636
+        },
+        {
+          "key": "groovy",
+          "value": 19.718309859154928
+        },
+        {
+          "key": "dotnet",
+          "value": 11.267605633802818
+        },
+        {
+          "key": "perl",
+          "value": 11.267605633802818
+        },
+        {
+          "key": "clojure",
+          "value": 9.859154929577464
+        },
+        {
+          "key": "docker",
+          "value": 4.225352112676056
+        },
+        {
+          "key": "erlang",
+          "value": 2.8169014084507045
+        },
+        {
+          "key": "apex",
+          "value": 1.4084507042253522
+        },
+        {
+          "key": "cobol",
+          "value": 1.4084507042253522
+        },
+        {
+          "key": "lua",
+          "value": 1.4084507042253522
+        },
+        {
+          "key": "xsjs",
+          "value": 1.4084507042253522
+        },
+        {
+          "key": "swift",
+          "value": 1.4084507042253522
+        }
+      ]
     }
   }
 }

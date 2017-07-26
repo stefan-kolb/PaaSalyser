@@ -1,30 +1,35 @@
 package statistics.models;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class RuntimeData {
 
-	private List<Long> profileRuntimesAmount;
-	private Map<String, Long> runtimes = new HashMap<String, Long>();
+    private Map<String, Long> profileRuntimesAmount;
+    private Map<String, Long> runtimes;
 
-	public List<Long> getNumberPerProfile() {
-		return profileRuntimesAmount;
-	}
+    public RuntimeData() {
+	super();
+	profileRuntimesAmount = new HashMap<String, Long>();
+	runtimes = new HashMap<String, Long>();
+    }
 
-	public void addRuntimeAmount(long amount) {
-		profileRuntimesAmount.add(amount);
-	}
+    public Map<String, Long> getNumberPerProfile() {
+	return profileRuntimesAmount;
+    }
 
-	public Map<String, Long> getRuntimes() {
-		return runtimes;
-	}
+    public void addProfileRuntimeAmount(String name, long amount) {
+	profileRuntimesAmount.put(name, amount);
+    }
 
-	public void addRuntime(String runtime) {
-		if (runtimes.putIfAbsent(runtime, (long) 1) != null) {
-			runtimes.replace(runtime, runtimes.get(runtime) + 1);
-		}
+    public Map<String, Long> getRuntimes() {
+	return runtimes;
+    }
+
+    public void addRuntime(String runtime) {
+	if (runtimes.putIfAbsent(runtime, (long) 1) != null) {
+	    runtimes.replace(runtime, runtimes.get(runtime) + 1);
 	}
+    }
 
 }

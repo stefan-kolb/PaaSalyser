@@ -3,30 +3,30 @@ package report.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import statistics.models.SimpleResult;
+import statistics.models.SimpleResultLong;
 
 public class PricingReport {
-	List<SimpleResult> numberOfModelsPerProfile = new ArrayList<>();
-	List<SimpleResult> models = new ArrayList<>();
-	List<SimpleResult> periods = new ArrayList<>();
+	List<SimpleResultLong> numberOfModelsPerProfile = new ArrayList<>();
+	List<SimpleResultLong> models = new ArrayList<>();
+	List<SimpleResultLong> periods = new ArrayList<>();
 
-	public PricingReport(List<SimpleResult> numberOfModelsPerProfile, List<SimpleResult> models,
-			List<SimpleResult> periods) {
+	public PricingReport(List<SimpleResultLong> numberOfModelsPerProfile, List<SimpleResultLong> models,
+			List<SimpleResultLong> periods) {
 		super();
 		this.numberOfModelsPerProfile = numberOfModelsPerProfile;
 		this.models = models;
 		this.periods = periods;
 	}
 
-	public List<SimpleResult> getNumberOfModelsPerProfile() {
+	public List<SimpleResultLong> getNumberOfModelsPerProfile() {
 		return numberOfModelsPerProfile;
 	}
 
-	public List<SimpleResult> getModels() {
+	public List<SimpleResultLong> getModels() {
 		return models;
 	}
 
-	public List<SimpleResult> getPeriods() {
+	public List<SimpleResultLong> getPeriods() {
 		return periods;
 	}
 }

@@ -1,11 +1,11 @@
 package statistics.models;
 
-public class SimpleResult {
+public class SimpleResultLong {
 
 	private String key;
 	private long value;
 
-	public SimpleResult(String key, long value) {
+	public SimpleResultLong(String key, long value) {
 		super();
 		this.key = key;
 		this.value = value;
