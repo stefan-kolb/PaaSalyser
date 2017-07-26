@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import gsonUtility.GsonAdapter;
+import gsonutility.GsonAdapter;
 import profile.PaasProfile;
 import report.Report;
 import statistics.DataPreprocessing;

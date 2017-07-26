@@ -10,6 +10,7 @@ public class StatusReport {
     private List<SimpleResultLong> topStatus;
 
     // StatusSince Statistics
+    // TODO
     private double meanStatusSince;
     private double medianStatusSince;
     private double varianceStatusSince;
