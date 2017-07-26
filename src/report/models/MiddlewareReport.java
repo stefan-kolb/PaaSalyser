@@ -2,11 +2,9 @@ package report.models;
 
 public class MiddlewareReport {
 
-    private String info = "Not implemented yet.";
+    private final String info = "Not implemented yet.";
 
-    public MiddlewareReport(String info) {
-	super();
-	this.info = info;
+    public MiddlewareReport() {
     }
 
     public String getInfo() {

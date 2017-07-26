@@ -2,11 +2,9 @@ package report.models;
 
 public class FrameworksReport {
 
-    private String info = "Not implemented yet.";
+    private final String info = "Not implemented yet.";
 
-    public FrameworksReport(String info) {
-	super();
-	this.info = info;
+    public FrameworksReport() {
     }
 
     public String getInfo() {

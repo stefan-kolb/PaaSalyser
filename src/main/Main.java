@@ -23,9 +23,7 @@ public class Main {
 
 	Path directoryToScan = Paths.get("PaasProfiles");
 	Path outputPath = Paths.get("Reports/PaaSReport_"
-		+ LocalDateTime.now().format(
-			DateTimeFormatter.ofPattern("ddMMyyyy-HHmmss"))
-		+ ".json");
+		+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy-HHmmss")) + ".json");
 	try {
 
 	    // This is where the magic happens.
@@ -36,40 +34,33 @@ public class Main {
 	    System.exit(0);
 	} catch (IOException e) {
 	    System.out.println();
-	    System.out.println("A Problem occured while scanning: "
-		    + e.getMessage());
+	    System.out.println("A Problem occured while scanning: " + e.getMessage());
 	    e.printStackTrace();
 	    System.exit(1);
 	}
     }
 
-    private static void evaluateDirectory(Path directory, Path outputPath)
-	    throws IOException {
+    private static void evaluateDirectory(Path directory, Path outputPath) throws IOException {
 	List<PaasProfile> profilesList = new ArrayList<PaasProfile>();
 
-	profilesList = gsonAdapter.scanDirectoryForJsonFiles(Paths
-		.get("PaasProfiles"));
+	profilesList = gsonAdapter.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
 	for (PaasProfile profile : profilesList) {
 	    if (profile.isFailed() == true) {
-		throw new IOException("Failed to scan profiles at: "
-			+ profile.getName());
+		throw new IOException("Failed to scan profiles at: " + profile.getName());
 	    }
 	}
 
 	generateReport(profilesList, outputPath);
     }
 
-    private static void generateReport(List<PaasProfile> profilesList,
-	    Path outputPath) throws IOException {
+    private static void generateReport(List<PaasProfile> profilesList, Path outputPath) throws IOException {
 	System.out.println();
 	System.out.println("---Preprocessing---");
-	DataPreprocessing dataPreprocessing = new DataPreprocessing(
-		profilesList);
+	DataPreprocessing dataPreprocessing = new DataPreprocessing(profilesList);
 
 	System.out.println();
 	System.out.println("---Statistics---");
-	StatisticsImplWithModels statistics = new StatisticsImplWithModels(
-		dataPreprocessing);
+	StatisticsImplWithModels statistics = new StatisticsImplWithModels(dataPreprocessing);
 
 	System.out.println();
 	System.out.println("---Creating Report---");
