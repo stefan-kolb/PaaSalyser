@@ -11,63 +11,66 @@ import java.util.List;
 import gsonutility.GsonAdapter;
 import profile.PaasProfile;
 import report.Report;
+import revision.RepositorySniffer;
 import statistics.DataPreprocessing;
 import statistics.Statistics;
 
 public class Main {
 
-    static GsonAdapter gsonAdapter = new GsonAdapter();
+	static GsonAdapter gsonAdapter = new GsonAdapter();
 
-    public static void main(String[] args) {
-	System.out.println("Starting Execution.");
+	public static void main(String[] args) {
+		System.out.println("Starting Execution.");
 
-	Path directoryToScan = Paths.get("PaasProfiles");
-	Path outputPath = Paths.get("Reports/PaaSReport_"
-		+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy-HHmmss")) + ".json");
-	try {
-
-	    // This is where the magic happens.
-	    evaluateDirectory(directoryToScan, outputPath);
-
-	    System.out.println();
-	    System.out.println("Finished creating: " + outputPath);
-	    System.exit(0);
-	} catch (IOException e) {
-	    System.out.println();
-	    System.out.println("A Problem occured while scanning: " + e.getMessage());
-	    e.printStackTrace();
-	    System.exit(1);
-	}
-    }
-
-    private static void evaluateDirectory(Path directory, Path outputPath) throws IOException {
-	List<PaasProfile> profilesList = new ArrayList<PaasProfile>();
-
-	profilesList = gsonAdapter.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
-	for (PaasProfile profile : profilesList) {
-	    if (profile.isFailed() == true) {
-		throw new IOException("Failed to scan profiles at: " + profile.getName());
-	    }
+		Path directoryToScan = Paths.get("PaasProfiles");
+		Path outputPath = Paths.get("Reports/PaaSReport_"
+				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy-HHmmss")) + ".json");
+		
+		new RepositorySniffer();
+		
+//		try {
+//			// This is where the magic happens.
+//			evaluateDirectory(directoryToScan, outputPath);
+//
+//			System.out.println();
+//			System.out.println("Finished creating: " + outputPath);
+//			System.exit(0);
+//		} catch (IOException e) {
+//			System.out.println();
+//			System.out.println("A Problem occured while scanning: " + e.getMessage());
+//			e.printStackTrace();
+//			System.exit(1);
+//		}
 	}
 
-	generateReport(profilesList, outputPath);
-    }
+	private static void evaluateDirectory(Path directory, Path outputPath) throws IOException {
+		List<PaasProfile> profilesList = new ArrayList<PaasProfile>();
 
-    private static void generateReport(List<PaasProfile> profilesList, Path outputPath) throws IOException {
-	System.out.println();
-	System.out.println("---Preprocessing---");
-	DataPreprocessing dataPreprocessing = new DataPreprocessing(profilesList);
+		profilesList = gsonAdapter.scanDirectoryForJsonFiles(Paths.get("PaasProfiles"));
+		for (PaasProfile profile : profilesList) {
+			if (profile.isFailed() == true) {
+				throw new IOException("Failed to scan profiles at: " + profile.getName());
+			}
+		}
 
-	System.out.println();
-	System.out.println("---Statistics---");
-	Statistics statistics = new Statistics(dataPreprocessing);
+		generateReport(profilesList, outputPath);
+	}
 
-	System.out.println();
-	System.out.println("---Creating Report---");
-	Report report = new Report(statistics);
+	private static void generateReport(List<PaasProfile> profilesList, Path outputPath) throws IOException {
+		System.out.println();
+		System.out.println("---Preprocessing---");
+		DataPreprocessing dataPreprocessing = new DataPreprocessing(profilesList);
 
-	System.out.println();
-	System.out.println("---Writing to File---");
-	gsonAdapter.createReportAsJsonFile(report, outputPath);
-    }
+		System.out.println();
+		System.out.println("---Statistics---");
+		Statistics statistics = new Statistics(dataPreprocessing);
+
+		System.out.println();
+		System.out.println("---Creating Report---");
+		Report report = new Report(statistics);
+
+		System.out.println();
+		System.out.println("---Writing to File---");
+		gsonAdapter.createReportAsJsonFile(report, outputPath);
+	}
 }
