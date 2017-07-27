@@ -11,29 +11,22 @@ import statistics.models.SimpleResultLong;
  */
 public class RevisionReport {
 
-	private int numberOfProfiles;
 	private double mean;
 	private double median;
 	private double variance;
 	private double stdev;
-	private List<SimpleResultLong> minFive = new ArrayList<>();
-	private List<SimpleResultLong> topFive = new ArrayList<>();
+	private List<SimpleResultLong> youngestRevisions = new ArrayList<>();
+	private List<SimpleResultLong> oldestRevisions = new ArrayList<>();
 
-	public RevisionReport(int numberOfProfiles,
-			QualitativeData qualitativeData, List<SimpleResultLong> minFive,
+	public RevisionReport(QualitativeData qualitativeData, List<SimpleResultLong> minFive,
 			List<SimpleResultLong> topFive) {
 		super();
-		this.numberOfProfiles = numberOfProfiles;
 		this.mean = qualitativeData.getMean();
 		this.median = qualitativeData.getMedian();
 		this.variance = qualitativeData.getVariance();
 		this.stdev = qualitativeData.getStDev();
-		this.minFive = minFive;
-		this.topFive = topFive;
-	}
-
-	public int getNumberOfProfiles() {
-		return numberOfProfiles;
+		this.youngestRevisions = minFive;
+		this.oldestRevisions = topFive;
 	}
 
 	public double getMean() {
@@ -52,12 +45,12 @@ public class RevisionReport {
 		return stdev;
 	}
 
-	public List<SimpleResultLong> getMinFive() {
-		return minFive;
+	public List<SimpleResultLong> getYoungestRevisions() {
+		return youngestRevisions;
 	}
 
-	public List<SimpleResultLong> getTopFive() {
-		return topFive;
+	public List<SimpleResultLong> getOldestRevisions() {
+		return oldestRevisions;
 	}
 
 }

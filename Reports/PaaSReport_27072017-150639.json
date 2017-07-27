@@ -4,52 +4,52 @@
     "numberOfEolProfiles": 51,
     "revisionReport": {
       "numberOfProfiles": 71,
-      "mean": 769.5915492957746,
-      "median": 777.0,
+      "mean": 770.5915492957746,
+      "median": 778.0,
       "variance": 184383.65006943062,
       "stdev": 429.39917334507135,
       "minFive": [
         {
           "key": "Heroku",
-          "value": 105
+          "value": 106
         },
         {
           "key": "PodSpace",
-          "value": 142
+          "value": 143
         },
         {
           "key": "Convox",
-          "value": 162
+          "value": 163
         },
         {
           "key": "d2c",
-          "value": 166
+          "value": 167
         },
         {
           "key": "Amazon Elastic Beanstalk",
-          "value": 219
+          "value": 220
         }
       ],
       "topFive": [
         {
           "key": "BitNami",
-          "value": 1482
+          "value": 1483
         },
         {
           "key": "Software AG Live",
-          "value": 1482
+          "value": 1483
         },
         {
           "key": "CatN",
-          "value": 1482
+          "value": 1483
         },
         {
           "key": "Pagoda Box",
-          "value": 1482
+          "value": 1483
         },
         {
           "key": "Cloudify",
-          "value": 1482
+          "value": 1483
         }
       ]
     },
@@ -79,52 +79,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 1786.9846153846152,
-      "medianStatusSince": 1638.0,
+      "meanStatusSince": 1787.9846153846152,
+      "medianStatusSince": 1639.0,
       "varianceStatusSince": 1231658.0459171599,
       "stdevStatusSince": 1109.8009037287543,
       "topFiveStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5942
+          "value": 5943
         },
         {
           "key": "Mendix",
-          "value": 4589
+          "value": 4590
         },
         {
           "key": "EngineYard",
-          "value": 3981
+          "value": 3982
         },
         {
           "key": "Software AG Live",
-          "value": 3593
+          "value": 3594
         },
         {
           "key": "brightbox",
-          "value": 3572
+          "value": 3573
         }
       ],
       "minFiveStatusSince": [
         {
           "key": "PodSpace",
-          "value": 175
+          "value": 176
         },
         {
           "key": "d2c",
-          "value": 197
+          "value": 198
         },
         {
           "key": "APPUiO",
-          "value": 294
+          "value": 295
         },
         {
           "key": "Swisscom Application Cloud",
-          "value": 299
+          "value": 300
         },
         {
           "key": "Predix",
-          "value": 338
+          "value": 339
         }
       ]
     },
@@ -281,6 +281,216 @@
     },
     "frameworksReport": {
       "info": "Not implemented yet."
+    },
+    "servicesReport": {
+      "nativeServicesProfilesPercent": 71.83098591549296,
+      "topFiveProfilesWithNativeServicesAmount": [
+        {
+          "key": "Bluemix",
+          "value": 49
+        },
+        {
+          "key": "SAP HANA Cloud Platform",
+          "value": 20
+        },
+        {
+          "key": "Atos Cloud Foundry",
+          "value": 14
+        },
+        {
+          "key": "Dokkur",
+          "value": 12
+        },
+        {
+          "key": "Clever Cloud",
+          "value": 10
+        }
+      ],
+      "topFiveNativeServices": [
+        {
+          "key": "mysql (datastore)",
+          "value": 36
+        },
+        {
+          "key": "mongodb (datastore)",
+          "value": 29
+        },
+        {
+          "key": "postgresql (datastore)",
+          "value": 28
+        },
+        {
+          "key": "redis (datastore)",
+          "value": 25
+        },
+        {
+          "key": "memcached (datastore)",
+          "value": 13
+        }
+      ],
+      "topFiveTypesOfServices": [
+        {
+          "key": "datastore",
+          "value": 207
+        },
+        {
+          "key": "worker",
+          "value": 15
+        },
+        {
+          "key": "other",
+          "value": 11
+        },
+        {
+          "key": "analytics",
+          "value": 10
+        },
+        {
+          "key": "devops",
+          "value": 9
+        }
+      ]
+    },
+    "extensibleReport": {
+      "extensibleProfilesPercent": 54.929577464788736
+    },
+    "infrastructuresReport": {
+      "topFiveInfrastrcturesPerProfile": [
+        {
+          "key": "Cloudways",
+          "value": 34
+        },
+        {
+          "key": "Jelastic",
+          "value": 25
+        },
+        {
+          "key": "ElasticBox",
+          "value": 21
+        },
+        {
+          "key": "Atos Cloud Foundry",
+          "value": 17
+        },
+        {
+          "key": "Microsoft Azure",
+          "value": 14
+        }
+      ],
+      "meanInfrastrcturesPerProfile": 4.686274509803921,
+      "medianInfrastrcturesPerProfile": 2.0,
+      "varianceInfrastrcturesPerProfile": 45.11726259131103,
+      "stdevInfrastrcturesPerProfile": 6.716938483513976,
+      "percentOfProfilesPerContinent": [
+        {
+          "key": "NA",
+          "value": 52.112676056338024
+        },
+        {
+          "key": "EU",
+          "value": 49.29577464788733
+        },
+        {
+          "key": "AS",
+          "value": 23.943661971830984
+        },
+        {
+          "key": "OC",
+          "value": 21.12676056338028
+        },
+        {
+          "key": "SA",
+          "value": 16.901408450704224
+        }
+      ],
+      "topFiveContinents": [
+        {
+          "key": "NA",
+          "value": 88
+        },
+        {
+          "key": "EU",
+          "value": 71
+        },
+        {
+          "key": "AS",
+          "value": 46
+        },
+        {
+          "key": "OC",
+          "value": 19
+        },
+        {
+          "key": "SA",
+          "value": 15
+        }
+      ],
+      "topFiveCountries": [
+        {
+          "key": "US",
+          "value": 81
+        },
+        {
+          "key": "IE",
+          "value": 19
+        },
+        {
+          "key": "JP",
+          "value": 17
+        },
+        {
+          "key": "AU",
+          "value": 17
+        },
+        {
+          "key": "SG",
+          "value": 14
+        }
+      ],
+      "topFiveRegions": [
+        {
+          "key": "Dublin",
+          "value": 17
+        },
+        {
+          "key": "Sydney",
+          "value": 14
+        },
+        {
+          "key": "Singapore",
+          "value": 14
+        },
+        {
+          "key": "Northern Virginia",
+          "value": 14
+        },
+        {
+          "key": "Tokyo",
+          "value": 12
+        }
+      ],
+      "topFiveProviders": [
+        {
+          "key": "AWS",
+          "value": 72
+        },
+        {
+          "key": "Vultr",
+          "value": 13
+        },
+        {
+          "key": "Azure",
+          "value": 12
+        },
+        {
+          "key": "DigitalOcean",
+          "value": 7
+        },
+        {
+          "key": "GCE",
+          "value": 5
+        }
+      ]
     }
   }
 }

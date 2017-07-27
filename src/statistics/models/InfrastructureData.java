@@ -1,10 +1,16 @@
 package statistics.models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import profile.models.Infrastructure;
 
 public class InfrastructureData {
 
+    private Map<String, Long> infrastructuresPerProfile;
+    private Map<String, Long> profileContinents;
     private Map<String, Long> continent;
     private Map<String, Long> country;
     private Map<String, Long> region;
@@ -12,10 +18,20 @@ public class InfrastructureData {
 
     public InfrastructureData() {
 	super();
+	infrastructuresPerProfile = new HashMap<>();
+	profileContinents = new HashMap<>();
 	continent = new HashMap<>();
 	country = new HashMap<>();
 	region = new HashMap<>();
 	provider = new HashMap<>();
+    }
+
+    public Map<String, Long> getInfrastructuresPerProfile() {
+	return infrastructuresPerProfile;
+    }
+
+    public Map<String, Long> getProfileContinents() {
+	return profileContinents;
     }
 
     public Map<String, Long> getContinent() {
@@ -32,6 +48,29 @@ public class InfrastructureData {
 
     public Map<String, Long> getProvider() {
 	return provider;
+    }
+
+    public void addInfraStructureProfile(String name, List<Infrastructure> infrastructures) {
+	if (name != null && infrastructures != null)
+	    if (!name.isEmpty() && !infrastructures.isEmpty())
+		infrastructuresPerProfile.put(name, (long) infrastructures.size());
+	List<String> temp = new ArrayList<>();
+	infrastructures.forEach(infra -> {
+	    if (!temp.contains(infra.getContinent())) {
+		temp.add(infra.getContinent());
+	    }
+	});
+	temp.forEach(element -> {
+	    if (profileContinents.putIfAbsent(element, (long) 1) != null)
+		profileContinents.replace(element, profileContinents.get(element) + 1);
+	});
+    }
+
+    public void addContinentProfile(String continent) {
+	if (continent != null)
+	    if (!continent.isEmpty())
+		if (profileContinents.putIfAbsent(continent, (long) 1) != null)
+		    profileContinents.replace(continent, profileContinents.get(continent) + 1);
     }
 
     public void addContinent(String name) {
@@ -56,7 +95,6 @@ public class InfrastructureData {
     }
 
     public void addProvider(String name) {
-	System.out.println(name);
 	if (name != null)
 	    if (!name.isEmpty())
 		if (provider.putIfAbsent(name, (long) 1) != null)

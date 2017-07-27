@@ -331,6 +331,7 @@ public class DataPreprocessing {
     private void evalServices() {
 	servicesData = new ServicesData();
 	profiles.forEach(profile -> {
+	    servicesData.addProfilesWithNativeServices(profile.getName(), profile.getServices().getNative().size());
 	    profile.getServices().getNative().forEach(nativeService -> {
 		servicesData.addNativeService(nativeService.getName(), nativeService.getType());
 	    });
@@ -344,17 +345,15 @@ public class DataPreprocessing {
 	    if (profile.getExtensible().equals("true")) {
 		extensibleData.incrementYes();
 	    }
-	    if (profile.getExtensible().equals("false")) {
-		extensibleData.incrementNo();
-	    }
 	});
     }
 
     private void evalInfrastructures() {
 	infrastructuresData = new InfrastructureData();
 	profiles.forEach(profile -> {
+	    infrastructuresData.addInfraStructureProfile(profile.getName(), profile.getInfrastructures());
+	    
 	    profile.getInfrastructures().forEach(infrastructure -> {
-		System.out.println(infrastructure.toString());
 		infrastructuresData.addContinent(infrastructure.getContinent());
 		infrastructuresData.addCountry(infrastructure.getCountry());
 		infrastructuresData.addRegion(infrastructure.getRegion());

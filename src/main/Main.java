@@ -12,7 +12,7 @@ import gsonutility.GsonAdapter;
 import profile.PaasProfile;
 import report.Report;
 import statistics.DataPreprocessing;
-import statistics.StatisticsImplWithModels;
+import statistics.Statistics;
 
 public class Main {
 
@@ -60,7 +60,7 @@ public class Main {
 
 	System.out.println();
 	System.out.println("---Statistics---");
-	StatisticsImplWithModels statistics = new StatisticsImplWithModels(dataPreprocessing);
+	Statistics statistics = new Statistics(dataPreprocessing);
 
 	System.out.println();
 	System.out.println("---Creating Report---");

@@ -3,7 +3,7 @@ package report;
 import report.models.BusinessInfo;
 import report.models.EconomicInfo;
 import report.models.MetaInfo;
-import statistics.StatisticsImplWithModels;
+import statistics.Statistics;
 
 public class Report {
 
@@ -11,7 +11,7 @@ public class Report {
 	private BusinessInfo businessInfo;
 	private EconomicInfo economicInfo;
 
-	public Report(StatisticsImplWithModels statistics) {
+	public Report(Statistics statistics) {
 		metaInfo = new MetaInfo(statistics.getProfilesCount(), statistics.getEolProfilesCount(),
 				statistics.getRevision(), statistics.getType());
 		businessInfo = new BusinessInfo(statistics.getStatus(), statistics.getPricing());
