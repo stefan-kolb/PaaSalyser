@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jgit.api.errors.GitAPIException;
+
 import gsonutility.GsonAdapter;
 import profile.PaasProfile;
 import report.Report;
@@ -26,7 +28,11 @@ public class Main {
 		Path outputPath = Paths.get("Reports/PaaSReport_"
 				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy-HHmmss")) + ".json");
 		
-		new RepositorySniffer();
+		try {
+			new RepositorySniffer();
+		} catch (GitAPIException | IOException e) {
+			e.printStackTrace();
+		}
 		
 //		try {
 //			// This is where the magic happens.
