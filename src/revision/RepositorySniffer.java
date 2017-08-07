@@ -2,51 +2,91 @@ package revision;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.NoHeadException;
-import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
-import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
+import gsonutility.GsonAdapter;
+import profile.PaasProfile;
+
 public class RepositorySniffer {
 
-	private static final String remotePath = "git@github.com:stefan-kolb/paas-profiles.git";
-	private static final File localPath = new File("paas-profiles");
+	private String gitRemotePath;
+	private File pathOfProfilesRepository;
 
-	List<ObjectId> profileChangedCommits;
+	private List<ObjectId> profileChangedCommits;
 
-	public RepositorySniffer() throws NoHeadException, GitAPIException, IncorrectObjectTypeException, IOException {
+	private GsonAdapter gsonAdapter;
 
-		if (!localPath.exists()) {
-			// Clone Repository if it does not already exist
-			cloneRepository();
-		} else {
-			System.out.println(localPath + " already exists.");
-		}
+	private Map<String, List<PaasProfile>> profilesOfCommits;
+	private boolean profilesLock = true;
 
-		try (Git git = Git.open(localPath); Repository repository = git.getRepository()) {
+	public RepositorySniffer(GsonAdapter gsonAdapter, String gitRemotePath, String pathOfProfilesRepository) {
+		this.gsonAdapter = gsonAdapter;
+		this.gitRemotePath = gitRemotePath;
+		this.pathOfProfilesRepository = new File(pathOfProfilesRepository);
+		profilesOfCommits = new HashMap<>();
+	}
+
+	public Map<String, List<PaasProfile>> getProfilesOfCommits() {
+		if (profilesLock == false)
+			return profilesOfCommits;
+		else
+			return null;
+	}
+
+	public void sniff() throws IOException, GitAPIException {
+		initializeOrPullRepository();
+
+		try (Git git = Git.open(pathOfProfilesRepository)) {
+			// Repository repository = git.getRepository();
 			System.out.println(git);
 
 			profileChangedCommits = scanRepositoryForProfilesCommits(git);
 
+			System.out.println("Profiles:");
+			iterateCommits(git, this.gsonAdapter);
 		}
-
-		// Write Code here
-
 	}
 
-	private void cloneRepository() throws InvalidRemoteException, TransportException, GitAPIException {
-		Git.cloneRepository().setURI(remotePath).setDirectory(localPath).call();
+	private void initializeOrPullRepository() throws IOException, GitAPIException {
+		if (!pathOfProfilesRepository.exists()) {
+			// Clone Repository if it does not already exist
+			cloneRepository();
+		} else {
+			System.out.println(pathOfProfilesRepository + " already exists.");
+			try (Git git = Git.open(pathOfProfilesRepository)) {
+				System.out.println("Resetting.");
+				git.reset().setMode(ResetType.HARD).call();
+				pullRepository(git);
+			}
+		}
+	}
+
+	private void cloneRepository() throws GitAPIException {
+		System.out.println("Cloning Repository: " + gitRemotePath);
+		Git.cloneRepository().setURI(gitRemotePath).setDirectory(pathOfProfilesRepository).call();
+	}
+
+	private void pullRepository(Git git) throws GitAPIException {
+		System.out.println("Pulling from Repository: " + gitRemotePath);
+		git.checkout().setName("master").call();
+		git.pull().call();
+
+		System.out.println("Pulling finished.");
 	}
 
 	private List<ObjectId> scanRepositoryForProfilesCommits(Git git)
@@ -87,7 +127,39 @@ public class RepositorySniffer {
 
 		System.out.println("Number of relevant commits: " + profileChangedCommits.size());
 		profileChangedCommits.forEach(System.out::println);
+
 		return profileChangedCommits;
+	}
+
+	private void iterateCommits(Git git, GsonAdapter gsonAdapter) {
+		profileChangedCommits.forEach(commit -> {
+			try {
+				storeProfilesOfCommit(git, commit.getName(), gsonAdapter);
+			} catch (GitAPIException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		profilesLock = false;
+	}
+
+	private void storeProfilesOfCommit(Git git, String commitId, GsonAdapter gsonAdapter)
+			throws GitAPIException, IOException {
+		System.out.println();
+		System.out.println("Current Commit is: " + commitId);
+		git.checkout().setName(commitId).call();
+
+		Path path = Paths.get(pathOfProfilesRepository.toString() + "/profiles");
+
+		// List<PaasProfile> profilesOfCurrentCommit =
+		// gsonAdapter.scanDirectoryForJsonFiles(path);
+		profilesOfCommits.put(commitId, gsonAdapter.scanDirectoryForJsonFiles(path));
+
+		// Hard reset to undo all changes made
+		System.out.println("Resetting.");
+		git.reset().setMode(ResetType.HARD).call();
+
+		System.out.println("Number of profiles in this commit: " + profilesOfCommits.get(commitId).size());
 	}
 
 }

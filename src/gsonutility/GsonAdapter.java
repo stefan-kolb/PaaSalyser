@@ -22,44 +22,46 @@ import report.Report;
 
 public class GsonAdapter {
 
-    private Gson gson;
+	private Gson gson;
 
-    public GsonAdapter() {
-	gson = new GsonBuilder().setPrettyPrinting().create();
-    }
+	public GsonAdapter() {
+		gson = new GsonBuilder().setPrettyPrinting().create();
+	}
 
-    public List<PaasProfile> scanDirectoryForJsonFiles(Path rootDirectory)
-	    throws IOException {
-	if (!Files.isDirectory(rootDirectory)) {
-	    throw new IOException(rootDirectory + " is no existing directory.");
-	} else {
-	    return Files
-		    .walk(rootDirectory)
-		    .filter(path -> path.toString().endsWith("json"))
-		    .map(path -> {
-			try (InputStream in = Files.newInputStream(path);
-				BufferedReader reader = new BufferedReader(
-					new InputStreamReader(in))) {
-			    PaasProfile profile = gson.fromJson(reader,
-				    PaasProfile.class);
-			    return profile;
-			} catch (IOException e) {
-			    return new PaasProfile(true);
+	public void walkAndPrintFileTree(Path rootDirectory) throws IOException {
+		if (!Files.isDirectory(rootDirectory)) {
+			throw new IOException(rootDirectory + " is no existing directory.");
+		} else {
+			Files.walk(rootDirectory).filter(path -> path.toString().endsWith("json"))
+					.peek(entry -> System.out.println(entry));
+		}
+	}
+
+	public List<PaasProfile> scanDirectoryForJsonFiles(Path rootDirectory) throws IOException {
+		if (!Files.isDirectory(rootDirectory)) {
+			throw new IOException(rootDirectory + " is no existing directory.");
+		} else {
+			return Files.walk(rootDirectory).filter(path -> path.toString().endsWith("json")).map(path -> {
+				try (InputStream in = Files.newInputStream(path);
+						BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+					PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
+					return profile;
+				} catch (IOException e) {
+					return new PaasProfile(true);
+				}
+			}).collect(Collectors.toCollection(LinkedList::new));
+		}
+	}
+
+	public void createReportAsJsonFile(Report report, Path path) throws IOException {
+		try (BufferedWriter writer = Files.newBufferedWriter(path, Charset.defaultCharset(),
+				StandardOpenOption.CREATE)) {
+			try {
+				gson.toJson(report, writer);
+			} catch (JsonIOException e) {
+				throw new IOException(e);
 			}
-		    }).collect(Collectors.toCollection(LinkedList::new));
+		}
 	}
-    }
-
-    public void createReportAsJsonFile(Report report, Path path)
-	    throws IOException {
-	try (BufferedWriter writer = Files.newBufferedWriter(path,
-		Charset.defaultCharset(), StandardOpenOption.CREATE)) {
-	    try {
-		gson.toJson(report, writer);
-	    } catch (JsonIOException e) {
-		throw new IOException(e);
-	    }
-	}
-    }
 
 }
