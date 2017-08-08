@@ -24,33 +24,37 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Starting Execution.");
 
-		Path directoryToScan = Paths.get("PaasProfiles");
+		Path directoryToScan = Paths.get("paas-profiles/profiles");
 		Path outputPath = Paths.get("Reports/PaaSReport_"
 				+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy-HHmmss")) + ".json");
 
 		final String gitRemotePath = "git@github.com:stefan-kolb/paas-profiles.git";
 		final String pathOfProfilesRepository = "paas-profiles";
 
-		try {
-			new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository).sniff();
-		} catch (GitAPIException | IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository).sniff();
+//		} catch (GitAPIException | IOException e) {
+//			System.out.println(e.getMessage());
+//			e.printStackTrace();
+//		}
 
-		// try {
-		// // This is where the magic happens.
-		// evaluateDirectory(directoryToScan, outputPath);
-		//
-		// System.out.println();
-		// System.out.println("Finished creating: " + outputPath);
-		// System.exit(0);
-		// } catch (IOException e) {
-		// System.out.println();
-		// System.out.println("A Problem occured while scanning: " +
-		// e.getMessage());
-		// e.printStackTrace();
-		// System.exit(1);
-		// }
+		try {
+			new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository).initializeOrResetRepository();
+			// This is where the magic happens.
+			evaluateDirectory(directoryToScan, outputPath);
+
+			System.out.println();
+			System.out.println("Finished creating: " + outputPath);
+			System.exit(0);
+		} catch (IOException e) {
+			System.out.println();
+			System.out.println("A Problem occured while scanning: " + e.getMessage());
+			System.exit(1);
+		} catch (GitAPIException e) {
+			System.out.println();
+			System.out.println("A Problem occured while scanning: " + e.getMessage());
+			System.exit(1);
+		}
 	}
 
 	private static void evaluateDirectory(Path directory, Path outputPath) throws IOException {

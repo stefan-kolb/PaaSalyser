@@ -16,6 +16,7 @@ import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
+import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
@@ -49,20 +50,21 @@ public class RepositorySniffer {
 	}
 
 	public void sniff() throws IOException, GitAPIException {
-		initializeOrPullRepository();
+		initializeOrResetRepository();
 
 		try (Git git = Git.open(pathOfProfilesRepository)) {
 			// Repository repository = git.getRepository();
-			System.out.println(git);
 
-			profileChangedCommits = scanRepositoryForProfilesCommits(git);
+			System.out.println("Scanning Profiles for relevant commits.");
+			// profileChangedCommits = scanRepositoryForProfilesCommits(git);
 
 			System.out.println("Profiles:");
-			iterateCommits(git, this.gsonAdapter);
+			// iterateCommits(git, this.gsonAdapter);
+			debugCommit(git, "13c8ab8ba405179ffb27e4da2cdb23361ab32d00", gsonAdapter);
 		}
 	}
 
-	private void initializeOrPullRepository() throws IOException, GitAPIException {
+	public void initializeOrResetRepository() throws IOException, GitAPIException {
 		if (!pathOfProfilesRepository.exists()) {
 			// Clone Repository if it does not already exist
 			cloneRepository();
@@ -160,6 +162,22 @@ public class RepositorySniffer {
 		git.reset().setMode(ResetType.HARD).call();
 
 		System.out.println("Number of profiles in this commit: " + profilesOfCommits.get(commitId).size());
+	}
+
+	// Debug only!!!
+	private void debugCommit(Git git, String commitId, GsonAdapter gsonAdapter) throws GitAPIException, IOException {
+		System.out.println();
+		System.out.println("Current Commit is: " + commitId);
+		git.checkout().setName(commitId).call();
+
+		System.out.println(git.getRepository().getWorkTree());
+
+		Path path = Paths.get(pathOfProfilesRepository.toString() + "/profiles");
+
+		// List<PaasProfile> profilesOfCurrentCommit =
+		// gsonAdapter.scanDirectoryForJsonFiles(path);
+		 gsonAdapter.debugScanDirectoryForJsonFiles(path).forEach(System.out::println);
+
 	}
 
 }

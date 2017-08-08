@@ -64,4 +64,21 @@ public class GsonAdapter {
 		}
 	}
 
+	public List<PaasProfile> debugScanDirectoryForJsonFiles(Path rootDirectory) throws IOException {
+		if (!Files.isDirectory(rootDirectory)) {
+			throw new IOException(rootDirectory + " is no existing directory.");
+		} else {
+			return Files.walk(rootDirectory).filter(path -> path.toString().endsWith("json")).map(path -> {
+				try (InputStream in = Files.newInputStream(path);
+						BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+					System.out.println("Current path is: " + path);
+					PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
+					return profile;
+				} catch (IOException e) {
+					return new PaasProfile(true);
+				}
+			}).collect(Collectors.toCollection(LinkedList::new));
+		}
+	}
+
 }
