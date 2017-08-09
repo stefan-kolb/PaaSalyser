@@ -56,11 +56,12 @@ public class RepositorySniffer {
 			// Repository repository = git.getRepository();
 
 			System.out.println("Scanning Profiles for relevant commits.");
-			// profileChangedCommits = scanRepositoryForProfilesCommits(git);
+			profileChangedCommits = scanRepositoryForProfilesCommits(git);
 
 			System.out.println("Profiles:");
-			// iterateCommits(git, this.gsonAdapter);
-			debugCommit(git, "13c8ab8ba405179ffb27e4da2cdb23361ab32d00", gsonAdapter);
+			iterateCommits(git, this.gsonAdapter);
+			// debugCommit(git, "13c8ab8ba405179ffb27e4da2cdb23361ab32d00",
+			// gsonAdapter);
 		}
 	}
 
@@ -176,7 +177,7 @@ public class RepositorySniffer {
 
 		// List<PaasProfile> profilesOfCurrentCommit =
 		// gsonAdapter.scanDirectoryForJsonFiles(path);
-		 gsonAdapter.debugScanDirectoryForJsonFiles(path).forEach(System.out::println);
+		gsonAdapter.debugScanDirectoryForJsonFiles(path).forEach(System.out::println);
 
 	}
 

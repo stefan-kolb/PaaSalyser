@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import profile.PaasProfile;
 import report.Report;
@@ -46,9 +47,12 @@ public class GsonAdapter {
 						BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
 					PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
 					return profile;
-				} catch (IOException e) {
+				} catch (IOException | JsonSyntaxException e) {
+					// TODO Error Logging
+					// Initial Commit is: 7f132fabb4e220f794b4926309dc8d48c794768c
 					return new PaasProfile(true);
 				}
+				// TODO Logging Parsing Exceptions
 			}).collect(Collectors.toCollection(LinkedList::new));
 		}
 	}
@@ -74,7 +78,8 @@ public class GsonAdapter {
 					System.out.println("Current path is: " + path);
 					PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
 					return profile;
-				} catch (IOException e) {
+				} catch (IOException | JsonSyntaxException e) {
+					// TODO logging
 					return new PaasProfile(true);
 				}
 			}).collect(Collectors.toCollection(LinkedList::new));

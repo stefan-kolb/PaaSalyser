@@ -31,30 +31,30 @@ public class Main {
 		final String gitRemotePath = "git@github.com:stefan-kolb/paas-profiles.git";
 		final String pathOfProfilesRepository = "paas-profiles";
 
-//		try {
-//			new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository).sniff();
-//		} catch (GitAPIException | IOException e) {
-//			System.out.println(e.getMessage());
-//			e.printStackTrace();
-//		}
-
 		try {
-			new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository).initializeOrResetRepository();
-			// This is where the magic happens.
-			evaluateDirectory(directoryToScan, outputPath);
-
-			System.out.println();
-			System.out.println("Finished creating: " + outputPath);
-			System.exit(0);
-		} catch (IOException e) {
-			System.out.println();
-			System.out.println("A Problem occured while scanning: " + e.getMessage());
-			System.exit(1);
-		} catch (GitAPIException e) {
-			System.out.println();
-			System.out.println("A Problem occured while scanning: " + e.getMessage());
-			System.exit(1);
+			new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository).sniff();
+		} catch (GitAPIException | IOException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+
+//		try {
+//			new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository).initializeOrResetRepository();
+//			// This is where the magic happens.
+//			evaluateDirectory(directoryToScan, outputPath);
+//
+//			System.out.println();
+//			System.out.println("Finished creating: " + outputPath);
+//			System.exit(0);
+//		} catch (IOException e) {
+//			System.out.println();
+//			System.out.println("A Problem occured while scanning: " + e.getMessage());
+//			System.exit(1);
+//		} catch (GitAPIException e) {
+//			System.out.println();
+//			System.out.println("A Problem occured while scanning: " + e.getMessage());
+//			System.exit(1);
+//		}
 	}
 
 	private static void evaluateDirectory(Path directory, Path outputPath) throws IOException {

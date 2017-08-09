@@ -47,9 +47,9 @@ public class PaasProfile {
 	private List<Pricing> pricings = null;
 	@SerializedName("qos")
 	@Expose
-	private Qos qos;
-	@SerializedName("scaling")
-	@Expose
+//	private Qos qos;
+//	@SerializedName("scaling")
+//	@Expose
 	private Scaling scaling;
 	@SerializedName("runtimes")
 	@Expose
@@ -157,13 +157,13 @@ public class PaasProfile {
 		}
 	}
 
-	public Qos getQos() {
-		if (this.qos == null) {
-			return new Qos();
-		} else {
-			return qos;
-		}
-	}
+//	public Qos getQos() {
+//		if (this.qos == null) {
+//			return new Qos();
+//		} else {
+//			return qos;
+//		}
+//	}
 
 	public String getType() {
 		if (this.type == null) {
@@ -249,7 +249,9 @@ public class PaasProfile {
 	public String toString() {
 		return "PaasProfile [name=" + name + ", revision=" + revision + ", url=" + url + ", status=" + status
 				+ ", statusSince=" + statusSince + ", type=" + type + ", platform=" + platform + ", hosting=" + hosting
-				+ ", pricings=" + pricings + ", qos=" + qos + ", scaling=" + scaling + ", runtimes=" + runtimes
+				+ ", pricings=" + pricings + 
+//				", qos=" + qos + 
+				", scaling=" + scaling + ", runtimes=" + runtimes
 				+ ", middlewares=" + middlewares + ", frameworks=" + frameworks + ", services=" + services
 				+ ", extensible=" + extensible + ", infrastructures=" + infrastructures + ", failed=" + failed + "]";
 	}
