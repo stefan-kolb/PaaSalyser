@@ -22,8 +22,12 @@ import org.paasfinder.paasalyser.report.models.StatusReport;
 import org.paasfinder.paasalyser.report.models.TypeReport;
 import org.paasfinder.paasalyser.statistics.models.SimpleResultDouble;
 import org.paasfinder.paasalyser.statistics.models.SimpleResultLong;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Statistics {
+	
+	private final Logger logger = LoggerFactory.getLogger(Statistics.class);
 
 	private DataPreprocessing dataPreProcessing;
 
@@ -47,35 +51,35 @@ public class Statistics {
 		this.dataPreProcessing = dataPreProcessing;
 
 		// Evaluate Report
-		System.out.println("profilesCount");
+		logger.info("profilesCount");
 		profilesCount = dataPreProcessing.getProfiles().size();
-		System.out.println("eolProfiles");
+		logger.info("eolProfiles");
 		eolProfiles = (int) dataPreProcessing.getStatusData().getEol();
-		System.out.println("evalRevision");
+		logger.info("evalRevision");
 		evalRevision();
-		System.out.println("evalStatus");
+		logger.info("evalStatus");
 		evalStatus();
-		System.out.println("evalType");
+		logger.info("evalType");
 		evalType();
-		System.out.println("evalPlatform");
+		logger.info("evalPlatform");
 		evalPlatform();
-		System.out.println("evalHosting");
+		logger.info("evalHosting");
 		evalHosting();
-		System.out.println("evalPricing");
+		logger.info("evalPricing");
 		evalPricing();
-		System.out.println("evalScaling");
+		logger.info("evalScaling");
 		evalScaling();
-		System.out.println("evalRuntimes");
+		logger.info("evalRuntimes");
 		evalRuntimes();
-		System.out.println("evalMiddleware");
+		logger.info("evalMiddleware");
 		evalMiddleware();
-		System.out.println("evalFrameworks");
+		logger.info("evalFrameworks");
 		evalFrameworks();
-		System.out.println("evalServices");
+		logger.info("evalServices");
 		evalServices();
-		System.out.println("evalExtensible");
+		logger.info("evalExtensible");
 		evalExtensible();
-		System.out.println("evalInfrastructures");
+		logger.info("evalInfrastructures");
 		evalInfrastructures();
 	}
 

@@ -20,8 +20,12 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.paasfinder.paasalyser.gsonutility.GsonAdapter;
 import org.paasfinder.paasalyser.profile.PaasProfile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RepositorySniffer {
+
+	private final Logger logger = LoggerFactory.getLogger(RepositorySniffer.class);
 
 	private String gitRemotePath;
 	private File pathOfProfilesRepository;
@@ -53,56 +57,63 @@ public class RepositorySniffer {
 		try (Git git = Git.open(pathOfProfilesRepository)) {
 			// Repository repository = git.getRepository();
 
-			System.out.println("Scanning Profiles for relevant commits.");
+			logger.info("Scanning Profiles for relevant commits");
 			profileChangedCommits = scanRepositoryForProfilesCommits(git);
 
-			System.out.println("Profiles:");
 			iterateCommits(git, this.gsonAdapter);
-			// debugCommit(git, "13c8ab8ba405179ffb27e4da2cdb23361ab32d00",
-			// gsonAdapter);
+
+			logger.info("Resetting & pulling repository");
+			git.reset().setMode(ResetType.HARD).call();
+			git.checkout().setName("master").call();
+			git.pull().call();
+			logger.info("Finished sniffing");
 		}
 	}
 
-	public void initializeOrResetRepository() throws IOException, GitAPIException {
+	/**
+	 * Clones or reset and pulls the repository.
+	 * 
+	 * @return Git object
+	 * @throws IOException
+	 *             if Output folder is not valid
+	 * @throws GitAPIException
+	 *             If problems with git occurred
+	 */
+	public Git initializeOrResetRepository() throws IOException, GitAPIException {
 		if (!pathOfProfilesRepository.exists()) {
-			// Clone Repository if it does not already exist
-			cloneRepository();
-		} else {
-			System.out.println(pathOfProfilesRepository + " already exists.");
-			try (Git git = Git.open(pathOfProfilesRepository)) {
-				System.out.println("Resetting.");
-				git.reset().setMode(ResetType.HARD).call();
-				pullRepository(git);
-			}
+			return cloneRepository();
 		}
+		return resetAndPullRepository();
 	}
 
-	private void cloneRepository() throws GitAPIException {
-		System.out.println("Cloning Repository: " + gitRemotePath);
-		Git.cloneRepository().setURI(gitRemotePath).setDirectory(pathOfProfilesRepository).call();
+	private Git cloneRepository() throws GitAPIException {
+		logger.info("Cloning repository: " + gitRemotePath);
+		return Git.cloneRepository().setURI(gitRemotePath).setDirectory(pathOfProfilesRepository).call();
 	}
 
-	private void pullRepository(Git git) throws GitAPIException {
-		System.out.println("Pulling from Repository: " + gitRemotePath);
-		git.checkout().setName("master").call();
-		git.pull().call();
-
-		System.out.println("Pulling finished.");
+	private Git resetAndPullRepository() throws GitAPIException, IOException {
+		logger.info("Resetting & Pulling repository: " + gitRemotePath);
+		try (Git git = Git.open(pathOfProfilesRepository)) {
+			git.reset().setMode(ResetType.HARD).call();
+			git.checkout().setName("master").call();
+			git.pull().call();
+			logger.info("Resetting & Pulling finished");
+			return git;
+		}
 	}
 
 	private List<ObjectId> scanRepositoryForProfilesCommits(Git git)
 			throws IncorrectObjectTypeException, IOException, GitAPIException {
+		logger.info("Scanning repository for relevant commits");
 		List<ObjectId> profileChangedCommits = new ArrayList<>();
 		Iterable<RevCommit> commits = git.log().all().call();
 
 		ObjectId currentCommit = null;
 		ObjectId commitBeforeCurrent = null;
 
-		System.out.println("Printing diff between tree: " + commitBeforeCurrent + " and " + currentCommit);
 		for (RevCommit commit : commits) {
-			// Set the current commit
 			currentCommit = commit.getTree();
-			System.out.println(commit.getShortMessage());
+			logger.info("Printing diff between tree: " + commitBeforeCurrent + " and " + currentCommit);
 			if (commitBeforeCurrent != null)
 				try (ObjectReader reader = git.getRepository().newObjectReader()) {
 					CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();
@@ -113,70 +124,57 @@ public class RepositorySniffer {
 					// finally get the list of changed files
 					List<DiffEntry> diffs = git.diff().setNewTree(newTreeIter).setOldTree(oldTreeIter).call();
 					for (DiffEntry entry : diffs) {
-						System.out.println("Entry: " + entry.toString());
 						if (entry.toString().contains("profiles/")) {
 							if (!profileChangedCommits.contains(commit.getId()))
 								profileChangedCommits.add(commit.getId());
 						}
 					}
 				}
-			System.out.println();
 			// Set the current commit to the one before for getting the
 			// difference inbetween
 			commitBeforeCurrent = currentCommit;
 		}
-
-		System.out.println("Number of relevant commits: " + profileChangedCommits.size());
-		profileChangedCommits.forEach(System.out::println);
-
+		logger.info("Number of relevant commits: " + profileChangedCommits.size());
 		return profileChangedCommits;
 	}
 
 	private void iterateCommits(Git git, GsonAdapter gsonAdapter) {
+		logger.info("Iterating relevant commits");
 		profileChangedCommits.forEach(commit -> {
+
+			if (commit.getName().contains("7f132fabb4e220f794b4926309dc8d48c794768c")) {
+				logger.info("Initial commit reached");
+				profilesLock = false;
+				return;
+			}
+
 			try {
 				storeProfilesOfCommit(git, commit.getName(), gsonAdapter);
-			} catch (GitAPIException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (GitAPIException e) {
+				logger.error("GitAPIException occurred during iterating commits");
+			} catch (IOException e) {
+				logger.error("IOException occurred during iterating commits");
 			}
 		});
-		profilesLock = false;
 	}
 
 	private void storeProfilesOfCommit(Git git, String commitId, GsonAdapter gsonAdapter)
 			throws GitAPIException, IOException {
-		System.out.println();
-		System.out.println("Current Commit is: " + commitId);
+		logger.info("Current Commit is: " + commitId);
 		git.checkout().setName(commitId).call();
 
 		Path path = Paths.get(pathOfProfilesRepository.toString() + "/profiles");
 
-		// List<PaasProfile> profilesOfCurrentCommit =
-		// gsonAdapter.scanDirectoryForJsonFiles(path);
-		profilesOfCommits.put(commitId, gsonAdapter.scanDirectoryForJsonFiles(path));
+		List<PaasProfile> profiles = gsonAdapter.scanDirectoryForJsonFiles(path);
 
-		// Hard reset to undo all changes made
-		System.out.println("Resetting.");
+		if (profiles.contains(null)) {
+			// If errors occurred during scanning, do not store this commit!
+			return;
+		}
+
+		profilesOfCommits.put(commitId, profiles);
+
 		git.reset().setMode(ResetType.HARD).call();
-
-		System.out.println("Number of profiles in this commit: " + profilesOfCommits.get(commitId).size());
-	}
-
-	// Debug only!!!
-	private void debugCommit(Git git, String commitId, GsonAdapter gsonAdapter) throws GitAPIException, IOException {
-		System.out.println();
-		System.out.println("Current Commit is: " + commitId);
-		git.checkout().setName(commitId).call();
-
-		System.out.println(git.getRepository().getWorkTree());
-
-		Path path = Paths.get(pathOfProfilesRepository.toString() + "/profiles");
-
-		// List<PaasProfile> profilesOfCurrentCommit =
-		// gsonAdapter.scanDirectoryForJsonFiles(path);
-		gsonAdapter.debugScanDirectoryForJsonFiles(path).forEach(System.out::println);
-
 	}
 
 }

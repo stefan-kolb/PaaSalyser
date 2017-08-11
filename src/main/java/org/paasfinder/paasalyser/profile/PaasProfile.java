@@ -43,11 +43,11 @@ public class PaasProfile {
 	@SerializedName("pricings")
 	@Expose
 	private List<Pricing> pricings = null;
-	@SerializedName("qos")
+	// @SerializedName("qos")
+	// @Expose
+	// private Qos qos;
+	@SerializedName("scaling")
 	@Expose
-//	private Qos qos;
-//	@SerializedName("scaling")
-//	@Expose
 	private Scaling scaling;
 	@SerializedName("runtimes")
 	@Expose
@@ -67,8 +67,6 @@ public class PaasProfile {
 	@SerializedName("infrastructures")
 	@Expose
 	private List<Infrastructure> infrastructures = null;
-
-	boolean failed = false;
 
 	public PaasProfile(String name, String revision, String url, String status, String statusSince, String type,
 			Hosting hosting, List<Pricing> pricings, Scaling scaling, List<Runtime> runtimes,
@@ -90,21 +88,6 @@ public class PaasProfile {
 		this.services = services;
 		this.extensible = extensible;
 		this.infrastructures = infrastructures;
-	}
-
-	/**
-	 * This Constructor is used if an error occured during scanning a JSON File
-	 * 
-	 * @param failed
-	 *            true if scan failed
-	 */
-	public PaasProfile(boolean errorOccurred) {
-		if (errorOccurred == true)
-			this.failed = true;
-	}
-
-	public boolean isFailed() {
-		return failed;
 	}
 
 	public String getName() {
@@ -155,13 +138,13 @@ public class PaasProfile {
 		}
 	}
 
-//	public Qos getQos() {
-//		if (this.qos == null) {
-//			return new Qos();
-//		} else {
-//			return qos;
-//		}
-//	}
+	// public Qos getQos() {
+	// if (this.qos == null) {
+	// return new Qos();
+	// } else {
+	// return qos;
+	// }
+	// }
 
 	public String getType() {
 		if (this.type == null) {
@@ -247,11 +230,11 @@ public class PaasProfile {
 	public String toString() {
 		return "PaasProfile [name=" + name + ", revision=" + revision + ", url=" + url + ", status=" + status
 				+ ", statusSince=" + statusSince + ", type=" + type + ", platform=" + platform + ", hosting=" + hosting
-				+ ", pricings=" + pricings + 
-//				", qos=" + qos + 
-				", scaling=" + scaling + ", runtimes=" + runtimes
-				+ ", middlewares=" + middlewares + ", frameworks=" + frameworks + ", services=" + services
-				+ ", extensible=" + extensible + ", infrastructures=" + infrastructures + ", failed=" + failed + "]";
+				+ ", pricings=" + pricings +
+				// ", qos=" + qos +
+				", scaling=" + scaling + ", runtimes=" + runtimes + ", middlewares=" + middlewares + ", frameworks="
+				+ frameworks + ", services=" + services + ", extensible=" + extensible + ", infrastructures="
+				+ infrastructures + "]";
 	}
 
 }
