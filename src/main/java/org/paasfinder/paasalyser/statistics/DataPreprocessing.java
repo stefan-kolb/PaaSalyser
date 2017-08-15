@@ -56,31 +56,31 @@ public class DataPreprocessing {
 		}
 
 		// Execute all evaluations
-		logger.info("evalRevision");
+//		logger.info("evalRevision");
 		evalRevision();
-		logger.info("evalStatus");
+//		logger.info("evalStatus");
 		evalStatus();
-		logger.info("evalType");
+//		logger.info("evalType");
 		evalType();
-		logger.info("evalPlatform");
+//		logger.info("evalPlatform");
 		evalPlatform();
-		logger.info("evalHosting");
+//		logger.info("evalHosting");
 		evalHosting();
-		logger.info("evalPricing");
+//		logger.info("evalPricing");
 		evalPricing();
-		logger.info("evalScaling");
+//		logger.info("evalScaling");
 		evalScaling();
-		logger.info("evalRuntimes");
+//		logger.info("evalRuntimes");
 		evalRuntimes();
 		// logger.info("evalMiddleware");
 		// evalMiddleware();
 		// logger.info("evalFrameworks");
 		// evalFrameworks();
-		logger.info("evalServices");
+//		logger.info("evalServices");
 		evalServices();
-		logger.info("evalExtensible");
+//		logger.info("evalExtensible");
 		evalExtensible();
-		logger.info("evalInfrastructures");
+//		logger.info("evalInfrastructures");
 		evalInfrastructures();
 	}
 

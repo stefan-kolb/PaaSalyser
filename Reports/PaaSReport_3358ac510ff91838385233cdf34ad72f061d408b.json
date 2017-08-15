@@ -3,52 +3,52 @@
     "numberOfProfiles": 69,
     "numberOfEolProfiles": 0,
     "revisionReport": {
-      "mean": 773.6376811594204,
-      "median": 793.0,
+      "mean": 777.6376811594204,
+      "median": 797.0,
       "variance": 188057.5933627389,
       "stdev": 433.6560772809934,
       "youngestRevisions": [
         {
           "key": "Heroku",
-          "value": 32
+          "value": 36
         },
         {
           "key": "Platform.sh",
-          "value": 39
+          "value": 43
         },
         {
           "key": "PodSpace",
-          "value": 158
+          "value": 162
         },
         {
           "key": "Convox",
-          "value": 178
+          "value": 182
         },
         {
           "key": "d2c",
-          "value": 182
+          "value": 186
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1498
+          "value": 1502
         },
         {
           "key": "Software AG Live",
-          "value": 1498
+          "value": 1502
         },
         {
           "key": "Pagoda Box",
-          "value": 1498
+          "value": 1502
         },
         {
           "key": "Cloudify",
-          "value": 1498
+          "value": 1502
         },
         {
           "key": "Oracle Cloud PaaS",
-          "value": 1498
+          "value": 1502
         }
       ]
     },
@@ -78,52 +78,52 @@
           "value": 0
         }
       ],
-      "meanStatusSince": 1798.5714285714282,
-      "medianStatusSince": 1654.0,
+      "meanStatusSince": 1802.5714285714282,
+      "medianStatusSince": 1658.0,
       "varianceStatusSince": 1249245.292517007,
       "stdevStatusSince": 1117.696422342403,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5958
+          "value": 5962
         },
         {
           "key": "Mendix",
-          "value": 4605
+          "value": 4609
         },
         {
           "key": "EngineYard",
-          "value": 3997
+          "value": 4001
         },
         {
           "key": "Software AG Live",
-          "value": 3609
+          "value": 3613
         },
         {
           "key": "brightbox",
-          "value": 3588
+          "value": 3592
         }
       ],
       "youngestStatusSince": [
         {
           "key": "PodSpace",
-          "value": 191
+          "value": 195
         },
         {
           "key": "d2c",
-          "value": 213
+          "value": 217
         },
         {
           "key": "APPUiO",
-          "value": 310
+          "value": 314
         },
         {
           "key": "Swisscom Application Cloud",
-          "value": 315
+          "value": 319
         },
         {
           "key": "Predix",
-          "value": 354
+          "value": 358
         }
       ]
     },

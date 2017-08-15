@@ -33,18 +33,9 @@ public class GsonAdapter {
 		gson = new GsonBuilder().setPrettyPrinting().create();
 	}
 
-	public void walkAndPrintFileTree(Path rootDirectory) throws IOException {
-		if (!Files.isDirectory(rootDirectory)) {
-			throw new IOException(rootDirectory + " is no existing directory.");
-		} else {
-			Files.walk(rootDirectory).filter(path -> path.toString().endsWith("json"))
-					.peek(entry -> System.out.println(entry));
-		}
-	}
-
 	/**
 	 * Scans the directory for PaasProfile json files and returns a list of
-	 * those.
+	 * those. If scanning a profile failed, the profile will be null.
 	 * 
 	 * @param rootDirectory
 	 *            Directory to scan
@@ -63,10 +54,10 @@ public class GsonAdapter {
 					PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
 					return profile;
 				} catch (IOException e) {
-					logger.error("IOException occurred during scanning directory at: " + path.getFileName());
+					logger.error("IOException occurred during scanning directory at: " + path.getFileName(), e);
 					return null;
 				} catch (JsonSyntaxException e) {
-					logger.error("IOException occurred during scanning directory at: " + path.getFileName());
+					logger.error("IOException occurred during scanning directory at: " + path.getFileName(), e);
 					return null;
 				}
 			}).collect(Collectors.toCollection(LinkedList::new));
