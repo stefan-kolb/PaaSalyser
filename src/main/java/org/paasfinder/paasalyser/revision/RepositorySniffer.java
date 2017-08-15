@@ -121,7 +121,6 @@ public class RepositorySniffer implements AutoCloseable {
 
 		for (RevCommit commit : commits) {
 			currentCommit = commit.getTree();
-			logger.info("Printing diff between tree: " + commitBeforeCurrent + " and " + currentCommit);
 			if (commitBeforeCurrent != null)
 				try (ObjectReader reader = git.getRepository().newObjectReader()) {
 					CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();
@@ -150,11 +149,15 @@ public class RepositorySniffer implements AutoCloseable {
 		Map<String, List<PaasProfile>> profilesOfCommits = new HashMap<>();
 
 		logger.info("Scanning relevant commits");
-		profileChangedCommits.forEach(commit -> {
+		for (ObjectId commit : profileChangedCommits) {
 
 			if (commit.getName().contains("7f132fabb4e220f794b4926309dc8d48c794768c")) {
 				logger.info("Initial commit reached");
-				return;
+				continue;
+			}
+			if (Files.exists(Paths.get("Reports/PaasReport_" + commit.getName() + ".json"))) {
+				logger.info("Commit already in Datastore");
+				continue;
 			}
 
 			try {
@@ -170,7 +173,7 @@ public class RepositorySniffer implements AutoCloseable {
 				logger.error(
 						"IOException occurred while trying to store Profiles of current commit-" + commit.getName());
 			}
-		});
+		}
 		logger.info("Finished scanning relevant commits");
 		return profilesOfCommits;
 	}
@@ -184,7 +187,7 @@ public class RepositorySniffer implements AutoCloseable {
 
 		if (profiles.contains(null)) {
 			// If errors occurred during scanning, do not store this commit!
-			profiles.forEach(System.out::println);
+			logger.error("Failed profiles in commit: " + commitId);
 			return null;
 		} else
 			return profiles;

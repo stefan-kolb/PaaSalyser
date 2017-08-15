@@ -54,10 +54,12 @@ public class GsonAdapter {
 					PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
 					return profile;
 				} catch (IOException e) {
-					logger.error("IOException occurred during scanning directory at: " + path.getFileName(), e);
+					logger.error("IOException occurred during scanning directory at: " + path.getFileName()
+							+ " | Message: " + e.getMessage());
 					return null;
 				} catch (JsonSyntaxException e) {
-					logger.error("IOException occurred during scanning directory at: " + path.getFileName(), e);
+					logger.error("IOException occurred during scanning directory at: " + path.getFileName()
+							+ " | Message: " + e.getMessage());
 					return null;
 				}
 			}).collect(Collectors.toCollection(LinkedList::new));
