@@ -1,25 +1,23 @@
 package org.paasfinder.paasalyser.profile.models;
 
-import java.util.LinkedList;
-import java.util.List;
+import org.paasfinder.paasalyser.gsonutility.deserializers.NativeServiceDeserializer;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.JsonAdapter;
 
 public class NativeService {
 
-	@SerializedName("name")
-	@Expose
 	private String name;
-	@SerializedName("type")
-	@Expose
 	private String type;
-	@SerializedName("description")
-	@Expose
 	private String description;
-	@SerializedName("versions")
-	@Expose
-	private List<String> versions = null;
+	private String[] versions;
+
+	public NativeService(String name, String type, String description, String[] versions) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.description = description;
+		this.versions = versions;
+	}
 
 	public String getName() {
 		return name;
@@ -33,12 +31,8 @@ public class NativeService {
 		return description;
 	}
 
-	public List<String> getVersions() {
-		if (versions != null) {
-			return versions;
-		} else {
-			return new LinkedList<String>();
-		}
+	public String[] getVersions() {
+		return versions;
 	}
 
 }

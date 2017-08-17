@@ -33,6 +33,7 @@ public class Statistics {
 
 	private int profilesCount;
 	private int eolProfiles;
+	private int invalidProfilesCount;
 	private RevisionReport revision;
 	private StatusReport status;
 	private TypeReport type;
@@ -259,7 +260,7 @@ public class Statistics {
 	}
 
 	private void evalExtensible() {
-		extensible = new ExtensibleReport(calcPercent(dataPreProcessing.getExtensibleData().getYes(), profilesCount));
+		extensible = new ExtensibleReport(calcPercent(dataPreProcessing.getExtensibleData().getTrue(), profilesCount));
 	}
 
 	private void evalInfrastructures() {

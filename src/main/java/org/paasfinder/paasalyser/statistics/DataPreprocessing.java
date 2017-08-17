@@ -5,8 +5,12 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.paasfinder.paasalyser.profile.PaasProfile;
+import org.paasfinder.paasalyser.profile.models.Infrastructure;
+import org.paasfinder.paasalyser.profile.models.NativeService;
+import org.paasfinder.paasalyser.profile.models.Pricing;
 import org.paasfinder.paasalyser.profile.models.PricingModel;
 import org.paasfinder.paasalyser.profile.models.PricingPeriod;
 import org.paasfinder.paasalyser.profile.models.Runtime;
@@ -30,6 +34,7 @@ public class DataPreprocessing {
 
 	private List<PaasProfile> profiles = new ArrayList<PaasProfile>();
 
+	private int invalidProfilesCount;
 	private RevisionData revisionData;
 	private StatusData statusData = new StatusData();;
 	private TypeData typeData;
@@ -47,45 +52,43 @@ public class DataPreprocessing {
 	public DataPreprocessing(List<PaasProfile> profiles) {
 
 		// Make sure that no eol-profile is being added to active profiles
-		for (PaasProfile profile : profiles) {
-			if (profile.getStatus().equalsIgnoreCase("eol")) {
-				statusData.incrementEol();
-			} else {
-				this.profiles.add(profile);
-			}
-		}
+		sortOutBadProfiles(profiles);
 
 		// Execute all evaluations
-		logger.info("evalRevision");
+		logger.debug("evalRevision");
 		evalRevision();
-		logger.info("evalStatus");
+		logger.debug("evalStatus");
 		evalStatus();
-		logger.info("evalType");
+		logger.debug("evalType");
 		evalType();
-		logger.info("evalPlatform");
+		logger.debug("evalPlatform");
 		evalPlatform();
-		logger.info("evalHosting");
+		logger.debug("evalHosting");
 		evalHosting();
-		logger.info("evalPricing");
+		logger.debug("evalPricing");
 		evalPricing();
-		logger.info("evalScaling");
+		logger.debug("evalScaling");
 		evalScaling();
-		logger.info("evalRuntimes");
+		logger.debug("evalRuntimes");
 		evalRuntimes();
-		// logger.info("evalMiddleware");
+		// logger.debug("evalMiddleware");
 		// evalMiddleware();
-		// logger.info("evalFrameworks");
+		// logger.debug("evalFrameworks");
 		// evalFrameworks();
-		logger.info("evalServices");
+		logger.debug("evalServices");
 		evalServices();
-		logger.info("evalExtensible");
+		logger.debug("evalExtensible");
 		evalExtensible();
-		logger.info("evalInfrastructures");
+		logger.debug("evalInfrastructures");
 		evalInfrastructures();
 	}
 
 	public List<PaasProfile> getProfiles() {
 		return profiles;
+	}
+
+	public int getInvalidProfilesCount() {
+		return invalidProfilesCount;
 	}
 
 	public RevisionData getRevisionData() {
@@ -140,19 +143,31 @@ public class DataPreprocessing {
 		return infrastructuresData;
 	}
 
+	private void sortOutBadProfiles(List<PaasProfile> profiles) {
+		// Make sure that no eol-profile is being added to active profiles
+		for (PaasProfile profile : profiles) {
+			try {
+				if (profile.getStatus().equalsIgnoreCase("eol")) {
+					statusData.incrementEol();
+				} else {
+					this.profiles.add(profile);
+				}
+			} catch (NullPointerException e) {
+				logger.debug("Bad profile found");
+				invalidProfilesCount++;
+			}
+		}
+	}
+
 	private void evalRevision() {
 		revisionData = new RevisionData();
 		for (PaasProfile profile : profiles) {
-			if (profile.getRevision() == null) {
-				continue;
-			}
-
 			try {
 				// The first 10 chars of the revision is always only the date
 				revisionData.addRevision(profile.getName(), ChronoUnit.DAYS
 						.between(LocalDate.parse(profile.getRevision().substring(0, 10)), LocalDate.now()));
 			} catch (DateTimeParseException e) {
-				// TODO Exception handling
+				logger.debug("StatusSince could not be parsed: " + profile.getRevision());
 			}
 		}
 	}
@@ -160,10 +175,6 @@ public class DataPreprocessing {
 	private void evalStatus() {
 		statusData = new StatusData();
 		for (PaasProfile profile : profiles) {
-			if (profile.getStatus() == null) {
-				continue;
-			}
-
 			// Evaluate Status
 			if (profile.getStatus().equalsIgnoreCase("production")) {
 				statusData.incrementProduction();
@@ -173,27 +184,26 @@ public class DataPreprocessing {
 				statusData.incrementBeta();
 			}
 
-			if (profile.getStatusSince() != null && !profile.getStatusSince().equals("null")) {
-				// Evaluate StatusSince
-				try {
-					// The first 10 chars of the revision is always only the
-					// date
-					statusData.addStatusSince(profile.getName(), ChronoUnit.DAYS
-							.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), LocalDate.now()));
-				} catch (DateTimeParseException e) {
-					e.printStackTrace();
-				}
+			// Evaluate StatusSince
+			if (profile.getStatusSince() == null) {
+				logger.debug("Status Since was null in: " + profile.getName());
+				continue;
 			}
+			try {
+				// The first 10 chars of the revision is always only the
+				// date
+				statusData.addStatusSince(profile.getName(), ChronoUnit.DAYS
+						.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), LocalDate.now()));
+			} catch (DateTimeParseException e) {
+				logger.debug("StatusSince could not be parsed: " + profile.getStatusSince());
+			}
+
 		}
 	}
 
 	private void evalType() {
 		typeData = new TypeData();
 		for (PaasProfile profile : profiles) {
-			if (profile.getType() == null) {
-				continue;
-			}
-
 			if (profile.getType().equalsIgnoreCase("SaaS-centric")) {
 				typeData.incrementSaasCentric();
 			} else if (profile.getType().equalsIgnoreCase("Generic")) {
@@ -207,10 +217,15 @@ public class DataPreprocessing {
 	private void evalPlatform() {
 		platformData = new PlatformData();
 		for (PaasProfile profile : profiles) {
-			if (profile.getPlatform() == null || profile.getPlatform().equals("null")) {
+			if (profile.getPlatform() == null) {
 				continue;
 			}
-
+			if (profile.getPlatform().equals("null")) {
+				continue;
+			}
+			if (profile.getPlatform().isEmpty()) {
+				continue;
+			}
 			platformData.addPlatform(profile.getPlatform());
 		}
 	}
@@ -218,10 +233,6 @@ public class DataPreprocessing {
 	public void evalHosting() {
 		hostingData = new HostingData();
 		for (PaasProfile profile : profiles) {
-			if (profile.getHosting() == null) {
-				continue;
-			}
-
 			if (profile.getHosting().getPublic()) {
 				hostingData.incrementPublic();
 			}
@@ -229,6 +240,7 @@ public class DataPreprocessing {
 				hostingData.incrementPrivate();
 			}
 			if (profile.getHosting().getVirtualPrivate()) {
+				// TODO check if this is ok or is sometimes null.
 				hostingData.incrementVirtualPrivate();
 			}
 		}
@@ -241,18 +253,21 @@ public class DataPreprocessing {
 				continue;
 			}
 
-			if (profile.getPricings().size() == 0) {
+			if (profile.getPricings().length == 0) {
 				pricingData.incrementZeroModels();
-			} else if (profile.getPricings().size() == 1) {
+
+				// Skip rest as array is empty!
+				continue;
+			} else if (profile.getPricings().length == 1) {
 				pricingData.incrementOneModel();
-			} else if (profile.getPricings().size() == 2) {
+			} else if (profile.getPricings().length == 2) {
 				pricingData.incrementTwoModels();
-			} else if (profile.getPricings().size() == 3) {
+			} else if (profile.getPricings().length == 3) {
 				pricingData.incrementThreeModels();
-			} else if (profile.getPricings().size() == 4) {
+			} else if (profile.getPricings().length == 4) {
 				pricingData.incrementFourModels();
 			}
-			profile.getPricings().forEach(profilePricing -> {
+			for (Pricing profilePricing : profile.getPricings()) {
 				if (profilePricing.getModel().equals(PricingModel.free)) {
 					pricingData.incrementFreeModels();
 				} else if (profilePricing.getModel().equals(PricingModel.fixed)) {
@@ -261,20 +276,23 @@ public class DataPreprocessing {
 					pricingData.incrementMeteredModels();
 				} else if (profilePricing.getModel().equals(PricingModel.hybrid)) {
 					pricingData.incrementHybridModels();
-				} else if (profilePricing.getModel().equals(PricingModel.empty)) {
-					pricingData.incrementEmptyModels();
 				}
 
+				if (profilePricing.getPeriod() == null) {
+					continue;
+				}
+				// If PricingModel is free, no PricingPeriod is needed!
+				if (profilePricing.getModel().equals(PricingModel.free)) {
+					continue;
+				}
 				if (profilePricing.getPeriod().equals(PricingPeriod.daily)) {
 					pricingData.incrementDailyPeriod();
 				} else if (profilePricing.getPeriod().equals(PricingPeriod.monthly)) {
 					pricingData.incrementMonthlyPeriod();
 				} else if (profilePricing.getPeriod().equals(PricingPeriod.anually)) {
 					pricingData.incrementAnuallyPeriod();
-				} else if (profilePricing.getPeriod().equals(PricingPeriod.empty)) {
-					pricingData.incrementEmptyPeriod();
 				}
-			});
+			}
 		}
 	}
 
@@ -285,7 +303,7 @@ public class DataPreprocessing {
 			if (profile.getScaling() == null) {
 				continue;
 			}
-			
+
 			if (profile.getScaling().getVertical()) {
 				scalingData.incrementVertical();
 			}
@@ -305,60 +323,12 @@ public class DataPreprocessing {
 				continue;
 			}
 
-			runtimesData.addProfileRuntimeAmount(profile.getName(), profile.getRuntimes().size());
+			runtimesData.addProfileRuntimeAmount(profile.getName(), profile.getRuntimes().length);
 			for (Runtime runtime : profile.getRuntimes()) {
 				runtimesData.addRuntime(runtime.getLanguage());
 			}
 		}
 	}
-
-	// private void evalMiddleware() {
-	// middlewareData = new HashMap<String, Long>();
-	//
-	// Map<String, Long> middlewares = new HashMap<String, Long>();
-	//
-	// long maxAmount = 0;
-	//
-	// for (PaasProfile profile : profiles) {
-	// long numberOfMiddlewares = profile.getMiddlewares().size();
-	// if (numberOfMiddlewares > maxAmount) {
-	// maxAmount = numberOfMiddlewares;
-	// }
-	// if (middlewares.containsKey("midAmount|" + numberOfMiddlewares)) {
-	// middlewares.replace("midAmount|" + numberOfMiddlewares,
-	// middlewares.get("midAmount|" + numberOfMiddlewares) + 1);
-	// } else {
-	// middlewares.put("midAmount|" + numberOfMiddlewares, (long) 1);
-	// }
-	// for (Middleware profileMiddleware : profile.getMiddlewares()) {
-	// profileMiddleware.getVersions().forEach(version -> {
-	// String key = profileMiddleware.getName() + "|" + version;
-	// if (middlewareData.putIfAbsent(key, (long) 1) != null) {
-	// middlewareData.replace(key, middlewareData.get(key),
-	// middlewareData.get(key) + 1);
-	// }
-	// });
-	// }
-	// }
-	// middlewareData.putAll(middlewares);
-	// middlewareData.put("max", maxAmount);
-	// }
-	//
-	// private void evalFrameworks() {
-	// frameworksData = new HashMap<String, Long>();
-	// for (PaasProfile profile : profiles) {
-	// profile.getFrameworks().forEach(framework -> {
-	// framework.getVersions().forEach(version -> {
-	// String key = framework.getName() + "|" + framework.getRuntime() + "|" +
-	// version;
-	// if (frameworksData.putIfAbsent(key, (long) 1) != null) {
-	// frameworksData.replace(key, frameworksData.get(key),
-	// frameworksData.get(key) + 1);
-	// }
-	// });
-	// });
-	// });
-	// }
 
 	private void evalServices() {
 		servicesData = new ServicesData();
@@ -367,22 +337,19 @@ public class DataPreprocessing {
 				continue;
 			}
 
-			servicesData.addProfilesWithNativeServices(profile.getName(), profile.getServices().getNative().size());
-			profile.getServices().getNative().forEach(nativeService -> {
+			servicesData.addProfilesWithNativeServices(profile.getName(), profile.getServices().getNative().length);
+			for (NativeService nativeService : profile.getServices().getNative()) {
 				servicesData.addNativeService(nativeService.getName(), nativeService.getType());
-			});
+			}
 		}
 	}
 
 	private void evalExtensible() {
 		extensibleData = new ExtensibleData();
 		for (PaasProfile profile : profiles) {
-			if (profile.getExtensible() == null) {
-				continue;
-			}
-
-			if (profile.getExtensible().equalsIgnoreCase("true")) {
-				extensibleData.incrementYes();
+			// boolean can only be false or true, not null!
+			if (profile.isExtensible() == true) {
+				extensibleData.incrementTrue();
 			}
 		}
 	}
@@ -396,12 +363,12 @@ public class DataPreprocessing {
 
 			infrastructuresData.addInfraStructureProfile(profile.getName(), profile.getInfrastructures());
 
-			profile.getInfrastructures().forEach(infrastructure -> {
+			for (Infrastructure infrastructure : profile.getInfrastructures()) {
 				infrastructuresData.addContinent(infrastructure.getContinent());
 				infrastructuresData.addCountry(infrastructure.getCountry());
 				infrastructuresData.addRegion(infrastructure.getRegion());
 				infrastructuresData.addProvider(infrastructure.getProvider());
-			});
+			}
 		}
 	}
 }

@@ -13,7 +13,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.paasfinder.paasalyser.gsonutility.deserializers.HostingDeserializer;
+import org.paasfinder.paasalyser.gsonutility.deserializers.InfrastructureDeserializer;
+import org.paasfinder.paasalyser.gsonutility.deserializers.PaasProfileDeserializer;
+import org.paasfinder.paasalyser.gsonutility.deserializers.PricingDeserializer;
+import org.paasfinder.paasalyser.gsonutility.deserializers.RuntimeDeserializer;
+import org.paasfinder.paasalyser.gsonutility.deserializers.ScalingDeserializer;
+import org.paasfinder.paasalyser.gsonutility.deserializers.ServicesDeserializer;
 import org.paasfinder.paasalyser.profile.PaasProfile;
+import org.paasfinder.paasalyser.profile.models.Hosting;
+import org.paasfinder.paasalyser.profile.models.Infrastructure;
+import org.paasfinder.paasalyser.profile.models.Pricing;
+import org.paasfinder.paasalyser.profile.models.Runtime;
+import org.paasfinder.paasalyser.profile.models.Scaling;
+import org.paasfinder.paasalyser.profile.models.Services;
 import org.paasfinder.paasalyser.report.Report;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +40,11 @@ public class GsonAdapter {
 
 	private final Logger logger = LoggerFactory.getLogger(GsonAdapter.class);
 
+	private GsonBuilder gsonBuilder;
 	private Gson gson;
 
 	public GsonAdapter() {
+		gsonBuilder = createGsonBuilderWithCustomDeserializing();
 		gson = new GsonBuilder().setPrettyPrinting().create();
 	}
 
@@ -60,8 +75,15 @@ public class GsonAdapter {
 			return Files.walk(rootDirectory).filter(path -> path.toString().endsWith("json")).map(path -> {
 				try (InputStream in = Files.newInputStream(path);
 						BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+					logger.info("Current profile is: " + path.getFileName().toString());
 					PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
-					return profile;
+					try {
+						profile.checkProfileValidity(path);
+						return profile;
+					} catch (NullPointerException e) {
+						logger.error("Profile " + path.getFileName().toString() + " is not a valid profile.");
+						return null;
+					}
 				} catch (IOException e) {
 					logger.error("IOException occurred during scanning directory at: " + path.getFileName());
 					return null;
@@ -71,6 +93,7 @@ public class GsonAdapter {
 				}
 			}).collect(Collectors.toCollection(LinkedList::new));
 		}
+
 	}
 
 	/**
@@ -92,6 +115,28 @@ public class GsonAdapter {
 				throw new IOException(e);
 			}
 		}
+	}
+
+	private GsonBuilder createGsonBuilderWithCustomDeserializing() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+
+		PaasProfileDeserializer paasProfileDeserializer = new PaasProfileDeserializer();
+		HostingDeserializer hostingDeserializer = new HostingDeserializer();
+		PricingDeserializer pricingDeserializer = new PricingDeserializer();
+		ScalingDeserializer scalingDeserializer = new ScalingDeserializer();
+		RuntimeDeserializer runtimeDeserializer = new RuntimeDeserializer();
+		ServicesDeserializer servicesDeserializer = new ServicesDeserializer();
+		InfrastructureDeserializer infrastructureDeserializer = new InfrastructureDeserializer();
+
+		gsonBuilder.registerTypeAdapter(PaasProfile.class, paasProfileDeserializer);
+		gsonBuilder.registerTypeAdapter(Hosting.class, hostingDeserializer);
+		gsonBuilder.registerTypeAdapter(Pricing.class, pricingDeserializer);
+		gsonBuilder.registerTypeAdapter(Scaling.class, scalingDeserializer);
+		gsonBuilder.registerTypeAdapter(Runtime.class, runtimeDeserializer);
+		gsonBuilder.registerTypeAdapter(Services.class, servicesDeserializer);
+		gsonBuilder.registerTypeAdapter(Infrastructure.class, infrastructureDeserializer);
+
+		return gsonBuilder;
 	}
 
 }

@@ -1,53 +1,49 @@
 package org.paasfinder.paasalyser.profile.models;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import org.paasfinder.paasalyser.gsonutility.deserializers.InfrastructureDeserializer;
+
+import com.google.gson.annotations.JsonAdapter;
 
 public class Infrastructure {
 
-    @SerializedName("continent")
-    @Expose
-    private String continent;
+	private String continent;
+	private String country;
+	private String region;
+	private String region_code;
+	private String provider;
 
-    @SerializedName("country")
-    @Expose
-    private String country;
+	public Infrastructure(String continent, String country, String region, String region_code, String provider) {
+		super();
+		this.continent = continent;
+		this.country = country;
+		this.region = region;
+		this.region_code = region_code;
+		this.provider = provider;
+	}
 
-    @SerializedName("region")
-    @Expose
-    private String region;
+	public String getContinent() {
+		return continent;
+	}
 
-    @SerializedName("region_code")
-    @Expose
-    private String region_code;
+	public String getCountry() {
+		return country;
+	}
 
-    @SerializedName("provider")
-    @Expose
-    private String provider;
+	public String getRegion() {
+		return region;
+	}
 
-    public String getContinent() {
-	return continent;
-    }
+	public String getRegion_code() {
+		return region_code;
+	}
 
-    public String getCountry() {
-	return country;
-    }
+	public String getProvider() {
+		return provider;
+	}
 
-    public String getRegion() {
-	return region;
-    }
-
-    public String getRegion_code() {
-	return region_code;
-    }
-
-    public String getProvider() {
-	return provider;
-    }
-
-    @Override
-    public String toString() {
-	return "Infrastructure [continent=" + continent + ", country=" + country + ", region=" + region
-		+ ", region_code=" + region_code + ", provider=" + provider + "]";
-    }
+	@Override
+	public String toString() {
+		return "Infrastructure [continent=" + continent + ", country=" + country + ", region=" + region
+				+ ", region_code=" + region_code + ", provider=" + provider + "]";
+	}
 }

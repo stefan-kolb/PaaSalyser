@@ -1,29 +1,31 @@
 package org.paasfinder.paasalyser.profile.models;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import org.paasfinder.paasalyser.gsonutility.deserializers.ScalingDeserializer;
+
+import com.google.gson.annotations.JsonAdapter;
 
 public class Scaling {
 
-	@SerializedName("vertical")
-	@Expose
-	private Boolean vertical;
-	@SerializedName("horizontal")
-	@Expose
-	private Boolean horizontal;
-	@SerializedName("auto")
-	@Expose
-	private Boolean auto;
+	private boolean vertical;
+	private boolean horizontal;
+	private boolean auto;
 
-	public Boolean getVertical() {
+	public Scaling(boolean vertical, boolean horizontal, boolean auto) {
+		super();
+		this.vertical = vertical;
+		this.horizontal = horizontal;
+		this.auto = auto;
+	}
+
+	public boolean getVertical() {
 		return vertical;
 	}
 
-	public Boolean getHorizontal() {
+	public boolean getHorizontal() {
 		return horizontal;
 	}
 
-	public Boolean getAuto() {
+	public boolean getAuto() {
 		return auto;
 	}
 

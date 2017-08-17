@@ -2,14 +2,14 @@ package org.paasfinder.paasalyser.statistics.models;
 
 public class ExtensibleData {
 
-    private long yes = 0;
+	private long _true = 0;
 
-    public long getYes() {
-	return yes;
-    }
+	public long getTrue() {
+		return _true;
+	}
 
-    public void incrementYes() {
-	yes++;
-    }
+	public void incrementTrue() {
+		_true++;
+	}
 
 }

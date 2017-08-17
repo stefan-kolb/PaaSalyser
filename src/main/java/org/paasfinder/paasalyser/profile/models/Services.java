@@ -1,34 +1,26 @@
 package org.paasfinder.paasalyser.profile.models;
 
-import java.util.LinkedList;
-import java.util.List;
+import org.paasfinder.paasalyser.gsonutility.deserializers.ServicesDeserializer;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.JsonAdapter;
 
 public class Services {
 
-	@SerializedName("native")
-	@Expose
-	private List<NativeService> _native = null;
-	@SerializedName("addon")
-	@Expose
-	private List<AddonService> addon = null;
+	private NativeService[] _native;
+	private AddonService[] addon;
 
-	public List<NativeService> getNative() {
-		if (_native != null) {
-			return _native;
-		} else {
-			return new LinkedList<NativeService>();
-		}
+	public Services(NativeService[] _native, AddonService[] addon) {
+		super();
+		this._native = _native;
+		this.addon = addon;
 	}
 
-	public List<AddonService> getAddon() {
-		if (addon != null) {
-			return addon;
-		} else {
-			return new LinkedList<AddonService>();
-		}
+	public NativeService[] getNative() {
+		return _native;
+	}
+
+	public AddonService[] getAddon() {
+		return addon;
 	}
 
 }

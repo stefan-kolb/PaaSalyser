@@ -48,17 +48,17 @@ public class Executionmanager {
 			return;
 		}
 
-		evaluateDirectory(directoryToScan, outputPath);
+		evaluateDirectory(outputPath);
 		logger.info("Finished scanning state of the art");
 	}
 
-	private void evaluateDirectory(Path directory, Path outputPath) throws IOException {
+	private void evaluateDirectory(Path outputPath) throws IOException {
 		List<PaasProfile> profilesList = new ArrayList<PaasProfile>();
 
 		try {
-			profilesList = gsonAdapter.scanDirectoryForJsonFiles(directory);
+			profilesList = gsonAdapter.scanDirectoryForJsonFiles(directoryToScan);
 		} catch (IOException e) {
-			logger.error(directory + " is not a valid directory", e);
+			logger.error(directoryToScan + " is not a valid directory", e);
 		}
 
 		generateReport(profilesList, outputPath);
