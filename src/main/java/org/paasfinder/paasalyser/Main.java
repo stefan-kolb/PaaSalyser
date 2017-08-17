@@ -8,12 +8,15 @@ import org.slf4j.LoggerFactory;
 
 public class Main {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(Main.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+
+	private static final Executionmanager execManager = new Executionmanager();
 
 	public static void main(String[] args) {
 		LOGGER.info("Starting Execution.");
 		try {
-			new Executionmanager().scanStateOfTheArt();
+			execManager.scanStateOfTheArt();
+			execManager.scanRepository();
 			LOGGER.info("Shutting down properly.");
 			System.exit(0);
 		} catch (IOException e) {

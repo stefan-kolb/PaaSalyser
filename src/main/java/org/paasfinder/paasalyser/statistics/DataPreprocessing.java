@@ -55,31 +55,31 @@ public class DataPreprocessing {
 		sortOutBadProfiles(profiles);
 
 		// Execute all evaluations
-		logger.debug("evalRevision");
+		// logger.info("evalRevision");
 		evalRevision();
-		logger.debug("evalStatus");
+		// logger.info("evalStatus");
 		evalStatus();
-		logger.debug("evalType");
+		// logger.info("evalType");
 		evalType();
-		logger.debug("evalPlatform");
+		// logger.info("evalPlatform");
 		evalPlatform();
-		logger.debug("evalHosting");
+		// logger.info("evalHosting");
 		evalHosting();
-		logger.debug("evalPricing");
+		// logger.info("evalPricing");
 		evalPricing();
-		logger.debug("evalScaling");
+		// logger.info("evalScaling");
 		evalScaling();
-		logger.debug("evalRuntimes");
+		// logger.info("evalRuntimes");
 		evalRuntimes();
 		// logger.debug("evalMiddleware");
 		// evalMiddleware();
 		// logger.debug("evalFrameworks");
 		// evalFrameworks();
-		logger.debug("evalServices");
+		// logger.info("evalServices");
 		evalServices();
-		logger.debug("evalExtensible");
+		// logger.info("evalExtensible");
 		evalExtensible();
-		logger.debug("evalInfrastructures");
+		// logger.info("evalInfrastructures");
 		evalInfrastructures();
 	}
 
