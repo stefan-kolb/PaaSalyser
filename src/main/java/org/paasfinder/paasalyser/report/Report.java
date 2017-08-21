@@ -13,7 +13,7 @@ public class Report {
 
 	public Report(Statistics statistics) {
 		metaInfo = new MetaInfo(statistics.getProfilesCount(), statistics.getEolProfilesCount(),
-				statistics.getRevision(), statistics.getType());
+				statistics.getInvalidProfilesCount(), statistics.getRevision(), statistics.getType());
 		businessInfo = new BusinessInfo(statistics.getStatus(), statistics.getPricing());
 		economicInfo = new EconomicInfo(statistics.getHosting(), statistics.getScaling(), statistics.getRuntimes(),
 				statistics.getMiddleware(), statistics.getFrameworks(), statistics.getServices(),

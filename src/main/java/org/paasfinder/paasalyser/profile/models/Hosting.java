@@ -1,16 +1,17 @@
 package org.paasfinder.paasalyser.profile.models;
 
-import org.paasfinder.paasalyser.gsonutility.deserializers.HostingDeserializer;
-
-import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 
 public class Hosting {
 
-	private boolean _public = false;
-	private boolean _private = false;
-	private boolean virtualPrivate = false;
+	@SerializedName("public")
+	private Boolean _public = false;
+	@SerializedName("private")
+	private Boolean _private = false;
+	@SerializedName("virtual_private")
+	private Boolean virtualPrivate = false;
 
-	public Hosting(boolean _public, boolean _private, boolean virtualPrivate) {
+	public Hosting(Boolean _public, Boolean _private, Boolean virtualPrivate) {
 		super();
 		this._public = _public;
 		this._private = _private;
@@ -18,15 +19,21 @@ public class Hosting {
 	}
 
 	public boolean getPublic() {
-		return _public;
+		if (_public == null)
+			return false;
+		return _public.booleanValue();
 	}
 
 	public boolean getPrivate() {
-		return _private;
+		if (_private == null)
+			return false;
+		return _private.booleanValue();
 	}
 
 	public boolean getVirtualPrivate() {
-		return virtualPrivate;
+		if (virtualPrivate == null)
+			return false;
+		return virtualPrivate.booleanValue();
 	}
 
 }

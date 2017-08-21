@@ -1,11 +1,10 @@
 package org.paasfinder.paasalyser.profile.models;
 
-import org.paasfinder.paasalyser.gsonutility.deserializers.ServicesDeserializer;
-
-import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 
 public class Services {
 
+	@SerializedName("native")
 	private NativeService[] _native;
 	private AddonService[] addon;
 

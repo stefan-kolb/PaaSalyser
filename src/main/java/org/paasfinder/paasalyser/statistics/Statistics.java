@@ -26,7 +26,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Statistics {
-	
+
+	@SuppressWarnings("unused")
 	private final Logger logger = LoggerFactory.getLogger(Statistics.class);
 
 	private DataPreprocessing dataPreProcessing;
@@ -53,33 +54,34 @@ public class Statistics {
 
 		// Evaluate Report
 		profilesCount = dataPreProcessing.getProfiles().size();
-//		logger.info("eolProfiles");
+		// logger.info("eolProfiles");
 		eolProfiles = (int) dataPreProcessing.getStatusData().getEol();
-//		logger.info("evalRevision");
+		invalidProfilesCount = dataPreProcessing.getInvalidProfilesCount();
+		// logger.info("evalRevision");
 		evalRevision();
-//		logger.info("evalStatus");
+		// logger.info("evalStatus");
 		evalStatus();
-//		logger.info("evalType");
+		// logger.info("evalType");
 		evalType();
-//		logger.info("evalPlatform");
+		// logger.info("evalPlatform");
 		evalPlatform();
-//		logger.info("evalHosting");
+		// logger.info("evalHosting");
 		evalHosting();
-//		logger.info("evalPricing");
+		// logger.info("evalPricing");
 		evalPricing();
-//		logger.info("evalScaling");
+		// logger.info("evalScaling");
 		evalScaling();
-//		logger.info("evalRuntimes");
+		// logger.info("evalRuntimes");
 		evalRuntimes();
-//		logger.info("evalMiddleware");
+		// logger.info("evalMiddleware");
 		evalMiddleware();
-//		logger.info("evalFrameworks");
+		// logger.info("evalFrameworks");
 		evalFrameworks();
-//		logger.info("evalServices");
+		// logger.info("evalServices");
 		evalServices();
-//		logger.info("evalExtensible");
+		// logger.info("evalExtensible");
 		evalExtensible();
-//		logger.info("evalInfrastructures");
+		// logger.info("evalInfrastructures");
 		evalInfrastructures();
 	}
 
@@ -89,6 +91,10 @@ public class Statistics {
 
 	public int getEolProfilesCount() {
 		return eolProfiles;
+	}
+
+	public int getInvalidProfilesCount() {
+		return invalidProfilesCount;
 	}
 
 	public RevisionReport getRevision() {
@@ -231,11 +237,13 @@ public class Statistics {
 		runtimesShare.sort((a, b) -> Double.compare(b.getValue(), a.getValue()));
 
 		// Summarise all elements after the 9th and put it back into the List
-		SimpleResultDouble otherRuntimes = new SimpleResultDouble("Others",
-				runtimesShare.subList(9, runtimesShare.size()).stream()
-						.collect(Collectors.summingDouble(entry -> entry.getValue())));
-		runtimesShare = runtimesShare.subList(0, 9);
-		runtimesShare.add(otherRuntimes);
+		if (runtimesShare.size() > 8) {
+			SimpleResultDouble otherRuntimes = new SimpleResultDouble("Others",
+					runtimesShare.subList(9, runtimesShare.size()).stream()
+							.collect(Collectors.summingDouble(entry -> entry.getValue())));
+			runtimesShare = runtimesShare.subList(0, 9);
+			runtimesShare.add(otherRuntimes);
+		}
 
 		runtimes = new RuntimesReport(languageSpecific, polyglot,
 				new QualitativeData(dataPreProcessing.getRuntimesData().getNumberPerProfile()),
@@ -255,7 +263,9 @@ public class Statistics {
 				calcPercent(dataPreProcessing.getServicesData().getProfilesWithNativeServices().size(), profilesCount),
 				getTopFive(dataPreProcessing.getServicesData().getProfilesWithNativeServices()),
 				getTopFive(dataPreProcessing.getServicesData().getNativeServices()),
-				getTopFive(dataPreProcessing.getServicesData().getTypesOfNativeServices()));
+				getTopFive(dataPreProcessing.getServicesData().getTypesOfNativeServices().entrySet().stream()
+						.filter(entry -> !entry.getValue().equals("empty"))
+						.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()))));
 	}
 
 	private void evalExtensible() {
@@ -267,10 +277,11 @@ public class Statistics {
 				.getProfileContinents().entrySet().stream()
 				.map(entry -> new SimpleResultDouble(entry.getKey(), calcPercent(entry.getValue(), profilesCount)))
 				.collect(Collectors.toCollection(ArrayList::new));
+
 		infrastructures = new InfrastructuresReport(
 				getTopFive(dataPreProcessing.getInfrastructuresData().getInfrastructuresPerProfile()),
 				new QualitativeData(dataPreProcessing.getInfrastructuresData().getInfrastructuresPerProfile()),
-				getTopFiveDouble(percentOfProfilesPerContinent),
+				sortDescendingDouble(percentOfProfilesPerContinent),
 				getTopFive(dataPreProcessing.getInfrastructuresData().getContinent()),
 				getTopFive(dataPreProcessing.getInfrastructuresData().getCountry()),
 				getTopFive(dataPreProcessing.getInfrastructuresData().getRegion()),
@@ -302,6 +313,7 @@ public class Statistics {
 			return list;
 	}
 
+	@SuppressWarnings("unused")
 	private List<SimpleResultDouble> getTopFiveDouble(List<SimpleResultDouble> list) {
 		// Sort descending
 		list.sort((x, y) -> Double.compare(y.getValue(), x.getValue()));
@@ -310,6 +322,12 @@ public class Statistics {
 			return list.subList(0, 5);
 		} else
 			return list;
+	}
+
+	private List<SimpleResultDouble> sortDescendingDouble(List<SimpleResultDouble> list) {
+		// Sort descending
+		list.sort((x, y) -> Double.compare(y.getValue(), x.getValue()));
+		return list;
 	}
 
 	private List<SimpleResultLong> getMinFive(Map<String, Long> list) {
@@ -325,6 +343,7 @@ public class Statistics {
 			return results;
 	}
 
+	@SuppressWarnings("unused")
 	private List<SimpleResultLong> getMinFive(List<SimpleResultLong> list) {
 		// Sort descending
 		list.sort(Comparator.comparingLong(SimpleResultLong::getValue));

@@ -40,11 +40,11 @@ public class GsonAdapter {
 
 	private final Logger logger = LoggerFactory.getLogger(GsonAdapter.class);
 
-	private GsonBuilder gsonBuilder;
+	// private GsonBuilder gsonBuilder;
 	private Gson gson;
 
 	public GsonAdapter() {
-		gsonBuilder = createGsonBuilderWithCustomDeserializing();
+		// gsonBuilder = createGsonBuilderWithCustomDeserializing();
 		gson = new GsonBuilder().setPrettyPrinting().create();
 	}
 
@@ -66,13 +66,11 @@ public class GsonAdapter {
 			return Files.walk(rootDirectory).filter(path -> path.toString().endsWith("json")).map(path -> {
 				try (InputStream in = Files.newInputStream(path);
 						BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-					logger.info("Current profile is: " + path.getFileName().toString());
 					PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
 					try {
-						profile.checkProfileValidity(path);
-						return profile;
+						return profile.checkProfileValidity(path);
 					} catch (NullPointerException e) {
-						logger.error("Profile " + path.getFileName().toString() + " is not a valid profile.");
+						logger.error("Invalid Profile: " + path.getFileName().toString() + " | " + e.getMessage());
 						return null;
 					}
 				} catch (IOException e) {
@@ -105,11 +103,12 @@ public class GsonAdapter {
 			try {
 				gson.toJson(report, writer);
 			} catch (JsonIOException e) {
-				throw new IOException(e);
+				throw new IOException("Failed to output to json", e);
 			}
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private GsonBuilder createGsonBuilderWithCustomDeserializing() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 

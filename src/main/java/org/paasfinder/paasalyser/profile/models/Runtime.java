@@ -1,9 +1,5 @@
 package org.paasfinder.paasalyser.profile.models;
 
-import org.paasfinder.paasalyser.gsonutility.deserializers.RuntimeDeserializer;
-
-import com.google.gson.annotations.JsonAdapter;
-
 public class Runtime {
 
 	private String language;

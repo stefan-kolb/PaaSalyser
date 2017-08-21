@@ -1,7 +1,7 @@
 package org.paasfinder.paasalyser.profile;
 
 import java.nio.file.Path;
-import java.util.Objects;
+import java.util.Arrays;
 
 import org.paasfinder.paasalyser.profile.models.Hosting;
 import org.paasfinder.paasalyser.profile.models.Infrastructure;
@@ -10,12 +10,15 @@ import org.paasfinder.paasalyser.profile.models.Runtime;
 import org.paasfinder.paasalyser.profile.models.Scaling;
 import org.paasfinder.paasalyser.profile.models.Services;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PaasProfile {
 
 	private String name;
 	private String revision;
 	private String url;
 	private String status;
+	@SerializedName("status_since")
 	private String statusSince;
 	private String type;
 	private String platform;
@@ -47,63 +50,93 @@ public class PaasProfile {
 		this.infrastructures = infrastructures;
 	}
 
+	public PaasProfile(String name) {
+		super();
+		this.name = name;
+	}
+
 	/**
 	 * Checks wether all necessarry fields is present or not. Specified in
-	 * paas-profiles/app/models/vendor/vendor.rb.
+	 * paas-profiles/app/models/vendor/*.
 	 * 
 	 * @param currentlyScannedPath
 	 *            Path of profile that is currently being scanned.
-	 * @return true if necessarry fields are not null.
+	 * @return this if necessarry fields are not null.
 	 * @throws NullPointerException
 	 *             if a required field is null.
 	 */
-	public boolean checkProfileValidity(Path currentlyScannedPath) throws NullPointerException {
-		Objects.requireNonNull(this.getName());
+	public PaasProfile checkProfileValidity(Path currentlyScannedPath) throws NullPointerException {
+		if (this.getName() == null) {
+			throw new NullPointerException(
+					"Name of profile " + currentlyScannedPath.getFileName().toString() + " is null");
+		}
 		if (this.getName().isEmpty()) {
 			throw new NullPointerException(
 					"Name of profile " + currentlyScannedPath.getFileName().toString() + " is empty");
 		}
 
-		Objects.requireNonNull(this.getStatus());
-		if (this.getStatus().isEmpty()) {
+		if (this.getRevision() == null) {
 			throw new NullPointerException(
-					"Status of profile " + currentlyScannedPath.getFileName().toString() + " is empty");
+					"Revision of profile " + currentlyScannedPath.getFileName().toString() + " is null");
 		}
-
-		Objects.requireNonNull(this.getRevision());
 		if (this.getRevision().isEmpty()) {
 			throw new NullPointerException(
 					"Revision of profile " + currentlyScannedPath.getFileName().toString() + " is empty");
 		}
 
-		Objects.requireNonNull(this.getUrl());
-		if (this.getUrl().isEmpty()) {
+		if (this.getStatus() == null) {
 			throw new NullPointerException(
-					"URL of profile " + currentlyScannedPath.getFileName().toString() + " is empty");
+					"Status of profile " + currentlyScannedPath.getFileName().toString() + " is null");
 		}
-
-		Objects.requireNonNull(this.getStatus());
 		if (this.getStatus().isEmpty()) {
 			throw new NullPointerException(
 					"Status of profile " + currentlyScannedPath.getFileName().toString() + " is empty");
 		}
 
-		Objects.requireNonNull(this.getType());
+		if (this.getType() == null) {
+			throw new NullPointerException(
+					"Type of profile " + currentlyScannedPath.getFileName().toString() + " is null");
+		}
 		if (this.getType().isEmpty()) {
 			throw new NullPointerException(
 					"Type of profile " + currentlyScannedPath.getFileName().toString() + " is empty");
 		}
-
-		Objects.requireNonNull(this.isExtensible());
-
-		Objects.requireNonNull(this.getHosting());
 
 		if (this.getPlatform() != null && this.getPlatform().isEmpty()) {
 			throw new NullPointerException(
 					"Platform of profile " + currentlyScannedPath.getFileName().toString() + " is empty");
 		}
 
-		return true;
+		if (this.getHosting() == null) {
+			throw new NullPointerException(
+					"Status of profile " + currentlyScannedPath.getFileName().toString() + " is null");
+		}
+
+		if (this.getRuntimes() != null) {
+			for (Runtime runtime : this.getRuntimes()) {
+				if (runtime == null) {
+					throw new NullPointerException(
+							"Runtime of profile " + currentlyScannedPath.getFileName().toString() + " is null");
+				}
+			}
+		}
+
+		if (this.getInfrastructures() != null) {
+			for (Infrastructure infra : this.getInfrastructures()) {
+				if (infra.getContinent() == null) {
+					throw new NullPointerException(
+							"NativeService of profile " + currentlyScannedPath.getFileName().toString() + " is null");
+				}
+				if (infra.getRegion() == null || infra.getRegion().isEmpty()) {
+					if (infra.getCountry() == null) {
+						throw new NullPointerException("NativeService of profile "
+								+ currentlyScannedPath.getFileName().toString() + " is null");
+					}
+				}
+			}
+		}
+
+		return this;
 	}
 
 	public String getName() {
@@ -160,6 +193,15 @@ public class PaasProfile {
 
 	public Infrastructure[] getInfrastructures() {
 		return infrastructures;
+	}
+
+	@Override
+	public String toString() {
+		return "PaasProfile [name=" + name + ", revision=" + revision + ", url=" + url + ", status=" + status
+				+ ", statusSince=" + statusSince + ", type=" + type + ", platform=" + platform + ", hosting=" + hosting
+				+ ", pricings=" + Arrays.toString(pricings) + ", scaling=" + scaling + ", runtimes="
+				+ Arrays.toString(runtimes) + ", services=" + services + ", extensible=" + extensible
+				+ ", infrastructures=" + Arrays.toString(infrastructures) + "]";
 	}
 
 }

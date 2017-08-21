@@ -1,9 +1,5 @@
 package org.paasfinder.paasalyser.profile.models;
 
-import org.paasfinder.paasalyser.gsonutility.deserializers.PricingDeserializer;
-
-import com.google.gson.annotations.JsonAdapter;
-
 public class Pricing {
 
 	private PricingModel model;

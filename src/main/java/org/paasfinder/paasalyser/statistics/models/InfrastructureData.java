@@ -50,22 +50,58 @@ public class InfrastructureData {
 	}
 
 	public void addInfraStructureProfile(String name, Infrastructure[] infrastructures) {
-		if (name == null || infrastructures == null) {
-			return;
-		}
-		if (name.isEmpty() || infrastructures.length == 0) {
+		if (name == null || name.isEmpty() || infrastructures == null || infrastructures.length == 0) {
 			return;
 		}
 
 		infrastructuresPerProfile.putIfAbsent(name, (long) infrastructures.length);
 
+		boolean na = false, eu = false, as = false, oc = false, sa = false, af = false;
+
 		for (Infrastructure infra : infrastructures) {
 			String continent = infra.getContinent();
-			if (continent == null || continent.isEmpty())
+			if (continent == null || continent.isEmpty() || continent.equals("null") || continent.equals("empty"))
 				return;
-			if (profileContinents.putIfAbsent(continent, (long) 1) != null)
-				profileContinents.replace(continent, profileContinents.get(continent) + 1);
 
+			if (continent.equals("NA")) {
+				na = true;
+			} else if (continent.equals("EU")) {
+				eu = true;
+			} else if (continent.equals("AS")) {
+				as = true;
+			} else if (continent.equals("OC")) {
+				oc = true;
+			} else if (continent.equals("SA")) {
+				sa = true;
+			} else if (continent.equals("AF")) {
+				af = true;
+			}
+		}
+
+		if (na) {
+			if (profileContinents.putIfAbsent("NA", (long) 1) != null) {
+				profileContinents.replace("NA", profileContinents.get("NA") + 1);
+			}
+		} else if (eu) {
+			if (profileContinents.putIfAbsent("EU", (long) 1) != null) {
+				profileContinents.replace("EU", profileContinents.get("EU") + 1);
+			}
+		} else if (as) {
+			if (profileContinents.putIfAbsent("AS", (long) 1) != null) {
+				profileContinents.replace("AS", profileContinents.get("AS") + 1);
+			}
+		} else if (oc) {
+			if (profileContinents.putIfAbsent("OC", (long) 1) != null) {
+				profileContinents.replace("OC", profileContinents.get("OC") + 1);
+			}
+		} else if (sa) {
+			if (profileContinents.putIfAbsent("SA", (long) 1) != null) {
+				profileContinents.replace("SA", profileContinents.get("SA") + 1);
+			}
+		} else if (af) {
+			if (profileContinents.putIfAbsent("AF", (long) 1) != null) {
+				profileContinents.replace("AF", profileContinents.get("AF") + 1);
+			}
 		}
 
 	}

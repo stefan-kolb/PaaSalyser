@@ -5,7 +5,6 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.paasfinder.paasalyser.profile.PaasProfile;
 import org.paasfinder.paasalyser.profile.models.Infrastructure;
@@ -36,7 +35,7 @@ public class DataPreprocessing {
 
 	private int invalidProfilesCount;
 	private RevisionData revisionData;
-	private StatusData statusData = new StatusData();;
+	private StatusData statusData;
 	private TypeData typeData;
 	private PlatformData platformData;
 	private HostingData hostingData;
@@ -52,7 +51,7 @@ public class DataPreprocessing {
 	public DataPreprocessing(List<PaasProfile> profiles) {
 
 		// Make sure that no eol-profile is being added to active profiles
-		sortOutBadProfiles(profiles);
+		sortOutInvalidProfiles(profiles);
 
 		// Execute all evaluations
 		// logger.info("evalRevision");
@@ -143,18 +142,19 @@ public class DataPreprocessing {
 		return infrastructuresData;
 	}
 
-	private void sortOutBadProfiles(List<PaasProfile> profiles) {
+	private void sortOutInvalidProfiles(List<PaasProfile> profiles) {
 		// Make sure that no eol-profile is being added to active profiles
+		statusData = new StatusData();
 		for (PaasProfile profile : profiles) {
-			try {
-				if (profile.getStatus().equalsIgnoreCase("eol")) {
-					statusData.incrementEol();
-				} else {
-					this.profiles.add(profile);
-				}
-			} catch (NullPointerException e) {
-				logger.debug("Bad profile found");
+			if (profile == null) {
+				logger.info("Bad profile found");
 				invalidProfilesCount++;
+				continue;
+			}
+			if (profile.getStatus().equalsIgnoreCase("eol")) {
+				statusData.incrementEol();
+			} else {
+				this.profiles.add(profile);
 			}
 		}
 	}
@@ -167,13 +167,13 @@ public class DataPreprocessing {
 				revisionData.addRevision(profile.getName(), ChronoUnit.DAYS
 						.between(LocalDate.parse(profile.getRevision().substring(0, 10)), LocalDate.now()));
 			} catch (DateTimeParseException e) {
-				logger.debug("StatusSince could not be parsed: " + profile.getRevision());
+				// logger.info("StatusSince could not be parsed: " +
+				// profile.getRevision());
 			}
 		}
 	}
 
 	private void evalStatus() {
-		statusData = new StatusData();
 		for (PaasProfile profile : profiles) {
 			// Evaluate Status
 			if (profile.getStatus().equalsIgnoreCase("production")) {
@@ -186,7 +186,8 @@ public class DataPreprocessing {
 
 			// Evaluate StatusSince
 			if (profile.getStatusSince() == null) {
-				logger.debug("Status Since was null in: " + profile.getName());
+				// logger.info("Status Since was null in: " +
+				// profile.getName());
 				continue;
 			}
 			try {
@@ -195,7 +196,9 @@ public class DataPreprocessing {
 				statusData.addStatusSince(profile.getName(), ChronoUnit.DAYS
 						.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), LocalDate.now()));
 			} catch (DateTimeParseException e) {
-				logger.debug("StatusSince could not be parsed: " + profile.getStatusSince());
+				// logger.info("StatusSince could not be parsed: " +
+				// profile.getStatusSince());
+				continue;
 			}
 
 		}
@@ -218,12 +221,12 @@ public class DataPreprocessing {
 		platformData = new PlatformData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getPlatform() == null) {
+				// logger.info("Platform was null in: " + profile.getName());
 				continue;
 			}
 			if (profile.getPlatform().equals("null")) {
-				continue;
-			}
-			if (profile.getPlatform().isEmpty()) {
+				// logger.info("Platform was String:null in: " +
+				// profile.getName());
 				continue;
 			}
 			platformData.addPlatform(profile.getPlatform());
@@ -240,7 +243,6 @@ public class DataPreprocessing {
 				hostingData.incrementPrivate();
 			}
 			if (profile.getHosting().getVirtualPrivate()) {
-				// TODO check if this is ok or is sometimes null.
 				hostingData.incrementVirtualPrivate();
 			}
 		}
@@ -250,14 +252,15 @@ public class DataPreprocessing {
 		pricingData = new PricingData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getPricings() == null) {
+				// logger.info("Pricings was null in: " + profile.getName());
 				continue;
 			}
 
 			if (profile.getPricings().length == 0) {
 				pricingData.incrementZeroModels();
-
-				// Skip rest as array is empty!
+				// logger.info("Pricings was empty in: " + profile.getName());
 				continue;
+
 			} else if (profile.getPricings().length == 1) {
 				pricingData.incrementOneModel();
 			} else if (profile.getPricings().length == 2) {
@@ -267,6 +270,7 @@ public class DataPreprocessing {
 			} else if (profile.getPricings().length == 4) {
 				pricingData.incrementFourModels();
 			}
+
 			for (Pricing profilePricing : profile.getPricings()) {
 				if (profilePricing.getModel().equals(PricingModel.free)) {
 					pricingData.incrementFreeModels();
@@ -279,10 +283,12 @@ public class DataPreprocessing {
 				}
 
 				if (profilePricing.getPeriod() == null) {
+					// logger.info("PricingPeriod was null in: " +
+					// profile.getName());
 					continue;
 				}
-				// If PricingModel is free, no PricingPeriod is needed!
 				if (profilePricing.getModel().equals(PricingModel.free)) {
+					// If PricingModel is free, no PricingPeriod is needed!
 					continue;
 				}
 				if (profilePricing.getPeriod().equals(PricingPeriod.daily)) {
@@ -301,6 +307,7 @@ public class DataPreprocessing {
 
 		for (PaasProfile profile : profiles) {
 			if (profile.getScaling() == null) {
+				// logger.info("Scaling was null in: " + profile.getName());
 				continue;
 			}
 
@@ -320,6 +327,11 @@ public class DataPreprocessing {
 		runtimesData = new RuntimeData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getRuntimes() == null) {
+				// logger.info("Runtimes was null in: " + profile.getName());
+				continue;
+			}
+			if (profile.getRuntimes().length == 0) {
+				// logger.info("Runtimes was empty in: " + profile.getName());
 				continue;
 			}
 
@@ -334,12 +346,32 @@ public class DataPreprocessing {
 		servicesData = new ServicesData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getServices() == null) {
+				// logger.info("Services was null in: " + profile.getName());
+				continue;
+			}
+			if (profile.getServices().getNative() == null) {
+				// logger.info("NativeServices was null in: " +
+				// profile.getName());
+				continue;
+			}
+			if (profile.getServices().getNative().length == 0) {
+				// logger.info("NativeServices was empty in: " +
+				// profile.getName());
 				continue;
 			}
 
 			servicesData.addProfilesWithNativeServices(profile.getName(), profile.getServices().getNative().length);
 			for (NativeService nativeService : profile.getServices().getNative()) {
-				servicesData.addNativeService(nativeService.getName(), nativeService.getType());
+				if (nativeService == null) {
+					// logger.info("NativeService was null in: " +
+					// profile.getName());
+					continue;
+				}
+				if (!nativeService.getType().isEmpty()) {
+					servicesData.addNativeService(nativeService.getName(), nativeService.getType());
+				} else {
+					servicesData.addNativeService(nativeService.getName(), "empty");
+				}
 			}
 		}
 	}
@@ -358,6 +390,13 @@ public class DataPreprocessing {
 		infrastructuresData = new InfrastructureData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getInfrastructures() == null) {
+				// logger.info("Infrastructures was null in: " +
+				// profile.getName());
+				continue;
+			}
+			if (profile.getInfrastructures().length == 0) {
+				// logger.info("Infrastructures was empty in: " +
+				// profile.getName());
 				continue;
 			}
 

@@ -1,9 +1,5 @@
 package org.paasfinder.paasalyser.profile.models;
 
-import org.paasfinder.paasalyser.gsonutility.deserializers.InfrastructureDeserializer;
-
-import com.google.gson.annotations.JsonAdapter;
-
 public class Infrastructure {
 
 	private String continent;
