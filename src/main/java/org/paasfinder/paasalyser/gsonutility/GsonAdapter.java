@@ -78,7 +78,7 @@ public class GsonAdapter {
 							+ " | Message: " + e.getMessage());
 					return null;
 				} catch (JsonSyntaxException e) {
-					logger.error("IOException occurred during scanning directory at: " + path.getFileName()
+					logger.error("JsonSyntaxException occurred during scanning directory at: " + path.getFileName()
 							+ " | Message: " + e.getMessage());
 					return null;
 				}

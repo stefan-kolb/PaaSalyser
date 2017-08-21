@@ -1,0 +1,492 @@
+{
+  "metaInfo": {
+    "numberOfProfiles": 75,
+    "numberOfEolProfiles": 47,
+    "numberOfInvalidProfiles": 0,
+    "revisionReport": {
+      "mean": 817.7333333333332,
+      "median": 818.0,
+      "variance": 178626.14222222217,
+      "stdev": 422.6418604708035,
+      "youngestRevisions": [
+        {
+          "key": "PodSpace",
+          "value": 168
+        },
+        {
+          "key": "Convox",
+          "value": 188
+        },
+        {
+          "key": "d2c",
+          "value": 192
+        },
+        {
+          "key": "Amazon Elastic Beanstalk",
+          "value": 245
+        },
+        {
+          "key": "Atos Cloud Foundry",
+          "value": 266
+        }
+      ],
+      "oldestRevisions": [
+        {
+          "key": "BitNami",
+          "value": 1508
+        },
+        {
+          "key": "Software AG Live",
+          "value": 1508
+        },
+        {
+          "key": "CatN",
+          "value": 1508
+        },
+        {
+          "key": "Pagoda Box",
+          "value": 1508
+        },
+        {
+          "key": "Cloudify",
+          "value": 1508
+        }
+      ]
+    },
+    "typeReport": {
+      "saasCentricPercent": 14.666666666666666,
+      "genericPercent": 68.0,
+      "iaasCentricPercent": 17.333333333333336
+    }
+  },
+  "businessInfo": {
+    "statusReport": {
+      "topStatus": [
+        {
+          "key": "Production",
+          "value": 65
+        },
+        {
+          "key": "End of Lifetime",
+          "value": 47
+        },
+        {
+          "key": "Beta",
+          "value": 9
+        },
+        {
+          "key": "Alpha",
+          "value": 1
+        }
+      ],
+      "meanStatusSince": 1825.2205882352944,
+      "medianStatusSince": 1723.0,
+      "varianceStatusSince": 1186066.4660467126,
+      "stdevStatusSince": 1089.0667867705417,
+      "oldestStatusSince": [
+        {
+          "key": "OutSystems Platform",
+          "value": 5968
+        },
+        {
+          "key": "Mendix",
+          "value": 4615
+        },
+        {
+          "key": "EngineYard",
+          "value": 4007
+        },
+        {
+          "key": "Software AG Live",
+          "value": 3619
+        },
+        {
+          "key": "brightbox",
+          "value": 3598
+        }
+      ],
+      "youngestStatusSince": [
+        {
+          "key": "PodSpace",
+          "value": 201
+        },
+        {
+          "key": "d2c",
+          "value": 223
+        },
+        {
+          "key": "APPUiO",
+          "value": 320
+        },
+        {
+          "key": "Swisscom Application Cloud",
+          "value": 325
+        },
+        {
+          "key": "Predix",
+          "value": 364
+        }
+      ]
+    },
+    "pricingReport": {
+      "numberOfModelsPerProfile": [
+        {
+          "key": "One Models",
+          "value": 51
+        },
+        {
+          "key": "Two Models",
+          "value": 15
+        },
+        {
+          "key": "Zero Models",
+          "value": 5
+        },
+        {
+          "key": "Three Models",
+          "value": 3
+        },
+        {
+          "key": "Four Models",
+          "value": 0
+        }
+      ],
+      "models": [
+        {
+          "key": "Fixed",
+          "value": 35
+        },
+        {
+          "key": "Free",
+          "value": 25
+        },
+        {
+          "key": "Metered",
+          "value": 23
+        },
+        {
+          "key": "Hybrid",
+          "value": 7
+        },
+        {
+          "key": "Empty",
+          "value": 0
+        }
+      ],
+      "periods": [
+        {
+          "key": "Monthly",
+          "value": 56
+        },
+        {
+          "key": "Daily",
+          "value": 1
+        },
+        {
+          "key": "Anually",
+          "value": 0
+        },
+        {
+          "key": "Empty",
+          "value": 0
+        }
+      ]
+    }
+  },
+  "economicInfo": {
+    "hostingReport": {
+      "privateHostingPercent": 49.333333333333336,
+      "publicHostingPercent": 76.0,
+      "virtualPrivateHostingPercent": 10.666666666666668
+    },
+    "scalingReport": {
+      "verticalPercent": 65.33333333333333,
+      "horizontalPercent": 81.33333333333333,
+      "autoPercent": 42.66666666666667
+    },
+    "runtimesReport": {
+      "languageSpecific": 22,
+      "polyglot": 53,
+      "meanNumberOfRuntimes": 4.1866666666666665,
+      "medianNumberOfRuntimes": 4.0,
+      "varianceNumberOfRuntimes": 7.911822222222225,
+      "stdevNumberOfRuntimes": 2.8127961572467752,
+      "topFiveNumberOfRuntimes": [
+        {
+          "key": "Atos Cloud Foundry",
+          "value": 11
+        },
+        {
+          "key": "HPE Helion Stackato",
+          "value": 10
+        },
+        {
+          "key": "Heroku",
+          "value": 9
+        },
+        {
+          "key": "Scalingo",
+          "value": 9
+        },
+        {
+          "key": "Flynn",
+          "value": 9
+        }
+      ],
+      "runtimesShare": [
+        {
+          "key": "java",
+          "value": 68.0
+        },
+        {
+          "key": "php",
+          "value": 68.0
+        },
+        {
+          "key": "ruby",
+          "value": 60.0
+        },
+        {
+          "key": "python",
+          "value": 56.00000000000001
+        },
+        {
+          "key": "node",
+          "value": 53.333333333333336
+        },
+        {
+          "key": "go",
+          "value": 28.000000000000004
+        },
+        {
+          "key": "scala",
+          "value": 22.666666666666664
+        },
+        {
+          "key": "groovy",
+          "value": 18.666666666666668
+        },
+        {
+          "key": "dotnet",
+          "value": 10.666666666666668
+        },
+        {
+          "key": "Others",
+          "value": 33.333333333333336
+        }
+      ]
+    },
+    "middlewareReport": {
+      "info": "Not implemented yet."
+    },
+    "frameworksReport": {
+      "info": "Not implemented yet."
+    },
+    "servicesReport": {
+      "nativeServicesProfilesPercent": 72.0,
+      "topFiveProfilesWithNativeServicesAmount": [
+        {
+          "key": "Bluemix",
+          "value": 49
+        },
+        {
+          "key": "SAP HANA Cloud Platform",
+          "value": 20
+        },
+        {
+          "key": "Atos Cloud Foundry",
+          "value": 14
+        },
+        {
+          "key": "Dokkur",
+          "value": 12
+        },
+        {
+          "key": "Clever Cloud",
+          "value": 10
+        }
+      ],
+      "topFiveNativeServices": [
+        {
+          "key": "mysql",
+          "value": 37
+        },
+        {
+          "key": "mongodb",
+          "value": 30
+        },
+        {
+          "key": "postgresql",
+          "value": 29
+        },
+        {
+          "key": "redis",
+          "value": 26
+        },
+        {
+          "key": "memcached",
+          "value": 13
+        }
+      ],
+      "topFiveTypesOfServices": [
+        {
+          "key": "datastore",
+          "value": 212
+        },
+        {
+          "key": "empty",
+          "value": 42
+        },
+        {
+          "key": "worker",
+          "value": 16
+        },
+        {
+          "key": "other",
+          "value": 11
+        },
+        {
+          "key": "analytics",
+          "value": 10
+        }
+      ]
+    },
+    "extensibleReport": {
+      "extensibleProfilesPercent": 52.0
+    },
+    "infrastructuresReport": {
+      "meanInfrastrcturesPerProfile": 4.537037037037036,
+      "medianInfrastrcturesPerProfile": 2.0,
+      "varianceInfrastrcturesPerProfile": 43.026406035665325,
+      "stdevInfrastrcturesPerProfile": 6.559451656629944,
+      "topFiveInfrastrcturesPerProfile": [
+        {
+          "key": "Cloudways",
+          "value": 34
+        },
+        {
+          "key": "Jelastic",
+          "value": 25
+        },
+        {
+          "key": "ElasticBox",
+          "value": 21
+        },
+        {
+          "key": "Atos Cloud Foundry",
+          "value": 17
+        },
+        {
+          "key": "Microsoft Azure",
+          "value": 14
+        }
+      ],
+      "percentOfProfilesPerContinent": [
+        {
+          "key": "NA",
+          "value": 53.333333333333336
+        },
+        {
+          "key": "EU",
+          "value": 14.666666666666666
+        },
+        {
+          "key": "AS",
+          "value": 2.666666666666667
+        },
+        {
+          "key": "OC",
+          "value": 1.3333333333333335
+        }
+      ],
+      "topFiveContinents": [
+        {
+          "key": "NA",
+          "value": 92
+        },
+        {
+          "key": "EU",
+          "value": 73
+        },
+        {
+          "key": "AS",
+          "value": 46
+        },
+        {
+          "key": "OC",
+          "value": 19
+        },
+        {
+          "key": "SA",
+          "value": 15
+        }
+      ],
+      "topFiveCountries": [
+        {
+          "key": "US",
+          "value": 84
+        },
+        {
+          "key": "IE",
+          "value": 19
+        },
+        {
+          "key": "JP",
+          "value": 17
+        },
+        {
+          "key": "AU",
+          "value": 17
+        },
+        {
+          "key": "SG",
+          "value": 14
+        }
+      ],
+      "topFiveRegions": [
+        {
+          "key": "Dublin",
+          "value": 16
+        },
+        {
+          "key": "Northern Virginia",
+          "value": 15
+        },
+        {
+          "key": "Sydney",
+          "value": 14
+        },
+        {
+          "key": "Singapore",
+          "value": 14
+        },
+        {
+          "key": "Tokyo",
+          "value": 12
+        }
+      ],
+      "topFiveProviders": [
+        {
+          "key": "AWS",
+          "value": 73
+        },
+        {
+          "key": "Vultr",
+          "value": 13
+        },
+        {
+          "key": "Azure",
+          "value": 12
+        },
+        {
+          "key": "DigitalOcean",
+          "value": 7
+        },
+        {
+          "key": "GCE",
+          "value": 5
+        }
+      ]
+    }
+  }
+}

@@ -54,21 +54,43 @@ public class Executionmanager {
 						processProfiles(commitProfile);
 						logger.info("Succesfully scanned " + commitProfile.getKey().getName());
 					} catch (IOException e) {
-						logger.error("Could not process commit " + commitProfile.getKey().getName());
+						logger.error(
+								"IOException occurred - Could not process commit " + commitProfile.getKey().getName(),
+								e);
+					} catch (RuntimeException e) {
+						logger.error("RuntimeException occurred - Could not process commit "
+								+ commitProfile.getKey().getName(), e);
 					}
 				}
 			}
 		}
 	}
 
-	private void processProfiles(Map.Entry<RevCommit, List<PaasProfile>> commitProfile) throws IOException {
+	private void processProfiles(Map.Entry<RevCommit, List<PaasProfile>> commitProfile)
+			throws IOException, IllegalStateException {
 		logger.info("Processing");
-		DataPreprocessing dataPreprocessing = new DataPreprocessing(commitProfile.getValue());
-		Statistics statistics = new Statistics(dataPreprocessing);
-		Report report = new Report(statistics);
-		Path path = Paths.get("Reports/" + commitProfile.getKey().getAuthorIdent().getWhen().getTime() + "_"
-				+ commitProfile.getKey().getName() + ".json");
-		gsonAdapter.createReportAsJsonFile(report, path);
+		DataPreprocessing dataPreprocessing;
+		Statistics statistics;
+		Report report;
+		try {
+			dataPreprocessing = new DataPreprocessing(commitProfile.getValue());
+			statistics = new Statistics(dataPreprocessing);
+
+		} catch (IllegalStateException e) {
+			throw new RuntimeException(
+					"IllegalStateException occurred while processing profiles of: " + commitProfile.getKey().getName(),
+					e);
+		}
+		try {
+			logger.info("Generating Report");
+			report = new Report(statistics);
+			Path path = Paths.get("Reports/" + commitProfile.getKey().getAuthorIdent().getWhen().getTime() + "_"
+					+ commitProfile.getKey().getName() + ".json");
+			gsonAdapter.createReportAsJsonFile(report, path);
+		} catch (IllegalArgumentException e) {
+			throw new RuntimeException("IllegalArgumentException occurred while processing profiles of: "
+					+ commitProfile.getKey().getName(), e);
+		}
 	}
 
 }

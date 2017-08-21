@@ -63,7 +63,21 @@ public class RepositorySniffer implements AutoCloseable {
 
 	public Map.Entry<RevCommit, List<PaasProfile>> getStateOfTheArt() throws GitAPIException, IOException {
 		RevCommit currentCommit = git.log().call().iterator().next();
-		logger.info("Current commit is: " + currentCommit.getName());
+		logger.info("State of the art commit is: " + currentCommit.getName());
+		Path outputPath = Paths.get("Reports/" + currentCommit.getAuthorIdent().getWhen().getTime() + "_"
+				+ currentCommit.getName() + ".json");
+
+		if (Files.exists(outputPath)) {
+			logger.info("Report of state of the art (commit id: " + currentCommit.getName() + ") already existing");
+		}
+		return new AbstractMap.SimpleEntry<RevCommit, List<PaasProfile>>(currentCommit,
+				getProfilesOfCommit(currentCommit.getName()));
+	}
+
+	public Map.Entry<RevCommit, List<PaasProfile>> getProfilesOfSpecificCommit(String commitId)
+			throws GitAPIException, IOException {
+		RevCommit currentCommit = git.log().call().iterator().next();
+		logger.info("Currently getting data of commit: " + currentCommit.getName());
 		Path outputPath = Paths.get("Reports/" + currentCommit.getAuthorIdent().getWhen().getTime() + "_"
 				+ currentCommit.getName() + ".json");
 
@@ -156,15 +170,15 @@ public class RepositorySniffer implements AutoCloseable {
 				logger.info("Initial commit reached");
 				continue;
 			}
-			Path path = Paths.get("Reports/" + commit.getAuthorIdent().getWhen().getTime() + "_"
-					+ commit.getName() + ".json");
+			Path path = Paths
+					.get("Reports/" + commit.getAuthorIdent().getWhen().getTime() + "_" + commit.getName() + ".json");
 			if (Files.exists(path)) {
 				logger.info("Commit already in Datastore");
 				continue;
 			}
 
 			try {
-				logger.info("Current commit is: " + commit.getName());
+				logger.info("Currently retrieving profiles of commit: " + commit.getName());
 				List<PaasProfile> profiles = getProfilesOfCommit(commit.getName());
 				if (profiles != null) {
 					profilesOfCommits.putIfAbsent(commit, profiles);

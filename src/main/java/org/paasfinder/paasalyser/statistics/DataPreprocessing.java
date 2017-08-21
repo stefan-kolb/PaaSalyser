@@ -48,10 +48,16 @@ public class DataPreprocessing {
 	private ExtensibleData extensibleData;
 	private InfrastructureData infrastructuresData;
 
-	public DataPreprocessing(List<PaasProfile> profiles) {
+	public DataPreprocessing(List<PaasProfile> profiles) throws IllegalStateException {
 
 		// Make sure that no eol-profile is being added to active profiles
 		sortOutInvalidProfiles(profiles);
+		if (profiles.isEmpty()) {
+			throw new IllegalStateException("No profiles to scan.");
+		}
+		if (invalidProfilesCount > 0) {
+			logger.warn("Bad profiles found.");
+		}
 
 		// Execute all evaluations
 		// logger.info("evalRevision");
@@ -147,7 +153,6 @@ public class DataPreprocessing {
 		statusData = new StatusData();
 		for (PaasProfile profile : profiles) {
 			if (profile == null) {
-				logger.info("Bad profile found");
 				invalidProfilesCount++;
 				continue;
 			}
@@ -157,6 +162,7 @@ public class DataPreprocessing {
 				this.profiles.add(profile);
 			}
 		}
+
 	}
 
 	private void evalRevision() {
@@ -164,8 +170,12 @@ public class DataPreprocessing {
 		for (PaasProfile profile : profiles) {
 			try {
 				// The first 10 chars of the revision is always only the date
+				if (profile.getRevision().length() < 10) {
+					continue;
+				}
 				revisionData.addRevision(profile.getName(), ChronoUnit.DAYS
 						.between(LocalDate.parse(profile.getRevision().substring(0, 10)), LocalDate.now()));
+
 			} catch (DateTimeParseException e) {
 				// logger.info("StatusSince could not be parsed: " +
 				// profile.getRevision());
@@ -185,19 +195,15 @@ public class DataPreprocessing {
 			}
 
 			// Evaluate StatusSince
-			if (profile.getStatusSince() == null) {
-				// logger.info("Status Since was null in: " +
-				// profile.getName());
+			if (profile.getStatusSince() == null || profile.getStatusSince().length() < 10) {
+				// The first 10 chars of any datetime-format is always the date
 				continue;
 			}
 			try {
-				// The first 10 chars of the revision is always only the
-				// date
 				statusData.addStatusSince(profile.getName(), ChronoUnit.DAYS
 						.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), LocalDate.now()));
 			} catch (DateTimeParseException e) {
-				// logger.info("StatusSince could not be parsed: " +
-				// profile.getStatusSince());
+				logger.error("Failed to parse LocalDate");
 				continue;
 			}
 
@@ -367,11 +373,10 @@ public class DataPreprocessing {
 					// profile.getName());
 					continue;
 				}
-				if (!nativeService.getType().isEmpty()) {
-					servicesData.addNativeService(nativeService.getName(), nativeService.getType());
-				} else {
+				if (nativeService.getType() == null || nativeService.getType().isEmpty()) {
 					servicesData.addNativeService(nativeService.getName(), "empty");
 				}
+				servicesData.addNativeService(nativeService.getName(), nativeService.getType());
 			}
 		}
 	}
