@@ -3,8 +3,8 @@ package org.paasfinder.paasalyser.report.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.paasfinder.paasalyser.statistics.models.SimpleResultDouble;
-import org.paasfinder.paasalyser.statistics.models.SimpleResultLong;
+import org.paasfinder.paasalyser.statistics.report.models.SimpleResultDouble;
+import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 
 public class RuntimesReport {
 

@@ -9,8 +9,11 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.paasfinder.paasalyser.gsonutility.deserializers.HostingDeserializer;
@@ -27,7 +30,7 @@ import org.paasfinder.paasalyser.profile.models.Pricing;
 import org.paasfinder.paasalyser.profile.models.Runtime;
 import org.paasfinder.paasalyser.profile.models.Scaling;
 import org.paasfinder.paasalyser.profile.models.Services;
-import org.paasfinder.paasalyser.report.Report;
+import org.paasfinder.paasalyser.report.PaasReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -97,7 +100,7 @@ public class GsonAdapter {
 	 * @throws IOException
 	 *             Gson was unable to stream or write to stream
 	 */
-	public void createReportAsJsonFile(Report report, Path path) throws IOException {
+	public void createReportAsJsonFile(PaasReport report, Path path) throws IOException {
 		try (BufferedWriter writer = Files.newBufferedWriter(path, Charset.defaultCharset(),
 				StandardOpenOption.CREATE)) {
 			try {
@@ -107,6 +110,27 @@ public class GsonAdapter {
 			}
 		}
 	}
+
+//	public Map<String, PaasReport> scanReportsFromDatastore(Path rootDirectory) throws IOException {
+//		if (!Files.isDirectory(rootDirectory)) {
+//			throw new IOException(rootDirectory + " is no existing directory");
+//		} else {
+//			return Files.walk(rootDirectory).filter(path -> path.toString().endsWith("json")).map(path -> {
+//				try (InputStream in = Files.newInputStream(path);
+//						BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+//					return new AbstractMap.SimpleEntry(path, gson.fromJson(reader, PaasReport.class));
+//				} catch (IOException e) {
+//					logger.error("IOException occurred during scanning directory at: " + path.getFileName()
+//							+ " | Message: " + e.getMessage());
+//					return null;
+//				} catch (JsonSyntaxException e) {
+//					logger.error("JsonSyntaxException occurred during scanning directory at: " + path.getFileName()
+//							+ " | Message: " + e.getMessage());
+//					return null;
+//				}
+//			}).collect(Collectors.toCollection(HashMap::new));
+//		}
+//	}
 
 	@SuppressWarnings("unused")
 	private GsonBuilder createGsonBuilderWithCustomDeserializing() {

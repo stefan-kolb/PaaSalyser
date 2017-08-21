@@ -10,13 +10,12 @@ public class Main {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-	private static final Executionmanager EXECUTIONMANAGER = new Executionmanager();
-
 	public static void main(String[] args) {
 		LOGGER.info("Starting Execution.");
+		final Executionmanager executionManager = new Executionmanager();
 		try {
-			EXECUTIONMANAGER.scanStateOfTheArt();
-			EXECUTIONMANAGER.scanRepository();
+			executionManager.scanStateOfTheArt();
+			executionManager.scanRepository();
 			LOGGER.info("Shutting down properly.");
 			System.exit(0);
 		} catch (IOException e) {
