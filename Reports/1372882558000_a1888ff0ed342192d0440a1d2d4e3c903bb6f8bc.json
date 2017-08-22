@@ -1,0 +1,430 @@
+{
+  "metaInfo": {
+    "date": {
+      "year": 2013,
+      "month": 7,
+      "day": 3
+    },
+    "numberOfProfiles": 64,
+    "numberOfEolProfiles": 18,
+    "numberOfInvalidProfiles": 0,
+    "revisionReport": {
+      "mean": 1511.0,
+      "median": 1511.0,
+      "variance": 0.0,
+      "stdev": 0.0,
+      "youngestRevisions": [
+        {
+          "key": "MoPaaS",
+          "value": 1511
+        },
+        {
+          "key": "Snapp",
+          "value": 1511
+        },
+        {
+          "key": "Google App Engine",
+          "value": 1511
+        },
+        {
+          "key": "Clever Cloud",
+          "value": 1511
+        },
+        {
+          "key": "iKnode",
+          "value": 1511
+        }
+      ],
+      "oldestRevisions": [
+        {
+          "key": "MoPaaS",
+          "value": 1511
+        },
+        {
+          "key": "Snapp",
+          "value": 1511
+        },
+        {
+          "key": "Google App Engine",
+          "value": 1511
+        },
+        {
+          "key": "Clever Cloud",
+          "value": 1511
+        },
+        {
+          "key": "iKnode",
+          "value": 1511
+        }
+      ]
+    },
+    "typeReport": {
+      "saasCentricPercent": 0.0,
+      "genericPercent": 0.0,
+      "iaasCentricPercent": 0.0
+    }
+  },
+  "businessInfo": {
+    "statusReport": {
+      "topStatus": [
+        {
+          "key": "Production",
+          "value": 43
+        },
+        {
+          "key": "Beta",
+          "value": 21
+        },
+        {
+          "key": "End of Lifetime",
+          "value": 18
+        },
+        {
+          "key": "Alpha",
+          "value": 0
+        }
+      ],
+      "meanStatusSince": 2292.08,
+      "medianStatusSince": 2124.0,
+      "varianceStatusSince": 353785.07359999995,
+      "stdevStatusSince": 594.7983470051005,
+      "oldestStatusSince": [
+        {
+          "key": "EngineYard",
+          "value": 4008
+        },
+        {
+          "key": "Software AG Live",
+          "value": 3620
+        },
+        {
+          "key": "brightbox",
+          "value": 3599
+        },
+        {
+          "key": "Force.com",
+          "value": 3521
+        },
+        {
+          "key": "Apprenda",
+          "value": 3185
+        }
+      ],
+      "youngestStatusSince": [
+        {
+          "key": "OpenShift",
+          "value": 1534
+        },
+        {
+          "key": "Snapp",
+          "value": 1559
+        },
+        {
+          "key": "Anynines",
+          "value": 1586
+        },
+        {
+          "key": "Cloudn PaaS",
+          "value": 1608
+        },
+        {
+          "key": "Static",
+          "value": 1626
+        }
+      ]
+    },
+    "pricingReport": {
+      "numberOfModelsPerProfile": [
+        {
+          "key": "Zero Models",
+          "value": 0
+        },
+        {
+          "key": "One Models",
+          "value": 0
+        },
+        {
+          "key": "Two Models",
+          "value": 0
+        },
+        {
+          "key": "Three Models",
+          "value": 0
+        },
+        {
+          "key": "Four Models",
+          "value": 0
+        }
+      ],
+      "models": [
+        {
+          "key": "Free",
+          "value": 0
+        },
+        {
+          "key": "Fixed",
+          "value": 0
+        },
+        {
+          "key": "Metered",
+          "value": 0
+        },
+        {
+          "key": "Hybrid",
+          "value": 0
+        },
+        {
+          "key": "Empty",
+          "value": 0
+        }
+      ],
+      "periods": [
+        {
+          "key": "Daily",
+          "value": 0
+        },
+        {
+          "key": "Monthly",
+          "value": 0
+        },
+        {
+          "key": "Anually",
+          "value": 0
+        },
+        {
+          "key": "Empty",
+          "value": 0
+        }
+      ]
+    }
+  },
+  "economicInfo": {
+    "hostingReport": {
+      "privateHostingPercent": 34.375,
+      "publicHostingPercent": 85.9375,
+      "virtualPrivateHostingPercent": 0.0
+    },
+    "scalingReport": {
+      "verticalPercent": 48.4375,
+      "horizontalPercent": 65.625,
+      "autoPercent": 39.0625
+    },
+    "runtimesReport": {
+      "languageSpecific": 28,
+      "polyglot": 36,
+      "meanNumberOfRuntimes": 3.21875,
+      "medianNumberOfRuntimes": 2.0,
+      "varianceNumberOfRuntimes": 7.3896484375,
+      "stdevNumberOfRuntimes": 2.7183907808665038,
+      "topFiveNumberOfRuntimes": [
+        {
+          "key": "dotCloud",
+          "value": 14
+        },
+        {
+          "key": "Heroku",
+          "value": 11
+        },
+        {
+          "key": "AppFog",
+          "value": 9
+        },
+        {
+          "key": "Appsembler",
+          "value": 7
+        },
+        {
+          "key": "Tier3 WebFabric",
+          "value": 7
+        }
+      ],
+      "runtimesShare": [
+        {
+          "key": "java",
+          "value": 64.0625
+        },
+        {
+          "key": "php",
+          "value": 60.9375
+        },
+        {
+          "key": "ruby",
+          "value": 51.5625
+        },
+        {
+          "key": "python",
+          "value": 48.4375
+        },
+        {
+          "key": "node",
+          "value": 46.875
+        },
+        {
+          "key": "dotnet",
+          "value": 18.75
+        },
+        {
+          "key": "perl",
+          "value": 7.8125
+        },
+        {
+          "key": "scala",
+          "value": 6.25
+        },
+        {
+          "key": "go",
+          "value": 4.6875
+        },
+        {
+          "key": "Others",
+          "value": 12.5
+        }
+      ]
+    },
+    "middlewareReport": {
+      "info": "Not implemented yet."
+    },
+    "frameworksReport": {
+      "info": "Not implemented yet."
+    },
+    "servicesReport": {
+      "nativeServicesProfilesPercent": 0.0,
+      "topFiveProfilesWithNativeServicesAmount": [],
+      "topFiveNativeServices": [],
+      "topFiveTypesOfServices": []
+    },
+    "extensibleReport": {
+      "extensibleProfilesPercent": 0.0
+    },
+    "infrastructuresReport": {
+      "meanInfrastrcturesPerProfile": 2.276595744680851,
+      "medianInfrastrcturesPerProfile": 1.0,
+      "varianceInfrastrcturesPerProfile": 5.051154368492533,
+      "stdevInfrastrcturesPerProfile": 2.247477334366808,
+      "topFiveInfrastrcturesPerProfile": [
+        {
+          "key": "Jelastic",
+          "value": 12
+        },
+        {
+          "key": "Amazon Elastic Beanstalk",
+          "value": 8
+        },
+        {
+          "key": "Nitrous.io",
+          "value": 7
+        },
+        {
+          "key": "ElasticBox",
+          "value": 5
+        },
+        {
+          "key": "BitNami",
+          "value": 5
+        }
+      ],
+      "percentOfProfilesPerContinent": [
+        {
+          "key": "NA",
+          "value": 56.25
+        },
+        {
+          "key": "EU",
+          "value": 15.625
+        },
+        {
+          "key": "AS",
+          "value": 1.5625
+        }
+      ],
+      "topFiveContinents": [
+        {
+          "key": "NA",
+          "value": 40
+        },
+        {
+          "key": "EU",
+          "value": 35
+        },
+        {
+          "key": "AS",
+          "value": 16
+        },
+        {
+          "key": "OC",
+          "value": 8
+        },
+        {
+          "key": "SA",
+          "value": 8
+        }
+      ],
+      "topFiveCountries": [
+        {
+          "key": "US",
+          "value": 12
+        },
+        {
+          "key": "IE",
+          "value": 6
+        },
+        {
+          "key": "JP",
+          "value": 3
+        },
+        {
+          "key": "BR",
+          "value": 3
+        },
+        {
+          "key": "SG",
+          "value": 3
+        }
+      ],
+      "topFiveRegions": [
+        {
+          "key": "Dublin",
+          "value": 6
+        },
+        {
+          "key": "Virginia",
+          "value": 5
+        },
+        {
+          "key": "Tokio",
+          "value": 2
+        },
+        {
+          "key": "Singapur",
+          "value": 2
+        },
+        {
+          "key": "Sao Paulo",
+          "value": 2
+        }
+      ],
+      "topFiveProviders": [
+        {
+          "key": "AWS",
+          "value": 12
+        },
+        {
+          "key": "Rusonyx",
+          "value": 1
+        },
+        {
+          "key": "innofield GmbH",
+          "value": 1
+        },
+        {
+          "key": "Planetta Internet",
+          "value": 1
+        },
+        {
+          "key": "ServInt",
+          "value": 1
+        }
+      ]
+    }
+  }
+}

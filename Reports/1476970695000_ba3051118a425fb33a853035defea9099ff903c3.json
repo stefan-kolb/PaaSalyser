@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2016,
+      "month": 10,
+      "day": 20
+    },
     "numberOfProfiles": 76,
     "numberOfEolProfiles": 45,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 862.4473684210527,
-      "median": 883.0,
+      "mean": 863.4473684210527,
+      "median": 884.0,
       "variance": 162024.4314404432,
       "stdev": 402.52258500665926,
       "youngestRevisions": [
         {
           "key": "APPUiO",
-          "value": 320
+          "value": 321
         },
         {
           "key": "Swisscom",
-          "value": 324
+          "value": 325
         },
         {
           "key": "AppFog",
-          "value": 325
+          "value": 326
         },
         {
           "key": "Swisscom Application Cloud",
-          "value": 325
+          "value": 326
         },
         {
           "key": "Anynines",
-          "value": 325
+          "value": 326
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "CatN",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Pagoda Box",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Cloudify",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 1853.842857142857,
-      "medianStatusSince": 1783.0,
+      "meanStatusSince": 1854.842857142857,
+      "medianStatusSince": 1784.0,
       "varianceStatusSince": 1141685.8181632655,
       "stdevStatusSince": 1068.4969902453004,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "APPUiO",
-          "value": 320
+          "value": 321
         },
         {
           "key": "Swisscom",
-          "value": 324
-        },
-        {
-          "key": "Swisscom Application Cloud",
           "value": 325
         },
         {
+          "key": "Swisscom Application Cloud",
+          "value": 326
+        },
+        {
           "key": "Predix",
-          "value": 364
+          "value": 365
         },
         {
           "key": "Flynn",
-          "value": 391
+          "value": 392
         }
       ]
     },

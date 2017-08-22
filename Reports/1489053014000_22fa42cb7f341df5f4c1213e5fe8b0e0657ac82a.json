@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2017,
+      "month": 3,
+      "day": 9
+    },
     "numberOfProfiles": 74,
     "numberOfEolProfiles": 47,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 826.5135135135135,
-      "median": 820.0,
+      "mean": 827.5135135135135,
+      "median": 821.0,
       "variance": 175258.14170927688,
       "stdev": 418.63843792618576,
       "youngestRevisions": [
         {
           "key": "Convox",
-          "value": 188
+          "value": 189
         },
         {
           "key": "d2c",
-          "value": 192
+          "value": 193
         },
         {
           "key": "Amazon Elastic Beanstalk",
-          "value": 245
+          "value": 246
         },
         {
           "key": "Atos Cloud Foundry",
-          "value": 266
+          "value": 267
         },
         {
           "key": "Google App Engine",
-          "value": 315
+          "value": 316
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "CatN",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Pagoda Box",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Cloudify",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 1849.4626865671644,
-      "medianStatusSince": 1782.0,
+      "meanStatusSince": 1850.4626865671644,
+      "medianStatusSince": 1783.0,
       "varianceStatusSince": 1163806.7560703938,
       "stdevStatusSince": 1078.798756057122,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "d2c",
-          "value": 223
+          "value": 224
         },
         {
           "key": "APPUiO",
-          "value": 320
+          "value": 321
         },
         {
           "key": "Swisscom Application Cloud",
-          "value": 325
+          "value": 326
         },
         {
           "key": "Predix",
-          "value": 364
+          "value": 365
         },
         {
           "key": "Flynn",
-          "value": 391
+          "value": 392
         }
       ]
     },

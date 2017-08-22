@@ -10,11 +10,13 @@ import org.paasfinder.paasalyser.profile.models.Runtime;
 import org.paasfinder.paasalyser.profile.models.Scaling;
 import org.paasfinder.paasalyser.profile.models.Services;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 
 public class PaasProfileDeserializer implements JsonDeserializer<PaasProfile> {
 
@@ -29,12 +31,21 @@ public class PaasProfileDeserializer implements JsonDeserializer<PaasProfile> {
 		String url = jsonObject.get("url").getAsString();
 		String status = jsonObject.get("status").getAsString();
 		String type = jsonObject.get("type").getAsString();
-		Hosting hosting = context.deserialize(jsonObject.get("hosting"), Hosting.class);
+
+		Hosting hosting = null;
+		try {
+			hosting = context.deserialize(jsonObject.get("hosting"), Hosting.class);
+		} catch (JsonParseException e) {
+			if (jsonObject.get("hosting").isJsonArray()) {
+				JsonArray array = json.getAsJsonArray();
+			}
+		}
+
 		boolean extensible = jsonObject.get("extensible").getAsBoolean();
 
 		// Optional fields
 		String statusSince = jsonObject.get("status_since").getAsString();
-		
+
 		String platform;
 		try {
 			platform = jsonObject.get("platform").getAsString();

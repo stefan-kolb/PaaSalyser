@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 7,
+      "day": 2
+    },
     "numberOfProfiles": 77,
     "numberOfEolProfiles": 24,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1329.7662337662337,
-      "median": 1281.0,
+      "mean": 1330.7662337662337,
+      "median": 1282.0,
       "variance": 19667.270028672636,
       "stdev": 140.24004431214587,
       "youngestRevisions": [
         {
           "key": "Amazon Elastic Beanstalk",
-          "value": 1147
+          "value": 1148
         },
         {
           "key": "Bluemix",
-          "value": 1147
+          "value": 1148
         },
         {
           "key": "Jelastic",
-          "value": 1149
+          "value": 1150
         },
         {
           "key": "AppFog",
-          "value": 1152
+          "value": 1153
         },
         {
           "key": "Shelly Cloud",
-          "value": 1168
+          "value": 1169
         }
       ],
       "oldestRevisions": [
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Force.com",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 3
         }
       ],
-      "meanStatusSince": 2075.5,
-      "medianStatusSince": 1947.5,
+      "meanStatusSince": 2076.5,
+      "medianStatusSince": 1948.5,
       "varianceStatusSince": 402794.03125,
       "stdevStatusSince": 634.6605638055669,
       "oldestStatusSince": [
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         },
         {
           "key": "Apprenda",
-          "value": 3184
+          "value": 3185
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Bluemix",
-          "value": 1148
+          "value": 1149
         },
         {
           "key": "Pivotal Web Services",
-          "value": 1202
+          "value": 1203
         },
         {
           "key": "Viaduct",
-          "value": 1262
+          "value": 1263
         },
         {
           "key": "App42 PaaS",
-          "value": 1315
+          "value": 1316
         },
         {
           "key": "Evia",
-          "value": 1350
+          "value": 1351
         }
       ]
     },

@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2016,
+      "month": 3,
+      "day": 5
+    },
     "numberOfProfiles": 71,
     "numberOfEolProfiles": 43,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1041.3661971830986,
-      "median": 1085.0,
+      "mean": 1042.3661971830986,
+      "median": 1086.0,
       "variance": 83981.58420948227,
       "stdev": 289.79576292534415,
       "youngestRevisions": [
         {
           "key": "Viaduct",
-          "value": 534
+          "value": 535
         },
         {
           "key": "HPE Helion Stackato",
-          "value": 553
+          "value": 554
         },
         {
           "key": "Clever Cloud",
-          "value": 572
+          "value": 573
         },
         {
           "key": "Railscloud",
-          "value": 583
+          "value": 584
         },
         {
           "key": "AppFog",
-          "value": 583
+          "value": 584
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Pogoapp",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "CatN",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 2043.453125,
-      "medianStatusSince": 1877.5,
+      "meanStatusSince": 2044.453125,
+      "medianStatusSince": 1878.5,
       "varianceStatusSince": 924244.3415527344,
       "stdevStatusSince": 961.3762746982757,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "HPE Helion Stackato",
-          "value": 755
+          "value": 756
         },
         {
           "key": "Anynines",
-          "value": 782
+          "value": 783
         },
         {
           "key": "Scalingo",
-          "value": 857
+          "value": 858
         },
         {
           "key": "Canopy Cloud Fabric",
-          "value": 957
+          "value": 958
         },
         {
           "key": "Deis",
-          "value": 1014
+          "value": 1015
         }
       ]
     },

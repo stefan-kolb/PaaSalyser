@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2015,
+      "month": 3,
+      "day": 19
+    },
     "numberOfProfiles": 73,
     "numberOfEolProfiles": 35,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1208.6164383561643,
-      "median": 1181.0,
+      "mean": 1209.6164383561643,
+      "median": 1182.0,
       "variance": 43430.784387314685,
       "stdev": 208.40053835658554,
       "youngestRevisions": [
         {
           "key": "OutSystems Platform",
-          "value": 889
+          "value": 890
         },
         {
           "key": "OpenShift Online",
-          "value": 889
+          "value": 890
         },
         {
           "key": "OpenShift Enterprise",
-          "value": 889
+          "value": 890
         },
         {
           "key": "OpenShift Origin",
-          "value": 889
+          "value": 890
         },
         {
           "key": "HP Helion Development Platform",
-          "value": 889
+          "value": 890
         }
       ],
       "oldestRevisions": [
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Force.com",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 2094.353846153846,
-      "medianStatusSince": 1938.0,
+      "meanStatusSince": 2095.353846153846,
+      "medianStatusSince": 1939.0,
       "varianceStatusSince": 851656.5363313612,
       "stdevStatusSince": 922.8523914101113,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Scalingo",
-          "value": 930
+          "value": 931
         },
         {
           "key": "Rapidcloud.io",
-          "value": 1070
+          "value": 1071
         },
         {
           "key": "platform.sh",
-          "value": 1085
+          "value": 1086
         },
         {
           "key": "CloudUnit",
-          "value": 1085
+          "value": 1086
         },
         {
           "key": "Flynn",
-          "value": 1104
+          "value": 1105
         }
       ]
     },

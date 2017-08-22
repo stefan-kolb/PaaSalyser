@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2015,
+      "month": 3,
+      "day": 14
+    },
     "numberOfProfiles": 75,
     "numberOfEolProfiles": 32,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1235.8266666666666,
-      "median": 1186.0,
+      "mean": 1236.8266666666666,
+      "median": 1187.0,
       "variance": 37181.90328888889,
       "stdev": 192.82609597481584,
       "youngestRevisions": [
         {
           "key": "Viaduct",
-          "value": 900
+          "value": 901
         },
         {
           "key": "Scalingo",
-          "value": 910
+          "value": 911
         },
         {
           "key": "platform.sh",
-          "value": 916
+          "value": 917
         },
         {
           "key": "Bluemix",
-          "value": 927
+          "value": 928
         },
         {
           "key": "Microsoft Azure",
-          "value": 930
+          "value": 931
         }
       ],
       "oldestRevisions": [
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Force.com",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 2021.0757575757575,
-      "medianStatusSince": 1877.5,
+      "meanStatusSince": 2022.0757575757575,
+      "medianStatusSince": 1878.5,
       "varianceStatusSince": 613858.8275941228,
       "stdevStatusSince": 783.4914342825471,
       "oldestStatusSince": [
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Scalingo",
-          "value": 930
+          "value": 931
         },
         {
           "key": "Rapidcloud.io",
-          "value": 1070
+          "value": 1071
         },
         {
           "key": "platform.sh",
-          "value": 1085
+          "value": 1086
         },
         {
           "key": "CloudUnit",
-          "value": 1085
+          "value": 1086
         },
         {
           "key": "Flynn",
-          "value": 1104
+          "value": 1105
         }
       ]
     },

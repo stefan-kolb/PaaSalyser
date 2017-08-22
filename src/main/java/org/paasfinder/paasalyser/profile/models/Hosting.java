@@ -36,4 +36,9 @@ public class Hosting {
 		return virtualPrivate.booleanValue();
 	}
 
+	@Override
+	public String toString() {
+		return "Hosting [_public=" + _public + ", _private=" + _private + ", virtualPrivate=" + virtualPrivate + "]";
+	}
+
 }

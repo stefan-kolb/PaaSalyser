@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2016,
+      "month": 1,
+      "day": 16
+    },
     "numberOfProfiles": 73,
     "numberOfEolProfiles": 40,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1070.7260273972602,
-      "median": 1109.0,
+      "mean": 1071.7260273972602,
+      "median": 1110.0,
       "variance": 70560.14411709511,
       "stdev": 265.6315947267853,
       "youngestRevisions": [
         {
           "key": "AppFog",
-          "value": 583
+          "value": 584
         },
         {
           "key": "Heroku",
-          "value": 585
+          "value": 586
         },
         {
           "key": "Force.com",
-          "value": 593
+          "value": 594
         },
         {
           "key": "Nuvla",
-          "value": 678
+          "value": 679
         },
         {
           "key": "Cloud 66",
-          "value": 693
+          "value": 694
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Pogoapp",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "CatN",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 2076.353846153846,
-      "medianStatusSince": 1938.0,
+      "meanStatusSince": 2077.353846153846,
+      "medianStatusSince": 1939.0,
       "varianceStatusSince": 879704.4440236688,
       "stdevStatusSince": 937.9256068706455,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Anynines",
-          "value": 782
+          "value": 783
         },
         {
           "key": "Scalingo",
-          "value": 857
+          "value": 858
         },
         {
           "key": "Deis",
-          "value": 1014
+          "value": 1015
         },
         {
           "key": "Platform.sh",
-          "value": 1085
+          "value": 1086
         },
         {
           "key": "CloudUnit",
-          "value": 1085
+          "value": 1086
         }
       ]
     },

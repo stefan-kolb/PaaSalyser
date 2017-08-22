@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2015,
+      "month": 8,
+      "day": 12
+    },
     "numberOfProfiles": 73,
     "numberOfEolProfiles": 37,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1105.3972602739725,
-      "median": 1130.0,
+      "mean": 1106.3972602739725,
+      "median": 1131.0,
       "variance": 58099.66410208294,
       "stdev": 241.03871909318417,
       "youngestRevisions": [
         {
           "key": "WSO2 App Cloud",
-          "value": 740
+          "value": 741
         },
         {
           "key": "Scalingo",
-          "value": 761
+          "value": 762
         },
         {
           "key": "Anynines",
-          "value": 795
-        },
-        {
-          "key": "Google App Engine",
           "value": 796
         },
         {
+          "key": "Google App Engine",
+          "value": 797
+        },
+        {
           "key": "Bluemix",
-          "value": 803
+          "value": 804
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Force.com",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Pogoapp",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 2071.107692307692,
-      "medianStatusSince": 1938.0,
+      "meanStatusSince": 2072.107692307692,
+      "medianStatusSince": 1939.0,
       "varianceStatusSince": 892815.1422485204,
       "stdevStatusSince": 944.8889576286308,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Anynines",
-          "value": 782
+          "value": 783
         },
         {
           "key": "Scalingo",
-          "value": 857
+          "value": 858
         },
         {
           "key": "Deis",
-          "value": 1014
+          "value": 1015
         },
         {
           "key": "Rapidcloud.io",
-          "value": 1070
+          "value": 1071
         },
         {
           "key": "Platform.sh",
-          "value": 1085
+          "value": 1086
         }
       ]
     },

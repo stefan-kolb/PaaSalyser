@@ -1,5 +1,7 @@
 package org.paasfinder.paasalyser.report;
 
+import java.time.LocalDate;
+
 import org.paasfinder.paasalyser.report.models.BusinessInfo;
 import org.paasfinder.paasalyser.report.models.EconomicInfo;
 import org.paasfinder.paasalyser.report.models.MetaInfo;
@@ -19,11 +21,11 @@ public class PaasReport {
 	 * @throws IllegalStateException
 	 *             If input parameter is null
 	 */
-	public PaasReport(ReportStatistics statistics) throws IllegalStateException {
+	public PaasReport(LocalDate date, ReportStatistics statistics) throws IllegalStateException {
 		if (statistics == null) {
 			throw new IllegalStateException("Statistics was null");
 		}
-		metaInfo = new MetaInfo(statistics.getProfilesCount(), statistics.getEolProfilesCount(),
+		metaInfo = new MetaInfo(date, statistics.getProfilesCount(), statistics.getEolProfilesCount(),
 				statistics.getInvalidProfilesCount(), statistics.getRevision(), statistics.getType());
 		businessInfo = new BusinessInfo(statistics.getStatus(), statistics.getPricing());
 		economicInfo = new EconomicInfo(statistics.getHosting(), statistics.getScaling(), statistics.getRuntimes(),

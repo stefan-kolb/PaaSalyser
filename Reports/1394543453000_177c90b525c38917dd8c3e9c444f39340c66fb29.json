@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 3,
+      "day": 11
+    },
     "numberOfProfiles": 73,
     "numberOfEolProfiles": 21,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1438.876712328767,
-      "median": 1503.0,
+      "mean": 1439.876712328767,
+      "median": 1504.0,
       "variance": 9335.66973165697,
       "stdev": 96.62126956140128,
       "youngestRevisions": [
         {
           "key": "Voxoz",
-          "value": 1259
+          "value": 1260
         },
         {
           "key": "Flynn",
-          "value": 1259
+          "value": 1260
         },
         {
           "key": "Moncai",
-          "value": 1259
+          "value": 1260
         },
         {
           "key": "Codename:Bluemix",
-          "value": 1264
+          "value": 1265
         },
         {
           "key": "AppScale",
-          "value": 1279
+          "value": 1280
         }
       ],
       "oldestRevisions": [
         {
           "key": "MoPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "iKnode",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ElasticBox",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 3
         }
       ],
-      "meanStatusSince": 2139.766666666667,
-      "medianStatusSince": 1999.5,
+      "meanStatusSince": 2140.766666666667,
+      "medianStatusSince": 2000.5,
       "varianceStatusSince": 389962.678888889,
       "stdevStatusSince": 624.4699183218428,
       "oldestStatusSince": [
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         },
         {
           "key": "Apprenda",
-          "value": 3184
+          "value": 3185
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Jumpstarter",
-          "value": 1265
+          "value": 1266
         },
         {
           "key": "Codename:Bluemix",
-          "value": 1274
+          "value": 1275
         },
         {
           "key": "Evia",
-          "value": 1350
+          "value": 1351
         },
         {
           "key": "Tsuru",
-          "value": 1454
+          "value": 1455
         },
         {
           "key": "Deis",
-          "value": 1476
+          "value": 1477
         }
       ]
     },

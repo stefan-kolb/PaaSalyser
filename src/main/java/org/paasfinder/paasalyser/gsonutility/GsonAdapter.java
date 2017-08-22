@@ -9,27 +9,13 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.AbstractMap;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.paasfinder.paasalyser.gsonutility.deserializers.HostingDeserializer;
-import org.paasfinder.paasalyser.gsonutility.deserializers.InfrastructureDeserializer;
-import org.paasfinder.paasalyser.gsonutility.deserializers.PaasProfileDeserializer;
-import org.paasfinder.paasalyser.gsonutility.deserializers.PricingDeserializer;
-import org.paasfinder.paasalyser.gsonutility.deserializers.RuntimeDeserializer;
-import org.paasfinder.paasalyser.gsonutility.deserializers.ScalingDeserializer;
-import org.paasfinder.paasalyser.gsonutility.deserializers.ServicesDeserializer;
 import org.paasfinder.paasalyser.profile.PaasProfile;
 import org.paasfinder.paasalyser.profile.models.Hosting;
-import org.paasfinder.paasalyser.profile.models.Infrastructure;
-import org.paasfinder.paasalyser.profile.models.Pricing;
-import org.paasfinder.paasalyser.profile.models.Runtime;
-import org.paasfinder.paasalyser.profile.models.Scaling;
-import org.paasfinder.paasalyser.profile.models.Services;
 import org.paasfinder.paasalyser.report.PaasReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,12 +29,12 @@ public class GsonAdapter {
 
 	private final Logger logger = LoggerFactory.getLogger(GsonAdapter.class);
 
-	// private GsonBuilder gsonBuilder;
+	private GsonBuilder gsonBuilder;
 	private Gson gson;
 
 	public GsonAdapter() {
-		// gsonBuilder = createGsonBuilderWithCustomDeserializing();
-		gson = new GsonBuilder().setPrettyPrinting().create();
+		gsonBuilder = createGsonBuilderWithCustomDeserializing();
+		gson = gsonBuilder.setPrettyPrinting().create();
 	}
 
 	/**
@@ -111,46 +97,55 @@ public class GsonAdapter {
 		}
 	}
 
-//	public Map<String, PaasReport> scanReportsFromDatastore(Path rootDirectory) throws IOException {
-//		if (!Files.isDirectory(rootDirectory)) {
-//			throw new IOException(rootDirectory + " is no existing directory");
-//		} else {
-//			return Files.walk(rootDirectory).filter(path -> path.toString().endsWith("json")).map(path -> {
-//				try (InputStream in = Files.newInputStream(path);
-//						BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-//					return new AbstractMap.SimpleEntry(path, gson.fromJson(reader, PaasReport.class));
-//				} catch (IOException e) {
-//					logger.error("IOException occurred during scanning directory at: " + path.getFileName()
-//							+ " | Message: " + e.getMessage());
-//					return null;
-//				} catch (JsonSyntaxException e) {
-//					logger.error("JsonSyntaxException occurred during scanning directory at: " + path.getFileName()
-//							+ " | Message: " + e.getMessage());
-//					return null;
-//				}
-//			}).collect(Collectors.toCollection(HashMap::new));
-//		}
-//	}
+	// public Map<String, PaasReport> scanReportsFromDatastore(Path
+	// rootDirectory) throws IOException {
+	// if (!Files.isDirectory(rootDirectory)) {
+	// throw new IOException(rootDirectory + " is no existing directory");
+	// } else {
+	// return Files.walk(rootDirectory).filter(path ->
+	// path.toString().endsWith("json")).map(path -> {
+	// try (InputStream in = Files.newInputStream(path);
+	// BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+	// return new AbstractMap.SimpleEntry(path, gson.fromJson(reader,
+	// PaasReport.class));
+	// } catch (IOException e) {
+	// logger.error("IOException occurred during scanning directory at: " +
+	// path.getFileName()
+	// + " | Message: " + e.getMessage());
+	// return null;
+	// } catch (JsonSyntaxException e) {
+	// logger.error("JsonSyntaxException occurred during scanning directory at:
+	// " + path.getFileName()
+	// + " | Message: " + e.getMessage());
+	// return null;
+	// }
+	// }).collect(Collectors.toCollection(HashMap::new));
+	// }
+	// }
 
-	@SuppressWarnings("unused")
 	private GsonBuilder createGsonBuilderWithCustomDeserializing() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 
-		PaasProfileDeserializer paasProfileDeserializer = new PaasProfileDeserializer();
-		HostingDeserializer hostingDeserializer = new HostingDeserializer();
-		PricingDeserializer pricingDeserializer = new PricingDeserializer();
-		ScalingDeserializer scalingDeserializer = new ScalingDeserializer();
-		RuntimeDeserializer runtimeDeserializer = new RuntimeDeserializer();
-		ServicesDeserializer servicesDeserializer = new ServicesDeserializer();
-		InfrastructureDeserializer infrastructureDeserializer = new InfrastructureDeserializer();
+		// PaasProfileDeserializer paasProfileDeserializer = new
+		// PaasProfileDeserializer();
+		// PricingDeserializer pricingDeserializer = new PricingDeserializer();
+		// ScalingDeserializer scalingDeserializer = new ScalingDeserializer();
+		// RuntimeDeserializer runtimeDeserializer = new RuntimeDeserializer();
+		// ServicesDeserializer servicesDeserializer = new
+		// ServicesDeserializer();
+		// InfrastructureDeserializer infrastructureDeserializer = new
+		// InfrastructureDeserializer();
 
-		gsonBuilder.registerTypeAdapter(PaasProfile.class, paasProfileDeserializer);
-		gsonBuilder.registerTypeAdapter(Hosting.class, hostingDeserializer);
-		gsonBuilder.registerTypeAdapter(Pricing.class, pricingDeserializer);
-		gsonBuilder.registerTypeAdapter(Scaling.class, scalingDeserializer);
-		gsonBuilder.registerTypeAdapter(Runtime.class, runtimeDeserializer);
-		gsonBuilder.registerTypeAdapter(Services.class, servicesDeserializer);
-		gsonBuilder.registerTypeAdapter(Infrastructure.class, infrastructureDeserializer);
+		// gsonBuilder.registerTypeAdapter(PaasProfile.class,
+		// paasProfileDeserializer);
+		gsonBuilder.registerTypeAdapter(Hosting.class, new HostingDeserializer());
+		// gsonBuilder.registerTypeAdapter(Pricing.class, pricingDeserializer);
+		// gsonBuilder.registerTypeAdapter(Scaling.class, scalingDeserializer);
+		// gsonBuilder.registerTypeAdapter(Runtime.class, runtimeDeserializer);
+		// gsonBuilder.registerTypeAdapter(Services.class,
+		// servicesDeserializer);
+		// gsonBuilder.registerTypeAdapter(Infrastructure.class,
+		// infrastructureDeserializer);
 
 		return gsonBuilder;
 	}

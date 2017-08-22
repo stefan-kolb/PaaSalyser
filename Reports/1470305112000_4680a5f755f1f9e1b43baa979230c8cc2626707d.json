@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2016,
+      "month": 8,
+      "day": 4
+    },
     "numberOfProfiles": 73,
     "numberOfEolProfiles": 42,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1000.7260273972603,
-      "median": 1039.0,
+      "mean": 1001.7260273972603,
+      "median": 1040.0,
       "variance": 105943.6509664102,
       "stdev": 325.489863077808,
       "youngestRevisions": [
         {
           "key": "Scalingo",
-          "value": 382
+          "value": 383
         },
         {
           "key": "AppAgile",
-          "value": 395
+          "value": 396
         },
         {
           "key": "exoscale Apps",
-          "value": 432
+          "value": 433
         },
         {
           "key": "Cloudways",
-          "value": 488
+          "value": 489
         },
         {
           "key": "SAP HANA Cloud Platform",
-          "value": 510
+          "value": 511
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Pogoapp",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "CatN",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 2013.893939393939,
-      "medianStatusSince": 1865.0,
+      "meanStatusSince": 2014.893939393939,
+      "medianStatusSince": 1866.0,
       "varianceStatusSince": 924612.4281450869,
       "stdevStatusSince": 961.5676929603484,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "HPE Helion Stackato",
-          "value": 755
+          "value": 756
         },
         {
           "key": "Anynines",
-          "value": 782
+          "value": 783
         },
         {
           "key": "AppAgile",
-          "value": 873
+          "value": 874
         },
         {
           "key": "Scalingo",
-          "value": 930
+          "value": 931
         },
         {
           "key": "Atos Cloud Foundry",
-          "value": 957
+          "value": 958
         }
       ]
     },

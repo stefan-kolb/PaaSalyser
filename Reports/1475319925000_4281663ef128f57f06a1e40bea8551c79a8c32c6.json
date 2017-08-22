@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2016,
+      "month": 10,
+      "day": 1
+    },
     "numberOfProfiles": 73,
     "numberOfEolProfiles": 45,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 887.6027397260275,
-      "median": 886.0,
+      "mean": 888.6027397260275,
+      "median": 887.0,
       "variance": 153771.9928692063,
       "stdev": 392.1377218136586,
       "youngestRevisions": [
         {
           "key": "Swisscom",
-          "value": 324
-        },
-        {
-          "key": "Anynines",
           "value": 325
         },
         {
+          "key": "Anynines",
+          "value": 326
+        },
+        {
           "key": "Platform.sh",
-          "value": 334
+          "value": 335
         },
         {
           "key": "Dokkur",
-          "value": 368
+          "value": 369
         },
         {
           "key": "Cloud Foundry",
-          "value": 369
+          "value": 370
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "CatN",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Pagoda Box",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Cloudify",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 1921.7910447761196,
-      "medianStatusSince": 1863.0,
+      "meanStatusSince": 1922.7910447761196,
+      "medianStatusSince": 1864.0,
       "varianceStatusSince": 1085059.777233237,
       "stdevStatusSince": 1041.6620263949517,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Swisscom",
-          "value": 324
+          "value": 325
         },
         {
           "key": "Flynn",
-          "value": 391
+          "value": 392
         },
         {
           "key": "Tsuru",
-          "value": 415
-        },
-        {
-          "key": "Dokkur",
           "value": 416
         },
         {
+          "key": "Dokkur",
+          "value": 417
+        },
+        {
           "key": "devpack",
-          "value": 462
+          "value": 463
         }
       ]
     },

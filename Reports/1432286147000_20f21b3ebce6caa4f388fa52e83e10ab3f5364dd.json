@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2015,
+      "month": 5,
+      "day": 22
+    },
     "numberOfProfiles": 72,
     "numberOfEolProfiles": 36,
     "numberOfInvalidProfiles": 1,
     "revisionReport": {
-      "mean": 1165.8472222222222,
-      "median": 1161.0,
+      "mean": 1166.8472222222222,
+      "median": 1162.0,
       "variance": 52644.184992283954,
       "stdev": 229.443206463569,
       "youngestRevisions": [
         {
           "key": "Cloud\u0026Heat App Elevator",
-          "value": 823
+          "value": 824
         },
         {
           "key": "Heroku",
-          "value": 832
+          "value": 833
         },
         {
           "key": "Scalingo",
-          "value": 857
+          "value": 858
         },
         {
           "key": "Shelly Cloud",
-          "value": 859
+          "value": 860
         },
         {
           "key": "Cloud Foundry",
-          "value": 859
+          "value": 860
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Force.com",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Appsembler",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 2080.3809523809523,
-      "medianStatusSince": 1938.0,
+      "meanStatusSince": 2081.3809523809523,
+      "medianStatusSince": 1939.0,
       "varianceStatusSince": 866096.9977324262,
       "stdevStatusSince": 930.6433246590373,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Scalingo",
-          "value": 857
+          "value": 858
         },
         {
           "key": "Deis",
-          "value": 1014
+          "value": 1015
         },
         {
           "key": "Rapidcloud.io",
-          "value": 1070
+          "value": 1071
         },
         {
           "key": "platform.sh",
-          "value": 1085
+          "value": 1086
         },
         {
           "key": "CloudUnit",
-          "value": 1085
+          "value": 1086
         }
       ]
     },

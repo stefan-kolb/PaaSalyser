@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 
@@ -84,7 +87,9 @@ public class Executionmanager {
 		logger.info("Generating Report");
 		PaasReport report;
 		try {
-			report = new PaasReport(statistics);
+			Instant instant = commitProfile.getKey().getAuthorIdent().getWhen().toInstant();
+			LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+			report = new PaasReport(localDate, statistics);
 		} catch (IllegalStateException e) {
 			logger.warn("Statistics was null. An empty report is being generated");
 			report = new PaasReport();

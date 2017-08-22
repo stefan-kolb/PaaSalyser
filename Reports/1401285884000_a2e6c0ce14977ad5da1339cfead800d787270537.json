@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 5,
+      "day": 28
+    },
     "numberOfProfiles": 74,
     "numberOfEolProfiles": 24,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1348.9594594594594,
-      "median": 1295.0,
+      "mean": 1349.9594594594594,
+      "median": 1296.0,
       "variance": 17368.147005113227,
       "stdev": 131.7882658096434,
       "youngestRevisions": [
         {
           "key": "MoPaaS",
-          "value": 1181
+          "value": 1182
         },
         {
           "key": "ELPaaS",
-          "value": 1181
+          "value": 1182
         },
         {
           "key": "Standing Cloud",
-          "value": 1181
+          "value": 1182
         },
         {
           "key": "Webappcabaret",
-          "value": 1181
+          "value": 1182
         },
         {
           "key": "Cloudways",
-          "value": 1181
+          "value": 1182
         }
       ],
       "oldestRevisions": [
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Force.com",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 3
         }
       ],
-      "meanStatusSince": 2085.8032786885246,
-      "medianStatusSince": 1957.0,
+      "meanStatusSince": 2086.8032786885246,
+      "medianStatusSince": 1958.0,
       "varianceStatusSince": 414795.5678581025,
       "stdevStatusSince": 644.0462466765119,
       "oldestStatusSince": [
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         },
         {
           "key": "Apprenda",
-          "value": 3184
+          "value": 3185
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Cumulogic Elastic WebStack",
-          "value": 1181
+          "value": 1182
         },
         {
           "key": "Pivotal Web Services",
-          "value": 1202
+          "value": 1203
         },
         {
           "key": "Viaduct",
-          "value": 1262
+          "value": 1263
         },
         {
           "key": "Codename:Bluemix",
-          "value": 1274
+          "value": 1275
         },
         {
           "key": "Evia",
-          "value": 1350
+          "value": 1351
         }
       ]
     },

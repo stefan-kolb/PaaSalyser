@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 3,
+      "day": 13
+    },
     "numberOfProfiles": 74,
     "numberOfEolProfiles": 21,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1435.5,
-      "median": 1503.0,
+      "mean": 1436.5,
+      "median": 1504.0,
       "variance": 9948.141891891892,
       "stdev": 99.74037242707635,
       "youngestRevisions": [
         {
           "key": "OpenShift Online",
-          "value": 1257
+          "value": 1258
         },
         {
           "key": "OpenShift Enterprise",
-          "value": 1257
+          "value": 1258
         },
         {
           "key": "OpenShift Origin",
-          "value": 1257
+          "value": 1258
         },
         {
           "key": "Voxoz",
-          "value": 1259
+          "value": 1260
         },
         {
           "key": "Flynn",
-          "value": 1259
+          "value": 1260
         }
       ],
       "oldestRevisions": [
         {
           "key": "MoPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "iKnode",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ElasticBox",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 3
         }
       ],
-      "meanStatusSince": 2134.2131147540986,
-      "medianStatusSince": 1999.0,
+      "meanStatusSince": 2135.2131147540986,
+      "medianStatusSince": 2000.0,
       "varianceStatusSince": 383065.47917226574,
       "stdevStatusSince": 618.9228378176603,
       "oldestStatusSince": [
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         },
         {
           "key": "Apprenda",
-          "value": 3184
+          "value": 3185
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Codename:Bluemix",
-          "value": 1274
+          "value": 1275
         },
         {
           "key": "Evia",
-          "value": 1350
+          "value": 1351
         },
         {
           "key": "Tsuru",
-          "value": 1454
+          "value": 1455
         },
         {
           "key": "Deis",
-          "value": 1476
+          "value": 1477
         },
         {
           "key": "OpenShift Online",
-          "value": 1533
+          "value": 1534
         }
       ]
     },

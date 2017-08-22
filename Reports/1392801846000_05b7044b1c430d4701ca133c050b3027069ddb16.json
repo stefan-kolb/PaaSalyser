@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 2,
+      "day": 19
+    },
     "numberOfProfiles": 70,
     "numberOfEolProfiles": 21,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1452.5285714285715,
-      "median": 1503.5,
+      "mean": 1453.5285714285715,
+      "median": 1504.5,
       "variance": 7490.020612244892,
       "stdev": 86.54490517786066,
       "youngestRevisions": [
         {
           "key": "AppScale",
-          "value": 1279
+          "value": 1280
         },
         {
           "key": "Heroku",
-          "value": 1279
+          "value": 1280
         },
         {
           "key": "Nitrous.io",
-          "value": 1281
+          "value": 1282
         },
         {
           "key": "Webbynode",
-          "value": 1281
+          "value": 1282
         },
         {
           "key": "CenturyLink Cloud",
-          "value": 1281
+          "value": 1282
         }
       ],
       "oldestRevisions": [
         {
           "key": "MoPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "iKnode",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ElasticBox",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 0
         }
       ],
-      "meanStatusSince": 2179.2280701754385,
-      "medianStatusSince": 2015.0,
+      "meanStatusSince": 2180.2280701754385,
+      "medianStatusSince": 2016.0,
       "varianceStatusSince": 377813.82517697755,
       "stdevStatusSince": 614.6656206239109,
       "oldestStatusSince": [
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         },
         {
           "key": "Apprenda",
-          "value": 3184
+          "value": 3185
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Evia",
-          "value": 1350
+          "value": 1351
         },
         {
           "key": "Tsuru",
-          "value": 1454
+          "value": 1455
         },
         {
           "key": "Deis",
-          "value": 1476
+          "value": 1477
         },
         {
           "key": "OpenShift Online",
-          "value": 1533
+          "value": 1534
         },
         {
           "key": "Railscloud",
-          "value": 1542
+          "value": 1543
         }
       ]
     },

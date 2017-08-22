@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2015,
+      "month": 6,
+      "day": 3
+    },
     "numberOfProfiles": 73,
     "numberOfEolProfiles": 36,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1130.164383561644,
-      "median": 1132.0,
+      "mean": 1131.164383561644,
+      "median": 1133.0,
       "variance": 54488.98667667481,
       "stdev": 233.42876145983985,
       "youngestRevisions": [
         {
           "key": "Deis",
-          "value": 810
+          "value": 811
         },
         {
           "key": "Platform.sh",
-          "value": 815
+          "value": 816
         },
         {
           "key": "cloudControl",
-          "value": 816
+          "value": 817
         },
         {
           "key": "dotCloud",
-          "value": 816
+          "value": 817
         },
         {
           "key": "mOSAIC",
-          "value": 818
+          "value": 819
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Force.com",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Appsembler",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 2097.625,
-      "medianStatusSince": 1947.5,
+      "meanStatusSince": 2098.625,
+      "medianStatusSince": 1948.5,
       "varianceStatusSince": 871297.734375,
       "stdevStatusSince": 933.4333047277669,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Scalingo",
-          "value": 857
+          "value": 858
         },
         {
           "key": "Deis",
-          "value": 1014
+          "value": 1015
         },
         {
           "key": "Rapidcloud.io",
-          "value": 1070
+          "value": 1071
         },
         {
           "key": "Platform.sh",
-          "value": 1085
+          "value": 1086
         },
         {
           "key": "CloudUnit",
-          "value": 1085
+          "value": 1086
         }
       ]
     },

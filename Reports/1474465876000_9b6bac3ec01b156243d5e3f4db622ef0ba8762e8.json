@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2016,
+      "month": 9,
+      "day": 21
+    },
     "numberOfProfiles": 72,
     "numberOfEolProfiles": 45,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 901.9583333333333,
-      "median": 887.5,
+      "mean": 902.9583333333333,
+      "median": 888.5,
       "variance": 147012.81770833337,
       "stdev": 383.42250547970366,
       "youngestRevisions": [
         {
           "key": "Platform.sh",
-          "value": 334
+          "value": 335
         },
         {
           "key": "Dokkur",
-          "value": 368
+          "value": 369
         },
         {
           "key": "Cloud Foundry",
-          "value": 369
+          "value": 370
         },
         {
           "key": "OpenShift Online",
-          "value": 369
+          "value": 370
         },
         {
           "key": "OpenShift Container Platform",
-          "value": 369
+          "value": 370
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "CatN",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Pagoda Box",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Cloudify",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 1946.0,
-      "medianStatusSince": 1865.0,
+      "meanStatusSince": 1947.0,
+      "medianStatusSince": 1866.0,
       "varianceStatusSince": 1062233.1515151516,
       "stdevStatusSince": 1030.6469577479727,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Flynn",
-          "value": 391
+          "value": 392
         },
         {
           "key": "Tsuru",
-          "value": 415
-        },
-        {
-          "key": "Dokkur",
           "value": 416
         },
         {
+          "key": "Dokkur",
+          "value": 417
+        },
+        {
           "key": "devpack",
-          "value": 462
+          "value": 463
         },
         {
           "key": "HPE Helion Stackato",
-          "value": 755
+          "value": 756
         }
       ]
     },

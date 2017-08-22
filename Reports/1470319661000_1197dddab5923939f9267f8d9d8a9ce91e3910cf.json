@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2016,
+      "month": 8,
+      "day": 4
+    },
     "numberOfProfiles": 74,
     "numberOfEolProfiles": 42,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 986.5945945945946,
-      "median": 1009.5,
+      "mean": 987.5945945945946,
+      "median": 1010.5,
       "variance": 112639.565376187,
       "stdev": 335.61818391765814,
       "youngestRevisions": [
         {
           "key": "Atos Cloud Foundry",
-          "value": 385
+          "value": 386
         },
         {
           "key": "Flynn",
-          "value": 390
+          "value": 391
         },
         {
           "key": "AppAgile",
-          "value": 395
+          "value": 396
         },
         {
           "key": "devpack",
-          "value": 398
+          "value": 399
         },
         {
           "key": "exoscale Apps",
-          "value": 432
+          "value": 433
         }
       ],
       "oldestRevisions": [
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Pogoapp",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "CatN",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 1979.0,
-      "medianStatusSince": 1863.0,
+      "meanStatusSince": 1980.0,
+      "medianStatusSince": 1864.0,
       "varianceStatusSince": 974935.4029850747,
       "stdevStatusSince": 987.3881723947652,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Flynn",
-          "value": 391
+          "value": 392
         },
         {
           "key": "devpack",
-          "value": 462
+          "value": 463
         },
         {
           "key": "HPE Helion Stackato",
-          "value": 755
+          "value": 756
         },
         {
           "key": "Anynines",
-          "value": 782
+          "value": 783
         },
         {
           "key": "Scalingo",
-          "value": 857
+          "value": 858
         }
       ]
     },

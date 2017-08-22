@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2015,
+      "month": 4,
+      "day": 13
+    },
     "numberOfProfiles": 72,
     "numberOfEolProfiles": 36,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1195.513888888889,
-      "median": 1181.0,
+      "mean": 1196.513888888889,
+      "median": 1182.0,
       "variance": 47540.5553626543,
       "stdev": 218.03796770896187,
       "youngestRevisions": [
         {
           "key": "Shelly Cloud",
-          "value": 862
+          "value": 863
         },
         {
           "key": "Microsoft Azure",
-          "value": 881
-        },
-        {
-          "key": "cloudControl",
           "value": 882
         },
         {
+          "key": "cloudControl",
+          "value": 883
+        },
+        {
           "key": "OutSystems Platform",
-          "value": 885
+          "value": 886
         },
         {
           "key": "Modulus",
-          "value": 886
+          "value": 887
         }
       ],
       "oldestRevisions": [
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Force.com",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 1
         }
       ],
-      "meanStatusSince": 2105.984375,
-      "medianStatusSince": 1947.5,
+      "meanStatusSince": 2106.984375,
+      "medianStatusSince": 1948.5,
       "varianceStatusSince": 856171.1716308594,
       "stdevStatusSince": 925.2951808103505,
       "oldestStatusSince": [
         {
           "key": "OutSystems Platform",
-          "value": 5968
+          "value": 5969
         },
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Scalingo",
-          "value": 930
+          "value": 931
         },
         {
           "key": "Rapidcloud.io",
-          "value": 1070
+          "value": 1071
         },
         {
           "key": "platform.sh",
-          "value": 1085
+          "value": 1086
         },
         {
           "key": "CloudUnit",
-          "value": 1085
+          "value": 1086
         },
         {
           "key": "Flynn",
-          "value": 1104
+          "value": 1105
         }
       ]
     },

@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 5,
+      "day": 23
+    },
     "numberOfProfiles": 73,
     "numberOfEolProfiles": 24,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1378.0,
-      "median": 1349.0,
+      "mean": 1379.0,
+      "median": 1350.0,
       "variance": 16137.780821917808,
       "stdev": 127.03456546120748,
       "youngestRevisions": [
         {
           "key": "Tsuru",
-          "value": 1186
+          "value": 1187
         },
         {
           "key": "Pivotal Web Services",
-          "value": 1187
+          "value": 1188
         },
         {
           "key": "Pivotal CF",
-          "value": 1187
+          "value": 1188
         },
         {
           "key": "Cloud Foundry",
-          "value": 1187
+          "value": 1188
         },
         {
           "key": "Apache Stratos",
-          "value": 1189
+          "value": 1190
         }
       ],
       "oldestRevisions": [
         {
           "key": "MoPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Standing Cloud",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 3
         }
       ],
-      "meanStatusSince": 2107.133333333333,
-      "medianStatusSince": 1968.0,
+      "meanStatusSince": 2108.133333333333,
+      "medianStatusSince": 1969.0,
       "varianceStatusSince": 399655.5822222222,
       "stdevStatusSince": 632.1831872346987,
       "oldestStatusSince": [
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         },
         {
           "key": "Apprenda",
-          "value": 3184
+          "value": 3185
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Pivotal Web Services",
-          "value": 1202
+          "value": 1203
         },
         {
           "key": "Codename:Bluemix",
-          "value": 1274
+          "value": 1275
         },
         {
           "key": "Evia",
-          "value": 1350
+          "value": 1351
         },
         {
           "key": "Pivotal CF",
-          "value": 1378
+          "value": 1379
         },
         {
           "key": "Tsuru",
-          "value": 1454
+          "value": 1455
         }
       ]
     },

@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 1,
+      "day": 29
+    },
     "numberOfProfiles": 68,
     "numberOfEolProfiles": 20,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1479.1470588235295,
-      "median": 1508.0,
+      "mean": 1480.1470588235295,
+      "median": 1509.0,
       "variance": 3026.890138408302,
       "stdev": 55.017180393112675,
       "youngestRevisions": [
         {
           "key": "Paasmaker",
-          "value": 1312
+          "value": 1313
         },
         {
           "key": "OpenShift Online",
-          "value": 1322
+          "value": 1323
         },
         {
           "key": "EngineYard",
-          "value": 1341
+          "value": 1342
         },
         {
           "key": "Gondor",
-          "value": 1341
+          "value": 1342
         },
         {
           "key": "AppFog",
-          "value": 1344
+          "value": 1345
         }
       ],
       "oldestRevisions": [
         {
           "key": "MoPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "iKnode",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ElasticBox",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "AppScale",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 0
         }
       ],
-      "meanStatusSince": 2200.4,
-      "medianStatusSince": 2027.0,
+      "meanStatusSince": 2201.4,
+      "medianStatusSince": 2028.0,
       "varianceStatusSince": 378758.13090909104,
       "stdevStatusSince": 615.4332871311813,
       "oldestStatusSince": [
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         },
         {
           "key": "Apprenda",
-          "value": 3184
+          "value": 3185
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Evia",
-          "value": 1350
+          "value": 1351
         },
         {
           "key": "Tsuru",
-          "value": 1454
+          "value": 1455
         },
         {
           "key": "Deis",
-          "value": 1476
+          "value": 1477
         },
         {
           "key": "OpenShift Online",
-          "value": 1533
+          "value": 1534
         },
         {
           "key": "Railscloud",
-          "value": 1542
+          "value": 1543
         }
       ]
     },

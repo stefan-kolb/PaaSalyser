@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 8,
+      "day": 12
+    },
     "numberOfProfiles": 78,
     "numberOfEolProfiles": 25,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1304.3461538461538,
-      "median": 1258.0,
+      "mean": 1305.3461538461538,
+      "median": 1259.0,
       "variance": 21821.200690335303,
       "stdev": 147.72000775228554,
       "youngestRevisions": [
         {
           "key": "Getup Cloud",
-          "value": 1109
+          "value": 1110
         },
         {
           "key": "Modulus",
-          "value": 1124
+          "value": 1125
         },
         {
           "key": "OpenShift Online",
-          "value": 1127
+          "value": 1128
         },
         {
           "key": "OrangeScape",
-          "value": 1130
+          "value": 1131
         },
         {
           "key": "Mendix",
-          "value": 1130
+          "value": 1131
         }
       ],
       "oldestRevisions": [
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Force.com",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 3
         }
       ],
-      "meanStatusSince": 2105.2985074626868,
-      "medianStatusSince": 1957.0,
+      "meanStatusSince": 2106.2985074626868,
+      "medianStatusSince": 1958.0,
       "varianceStatusSince": 522839.6123858319,
       "stdevStatusSince": 723.0764913795994,
       "oldestStatusSince": [
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Platformer.com",
-          "value": 1140
+          "value": 1141
         },
         {
           "key": "Bluemix",
-          "value": 1148
+          "value": 1149
         },
         {
           "key": "exoscale Apps",
-          "value": 1190
+          "value": 1191
         },
         {
           "key": "Pivotal Web Services",
-          "value": 1202
+          "value": 1203
         },
         {
           "key": "Viaduct",
-          "value": 1262
+          "value": 1263
         }
       ]
     },

@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 2,
+      "day": 13
+    },
     "numberOfProfiles": 71,
     "numberOfEolProfiles": 20,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1465.6338028169014,
-      "median": 1508.0,
+      "mean": 1466.6338028169014,
+      "median": 1509.0,
       "variance": 5648.288434834354,
       "stdev": 75.15509586737518,
       "youngestRevisions": [
         {
           "key": "Jelastic",
-          "value": 1287
-        },
-        {
-          "key": "Modulus",
           "value": 1288
         },
         {
+          "key": "Modulus",
+          "value": 1289
+        },
+        {
           "key": "Clever Cloud",
-          "value": 1291
+          "value": 1292
         },
         {
           "key": "Getup Cloud",
-          "value": 1291
+          "value": 1292
         },
         {
           "key": "Jumpstarter",
-          "value": 1291
+          "value": 1292
         }
       ],
       "oldestRevisions": [
         {
           "key": "MoPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "iKnode",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ElasticBox",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "AppScale",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 0
         }
       ],
-      "meanStatusSince": 2166.6206896551726,
-      "medianStatusSince": 2007.5,
+      "meanStatusSince": 2167.6206896551726,
+      "medianStatusSince": 2008.5,
       "varianceStatusSince": 380359.718192628,
       "stdevStatusSince": 616.733101262311,
       "oldestStatusSince": [
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         },
         {
           "key": "Apprenda",
-          "value": 3184
+          "value": 3185
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Evia",
-          "value": 1350
+          "value": 1351
         },
         {
           "key": "Jumpstarter",
-          "value": 1448
+          "value": 1449
         },
         {
           "key": "Tsuru",
-          "value": 1454
+          "value": 1455
         },
         {
           "key": "Deis",
-          "value": 1476
+          "value": 1477
         },
         {
           "key": "OpenShift Online",
-          "value": 1533
+          "value": 1534
         }
       ]
     },

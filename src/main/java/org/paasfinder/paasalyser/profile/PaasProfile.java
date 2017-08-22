@@ -10,24 +10,38 @@ import org.paasfinder.paasalyser.profile.models.Runtime;
 import org.paasfinder.paasalyser.profile.models.Scaling;
 import org.paasfinder.paasalyser.profile.models.Services;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class PaasProfile {
 
 	private String name;
+
 	private String revision;
+
 	private String url;
+
 	private String status;
+	
 	@SerializedName("status_since")
 	private String statusSince;
+
 	private String type;
+
 	private String platform;
+
 	private Hosting hosting;
+
 	private Pricing[] pricings;
+
 	private Scaling scaling;
+
 	private Runtime[] runtimes;
+
 	private Services services;
+
 	private boolean extensible;
+
 	private Infrastructure[] infrastructures;
 
 	public PaasProfile(String name, String revision, String url, String status, String statusSince, String type,

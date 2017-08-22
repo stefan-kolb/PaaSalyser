@@ -1,55 +1,60 @@
 {
   "metaInfo": {
+    "date": {
+      "year": 2014,
+      "month": 9,
+      "day": 29
+    },
     "numberOfProfiles": 77,
     "numberOfEolProfiles": 27,
     "numberOfInvalidProfiles": 0,
     "revisionReport": {
-      "mean": 1276.2597402597403,
-      "median": 1221.0,
+      "mean": 1277.2597402597403,
+      "median": 1222.0,
       "variance": 25318.711755776687,
       "stdev": 159.11854623448735,
       "youngestRevisions": [
         {
           "key": "Shelly Cloud",
-          "value": 1057
+          "value": 1058
         },
         {
           "key": "Google App Engine",
-          "value": 1062
+          "value": 1063
         },
         {
           "key": "Clever Cloud",
-          "value": 1067
+          "value": 1068
         },
         {
           "key": "Heroku",
-          "value": 1067
+          "value": 1068
         },
         {
           "key": "Rapidcloud.io",
-          "value": 1068
+          "value": 1069
         }
       ],
       "oldestRevisions": [
         {
           "key": "Apprenda",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "BitNami",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Microsoft Azure",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "ConPaaS",
-          "value": 1508
+          "value": 1509
         },
         {
           "key": "Software AG Live",
-          "value": 1508
+          "value": 1509
         }
       ]
     },
@@ -79,52 +84,52 @@
           "value": 3
         }
       ],
-      "meanStatusSince": 2082.969696969697,
-      "medianStatusSince": 1922.5,
+      "meanStatusSince": 2083.969696969697,
+      "medianStatusSince": 1923.5,
       "varianceStatusSince": 548541.4839302109,
       "stdevStatusSince": 740.6358645989343,
       "oldestStatusSince": [
         {
           "key": "Mendix",
-          "value": 4615
+          "value": 4616
         },
         {
           "key": "EngineYard",
-          "value": 4007
+          "value": 4008
         },
         {
           "key": "Software AG Live",
-          "value": 3619
+          "value": 3620
         },
         {
           "key": "brightbox",
-          "value": 3598
+          "value": 3599
         },
         {
           "key": "Force.com",
-          "value": 3520
+          "value": 3521
         }
       ],
       "youngestStatusSince": [
         {
           "key": "Rapidcloud.io",
-          "value": 1070
+          "value": 1071
         },
         {
           "key": "Platformer.com",
-          "value": 1140
-        },
-        {
-          "key": "Viaduct",
           "value": 1141
         },
         {
+          "key": "Viaduct",
+          "value": 1142
+        },
+        {
           "key": "Bluemix",
-          "value": 1148
+          "value": 1149
         },
         {
           "key": "exoscale Apps",
-          "value": 1190
+          "value": 1191
         }
       ]
     },
