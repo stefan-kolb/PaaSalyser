@@ -10,24 +10,25 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 
 public class HostingDeserializer implements JsonDeserializer<Hosting> {
 
 	@Override
 	public Hosting deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-			throws JsonParseException {
+			throws JsonParseException, JsonSyntaxException {
 		if (json.isJsonArray()) {
 			JsonArray hostingArray = json.getAsJsonArray();
 			boolean _public = false;
 			boolean _private = false;
 			for (JsonElement elem : hostingArray) {
 				String elemString = elem.getAsString();
-				if(elemString.equals("public")){
+				if (elemString.equals("public")) {
 					_public = true;
-				} else if (elemString.equals("private")){
+				} else if (elemString.equals("private")) {
 					_private = true;
 				} else {
-					// TODO JsonSyntaxException
+					throw new JsonSyntaxException("Invalid Json Syntax: Hosting was neither public nor private.");
 				}
 			}
 			return new Hosting(_public, _private, null);

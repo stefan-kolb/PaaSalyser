@@ -1,9 +1,6 @@
 package org.paasfinder.paasalyser;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -12,6 +9,7 @@ import java.util.Map;
 
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.paasfinder.paasalyser.database.DatabaseConnector;
 import org.paasfinder.paasalyser.gsonutility.GsonAdapter;
 import org.paasfinder.paasalyser.profile.PaasProfile;
 import org.paasfinder.paasalyser.report.PaasReport;
@@ -26,6 +24,7 @@ public class Executionmanager {
 	private final Logger logger = LoggerFactory.getLogger(Executionmanager.class);
 
 	private GsonAdapter gsonAdapter;
+	private DatabaseConnector database;
 
 	private final String gitRemotePath = "git@github.com:stefan-kolb/paas-profiles.git";
 	private final String pathOfProfilesRepository = "paas-profiles";
@@ -33,29 +32,35 @@ public class Executionmanager {
 	public Executionmanager() {
 		super();
 		gsonAdapter = new GsonAdapter();
+		database = new DatabaseConnector();
 	}
 
 	public void scanStateOfTheArt() throws IOException, GitAPIException {
-		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository)) {
+		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
+				database)) {
 			logger.info("Scanning State of the Art");
-			processProfiles(sniffer.getStateOfTheArt());
+			if (database.contains(sniffer.getStateOfTheArtCommitName())) {
+				logger.info("Commit already in database");
+				return;
+			}
+			processCommitProfiles(sniffer.getStateOfTheArt());
 		}
 		logger.info("Successfully scanned State of the Art");
 	}
 
 	public void scanRepository() throws IOException, GitAPIException {
-		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository)) {
+		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
+				database)) {
 
 			Map<RevCommit, List<PaasProfile>> profilesOfCommits = sniffer.sniffRepository();
-			logger.info("Number of successfully scanned commits is: " + profilesOfCommits.size());
+			logger.info("Number of commits to process is: " + profilesOfCommits.size());
 
 			for (Map.Entry<RevCommit, List<PaasProfile>> commitProfile : profilesOfCommits.entrySet()) {
-				Path path = Paths.get("Reports/" + commitProfile.getKey().getAuthorIdent().getWhen().getTime() + "_"
-						+ commitProfile.getKey().getName() + ".json");
-				if (!Files.exists(path)) {
+				if (!database.contains(commitProfile.getKey().getName())) {
 					try {
-						processProfiles(commitProfile);
-						logger.info("Succesfully scanned " + commitProfile.getKey().getName());
+						if (database.savePaasProfile(processCommitProfiles(commitProfile))) {
+							logger.info("Saving Paasprofile to Database succesful");
+						}
 					} catch (IOException e) {
 						logger.error("IOException occurred - Could not process commit "
 								+ commitProfile.getKey().getName() + " | " + e.getMessage());
@@ -64,20 +69,20 @@ public class Executionmanager {
 								+ commitProfile.getKey().getName() + " | " + e.getMessage());
 					}
 				} else {
-					logger.info(path + " already exists.");
+					logger.info("Commit already in database");
 				}
 			}
 		}
 	}
 
-	private void processProfiles(Map.Entry<RevCommit, List<PaasProfile>> commitProfile)
+	private PaasReport processCommitProfiles(Map.Entry<RevCommit, List<PaasProfile>> commitProfile)
 			throws IOException, RuntimeException {
 		logger.info("Processing");
-		ReportPreprocessing dataPreprocessing;
-		ReportStatistics statistics;
+		ReportPreprocessing reportPreprocessing;
+		ReportStatistics reportStatistics;
 		try {
-			dataPreprocessing = new ReportPreprocessing(commitProfile.getValue());
-			statistics = new ReportStatistics(dataPreprocessing);
+			reportPreprocessing = new ReportPreprocessing(commitProfile.getValue());
+			reportStatistics = new ReportStatistics(reportPreprocessing);
 		} catch (IllegalStateException e) {
 			throw new RuntimeException(
 					"IllegalStateException occurred while processing profiles of: " + commitProfile.getKey().getName(),
@@ -89,20 +94,12 @@ public class Executionmanager {
 		try {
 			Instant instant = commitProfile.getKey().getAuthorIdent().getWhen().toInstant();
 			LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-			report = new PaasReport(localDate, statistics);
+			report = new PaasReport(commitProfile.getKey().getName(), localDate, reportStatistics);
 		} catch (IllegalStateException e) {
 			logger.warn("Statistics was null. An empty report is being generated");
 			report = new PaasReport();
 		}
-
-		Path path = Paths.get("Reports/" + commitProfile.getKey().getAuthorIdent().getWhen().getTime() + "_"
-				+ commitProfile.getKey().getName() + ".json");
-		try {
-			gsonAdapter.createReportAsJsonFile(report, path);
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("IllegalArgumentException occurred while processing profiles of: "
-					+ commitProfile.getKey().getName() + " | " + e.getMessage());
-		}
+		return report;
 	}
 
 }

@@ -2,21 +2,29 @@ package org.paasfinder.paasalyser.report.models;
 
 import java.util.List;
 
+import org.mongodb.morphia.annotations.Embedded;
 import org.paasfinder.paasalyser.statistics.report.models.SimpleResultDouble;
 import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 
+@Embedded
 public class InfrastructuresReport {
 
 	private double meanInfrastrcturesPerProfile;
 	private double medianInfrastrcturesPerProfile;
 	private double varianceInfrastrcturesPerProfile;
 	private double stdevInfrastrcturesPerProfile;
+	@Embedded
 	private List<SimpleResultLong> topFiveInfrastrcturesPerProfile;
 
+	@Embedded
 	private List<SimpleResultDouble> percentOfProfilesPerContinent;
+	@Embedded
 	private List<SimpleResultLong> topFiveContinents;
+	@Embedded
 	private List<SimpleResultLong> topFiveCountries;
+	@Embedded
 	private List<SimpleResultLong> topFiveRegions;
+	@Embedded
 	private List<SimpleResultLong> topFiveProviders;
 
 	public InfrastructuresReport(List<SimpleResultLong> topFiveInfrastrcturesPerProfile,
@@ -34,6 +42,10 @@ public class InfrastructuresReport {
 		this.topFiveCountries = topFiveCountries;
 		this.topFiveRegions = topFiveRegions;
 		this.topFiveProviders = topFiveProviders;
+	}
+
+	public InfrastructuresReport() {
+		super();
 	}
 
 	public List<SimpleResultLong> getTopFiveInfrastrcturesPerProfile() {

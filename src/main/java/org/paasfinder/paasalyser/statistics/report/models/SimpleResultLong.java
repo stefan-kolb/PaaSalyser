@@ -1,5 +1,8 @@
 package org.paasfinder.paasalyser.statistics.report.models;
 
+import org.mongodb.morphia.annotations.Embedded;
+
+@Embedded
 public class SimpleResultLong {
 
 	private String key;
@@ -9,6 +12,10 @@ public class SimpleResultLong {
 		super();
 		this.key = key;
 		this.value = value;
+	}
+
+	public SimpleResultLong() {
+		super();
 	}
 
 	public String getKey() {

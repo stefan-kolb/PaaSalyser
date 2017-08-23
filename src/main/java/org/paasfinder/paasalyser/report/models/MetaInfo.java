@@ -2,13 +2,18 @@ package org.paasfinder.paasalyser.report.models;
 
 import java.time.LocalDate;
 
+import org.mongodb.morphia.annotations.Embedded;
+
+@Embedded
 public class MetaInfo {
 
 	private LocalDate date;
 	private int numberOfProfiles;
 	private int numberOfEolProfiles;
 	private int numberOfInvalidProfiles;
+	@Embedded
 	private RevisionReport revisionReport;
+	@Embedded
 	private TypeReport typeReport;
 
 	public MetaInfo(LocalDate date, int numberOfProfiles, int numberOfEolProfiles, int numberOfInvalidProfiles,
@@ -20,6 +25,10 @@ public class MetaInfo {
 		this.numberOfInvalidProfiles = numberOfInvalidProfiles;
 		this.revisionReport = revisionReport;
 		this.typeReport = typeReport;
+	}
+
+	public MetaInfo() {
+		super();
 	}
 
 	public LocalDate getDate() {

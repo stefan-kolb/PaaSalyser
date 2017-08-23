@@ -1,5 +1,8 @@
 package org.paasfinder.paasalyser.report.models;
 
+import org.mongodb.morphia.annotations.Embedded;
+
+@Embedded
 public class HostingReport {
 
 	private double privateHostingPercent = 0.0;
@@ -12,6 +15,10 @@ public class HostingReport {
 		this.privateHostingPercent = privateHostingPercent;
 		this.publicHostingPercent = publicHostingPercent;
 		this.virtualPrivateHostingPercent = virtualPrivateHostingPercent;
+	}
+
+	public HostingReport() {
+		super();
 	}
 
 	public double getPrivateHostingPercent() {

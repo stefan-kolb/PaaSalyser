@@ -21,6 +21,7 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
+import org.paasfinder.paasalyser.database.DatabaseConnector;
 import org.paasfinder.paasalyser.gsonutility.GsonAdapter;
 import org.paasfinder.paasalyser.profile.PaasProfile;
 import org.slf4j.Logger;
@@ -33,16 +34,17 @@ public class RepositorySniffer implements AutoCloseable {
 	private final String gitRemotePath;
 	private final Path pathOfRepository;
 
-	private List<RevCommit> profileChangedCommits;
-
 	private final GsonAdapter gsonAdapter;
 	private final Git git;
 
-	public RepositorySniffer(GsonAdapter gsonAdapter, String gitRemotePath, String pathOfRepository)
-			throws IOException, GitAPIException {
+	private DatabaseConnector database;
+
+	public RepositorySniffer(GsonAdapter gsonAdapter, String gitRemotePath, String pathOfRepository,
+			DatabaseConnector database) throws IOException, GitAPIException {
 		this.gsonAdapter = gsonAdapter;
 		this.gitRemotePath = gitRemotePath;
 		this.pathOfRepository = Paths.get(pathOfRepository);
+		this.database = database;
 		git = initializeOrResetRepository();
 	}
 
@@ -54,39 +56,39 @@ public class RepositorySniffer implements AutoCloseable {
 	public Map<RevCommit, List<PaasProfile>> sniffRepository() throws IOException, GitAPIException {
 		resetAndPullRepository();
 
-		logger.info("Scanning Profiles for relevant commits");
-		profileChangedCommits = scanRepositoryForProfilesCommits();
-
 		logger.info("Finished sniffing");
-		return scanCommits();
+		return scanCommits(scanRepositoryForProfilesCommits());
 	}
 
 	public Map.Entry<RevCommit, List<PaasProfile>> getStateOfTheArt() throws GitAPIException, IOException {
 		RevCommit currentCommit = git.log().call().iterator().next();
 		logger.info("State of the art commit is: " + currentCommit.getName());
-		Path outputPath = Paths.get("Reports/" + currentCommit.getAuthorIdent().getWhen().getTime() + "_"
-				+ currentCommit.getName() + ".json");
-
-		if (Files.exists(outputPath)) {
-			logger.info("Report of state of the art (commit id: " + currentCommit.getName() + ") already existing");
-		}
 		return new AbstractMap.SimpleEntry<RevCommit, List<PaasProfile>>(currentCommit,
 				getProfilesOfCommit(currentCommit.getName()));
 	}
 
-	public Map.Entry<RevCommit, List<PaasProfile>> getProfilesOfSpecificCommit(String commitId)
-			throws GitAPIException, IOException {
-		RevCommit currentCommit = git.log().call().iterator().next();
-		logger.info("Currently getting data of commit: " + currentCommit.getName());
-		Path outputPath = Paths.get("Reports/" + currentCommit.getAuthorIdent().getWhen().getTime() + "_"
-				+ currentCommit.getName() + ".json");
-
-		if (Files.exists(outputPath)) {
-			logger.info("Report of state of the art (commit id: " + currentCommit.getName() + ") already existing");
-		}
-		return new AbstractMap.SimpleEntry<RevCommit, List<PaasProfile>>(currentCommit,
-				getProfilesOfCommit(currentCommit.getName()));
+	public String getStateOfTheArtCommitName() throws GitAPIException {
+		return git.log().call().iterator().next().getName();
 	}
+
+	// public Map.Entry<RevCommit, List<PaasProfile>>
+	// getProfilesOfSpecificCommit(String commitId)
+	// throws GitAPIException, IOException {
+	// RevCommit currentCommit = git.log().call().iterator().next();
+	// logger.info("Currently getting data of commit: " +
+	// currentCommit.getName());
+	// Path outputPath = Paths.get("Reports/" +
+	// currentCommit.getAuthorIdent().getWhen().getTime() + "_"
+	// + currentCommit.getName() + ".json");
+	//
+	// if (Files.exists(outputPath)) {
+	// logger.info("Report of state of the art (commit id: " +
+	// currentCommit.getName() + ") already existing");
+	// }
+	// return new AbstractMap.SimpleEntry<RevCommit,
+	// List<PaasProfile>>(currentCommit,
+	// getProfilesOfCommit(currentCommit.getName()));
+	// }
 
 	/**
 	 * Clones or reset and pulls the repository.
@@ -99,6 +101,7 @@ public class RepositorySniffer implements AutoCloseable {
 	 */
 	private Git initializeOrResetRepository() throws IOException, GitAPIException {
 		logger.info("Initialising Repository");
+		// index-lock ensures synchronized acces by multiple threads
 		if (Files.deleteIfExists(Paths.get("paas-profiles/.git/index.lock"))) {
 			logger.info("Removing git HEAD.lock");
 		}
@@ -160,28 +163,28 @@ public class RepositorySniffer implements AutoCloseable {
 		return profileChangedCommits;
 	}
 
-	private Map<RevCommit, List<PaasProfile>> scanCommits() {
+	private Map<RevCommit, List<PaasProfile>> scanCommits(List<RevCommit> profileChangedCommits) {
 		Map<RevCommit, List<PaasProfile>> profilesOfCommits = new HashMap<>();
 
 		logger.info("Scanning relevant commits");
 		for (RevCommit commit : profileChangedCommits) {
 
-			if (commit.getName().contains("7f132fabb4e220f794b4926309dc8d48c794768c")) {
+			if (commit.getName().equals("7f132fabb4e220f794b4926309dc8d48c794768c")) {
 				logger.info("Initial commit reached");
 				continue;
 			}
-			Path path = Paths
-					.get("Reports/" + commit.getAuthorIdent().getWhen().getTime() + "_" + commit.getName() + ".json");
-			if (Files.exists(path)) {
+			if (database.contains(commit.getName())) {
 				logger.info("Commit already in Datastore");
 				continue;
 			}
 
 			try {
-				logger.info("Currently retrieving profiles of commit: " + commit.getName());
+				logger.info("Retrieving profiles of: " + commit.getName());
 				List<PaasProfile> profiles = getProfilesOfCommit(commit.getName());
 				if (profiles != null) {
 					profilesOfCommits.putIfAbsent(commit, profiles);
+				} else {
+					logger.error("Could not retrieve profiles of " + commit.getName());
 				}
 			} catch (GitAPIException e) {
 				logger.error("GitAPIException occurred while trying to store Profiles of current commit-"

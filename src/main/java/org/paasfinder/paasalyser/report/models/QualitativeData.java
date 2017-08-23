@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.stat.descriptive.rank.Median;
+import org.mongodb.morphia.annotations.Embedded;
 
+@Embedded
 public class QualitativeData {
 
 	private double mean;
@@ -23,6 +25,10 @@ public class QualitativeData {
 
 	public QualitativeData(List<Long> data) {
 		calcValues(data.stream().mapToDouble(value -> value.doubleValue()).toArray());
+	}
+
+	public QualitativeData() {
+		super();
 	}
 
 	public double getMean() {

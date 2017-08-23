@@ -14,7 +14,7 @@ public class Main {
 		LOGGER.info("Starting Execution.");
 		final Executionmanager executionManager = new Executionmanager();
 		try {
-			executionManager.scanStateOfTheArt();
+//			executionManager.scanStateOfTheArt();
 			executionManager.scanRepository();
 			LOGGER.info("Shutting down properly.");
 			System.exit(0);

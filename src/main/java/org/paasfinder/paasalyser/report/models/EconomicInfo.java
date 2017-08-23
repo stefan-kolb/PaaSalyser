@@ -1,28 +1,37 @@
 package org.paasfinder.paasalyser.report.models;
 
+import org.mongodb.morphia.annotations.Embedded;
+
+@Embedded
 public class EconomicInfo {
 
+	@Embedded
 	private HostingReport hostingReport;
+	@Embedded
 	private ScalingReport scalingReport;
+	@Embedded
 	private RuntimesReport runtimesReport;
-	private MiddlewareReport middlewareReport;
-	private FrameworksReport frameworksReport;
+	@Embedded
 	private ServicesReport servicesReport;
+	@Embedded
 	private ExtensibleReport extensibleReport;
+	@Embedded
 	private InfrastructuresReport infrastructuresReport;
 
 	public EconomicInfo(HostingReport hostingReport, ScalingReport scalingReport, RuntimesReport runtimesReport,
-			MiddlewareReport middlewareReport, FrameworksReport frameworksReport, ServicesReport servicesReport,
-			ExtensibleReport extensibleReport, InfrastructuresReport infrastructuresReport) {
+			ServicesReport servicesReport, ExtensibleReport extensibleReport,
+			InfrastructuresReport infrastructuresReport) {
 		super();
 		this.hostingReport = hostingReport;
 		this.scalingReport = scalingReport;
 		this.runtimesReport = runtimesReport;
-		this.middlewareReport = middlewareReport;
-		this.frameworksReport = frameworksReport;
 		this.servicesReport = servicesReport;
 		this.extensibleReport = extensibleReport;
 		this.infrastructuresReport = infrastructuresReport;
+	}
+
+	public EconomicInfo() {
+		super();
 	}
 
 	public HostingReport getHostingReport() {
@@ -35,14 +44,6 @@ public class EconomicInfo {
 
 	public RuntimesReport getRuntimesReport() {
 		return runtimesReport;
-	}
-
-	public MiddlewareReport getMiddlewareReport() {
-		return middlewareReport;
-	}
-
-	public FrameworksReport getFrameworksReport() {
-		return frameworksReport;
 	}
 
 	public ServicesReport getServicesReport() {

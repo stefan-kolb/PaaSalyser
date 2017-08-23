@@ -17,6 +17,7 @@ dependencies {
     compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '4.8.0.201706111038-r'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+	compile group: 'org.mongodb.morphia', name: 'morphia', version: '1.3.2'
 }
 
 mainClassName = 'org.paasfinder.paasalyser.Main'

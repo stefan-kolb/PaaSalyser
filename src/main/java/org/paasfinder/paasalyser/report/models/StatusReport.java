@@ -2,8 +2,10 @@ package org.paasfinder.paasalyser.report.models;
 
 import java.util.List;
 
+import org.mongodb.morphia.annotations.Embedded;
 import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 
+@Embedded
 public class StatusReport {
 
 	// Status Statistics
@@ -14,7 +16,9 @@ public class StatusReport {
 	private double medianStatusSince;
 	private double varianceStatusSince;
 	private double stdevStatusSince;
+	@Embedded
 	private List<SimpleResultLong> oldestStatusSince;
+	@Embedded
 	private List<SimpleResultLong> youngestStatusSince;
 
 	public StatusReport(List<SimpleResultLong> topStatus, QualitativeData qualitativeData,
@@ -27,6 +31,10 @@ public class StatusReport {
 		this.stdevStatusSince = qualitativeData.getStDev();
 		this.oldestStatusSince = topFiveStatusSince;
 		this.youngestStatusSince = minFiveStatusSince;
+	}
+
+	public StatusReport() {
+		super();
 	}
 
 	public List<SimpleResultLong> getTopStatus() {

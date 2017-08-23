@@ -368,9 +368,7 @@ public class ReportPreprocessing {
 
 			servicesData.addProfilesWithNativeServices(profile.getName(), profile.getServices().getNative().length);
 			for (NativeService nativeService : profile.getServices().getNative()) {
-				if (nativeService == null) {
-					// logger.info("NativeService was null in: " +
-					// profile.getName());
+				if (nativeService == null || nativeService.getName() == null || nativeService.getName().isEmpty()) {
 					continue;
 				}
 				if (nativeService.getType() == null || nativeService.getType().isEmpty()) {

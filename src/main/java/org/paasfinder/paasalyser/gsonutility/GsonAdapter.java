@@ -59,16 +59,14 @@ public class GsonAdapter {
 					try {
 						return profile.checkProfileValidity(path);
 					} catch (NullPointerException e) {
-						logger.error("Invalid Profile: " + path.getFileName().toString() + " | " + e.getMessage());
+						logger.error("Invalid Profile: " + path.getFileName().toString());
 						return null;
 					}
 				} catch (IOException e) {
-					logger.error("IOException occurred during scanning directory at: " + path.getFileName()
-							+ " | Message: " + e.getMessage());
+					logger.error("IOException occurred during scanning directory at: " + path.getFileName());
 					return null;
 				} catch (JsonSyntaxException e) {
-					logger.error("JsonSyntaxException occurred during scanning directory at: " + path.getFileName()
-							+ " | Message: " + e.getMessage());
+					logger.error("JsonSyntaxException occurred during scanning directory at: " + path.getFileName());
 					return null;
 				}
 			}).collect(Collectors.toCollection(LinkedList::new));
