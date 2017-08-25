@@ -202,6 +202,13 @@ public class RepositorySniffer implements AutoCloseable {
 		git.checkout().setName(commitId).call();
 		Path path = Paths.get(pathOfRepository.toString() + "/profiles");
 		List<PaasProfile> profiles = gsonAdapter.scanDirectoryForJsonFiles(path);
+		for (PaasProfile profile : profiles) {
+			if (profile == null) {
+				// Skip profiles if profiles are invalid to ensure data
+				// consistency across all profiles generated
+				return null;
+			}
+		}
 		return profiles;
 	}
 

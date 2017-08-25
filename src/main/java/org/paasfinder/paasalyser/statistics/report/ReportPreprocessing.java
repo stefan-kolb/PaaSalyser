@@ -162,7 +162,6 @@ public class ReportPreprocessing {
 				this.profiles.add(profile);
 			}
 		}
-
 	}
 
 	private void evalRevision() {
