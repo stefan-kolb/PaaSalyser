@@ -30,6 +30,10 @@ public class DatabaseConnector {
 		logger.info("Database connected");
 	}
 
+	public void clearDatabase() {
+		datastore.getDB().dropDatabase();
+	}
+
 	public boolean savePaasProfile(PaasReport paasReport) {
 		logger.info("Saving Paasprofile " + paasReport.getCommitHash());
 		datastore.save(paasReport);

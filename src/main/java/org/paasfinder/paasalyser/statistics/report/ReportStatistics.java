@@ -52,23 +52,23 @@ public class ReportStatistics {
 	/**
 	 * Generates statistics out of preprocessed data.
 	 * 
-	 * @param dataPreProcessing
+	 * @param reportPreprocessing
 	 *            data to generate statistics of.
 	 * @throws IllegalStateException
 	 *             if input parameters is null.
 	 */
-	public ReportStatistics(ReportPreprocessing dataPreProcessing) throws IllegalStateException {
-		if (dataPreProcessing == null) {
+	public ReportStatistics(ReportPreprocessing reportPreprocessing) throws IllegalStateException {
+		if (reportPreprocessing == null) {
 			return;
 		}
 
-		this.dataPreProcessing = dataPreProcessing;
+		this.dataPreProcessing = reportPreprocessing;
 
 		// Evaluate Report
-		profilesCount = dataPreProcessing.getProfiles().size();
+		profilesCount = reportPreprocessing.getProfiles().size();
 		// logger.info("eolProfiles");
-		eolProfiles = (int) dataPreProcessing.getStatusData().getEol();
-		invalidProfilesCount = dataPreProcessing.getInvalidProfilesCount();
+		eolProfiles = (int) reportPreprocessing.getStatusData().getEol();
+		invalidProfilesCount = reportPreprocessing.getInvalidProfilesCount();
 		// logger.info("evalRevision");
 		evalRevision();
 		// logger.info("evalStatus");

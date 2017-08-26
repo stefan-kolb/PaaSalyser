@@ -134,4 +134,13 @@ public class PricingData {
 		emptyPeriod++;
 	}
 
+	@Override
+	public String toString() {
+		return "PricingData [zeroModels=" + zeroModels + ", oneModel=" + oneModel + ", twoModels=" + twoModels
+				+ ", threeModels=" + threeModels + ", fourModels=" + fourModels + ", freeModel=" + freeModel
+				+ ", fixedModel=" + fixedModel + ", meteredModel=" + meteredModel + ", hybridModel=" + hybridModel
+				+ ", emptyModel=" + emptyModel + ", dailyPeriod=" + dailyPeriod + ", monthlyPeriod=" + monthlyPeriod
+				+ ", annuallyPariod=" + annuallyPariod + ", emptyPeriod=" + emptyPeriod + "]";
+	}
+
 }

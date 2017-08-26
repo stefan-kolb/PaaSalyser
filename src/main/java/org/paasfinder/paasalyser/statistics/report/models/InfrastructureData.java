@@ -134,4 +134,11 @@ public class InfrastructureData {
 			provider.replace(name, provider.get(name) + 1);
 	}
 
+	@Override
+	public String toString() {
+		return "InfrastructureData [infrastructuresPerProfile=" + infrastructuresPerProfile + ", profileContinents="
+				+ profileContinents + ", continent=" + continent + ", country=" + country + ", region=" + region
+				+ ", provider=" + provider + "]";
+	}
+
 }

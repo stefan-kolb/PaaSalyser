@@ -71,4 +71,10 @@ public class PaasReport {
 		return economicInfo;
 	}
 
+	@Override
+	public String toString() {
+		return "PaasReport [id=" + id + ", commitHash=" + commitHash + ", metaInfo=" + metaInfo + ", businessInfo="
+				+ businessInfo + ", economicInfo=" + economicInfo + "]";
+	}
+
 }

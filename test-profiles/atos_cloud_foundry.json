@@ -1,0 +1,469 @@
+{
+  "name": "Atos Cloud Foundry",
+  "revision": "2016-11-28",
+  "url": "https://canopy-cloud.com/application-platforms/atos-cloud-foundry",
+  "vendor_verified": "2016-05-25",
+  "status": "production",
+  "status_since": "2015-01-07",
+  "type": "Generic",
+  "platform": "Cloud Foundry",
+  "hosting": {
+    "public": true,
+    "private": true
+  },
+  "qos": {
+    "uptime": 99.9
+  },
+  "pricings": [
+    {
+      "model": "metered",
+      "period": "monthly"
+    },
+    {
+      "model": "fixed",
+      "period": "monthly"
+    }
+  ],
+  "scaling": {
+    "vertical": true,
+    "horizontal": true,
+    "auto": true
+  },
+  "runtimes": [
+    {
+      "language": "clojure",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "go",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "groovy",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "java",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "node",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "scala",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "php",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "python",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "ruby",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "dotnet",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "swift",
+      "versions": [
+
+      ]
+    },
+    {
+      "language": "hhvm",
+      "versions": [
+
+      ]
+    }
+  ],
+  "middlewares": [
+    {
+      "name": "tomcat",
+      "runtime": "java",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "tomee",
+      "runtime": "java",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "jboss",
+      "runtime": "java",
+      "versions": [
+
+      ]
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "grails",
+      "runtime": "groovy",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "play",
+      "runtime": "java",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "spring",
+      "runtime": "java",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "rails",
+      "runtime": "ruby",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "rack",
+      "runtime": "ruby",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "sinatra",
+      "runtime": "ruby",
+      "versions": [
+
+      ]
+    },
+    {
+      "name": "django",
+      "runtime": "python",
+      "versions": [
+
+      ]
+    }
+  ],
+  "services": {
+    "native": [
+      {
+        "name": "mongodb",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "memcached",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "mysql",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "postgresql",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "rabbitmq",
+        "description": "",
+        "type": "worker",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "redis",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "Neo4J",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "kafka",
+        "description": "",
+        "type": "message broker",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "riak cs",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "cassandra",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "elasticsearch",
+        "description": "",
+        "type": "search",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "abacus",
+        "description": "",
+        "type": "metering",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "couchdb",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      },
+      {
+        "name": "dingo-postgresql",
+        "description": "",
+        "type": "datastore",
+        "versions": [
+
+        ]
+      }
+    ],
+    "addon": [
+      {
+        "name": "ADFS/LDAP/AS",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "",
+        "type": "other"
+      },
+      {
+        "name": "Advanced Developer GUI",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "",
+        "type": "console"
+      },
+      {
+        "name": "Jenkins",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "",
+        "type": "other"
+      },
+      {
+        "name": "Datadog",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "",
+        "type": "monitoring"
+      },
+      {
+        "name": "NewRelic",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "",
+        "type": "monitoring"
+      },
+      {
+        "name": "Dynatrace",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "",
+        "type": "other"
+      },
+      {
+        "name": "Nagios",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "Internal monitoring",
+        "type": "monitoring"
+      },
+      {
+        "name": "Pingdom",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "External monitoring",
+        "type": "monitoring"
+      },
+      {
+        "name": "StatusPage",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "External monitoring",
+        "type": "monitoring"
+      },
+      {
+        "name": "Canopy Compose Service Broker",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "",
+        "type": "broker"
+      },
+      {
+        "name": "Database administrative app for Postgresql, MySQL, MongoDB, CouchDB",
+        "url": "https://canopy-cloud.com/application-platforms/canopy-cloud-fabric",
+        "description": "",
+        "type": "app"
+      }
+    ]
+  },
+  "extensible": true,
+  "infrastructures": [
+    {
+      "continent": "AS",
+      "country": "SG",
+      "region": "Singapore",
+      "provider": "AWS"
+    },
+    {
+      "continent": "AS",
+      "country": "JP",
+      "region": "Tokyo",
+      "provider": "AWS"
+    },
+    {
+      "continent": "EU",
+      "country": "IE",
+      "region": "Dublin",
+      "provider": "AWS"
+    },
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "Northern California",
+      "provider": "AWS"
+    },
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "Northern Virginia",
+      "provider": "AWS"
+    },
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "Oregon",
+      "provider": "AWS"
+    },
+    {
+      "continent": "OC",
+      "country": "AU",
+      "region": "Sydney",
+      "provider": "AWS"
+    },
+    {
+      "continent": "SA",
+      "country": "BR",
+      "region": "Sao Paulo",
+      "provider": "AWS"
+    },
+    {
+      "continent": "EU",
+      "country": "GB",
+      "region": "",
+      "provider": "vCloud Air"
+    },
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "",
+      "provider": "vCloud Air"
+    },
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "",
+      "provider": "Atos Cloud"
+    },
+    {
+      "continent": "EU",
+      "country": "DE",
+      "region": "",
+      "provider": "Atos Cloud"
+    },
+    {
+      "continent": "AS",
+      "country": "SG",
+      "region": "Singapore",
+      "provider": "Atos Cloud"
+    },
+    {
+      "continent": "OC",
+      "country": "AU",
+      "region": "Perth",
+      "provider": "Atos Cloud"
+    },
+    {
+      "continent": "EU",
+      "country": "DE",
+      "region": "",
+      "provider": "Atos Private Cloud (EPC)"
+    },
+    {
+      "continent": "NA",
+      "country": "US",
+      "region": "",
+      "provider": "Atos Private Cloud (EPC)"
+    },
+    {
+      "continent": "AS",
+      "country": "",
+      "region": "",
+      "provider": "Atos Private Cloud (EPC)"
+    }
+  ]
+}

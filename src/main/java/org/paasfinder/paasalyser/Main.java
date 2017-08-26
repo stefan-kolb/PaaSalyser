@@ -15,7 +15,8 @@ public class Main {
 		final Executionmanager executionManager = new Executionmanager();
 		try {
 //			executionManager.scanStateOfTheArt();
-			executionManager.scanRepository();
+			executionManager.scanTestProfiles();
+			// executionManager.scanRepository();
 			LOGGER.info("Shutting down properly.");
 			System.exit(0);
 		} catch (IOException e) {
