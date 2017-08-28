@@ -47,10 +47,6 @@ public class MetaInfo {
 		return numberOfEolProfiles;
 	}
 
-	public int getNumberOInvalidProfiles() {
-		return numberOfInvalidProfiles;
-	}
-
 	public RevisionReport getRevisionReport() {
 		return revisionReport;
 	}

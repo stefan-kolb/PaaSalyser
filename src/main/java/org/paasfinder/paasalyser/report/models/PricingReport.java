@@ -8,11 +8,9 @@ import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 
 @Embedded
 public class PricingReport {
-	@Embedded
+
 	List<SimpleResultLong> numberOfModelsPerProfile = new ArrayList<>();
-	@Embedded
 	List<SimpleResultLong> models = new ArrayList<>();
-	@Embedded
 	List<SimpleResultLong> periods = new ArrayList<>();
 
 	public PricingReport(List<SimpleResultLong> numberOfModelsPerProfile, List<SimpleResultLong> models,

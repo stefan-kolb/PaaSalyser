@@ -19,8 +19,9 @@ public class Main {
 			LOGGER.error("IOException occured while executing", e);
 		}
 		try {
-			 executionManager.scanTestProfiles();
-//			executionManager.scanRepository();
+			// executionManager.scanTestProfiles();
+			executionManager.scanRepository();
+			executionManager.createStatisticalAnalysis();
 			LOGGER.info("Shutting down properly.");
 			System.exit(0);
 		} catch (IOException e) {

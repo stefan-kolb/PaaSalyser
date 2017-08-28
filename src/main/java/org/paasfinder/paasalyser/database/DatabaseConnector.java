@@ -2,71 +2,138 @@ package org.paasfinder.paasalyser.database;
 
 import java.util.List;
 
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Morphia;
 import org.paasfinder.paasalyser.report.PaasReport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.paasfinder.paasalyser.report.models.ExtensibleReport;
+import org.paasfinder.paasalyser.report.models.HostingReport;
+import org.paasfinder.paasalyser.report.models.InfrastructuresReport;
+import org.paasfinder.paasalyser.report.models.MetaInfo;
+import org.paasfinder.paasalyser.report.models.PricingReport;
+import org.paasfinder.paasalyser.report.models.RevisionReport;
+import org.paasfinder.paasalyser.report.models.RuntimesReport;
+import org.paasfinder.paasalyser.report.models.ScalingReport;
+import org.paasfinder.paasalyser.report.models.ServicesReport;
+import org.paasfinder.paasalyser.report.models.StatusReport;
+import org.paasfinder.paasalyser.report.models.TypeReport;
 
-import com.mongodb.MongoClient;
+public interface DatabaseConnector {
 
-public class DatabaseConnector {
+	/**
+	 * Saves a {@link PaasReport} in the database.
+	 * 
+	 * @param paasReport
+	 * @return
+	 */
+	public void savePaasReport(PaasReport paasReport);
 
-	private final Logger logger = LoggerFactory.getLogger(DatabaseConnector.class);
+	/**
+	 * Checks if a {@link PaasReport} is present in the database.
+	 * 
+	 * @param paasReport
+	 * @return true if present in the database
+	 */
+	public boolean contains(PaasReport paasReport);
 
-	private final Morphia morphia;
-	private final Datastore datastore;
+	/**
+	 * Checks if a {@link PaasReport} with the according git-commitHash is
+	 * present in the database.
+	 * 
+	 * @param commitHash
+	 *            to search for in the database
+	 * @return true if present in the database
+	 */
+	public boolean contains(String commitHash);
 
-	public DatabaseConnector() {
-		super();
-		logger.info("Setting up Database connection...");
-		morphia = new Morphia();
-		morphia.mapPackage("org.paasfinder.paasalyser.report");
-		morphia.mapPackage("org.paasfinder.paasalyser.report.models");
+	public List<PaasReport> getAllPaasReportsFromDatabase();
 
-		datastore = morphia.createDatastore(new MongoClient(), "paasalyser");
-		datastore.ensureIndexes();
+	public void deletePaasReport(String commitHash);
 
-		logger.info("Database connected");
+	/**
+	 * Fetches date, numberOfProfiles and numberOfEolProfiles of a
+	 * {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of{@link PaasReport} with date,
+	 *         numberOfProfiles and numberOfEolProfiles
+	 */
+	public List<MetaInfo> getProfileAmounts();
 
-		logger.info("Clearing Database");
-		datastore.getDB().dropDatabase();
-	}
+	/**
+	 * Fetches date and {@link RevisionReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link RevisionReport}
+	 */
+	public List<MetaInfo> getRevisionAmounts();
 
-	public boolean savePaasProfile(PaasReport paasReport) {
-		logger.info("Saving Paasprofile " + paasReport.getCommitHash());
-		datastore.save(paasReport);
-		return true;
-	}
+	/**
+	 * Fetches date and {@link TypeReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link TypeReport}
+	 */
+	public List<MetaInfo> getTypeAmounts();
 
-	public boolean contains(PaasReport paasReport) {
-		logger.info("Searching for Paasprofile " + paasReport.getCommitHash());
-		return datastore.find(PaasReport.class).filter("commitHash ==", paasReport.getCommitHash()).get() != null;
-	}
+	/**
+	 * Fetches date and {@link StatusReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link StatusReport}
+	 */
+	public List<PaasReport> getStatusAmounts();
 
-	public boolean contains(String commitHash) {
-		logger.info("Searching for Paasprofile " + commitHash);
-		return datastore.find(PaasReport.class).filter("commitHash ==", commitHash).get() != null;
-	}
+	/**
+	 * Fetches date and {@link PricingReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link PricingReport}
+	 */
+	public List<PaasReport> getPricingAmounts();
 
-	public List<PaasReport> getAllPaasReportsFromDatabase() {
-		logger.info("Querying all Paasprofiles");
-		return datastore.createQuery(PaasReport.class).asList();
-	}
+	/**
+	 * Fetches date and {@link HostingReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link HostingReport}
+	 */
+	public List<PaasReport> getHostingAmounts();
 
-	public PaasReport getPaasReport(String commitHash) {
-		logger.info("Querying Paasprofile " + commitHash);
-		return datastore.createQuery(PaasReport.class).field("id").equal(commitHash).get();
-	}
+	/**
+	 * Fetches date and {@link ScalingReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link ScalingReport}
+	 */
+	public List<PaasReport> getScalingAmounts();
 
-	public void deletePaasReport(String commitHash) {
-		logger.info("Deleting Paasprofile " + commitHash);
-		datastore.delete(datastore.createQuery(PaasReport.class).field("id").equal(commitHash));
-	}
+	/**
+	 * Fetches date and {@link RuntimesReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link RuntimesReport}
+	 */
+	public List<PaasReport> getRuntimesAmounts();
 
-	public List<PaasReport> getNumberOfProfilesAsList() {
-		return datastore.createQuery(PaasReport.class).order("metainfos.date")
-				.project("metainfos.numberOfProfiles", true).project("metainfos.date", true).asList();
-	}
+	/**
+	 * Fetches date and {@link ServicesReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link ServicesReport}
+	 */
+	public List<PaasReport> getServicesAmounts();
+
+	/**
+	 * Fetches date and {@link ExtensibleReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link ExtensibleReport}
+	 */
+	public List<PaasReport> getExtensibleAmounts();
+
+	/**
+	 * Fetches date and {@link InfrastructuresReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link InfrastructuresReport}
+	 */
+	public List<PaasReport> getInfrastructuresAmounts();
 
 }
