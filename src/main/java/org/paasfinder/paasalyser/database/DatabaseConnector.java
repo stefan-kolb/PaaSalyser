@@ -28,9 +28,8 @@ public class DatabaseConnector {
 		datastore.ensureIndexes();
 
 		logger.info("Database connected");
-	}
 
-	public void clearDatabase() {
+		logger.info("Clearing Database");
 		datastore.getDB().dropDatabase();
 	}
 

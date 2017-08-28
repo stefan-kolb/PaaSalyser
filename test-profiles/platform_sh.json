@@ -1,9 +1,9 @@
 {
   "name": "Platform.sh",
-  "revision": "2017-07-03",
-  "vendor_verified": "2017-07-03",
+  "revision": "2017-07",
+  "vendor_verified": "2017-07",
   "url": "https://platform.sh",
-  "status": "production",
+  "status": "beta",
   "status_since": "2014-09-01",
   "type": "Generic",
   "hosting": {
@@ -330,95 +330,16 @@
   "extensible": false,
   "infrastructures": [
     {
-      "continent": "NA",
-      "country": "US",
-      "region": "Northern Virginia",
-      "provider": "AWS"
-    },
-    {
-      "continent": "NA",
-      "country": "US",
-      "region": "Ohio",
-      "provider": "AWS"
-    },    {
-      "continent": "NA",
-      "country": "US",
-      "region": "Northern California",
-      "provider": "AWS"
-    },    {
-      "continent": "NA",
-      "country": "US",
-      "region": "Oregon",
-      "provider": "AWS"
-    },    {
-      "continent": "AS",
-      "country": "IN",
-      "region": "Mumbai",
-      "provider": "AWS"
-    },    {
-      "continent": "AS",
-      "country": "KR",
-      "region": "Seoul",
-      "provider": "AWS"
-    },
-    {
-      "continent": "AS",
-      "country": "SG",
-      "region": "Singapore",
-      "provider": "AWS"
-    },
-    {
-      "continent": "AS",
-      "country": "CN",
-      "region": "China",
-      "provider": "Microsoft Azure"
-    },
-    {
       "continent": "OC",
       "country": "AU",
       "region": "Sydney",
       "provider": "AWS"
-    },   {
+    },   
+	{
       "continent": "AS",
       "country": "JP",
       "region": "Tokyo",
       "provider": "AWS"
-    },
-    {
-      "continent": "EU",
-      "country": "IE",
-      "region": "Dublin",
-      "provider": "AWS"
-    },
-    {
-      "continent": "EU",
-      "country": "DE",
-      "region": "Frankfurt",
-      "provider": "AWS"
-    },
-    {
-      "continent": "SA",
-      "country": "BR",
-      "region": "São Paulo",
-      "provider": "AWS"
-    },
-    {
-      "continent": "EU",
-      "country": "FR",
-      "region": "Paris",
-      "provider": "Orange Business Services"
-    },
-    {
-      "continent": "EU",
-      "country": "DE",
-      "region": "Frankfurt",
-      "provider": "Microsoft Azure"
-    },
-    {
-      "continent": "EU",
-      "country": "NL",
-      "region": "Netherlands",
-      "provider": "Microsoft Azure"
     }
   ]
 }

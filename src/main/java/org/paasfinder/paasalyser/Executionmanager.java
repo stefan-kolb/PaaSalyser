@@ -24,16 +24,26 @@ public class Executionmanager {
 
 	private final Logger logger = LoggerFactory.getLogger(Executionmanager.class);
 
+	Process mongoDB = null;
+
 	private GsonAdapter gsonAdapter;
 	private DatabaseConnector database;
 
 	private final String gitRemotePath = "git@github.com:stefan-kolb/paas-profiles.git";
 	private final String pathOfProfilesRepository = "paas-profiles";
 
-	public Executionmanager() {
+	public Executionmanager() throws IOException {
 		super();
+		logger.info("Starting MongoDB");
+		String command = "cmd /c start runMongoDB";
+		mongoDB = Runtime.getRuntime().exec(command);
+
 		gsonAdapter = new GsonAdapter();
 		database = new DatabaseConnector();
+	}
+
+	public void close() {
+		mongoDB.destroy();
 	}
 
 	public void scanStateOfTheArt() throws IOException, GitAPIException {

@@ -12,11 +12,15 @@ public class Main {
 
 	public static void main(String[] args) {
 		LOGGER.info("Starting Execution.");
-		final Executionmanager executionManager = new Executionmanager();
+		Executionmanager executionManager = null;
 		try {
-			// executionManager.scanStateOfTheArt();
-			executionManager.scanTestProfiles();
-			// executionManager.scanRepository();
+			executionManager = new Executionmanager();
+		} catch (IOException e) {
+			LOGGER.error("IOException occured while executing", e);
+		}
+		try {
+			 executionManager.scanTestProfiles();
+//			executionManager.scanRepository();
 			LOGGER.info("Shutting down properly.");
 			System.exit(0);
 		} catch (IOException e) {
@@ -25,6 +29,8 @@ public class Main {
 		} catch (GitAPIException e) {
 			LOGGER.error("GitAPIException occured while executing", e);
 			System.exit(1);
+		} finally {
+			executionManager.close();
 		}
 	}
 

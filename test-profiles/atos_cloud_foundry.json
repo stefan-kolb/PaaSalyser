@@ -4,8 +4,8 @@
   "url": "https://canopy-cloud.com/application-platforms/atos-cloud-foundry",
   "vendor_verified": "2016-05-25",
   "status": "production",
-  "status_since": "2015-01-07",
-  "type": "Generic",
+  "status_since": "2015-01",
+  "type": "IaaS-centric",
   "platform": "Cloud Foundry",
   "hosting": {
     "public": true,
@@ -16,12 +16,19 @@
   },
   "pricings": [
     {
-      "model": "metered",
-      "period": "monthly"
+      "model": "free"
     },
     {
       "model": "fixed",
       "period": "monthly"
+    },
+	{
+      "model": "hybrid",
+      "period": "monthly"
+    },
+	{
+      "model": "fixed",
+      "period": "anually"
     }
   ],
   "scaling": {
@@ -181,115 +188,7 @@
     "native": [
       {
         "name": "mongodb",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "memcached",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "mysql",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "postgresql",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "rabbitmq",
-        "description": "",
-        "type": "worker",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "redis",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "Neo4J",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "kafka",
-        "description": "",
-        "type": "message broker",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "riak cs",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "cassandra",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "elasticsearch",
-        "description": "",
-        "type": "search",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "abacus",
-        "description": "",
-        "type": "metering",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "couchdb",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
-      },
-      {
-        "name": "dingo-postgresql",
-        "description": "",
-        "type": "datastore",
-        "versions": [
-
-        ]
+        "type": "datastore"
       }
     ],
     "addon": [
@@ -363,107 +262,5 @@
   },
   "extensible": true,
   "infrastructures": [
-    {
-      "continent": "AS",
-      "country": "SG",
-      "region": "Singapore",
-      "provider": "AWS"
-    },
-    {
-      "continent": "AS",
-      "country": "JP",
-      "region": "Tokyo",
-      "provider": "AWS"
-    },
-    {
-      "continent": "EU",
-      "country": "IE",
-      "region": "Dublin",
-      "provider": "AWS"
-    },
-    {
-      "continent": "NA",
-      "country": "US",
-      "region": "Northern California",
-      "provider": "AWS"
-    },
-    {
-      "continent": "NA",
-      "country": "US",
-      "region": "Northern Virginia",
-      "provider": "AWS"
-    },
-    {
-      "continent": "NA",
-      "country": "US",
-      "region": "Oregon",
-      "provider": "AWS"
-    },
-    {
-      "continent": "OC",
-      "country": "AU",
-      "region": "Sydney",
-      "provider": "AWS"
-    },
-    {
-      "continent": "SA",
-      "country": "BR",
-      "region": "Sao Paulo",
-      "provider": "AWS"
-    },
-    {
-      "continent": "EU",
-      "country": "GB",
-      "region": "",
-      "provider": "vCloud Air"
-    },
-    {
-      "continent": "NA",
-      "country": "US",
-      "region": "",
-      "provider": "vCloud Air"
-    },
-    {
-      "continent": "NA",
-      "country": "US",
-      "region": "",
-      "provider": "Atos Cloud"
-    },
-    {
-      "continent": "EU",
-      "country": "DE",
-      "region": "",
-      "provider": "Atos Cloud"
-    },
-    {
-      "continent": "AS",
-      "country": "SG",
-      "region": "Singapore",
-      "provider": "Atos Cloud"
-    },
-    {
-      "continent": "OC",
-      "country": "AU",
-      "region": "Perth",
-      "provider": "Atos Cloud"
-    },
-    {
-      "continent": "EU",
-      "country": "DE",
-      "region": "",
-      "provider": "Atos Private Cloud (EPC)"
-    },
-    {
-      "continent": "NA",
-      "country": "US",
-      "region": "",
-      "provider": "Atos Private Cloud (EPC)"
-    },
-    {
-      "continent": "AS",
-      "country": "",
-      "region": "",
-      "provider": "Atos Private Cloud (EPC)"
-    }
   ]
 }

@@ -82,23 +82,28 @@ public class InfrastructureData {
 			if (profileContinents.putIfAbsent("NA", (long) 1) != null) {
 				profileContinents.replace("NA", profileContinents.get("NA") + 1);
 			}
-		} else if (eu) {
+		}
+		if (eu) {
 			if (profileContinents.putIfAbsent("EU", (long) 1) != null) {
 				profileContinents.replace("EU", profileContinents.get("EU") + 1);
 			}
-		} else if (as) {
+		}
+		if (as) {
 			if (profileContinents.putIfAbsent("AS", (long) 1) != null) {
 				profileContinents.replace("AS", profileContinents.get("AS") + 1);
 			}
-		} else if (oc) {
+		}
+		if (oc) {
 			if (profileContinents.putIfAbsent("OC", (long) 1) != null) {
 				profileContinents.replace("OC", profileContinents.get("OC") + 1);
 			}
-		} else if (sa) {
+		}
+		if (sa) {
 			if (profileContinents.putIfAbsent("SA", (long) 1) != null) {
 				profileContinents.replace("SA", profileContinents.get("SA") + 1);
 			}
-		} else if (af) {
+		}
+		if (af) {
 			if (profileContinents.putIfAbsent("AF", (long) 1) != null) {
 				profileContinents.replace("AF", profileContinents.get("AF") + 1);
 			}
