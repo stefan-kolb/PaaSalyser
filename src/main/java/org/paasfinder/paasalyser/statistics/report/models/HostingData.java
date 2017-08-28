@@ -30,4 +30,10 @@ public class HostingData {
 		virtual_private++;
 	}
 
+	@Override
+	public String toString() {
+		return "HostingData [_private=" + _private + ", _public=" + _public + ", virtual_private=" + virtual_private
+				+ "]";
+	}
+
 }

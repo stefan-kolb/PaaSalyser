@@ -32,4 +32,9 @@ public class RuntimeData {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "RuntimeData [profileRuntimesAmount=" + profileRuntimesAmount + ", runtimes=" + runtimes + "]";
+	}
+
 }

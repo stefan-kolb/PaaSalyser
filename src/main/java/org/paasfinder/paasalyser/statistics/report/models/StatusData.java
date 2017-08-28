@@ -54,4 +54,10 @@ public class StatusData {
 		statusSince.put(key, value);
 	}
 
+	@Override
+	public String toString() {
+		return "StatusData [alpha=" + alpha + ", beta=" + beta + ", eol=" + eol + ", production=" + production
+				+ ", statusSince=" + statusSince + "]";
+	}
+
 }

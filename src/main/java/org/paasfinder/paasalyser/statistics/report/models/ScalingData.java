@@ -30,4 +30,9 @@ public class ScalingData {
 		auto++;
 	}
 
+	@Override
+	public String toString() {
+		return "ScalingData [horizontal=" + horizontal + ", vertical=" + vertical + ", auto=" + auto + "]";
+	}
+
 }

@@ -24,4 +24,9 @@ public class PlatformData {
 		platformProfiles++;
 	}
 
+	@Override
+	public String toString() {
+		return "PlatformData [platformProfiles=" + platformProfiles + ", platforms=" + platforms + "]";
+	}
+
 }

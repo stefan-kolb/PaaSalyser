@@ -49,4 +49,10 @@ public class ServicesData {
 		return typesOfNativeServices;
 	}
 
+	@Override
+	public String toString() {
+		return "ServicesData [profilesWithNativeServices=" + profilesWithNativeServices + ", nativeServices="
+				+ nativeServices + ", typesOfNativeServices=" + typesOfNativeServices + "]";
+	}
+
 }

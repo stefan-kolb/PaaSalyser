@@ -1,6 +1,7 @@
 package org.paasfinder.paasalyser;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -34,7 +35,7 @@ public class Executionmanager {
 		gsonAdapter = new GsonAdapter();
 		database = new DatabaseConnector();
 	}
-	
+
 	public void scanStateOfTheArt() throws IOException, GitAPIException {
 		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
 				database)) {
@@ -46,6 +47,15 @@ public class Executionmanager {
 			processCommitProfiles(sniffer.getStateOfTheArt());
 		}
 		logger.info("Successfully scanned State of the Art");
+	}
+
+	public void scanTestProfiles() throws IllegalStateException, IOException, GitAPIException {
+		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
+				database)) {
+			logger.info("Scanning Test Profiles");
+			processTestProfiles(gsonAdapter.scanDirectoryForJsonFiles(Paths.get("test-profiles")));
+		}
+		logger.info("Successfully scanned Test Profiles");
 	}
 
 	public void scanRepository() throws IOException, GitAPIException {
@@ -82,6 +92,7 @@ public class Executionmanager {
 		ReportStatistics reportStatistics;
 		try {
 			reportPreprocessing = new ReportPreprocessing(commitProfile.getValue());
+			System.out.println(reportPreprocessing.toString());
 			reportStatistics = new ReportStatistics(reportPreprocessing);
 		} catch (IllegalStateException e) {
 			throw new RuntimeException(
@@ -100,6 +111,21 @@ public class Executionmanager {
 			report = new PaasReport();
 		}
 		return report;
+	}
+
+	private void processTestProfiles(List<PaasProfile> commitProfiles) throws IOException, RuntimeException {
+		logger.info("Processing");
+		ReportPreprocessing reportPreprocessing;
+		ReportStatistics reportStatistics;
+		try {
+			reportPreprocessing = new ReportPreprocessing(commitProfiles);
+			System.out.println(reportPreprocessing.toString());
+			System.out.println("--------------------------------------------");
+			reportStatistics = new ReportStatistics(reportPreprocessing);
+			System.out.println(reportStatistics.toString());
+		} catch (IllegalStateException e) {
+			throw new RuntimeException("IllegalStateException occurred while processing test profiles", e);
+		}
 	}
 
 }

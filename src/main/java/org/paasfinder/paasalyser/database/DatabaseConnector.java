@@ -26,7 +26,12 @@ public class DatabaseConnector {
 
 		datastore = morphia.createDatastore(new MongoClient(), "paasalyser");
 		datastore.ensureIndexes();
+
 		logger.info("Database connected");
+	}
+
+	public void clearDatabase() {
+		datastore.getDB().dropDatabase();
 	}
 
 	public boolean savePaasProfile(PaasReport paasReport) {

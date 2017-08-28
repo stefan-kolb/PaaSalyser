@@ -30,4 +30,9 @@ public class TypeData {
 		iaasCentric++;
 	}
 
+	@Override
+	public String toString() {
+		return "TypeData [saasCentric=" + saasCentric + ", generic=" + generic + ", iaasCentric=" + iaasCentric + "]";
+	}
+
 }

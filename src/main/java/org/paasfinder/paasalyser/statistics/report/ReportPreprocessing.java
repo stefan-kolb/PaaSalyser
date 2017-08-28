@@ -162,7 +162,6 @@ public class ReportPreprocessing {
 				this.profiles.add(profile);
 			}
 		}
-
 	}
 
 	private void evalRevision() {
@@ -175,10 +174,8 @@ public class ReportPreprocessing {
 				}
 				revisionData.addRevision(profile.getName(), ChronoUnit.DAYS
 						.between(LocalDate.parse(profile.getRevision().substring(0, 10)), LocalDate.now()));
-
 			} catch (DateTimeParseException e) {
-				// logger.info("StatusSince could not be parsed: " +
-				// profile.getRevision());
+				throw new RuntimeException("Could not parse revision date", e);
 			}
 		}
 	}
@@ -203,7 +200,8 @@ public class ReportPreprocessing {
 				statusData.addStatusSince(profile.getName(), ChronoUnit.DAYS
 						.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), LocalDate.now()));
 			} catch (DateTimeParseException e) {
-				logger.error("Failed to parse LocalDate");
+				logger.error("Failed to parse StatusSince");
+				// Failing here isn't too crucial.
 				continue;
 			}
 
@@ -412,5 +410,14 @@ public class ReportPreprocessing {
 				infrastructuresData.addProvider(infrastructure.getProvider());
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "ReportPreprocessing [profiles=" + profiles + "\n invalidProfilesCount=" + invalidProfilesCount
+				+ "\n revisionData=" + revisionData + "\n statusData=" + statusData + "\n typeData=" + typeData
+				+ "\n platformData=" + platformData + "\n hostingData=" + hostingData + "\n pricingData=" + pricingData
+				+ "\n scalingData=" + scalingData + "\n runtimesData=" + runtimesData + "\n servicesData=" + servicesData
+				+ "\n extensibleData=" + extensibleData + "\n infrastructuresData=" + infrastructuresData + "]";
 	}
 }
