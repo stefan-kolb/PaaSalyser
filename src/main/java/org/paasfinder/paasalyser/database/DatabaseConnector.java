@@ -60,4 +60,9 @@ public class DatabaseConnector {
 		datastore.delete(datastore.createQuery(PaasReport.class).field("id").equal(commitHash));
 	}
 
+	public List<PaasReport> getNumberOfProfilesAsList() {
+		return datastore.createQuery(PaasReport.class).order("metainfos.date")
+				.project("metainfos.numberOfProfiles", true).project("metainfos.date", true).asList();
+	}
+
 }

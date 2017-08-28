@@ -15,7 +15,8 @@ import org.paasfinder.paasalyser.report.models.MetaInfo;
 import org.paasfinder.paasalyser.statistics.report.ReportStatistics;
 
 @Entity("paasreports")
-@Indexes({ @Index(fields = @Field("id")), @Index(fields = @Field("commitHash")) })
+@Indexes({ @Index(fields = @Field("id")), @Index(fields = @Field("commitHash")),
+		@Index(fields = @Field("metainfos.date")) })
 public class PaasReport {
 
 	@Id

@@ -34,7 +34,7 @@ public class Executionmanager {
 		gsonAdapter = new GsonAdapter();
 		database = new DatabaseConnector();
 	}
-
+	
 	public void scanStateOfTheArt() throws IOException, GitAPIException {
 		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
 				database)) {
