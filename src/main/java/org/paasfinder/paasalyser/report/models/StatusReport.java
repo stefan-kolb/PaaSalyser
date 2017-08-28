@@ -16,9 +16,8 @@ public class StatusReport {
 	private double medianStatusSince;
 	private double varianceStatusSince;
 	private double stdevStatusSince;
-	@Embedded
+
 	private List<SimpleResultLong> oldestStatusSince;
-	@Embedded
 	private List<SimpleResultLong> youngestStatusSince;
 
 	public StatusReport(List<SimpleResultLong> topStatus, QualitativeData qualitativeData,

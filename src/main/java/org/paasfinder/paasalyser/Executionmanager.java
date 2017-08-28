@@ -11,12 +11,14 @@ import java.util.Map;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.paasfinder.paasalyser.database.DatabaseConnector;
+import org.paasfinder.paasalyser.database.DatabaseConnectorImpl;
 import org.paasfinder.paasalyser.gsonutility.GsonAdapter;
 import org.paasfinder.paasalyser.profile.PaasProfile;
 import org.paasfinder.paasalyser.report.PaasReport;
 import org.paasfinder.paasalyser.revision.RepositorySniffer;
 import org.paasfinder.paasalyser.statistics.report.ReportPreprocessing;
 import org.paasfinder.paasalyser.statistics.report.ReportStatistics;
+import org.paasfinder.paasalyser.statistics.timeseries.TimeseriesStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +41,7 @@ public class Executionmanager {
 		mongoDB = Runtime.getRuntime().exec(command);
 
 		gsonAdapter = new GsonAdapter();
-		database = new DatabaseConnector();
+		database = new DatabaseConnectorImpl();
 	}
 
 	public void close() {
@@ -68,6 +70,10 @@ public class Executionmanager {
 		logger.info("Successfully scanned Test Profiles");
 	}
 
+	public void createStatisticalAnalysis() {
+		TimeseriesStatistics timeseriesStatistics = new TimeseriesStatistics();
+	}
+
 	public void scanRepository() throws IOException, GitAPIException {
 		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
 				database)) {
@@ -78,9 +84,7 @@ public class Executionmanager {
 			for (Map.Entry<RevCommit, List<PaasProfile>> commitProfile : profilesOfCommits.entrySet()) {
 				if (!database.contains(commitProfile.getKey().getName())) {
 					try {
-						if (database.savePaasProfile(processCommitProfiles(commitProfile))) {
-							logger.info("Saving Paasprofile to Database succesful");
-						}
+						database.savePaasReport(processCommitProfiles(commitProfile));
 					} catch (IOException e) {
 						logger.error("IOException occurred - Could not process commit "
 								+ commitProfile.getKey().getName() + " | " + e.getMessage());
