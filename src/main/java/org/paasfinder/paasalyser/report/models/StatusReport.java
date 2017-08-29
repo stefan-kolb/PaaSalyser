@@ -8,8 +8,9 @@ import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 @Embedded
 public class StatusReport {
 
-	// Status Statistics
-	private List<SimpleResultLong> topStatus;
+	private double alphaPercent = 0.0;
+	private double betaPercent = 0.0;
+	private double productionPercent = 0.0;
 
 	// StatusSince Statistics
 	private double meanStatusSince;
@@ -20,10 +21,12 @@ public class StatusReport {
 	private List<SimpleResultLong> oldestStatusSince;
 	private List<SimpleResultLong> youngestStatusSince;
 
-	public StatusReport(List<SimpleResultLong> topStatus, QualitativeData qualitativeData,
+	public StatusReport(double[] percentages, QualitativeData qualitativeData,
 			List<SimpleResultLong> topFiveStatusSince, List<SimpleResultLong> minFiveStatusSince) {
 		super();
-		this.topStatus = topStatus;
+		this.alphaPercent = percentages[0];
+		this.betaPercent = percentages[1];
+		this.productionPercent = percentages[2];
 		this.meanStatusSince = qualitativeData.getMean();
 		this.medianStatusSince = qualitativeData.getMedian();
 		this.varianceStatusSince = qualitativeData.getVariance();
@@ -36,8 +39,16 @@ public class StatusReport {
 		super();
 	}
 
-	public List<SimpleResultLong> getTopStatus() {
-		return topStatus;
+	public double getAlphaPercent() {
+		return alphaPercent;
+	}
+
+	public double getBetaPercent() {
+		return betaPercent;
+	}
+
+	public double getProductionPercent() {
+		return productionPercent;
 	}
 
 	public double getMeanStatusSince() {

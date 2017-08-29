@@ -31,7 +31,7 @@ public class ReportPreprocessing {
 
 	private final Logger logger = LoggerFactory.getLogger(ReportPreprocessing.class);
 
-	private List<PaasProfile> profiles = new ArrayList<PaasProfile>();
+	private List<PaasProfile> profiles = new ArrayList<>(100);
 
 	private int invalidProfilesCount;
 	private RevisionData revisionData;
@@ -417,7 +417,8 @@ public class ReportPreprocessing {
 		return "ReportPreprocessing [profiles=" + profiles + "\n invalidProfilesCount=" + invalidProfilesCount
 				+ "\n revisionData=" + revisionData + "\n statusData=" + statusData + "\n typeData=" + typeData
 				+ "\n platformData=" + platformData + "\n hostingData=" + hostingData + "\n pricingData=" + pricingData
-				+ "\n scalingData=" + scalingData + "\n runtimesData=" + runtimesData + "\n servicesData=" + servicesData
-				+ "\n extensibleData=" + extensibleData + "\n infrastructuresData=" + infrastructuresData + "]";
+				+ "\n scalingData=" + scalingData + "\n runtimesData=" + runtimesData + "\n servicesData="
+				+ servicesData + "\n extensibleData=" + extensibleData + "\n infrastructuresData=" + infrastructuresData
+				+ "]";
 	}
 }

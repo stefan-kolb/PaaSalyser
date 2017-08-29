@@ -14,11 +14,11 @@ public class TypeReport {
 	private double genericPercent = 0.0;
 	private double iaasCentricPercent = 0.0;
 
-	public TypeReport(double saasCentricPercent, double genericPercent, double iaasCentricPercent) {
+	public TypeReport(double[] percentages) {
 		super();
-		this.saasCentricPercent = saasCentricPercent;
-		this.genericPercent = genericPercent;
-		this.iaasCentricPercent = iaasCentricPercent;
+		this.saasCentricPercent = percentages[0];
+		this.genericPercent = percentages[1];
+		this.iaasCentricPercent = percentages[2];
 	}
 
 	public TypeReport() {

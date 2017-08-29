@@ -9,12 +9,11 @@ public class HostingReport {
 	private double publicHostingPercent = 0.0;
 	private double virtualPrivateHostingPercent = 0.0;
 
-	public HostingReport(double privateHostingPercent, double publicHostingPercent,
-			double virtualPrivateHostingPercent) {
+	public HostingReport(double[] percentages) {
 		super();
-		this.privateHostingPercent = privateHostingPercent;
-		this.publicHostingPercent = publicHostingPercent;
-		this.virtualPrivateHostingPercent = virtualPrivateHostingPercent;
+		this.privateHostingPercent = percentages[0];
+		this.publicHostingPercent = percentages[1];
+		this.virtualPrivateHostingPercent = percentages[2];
 	}
 
 	public HostingReport() {

@@ -7,10 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.paasfinder.paasalyser.report.models.ExtensibleReport;
-import org.paasfinder.paasalyser.report.models.FrameworksReport;
 import org.paasfinder.paasalyser.report.models.HostingReport;
 import org.paasfinder.paasalyser.report.models.InfrastructuresReport;
-import org.paasfinder.paasalyser.report.models.MiddlewareReport;
 import org.paasfinder.paasalyser.report.models.PlatformReport;
 import org.paasfinder.paasalyser.report.models.PricingReport;
 import org.paasfinder.paasalyser.report.models.QualitativeData;
@@ -43,8 +41,8 @@ public class ReportStatistics {
 	private PricingReport pricing;
 	private ScalingReport scaling;
 	private RuntimesReport runtimes;
-	private MiddlewareReport middleware;
-	private FrameworksReport frameworks;
+	// private MiddlewareReport middleware;
+	// private FrameworksReport frameworks;
 	private ServicesReport services;
 	private ExtensibleReport extensible;
 	private InfrastructuresReport infrastructures;
@@ -86,9 +84,9 @@ public class ReportStatistics {
 		// logger.info("evalRuntimes");
 		evalRuntimes();
 		// logger.info("evalMiddleware");
-		evalMiddleware();
+		// evalMiddleware();
 		// logger.info("evalFrameworks");
-		evalFrameworks();
+		// evalFrameworks();
 		// logger.info("evalServices");
 		evalServices();
 		// logger.info("evalExtensible");
@@ -148,13 +146,13 @@ public class ReportStatistics {
 		return runtimes;
 	}
 
-	public MiddlewareReport getMiddleware() {
-		return middleware;
-	}
-
-	public FrameworksReport getFrameworks() {
-		return frameworks;
-	}
+	// public MiddlewareReport getMiddleware() {
+	// return middleware;
+	// }
+	//
+	// public FrameworksReport getFrameworks() {
+	// return frameworks;
+	// }
 
 	public ServicesReport getServices() {
 		return services;
@@ -175,22 +173,23 @@ public class ReportStatistics {
 	}
 
 	private void evalStatus() {
-		List<SimpleResultLong> statusResults = new ArrayList<>();
-		statusResults.add(new SimpleResultLong("Alpha", dataPreProcessing.getStatusData().getAlpha()));
-		statusResults.add(new SimpleResultLong("Beta", dataPreProcessing.getStatusData().getBeta()));
-		statusResults.add(new SimpleResultLong("End of Lifetime", dataPreProcessing.getStatusData().getEol()));
-		statusResults.add(new SimpleResultLong("Production", dataPreProcessing.getStatusData().getProduction()));
+		double[] percentages = new double[3];
+		percentages[0] = calcPercent(dataPreProcessing.getStatusData().getAlpha(), profilesCount);
+		percentages[1] = calcPercent(dataPreProcessing.getStatusData().getBeta(), profilesCount);
+		percentages[2] = calcPercent(dataPreProcessing.getStatusData().getProduction(), profilesCount);
 
-		status = new StatusReport(getTopFive(statusResults),
-				new QualitativeData(dataPreProcessing.getStatusData().getStatusSince()),
+		status = new StatusReport(percentages, new QualitativeData(dataPreProcessing.getStatusData().getStatusSince()),
 				getTopFive(dataPreProcessing.getStatusData().getStatusSince()),
 				getMinFive(dataPreProcessing.getStatusData().getStatusSince()));
 	}
 
 	private void evalType() {
-		type = new TypeReport(calcPercent(dataPreProcessing.getTypeData().getSaasCentric(), profilesCount),
-				calcPercent(dataPreProcessing.getTypeData().getGeneric(), profilesCount),
-				calcPercent(dataPreProcessing.getTypeData().getIaasCentric(), profilesCount));
+		double[] percentages = new double[3];
+		percentages[0] = calcPercent(dataPreProcessing.getTypeData().getSaasCentric(), profilesCount);
+		percentages[1] = calcPercent(dataPreProcessing.getTypeData().getGeneric(), profilesCount);
+		percentages[2] = calcPercent(dataPreProcessing.getTypeData().getIaasCentric(), profilesCount);
+
+		type = new TypeReport(percentages);
 	}
 
 	private void evalPlatform() {
@@ -204,9 +203,12 @@ public class ReportStatistics {
 	}
 
 	private void evalHosting() {
-		hosting = new HostingReport(calcPercent(dataPreProcessing.getHostingData().getPrivate(), profilesCount),
-				calcPercent(dataPreProcessing.getHostingData().getPublic(), profilesCount),
-				calcPercent(dataPreProcessing.getHostingData().getVirtualPrivate(), profilesCount));
+		double[] percentages = new double[3];
+		percentages[0] = calcPercent(dataPreProcessing.getHostingData().getPrivate(), profilesCount);
+		percentages[1] = calcPercent(dataPreProcessing.getHostingData().getPublic(), profilesCount);
+		percentages[2] = calcPercent(dataPreProcessing.getHostingData().getVirtualPrivate(), profilesCount);
+
+		hosting = new HostingReport(percentages);
 	}
 
 	private void evalPricing() {
@@ -239,9 +241,12 @@ public class ReportStatistics {
 	}
 
 	private void evalScaling() {
-		scaling = new ScalingReport(calcPercent(dataPreProcessing.getScalingData().getVertical(), profilesCount),
-				calcPercent(dataPreProcessing.getScalingData().getHorizontal(), profilesCount),
-				calcPercent(dataPreProcessing.getScalingData().getAuto(), profilesCount));
+		double[] percentages = new double[3];
+		percentages[0] = calcPercent(dataPreProcessing.getScalingData().getVertical(), profilesCount);
+		percentages[1] = calcPercent(dataPreProcessing.getScalingData().getHorizontal(), profilesCount);
+		percentages[2] = calcPercent(dataPreProcessing.getScalingData().getAuto(), profilesCount);
+
+		scaling = new ScalingReport(percentages);
 	}
 
 	private void evalRuntimes() {
@@ -269,17 +274,11 @@ public class ReportStatistics {
 				getTopFive(dataPreProcessing.getRuntimesData().getNumberPerProfile()), runtimesShare);
 	}
 
-	private void evalMiddleware() {
-		middleware = new MiddlewareReport();
-	}
-
-	private void evalFrameworks() {
-		frameworks = new FrameworksReport();
-	}
-
 	private void evalServices() {
-		services = new ServicesReport(
-				calcPercent(dataPreProcessing.getServicesData().getProfilesWithNativeServices().size(), profilesCount),
+		double profilesWithNativeServices = calcPercent(
+				dataPreProcessing.getServicesData().getProfilesWithNativeServices().size(), profilesCount);
+		
+		services = new ServicesReport(profilesWithNativeServices,
 				getTopFive(dataPreProcessing.getServicesData().getProfilesWithNativeServices()),
 				getTopFive(dataPreProcessing.getServicesData().getNativeServices()),
 				getTopFive(dataPreProcessing.getServicesData().getTypesOfNativeServices().entrySet().stream()
@@ -288,7 +287,9 @@ public class ReportStatistics {
 	}
 
 	private void evalExtensible() {
-		extensible = new ExtensibleReport(calcPercent(dataPreProcessing.getExtensibleData().getTrue(), profilesCount));
+		double extensibleCount = calcPercent(dataPreProcessing.getExtensibleData().getTrue(), profilesCount);
+		
+		extensible = new ExtensibleReport(extensibleCount);
 	}
 
 	private void evalInfrastructures() {

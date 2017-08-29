@@ -9,11 +9,11 @@ public class ScalingReport {
 	private double horizontalPercent = 0.0;
 	private double autoPercent = 0.0;
 
-	public ScalingReport(double verticalPercent, double horizontalPercent, double autoPercent) {
+	public ScalingReport(double[] percentages) {
 		super();
-		this.verticalPercent = verticalPercent;
-		this.horizontalPercent = horizontalPercent;
-		this.autoPercent = autoPercent;
+		this.verticalPercent = percentages[0];
+		this.horizontalPercent = percentages[1];
+		this.autoPercent = percentages[2];
 	}
 
 	public ScalingReport() {

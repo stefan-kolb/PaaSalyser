@@ -5,4 +5,4 @@ c:
 cd "C:\Program Files\MongoDB\Server\3.4\bin"
 start mongod.exe
 echo MongoDB is ready
-pause
+exit
