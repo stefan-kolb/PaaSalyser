@@ -18,6 +18,7 @@ import org.paasfinder.paasalyser.report.PaasReport;
 import org.paasfinder.paasalyser.revision.RepositorySniffer;
 import org.paasfinder.paasalyser.statistics.report.ReportPreprocessing;
 import org.paasfinder.paasalyser.statistics.report.ReportStatistics;
+import org.paasfinder.paasalyser.statistics.timeseries.TimeseriesCSVPrinter;
 import org.paasfinder.paasalyser.statistics.timeseries.TimeseriesStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,7 @@ public class Executionmanager {
 
 	private final String gitRemotePath = "git@github.com:stefan-kolb/paas-profiles.git";
 	private final String pathOfProfilesRepository = "paas-profiles";
+	private final String pathOfTimeseriesReports = "Timeseries Reports";
 
 	public Executionmanager() throws IOException {
 		super();
@@ -71,7 +73,10 @@ public class Executionmanager {
 	}
 
 	public void createStatisticalAnalysis() {
-		TimeseriesStatistics timeseriesStatistics = new TimeseriesStatistics();
+		TimeseriesStatistics timeseries = new TimeseriesStatistics();
+		TimeseriesCSVPrinter printer = new TimeseriesCSVPrinter(pathOfTimeseriesReports);
+
+		printer.printToCSVFile("ProfileAmounts", timeseries.evalProfileAmounts(database.getProfileAmounts()));
 	}
 
 	public void scanRepository() throws IOException, GitAPIException {

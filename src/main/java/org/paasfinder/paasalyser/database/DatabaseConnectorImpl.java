@@ -1,6 +1,5 @@
 package org.paasfinder.paasalyser.database;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,7 +67,7 @@ public class DatabaseConnectorImpl implements DatabaseConnector {
 
 		return relevantReports.stream().map(elem -> {
 			return elem.getMetaInfo();
-		}).collect(Collectors.toCollection(LinkedList::new));
+		}).collect(Collectors.toList());
 	}
 
 	public List<MetaInfo> getRevisionAmounts() {
@@ -77,7 +76,7 @@ public class DatabaseConnectorImpl implements DatabaseConnector {
 
 		return relevantReports.stream().map(elem -> {
 			return elem.getMetaInfo();
-		}).collect(Collectors.toCollection(LinkedList::new));
+		}).collect(Collectors.toList());
 	}
 
 	public List<MetaInfo> getTypeAmounts() {
@@ -86,7 +85,7 @@ public class DatabaseConnectorImpl implements DatabaseConnector {
 
 		return relevantReports.stream().map(elem -> {
 			return elem.getMetaInfo();
-		}).collect(Collectors.toCollection(LinkedList::new));
+		}).collect(Collectors.toList());
 	}
 
 	public List<PaasReport> getStatusAmounts() {

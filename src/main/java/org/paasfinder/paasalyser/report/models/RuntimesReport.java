@@ -17,7 +17,8 @@ public class RuntimesReport {
 	private double medianNumberOfRuntimes;
 	private double varianceNumberOfRuntimes;
 	private double stdevNumberOfRuntimes;
-	@Embedded
+
+	// Number of runtimes per profile
 	private List<SimpleResultLong> topFiveNumberOfRuntimes = new ArrayList<>();
 
 	// Amount of Runtimes
