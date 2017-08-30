@@ -13,15 +13,16 @@ public class InfrastructuresReport {
 	private double medianInfrastrcturesPerProfile;
 	private double varianceInfrastrcturesPerProfile;
 	private double stdevInfrastrcturesPerProfile;
-	private List<SimpleResultLong> topFiveInfrastrcturesPerProfile;
+	private List<SimpleResultLong> topFiveInfrastructuresPerProfile;
 
 	private List<SimpleResultDouble> percentOfProfilesPerContinent;
+
 	private List<SimpleResultLong> topFiveContinents;
 	private List<SimpleResultLong> topFiveCountries;
 	private List<SimpleResultLong> topFiveRegions;
 	private List<SimpleResultLong> topFiveProviders;
 
-	public InfrastructuresReport(List<SimpleResultLong> topFiveInfrastrcturesPerProfile,
+	public InfrastructuresReport(List<SimpleResultLong> topFiveInfrastructuresPerProfile,
 			QualitativeData infrastrcturesPerProfile, List<SimpleResultDouble> percentOfProfilesPerContinent,
 			List<SimpleResultLong> topFiveContinents, List<SimpleResultLong> topFiveCountries,
 			List<SimpleResultLong> topFiveRegions, List<SimpleResultLong> topFiveProviders) {
@@ -30,7 +31,7 @@ public class InfrastructuresReport {
 		this.medianInfrastrcturesPerProfile = infrastrcturesPerProfile.getMedian();
 		this.varianceInfrastrcturesPerProfile = infrastrcturesPerProfile.getVariance();
 		this.stdevInfrastrcturesPerProfile = infrastrcturesPerProfile.getStDev();
-		this.topFiveInfrastrcturesPerProfile = topFiveInfrastrcturesPerProfile;
+		this.topFiveInfrastructuresPerProfile = topFiveInfrastructuresPerProfile;
 		this.percentOfProfilesPerContinent = percentOfProfilesPerContinent;
 		this.topFiveContinents = topFiveContinents;
 		this.topFiveCountries = topFiveCountries;
@@ -43,7 +44,7 @@ public class InfrastructuresReport {
 	}
 
 	public List<SimpleResultLong> getTopFiveInfrastrcturesPerProfile() {
-		return topFiveInfrastrcturesPerProfile;
+		return topFiveInfrastructuresPerProfile;
 	}
 
 	public double getMeanInfrastrcturesPerProfile() {
