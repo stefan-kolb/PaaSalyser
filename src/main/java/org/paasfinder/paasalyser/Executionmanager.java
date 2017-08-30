@@ -27,7 +27,7 @@ public class Executionmanager {
 
 	private final Logger logger = LoggerFactory.getLogger(Executionmanager.class);
 
-	Process mongoDB = null;
+	private Process mongoDB = null;
 
 	private GsonAdapter gsonAdapter;
 	private DatabaseConnector database;

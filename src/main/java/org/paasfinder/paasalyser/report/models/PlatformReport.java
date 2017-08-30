@@ -9,7 +9,6 @@ import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 public class PlatformReport {
 
 	private double platformProfilesPercent = 0.0;
-	@Embedded
 	private List<SimpleResultLong> topPlatforms;
 
 	public PlatformReport(double platformProfilesPercent, List<SimpleResultLong> topPlatforms) {

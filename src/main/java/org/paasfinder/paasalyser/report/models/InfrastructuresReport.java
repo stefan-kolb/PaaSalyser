@@ -13,18 +13,12 @@ public class InfrastructuresReport {
 	private double medianInfrastrcturesPerProfile;
 	private double varianceInfrastrcturesPerProfile;
 	private double stdevInfrastrcturesPerProfile;
-	@Embedded
 	private List<SimpleResultLong> topFiveInfrastrcturesPerProfile;
 
-	@Embedded
 	private List<SimpleResultDouble> percentOfProfilesPerContinent;
-	@Embedded
 	private List<SimpleResultLong> topFiveContinents;
-	@Embedded
 	private List<SimpleResultLong> topFiveCountries;
-	@Embedded
 	private List<SimpleResultLong> topFiveRegions;
-	@Embedded
 	private List<SimpleResultLong> topFiveProviders;
 
 	public InfrastructuresReport(List<SimpleResultLong> topFiveInfrastrcturesPerProfile,

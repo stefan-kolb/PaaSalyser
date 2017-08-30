@@ -9,11 +9,8 @@ import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 public class ServicesReport {
 
 	private double nativeServicesProfilesPercent;
-	@Embedded
 	private List<SimpleResultLong> topFiveProfilesWithNativeServicesAmount;
-	@Embedded
 	private List<SimpleResultLong> topFiveNativeServices;
-	@Embedded
 	private List<SimpleResultLong> topFiveTypesOfServices;
 
 	public ServicesReport(double nativeServicesProfilesPercent,

@@ -71,25 +71,6 @@ public class RepositorySniffer implements AutoCloseable {
 		return git.log().call().iterator().next().getName();
 	}
 
-	// public Map.Entry<RevCommit, List<PaasProfile>>
-	// getProfilesOfSpecificCommit(String commitId)
-	// throws GitAPIException, IOException {
-	// RevCommit currentCommit = git.log().call().iterator().next();
-	// logger.info("Currently getting data of commit: " +
-	// currentCommit.getName());
-	// Path outputPath = Paths.get("Reports/" +
-	// currentCommit.getAuthorIdent().getWhen().getTime() + "_"
-	// + currentCommit.getName() + ".json");
-	//
-	// if (Files.exists(outputPath)) {
-	// logger.info("Report of state of the art (commit id: " +
-	// currentCommit.getName() + ") already existing");
-	// }
-	// return new AbstractMap.SimpleEntry<RevCommit,
-	// List<PaasProfile>>(currentCommit,
-	// getProfilesOfCommit(currentCommit.getName()));
-	// }
-
 	/**
 	 * Clones or reset and pulls the repository.
 	 * 

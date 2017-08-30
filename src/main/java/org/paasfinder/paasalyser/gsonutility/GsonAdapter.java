@@ -33,7 +33,7 @@ public class GsonAdapter {
 	private Gson gson;
 
 	public GsonAdapter() {
-		gsonBuilder = createGsonBuilderWithCustomDeserializing();
+		gsonBuilder = createCustomGsonBuilder();
 		gson = gsonBuilder.setPrettyPrinting().create();
 	}
 
@@ -84,6 +84,7 @@ public class GsonAdapter {
 	 * @throws IOException
 	 *             Gson was unable to stream or write to stream
 	 */
+	@Deprecated
 	public void createReportAsJsonFile(PaasReport report, Path path) throws IOException {
 		try (BufferedWriter writer = Files.newBufferedWriter(path, Charset.defaultCharset(),
 				StandardOpenOption.CREATE)) {
@@ -95,57 +96,8 @@ public class GsonAdapter {
 		}
 	}
 
-	// public Map<String, PaasReport> scanReportsFromDatastore(Path
-	// rootDirectory) throws IOException {
-	// if (!Files.isDirectory(rootDirectory)) {
-	// throw new IOException(rootDirectory + " is no existing directory");
-	// } else {
-	// return Files.walk(rootDirectory).filter(path ->
-	// path.toString().endsWith("json")).map(path -> {
-	// try (InputStream in = Files.newInputStream(path);
-	// BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-	// return new AbstractMap.SimpleEntry(path, gson.fromJson(reader,
-	// PaasReport.class));
-	// } catch (IOException e) {
-	// logger.error("IOException occurred during scanning directory at: " +
-	// path.getFileName()
-	// + " | Message: " + e.getMessage());
-	// return null;
-	// } catch (JsonSyntaxException e) {
-	// logger.error("JsonSyntaxException occurred during scanning directory at:
-	// " + path.getFileName()
-	// + " | Message: " + e.getMessage());
-	// return null;
-	// }
-	// }).collect(Collectors.toCollection(HashMap::new));
-	// }
-	// }
-
-	private GsonBuilder createGsonBuilderWithCustomDeserializing() {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-
-		// PaasProfileDeserializer paasProfileDeserializer = new
-		// PaasProfileDeserializer();
-		// PricingDeserializer pricingDeserializer = new PricingDeserializer();
-		// ScalingDeserializer scalingDeserializer = new ScalingDeserializer();
-		// RuntimeDeserializer runtimeDeserializer = new RuntimeDeserializer();
-		// ServicesDeserializer servicesDeserializer = new
-		// ServicesDeserializer();
-		// InfrastructureDeserializer infrastructureDeserializer = new
-		// InfrastructureDeserializer();
-
-		// gsonBuilder.registerTypeAdapter(PaasProfile.class,
-		// paasProfileDeserializer);
-		gsonBuilder.registerTypeAdapter(Hosting.class, new HostingDeserializer());
-		// gsonBuilder.registerTypeAdapter(Pricing.class, pricingDeserializer);
-		// gsonBuilder.registerTypeAdapter(Scaling.class, scalingDeserializer);
-		// gsonBuilder.registerTypeAdapter(Runtime.class, runtimeDeserializer);
-		// gsonBuilder.registerTypeAdapter(Services.class,
-		// servicesDeserializer);
-		// gsonBuilder.registerTypeAdapter(Infrastructure.class,
-		// infrastructureDeserializer);
-
-		return gsonBuilder;
+	private GsonBuilder createCustomGsonBuilder() {
+		return new GsonBuilder().registerTypeAdapter(Hosting.class, new HostingDeserializer());
 	}
 
 }

@@ -17,9 +17,7 @@ public class RevisionReport {
 	private double median;
 	private double variance;
 	private double stdev;
-	@Embedded
 	private List<SimpleResultLong> youngestRevisions = new ArrayList<>();
-	@Embedded
 	private List<SimpleResultLong> oldestRevisions = new ArrayList<>();
 
 	public RevisionReport(QualitativeData qualitativeData, List<SimpleResultLong> minFive,

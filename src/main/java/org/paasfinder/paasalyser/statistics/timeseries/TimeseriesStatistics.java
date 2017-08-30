@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.paasfinder.paasalyser.report.PaasReport;
 import org.paasfinder.paasalyser.report.models.MetaInfo;
-import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

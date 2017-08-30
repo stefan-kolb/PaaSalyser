@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+@Deprecated
 public class NativeServiceDeserializer implements JsonDeserializer<NativeService> {
 
 	@Override
