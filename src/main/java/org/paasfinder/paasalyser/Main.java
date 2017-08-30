@@ -21,9 +21,8 @@ public class Main {
 		try {
 			// executionManager.scanTestProfiles();
 			executionManager.scanRepository();
-			executionManager.createStatisticalAnalysis();
-			LOGGER.info("Shutting down properly.");
-			System.exit(0);
+			executionManager.createTimeseriesAnalysisFiles();
+
 		} catch (IOException e) {
 			LOGGER.error("IOException occured while executing", e);
 			System.exit(1);
@@ -31,8 +30,9 @@ public class Main {
 			LOGGER.error("GitAPIException occured while executing", e);
 			System.exit(1);
 		} finally {
-			executionManager.close();
+			LOGGER.info("Database is being closed (0 is ok): " + executionManager.shutdownDatabaseProcess());
 		}
+		LOGGER.info("Shutting down properly.");
 	}
 
 }

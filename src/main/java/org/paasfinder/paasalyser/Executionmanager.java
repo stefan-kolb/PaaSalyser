@@ -1,5 +1,6 @@
 package org.paasfinder.paasalyser;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.Instant;
@@ -39,15 +40,19 @@ public class Executionmanager {
 	public Executionmanager() throws IOException {
 		super();
 		logger.info("Starting MongoDB");
-		String command = "cmd /c start runMongoDB";
-		mongoDB = Runtime.getRuntime().exec(command);
+
+		String[] commands = { "cmd", "/c", "start runMongoDB" };
+		File projectDirectory = Paths.get("D:\\Dokumente\\Studium\\PaaSalyser").toFile();
+
+		mongoDB = new ProcessBuilder(commands).directory(projectDirectory).start();
 
 		gsonAdapter = new GsonAdapter();
 		database = new DatabaseConnectorImpl();
 	}
 
-	public void close() {
-		mongoDB.destroy();
+	public int shutdownDatabaseProcess() {
+		mongoDB.destroyForcibly();
+		return mongoDB.exitValue();
 	}
 
 	public void scanStateOfTheArt() throws IOException, GitAPIException {
@@ -72,14 +77,30 @@ public class Executionmanager {
 		logger.info("Successfully scanned Test Profiles");
 	}
 
-	public void createStatisticalAnalysis() {
+	/**
+	 * Creates CSV files with the timeseries data of the reports in the database
+	 */
+	public void createTimeseriesAnalysisFiles() {
 		TimeseriesStatistics timeseries = new TimeseriesStatistics();
 		TimeseriesCSVPrinter printer = new TimeseriesCSVPrinter(pathOfTimeseriesReports);
 
 		printer.printToCSVFile("ProfileAmounts", timeseries.evalProfileAmounts(database.getProfileAmounts()));
+		printer.printToCSVFile("Revision", timeseries.evalRevision(database.getRevisionAmounts()));
 	}
 
-	public void scanRepository() throws IOException, GitAPIException {
+	/**
+	 * Scans the paas-profiles repository for commits where profiles have been
+	 * changed, generates a report out of the profiles and stores it in the
+	 * database.
+	 * 
+	 * @throws IOException
+	 *             An error occurred while setting up {@link RepositorySniffer}
+	 *             or an error occurred during scanning the repository
+	 * @throws GitAPIException
+	 *             An error occurred while setting up {@link RepositorySniffer}
+	 *             or an error occurred during scanning the repository
+	 */
+	public void scanRepository() throws GitAPIException, IOException {
 		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
 				database)) {
 
@@ -107,11 +128,14 @@ public class Executionmanager {
 	private PaasReport processCommitProfiles(Map.Entry<RevCommit, List<PaasProfile>> commitProfile)
 			throws IOException, RuntimeException {
 		logger.info("Processing");
+
+		Instant instant = commitProfile.getKey().getAuthorIdent().getWhen().toInstant();
+		LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+
 		ReportPreprocessing reportPreprocessing;
 		ReportStatistics reportStatistics;
 		try {
-			reportPreprocessing = new ReportPreprocessing(commitProfile.getValue());
-			System.out.println(reportPreprocessing.toString());
+			reportPreprocessing = new ReportPreprocessing(localDate, commitProfile.getValue());
 			reportStatistics = new ReportStatistics(reportPreprocessing);
 		} catch (IllegalStateException e) {
 			throw new RuntimeException(
@@ -122,8 +146,7 @@ public class Executionmanager {
 		logger.info("Generating Report");
 		PaasReport report;
 		try {
-			Instant instant = commitProfile.getKey().getAuthorIdent().getWhen().toInstant();
-			LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+
 			report = new PaasReport(commitProfile.getKey().getName(), localDate, reportStatistics);
 		} catch (IllegalStateException e) {
 			logger.warn("Statistics was null. An empty report is being generated");
@@ -137,7 +160,7 @@ public class Executionmanager {
 		ReportPreprocessing reportPreprocessing;
 		ReportStatistics reportStatistics;
 		try {
-			reportPreprocessing = new ReportPreprocessing(commitProfiles);
+			reportPreprocessing = new ReportPreprocessing(LocalDate.now(), commitProfiles);
 			System.out.println(reportPreprocessing.toString());
 			System.out.println("--------------------------------------------");
 			reportStatistics = new ReportStatistics(reportPreprocessing);

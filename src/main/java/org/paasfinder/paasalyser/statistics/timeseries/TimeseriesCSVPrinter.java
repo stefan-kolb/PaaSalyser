@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class TimeseriesCSVPrinter {
 
-	private final Logger logger = LoggerFactory.getLogger(TimeseriesStatistics.class);
+	private final Logger logger = LoggerFactory.getLogger(TimeseriesCSVPrinter.class);
 	private final String pathOfTimeseriesReports;
 
 	public TimeseriesCSVPrinter(String pathOfTimeseriesReports) {
@@ -33,27 +33,25 @@ public class TimeseriesCSVPrinter {
 	 *            List of String[] to print
 	 * @return true if no errors occurred
 	 */
-	public boolean printToCSVFile(String fileName, List<String[]> toPrint) {
+	public void printToCSVFile(String fileName, List<String[]> toPrint) {
 		logger.info("Printing " + fileName);
 		try {
 			Files.deleteIfExists(Paths.get(pathOfTimeseriesReports + "/" + fileName + ".csv"));
 		} catch (IOException e) {
 			logger.error("IOException occured during deleting exisiting report", e);
-			return false;
+			return;
 		}
 
 		try (//
 				BufferedWriter writer = Files.newBufferedWriter(
 						Paths.get(pathOfTimeseriesReports + "/" + fileName + ".csv"), Charset.defaultCharset(),
 						StandardOpenOption.CREATE_NEW);
-				CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.EXCEL)) {
+				CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.EXCEL.withDelimiter(':'))) {
 			csvPrinter.printRecords(toPrint);
 		} catch (IOException e) {
 			logger.error("IOException occured during writing to file", e);
-			return false;
 		}
 		logger.info("Printing successful");
-		return true;
 	}
 
 }

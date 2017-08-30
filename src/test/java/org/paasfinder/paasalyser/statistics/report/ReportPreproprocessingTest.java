@@ -29,7 +29,7 @@ public class ReportPreproprocessingTest {
 			System.out.println("IOException occurred during setup");
 			e.printStackTrace();
 		}
-		reportPreprocessing = new ReportPreprocessing(profiles);
+		reportPreprocessing = new ReportPreprocessing(LocalDate.now(), profiles);
 	}
 
 	@AfterClass

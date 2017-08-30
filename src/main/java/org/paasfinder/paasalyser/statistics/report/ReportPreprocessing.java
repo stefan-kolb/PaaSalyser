@@ -33,6 +33,8 @@ public class ReportPreprocessing {
 
 	private List<PaasProfile> profiles = new ArrayList<>(100);
 
+	private LocalDate localDate;
+
 	private int invalidProfilesCount;
 	private RevisionData revisionData;
 	private StatusData statusData;
@@ -48,7 +50,7 @@ public class ReportPreprocessing {
 	private ExtensibleData extensibleData;
 	private InfrastructureData infrastructuresData;
 
-	public ReportPreprocessing(List<PaasProfile> profiles) throws IllegalStateException {
+	public ReportPreprocessing(LocalDate localDate, List<PaasProfile> profiles) throws IllegalStateException {
 
 		// Make sure that no eol-profile is being added to active profiles
 		sortOutInvalidProfiles(profiles);
@@ -58,6 +60,8 @@ public class ReportPreprocessing {
 		if (invalidProfilesCount > 0) {
 			logger.warn("Invalid profiles found.");
 		}
+
+		this.localDate = localDate;
 
 		// Execute all evaluations
 		// logger.info("evalRevision");
@@ -172,8 +176,8 @@ public class ReportPreprocessing {
 				if (profile.getRevision().length() < 10) {
 					continue;
 				}
-				revisionData.addRevision(profile.getName(), ChronoUnit.DAYS
-						.between(LocalDate.parse(profile.getRevision().substring(0, 10)), LocalDate.now()));
+				revisionData.addRevision(profile.getName(),
+						ChronoUnit.DAYS.between(LocalDate.parse(profile.getRevision().substring(0, 10)), localDate));
 			} catch (DateTimeParseException e) {
 				throw new RuntimeException("Could not parse revision date", e);
 			}
@@ -197,8 +201,8 @@ public class ReportPreprocessing {
 				continue;
 			}
 			try {
-				statusData.addStatusSince(profile.getName(), ChronoUnit.DAYS
-						.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), LocalDate.now()));
+				statusData.addStatusSince(profile.getName(),
+						ChronoUnit.DAYS.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), localDate));
 			} catch (DateTimeParseException e) {
 				logger.error("Failed to parse StatusSince");
 				// Failing here isn't too crucial.

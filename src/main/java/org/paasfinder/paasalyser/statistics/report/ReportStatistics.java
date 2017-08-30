@@ -212,7 +212,7 @@ public class ReportStatistics {
 	}
 
 	private void evalPricing() {
-		List<SimpleResultLong> numberOfModelsPerProfile = new ArrayList<>();
+		List<SimpleResultLong> numberOfModelsPerProfile = new ArrayList<>(5);
 		numberOfModelsPerProfile
 				.add(new SimpleResultLong("Zero Models", dataPreProcessing.getPricingData().getZeroModels()));
 		numberOfModelsPerProfile
@@ -224,14 +224,14 @@ public class ReportStatistics {
 		numberOfModelsPerProfile
 				.add(new SimpleResultLong("Four Models", dataPreProcessing.getPricingData().getFourModels()));
 
-		List<SimpleResultLong> models = new ArrayList<>();
+		List<SimpleResultLong> models = new ArrayList<>(5);
 		models.add(new SimpleResultLong("Free", dataPreProcessing.getPricingData().getFreeModel()));
 		models.add(new SimpleResultLong("Fixed", dataPreProcessing.getPricingData().getFixedModel()));
 		models.add(new SimpleResultLong("Metered", dataPreProcessing.getPricingData().getMeteredModel()));
 		models.add(new SimpleResultLong("Hybrid", dataPreProcessing.getPricingData().getHybridModel()));
 		models.add(new SimpleResultLong("Empty", dataPreProcessing.getPricingData().getEmptyModel()));
 
-		List<SimpleResultLong> periods = new ArrayList<>();
+		List<SimpleResultLong> periods = new ArrayList<>(4);
 		periods.add(new SimpleResultLong("Daily", dataPreProcessing.getPricingData().getDailyPeriod()));
 		periods.add(new SimpleResultLong("Monthly", dataPreProcessing.getPricingData().getMonthlyPeriod()));
 		periods.add(new SimpleResultLong("Anually", dataPreProcessing.getPricingData().getAnnuallyPariod()));
@@ -260,7 +260,7 @@ public class ReportStatistics {
 				.collect(Collectors.toCollection(ArrayList::new));
 		runtimesShare.sort((a, b) -> Double.compare(b.getValue(), a.getValue()));
 
-		// Summarise all elements after the 9th and put it back into the List
+		// Summarize all elements after the 9th and put it back into the List
 		if (runtimesShare.size() > 8) {
 			SimpleResultDouble otherRuntimes = new SimpleResultDouble("Others",
 					runtimesShare.subList(9, runtimesShare.size()).stream()
@@ -277,7 +277,7 @@ public class ReportStatistics {
 	private void evalServices() {
 		double profilesWithNativeServices = calcPercent(
 				dataPreProcessing.getServicesData().getProfilesWithNativeServices().size(), profilesCount);
-		
+
 		services = new ServicesReport(profilesWithNativeServices,
 				getTopFive(dataPreProcessing.getServicesData().getProfilesWithNativeServices()),
 				getTopFive(dataPreProcessing.getServicesData().getNativeServices()),
@@ -288,7 +288,7 @@ public class ReportStatistics {
 
 	private void evalExtensible() {
 		double extensibleCount = calcPercent(dataPreProcessing.getExtensibleData().getTrue(), profilesCount);
-		
+
 		extensible = new ExtensibleReport(extensibleCount);
 	}
 

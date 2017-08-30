@@ -1,6 +1,5 @@
 package org.paasfinder.paasalyser.report.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
@@ -19,9 +18,9 @@ public class RuntimesReport {
 	private double stdevNumberOfRuntimes;
 
 	// Number of runtimes per profile
-	private List<SimpleResultLong> topFiveNumberOfRuntimes = new ArrayList<>();
+	private List<SimpleResultLong> topFiveNumberOfRuntimes;
 
-	// Amount of Runtimes
+	// Share of Runtimes in profiles
 	private List<SimpleResultDouble> runtimesShare;
 
 	public RuntimesReport(long languageSpecific, long polyglot, QualitativeData profileNumberOfRuntimesData,

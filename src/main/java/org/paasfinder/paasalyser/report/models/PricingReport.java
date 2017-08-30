@@ -1,6 +1,5 @@
 package org.paasfinder.paasalyser.report.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
@@ -9,9 +8,9 @@ import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 @Embedded
 public class PricingReport {
 
-	List<SimpleResultLong> numberOfModelsPerProfile = new ArrayList<>();
-	List<SimpleResultLong> models = new ArrayList<>();
-	List<SimpleResultLong> periods = new ArrayList<>();
+	List<SimpleResultLong> numberOfModelsPerProfile;
+	List<SimpleResultLong> models;
+	List<SimpleResultLong> periods;
 
 	public PricingReport(List<SimpleResultLong> numberOfModelsPerProfile, List<SimpleResultLong> models,
 			List<SimpleResultLong> periods) {
