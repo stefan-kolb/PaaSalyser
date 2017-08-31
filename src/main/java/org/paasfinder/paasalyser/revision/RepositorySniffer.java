@@ -54,9 +54,9 @@ public class RepositorySniffer implements AutoCloseable {
 	}
 
 	public Map<RevCommit, List<PaasProfile>> sniffRepository() throws IOException, GitAPIException {
+		logger.info("Resetting and pulling repository");
 		resetAndPullRepository();
 
-		logger.info("Finished sniffing");
 		return scanCommits(scanRepositoryForProfilesCommits());
 	}
 

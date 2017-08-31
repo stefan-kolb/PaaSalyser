@@ -43,26 +43,39 @@ public class TimeseriesStatistics {
 
 	public List<String[]> evalRevision(List<MetaInfo> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
-		String[] reportData = new String[5];
+		String[] reportData = new String[9];
 
 		// Header Row
 		reportData[0] = "Date";
+
 		reportData[1] = "Mean";
 		reportData[2] = "Median";
+
 		reportData[3] = "Youngest";
-		reportData[4] = "Oldest";
+		reportData[4] = "Second youngest";
+		reportData[5] = "Third youngest";
+
+		reportData[6] = "Oldest";
+		reportData[7] = "Second oldest";
+		reportData[8] = "Third oldest";
+
 		data.add(reportData);
 
 		// Table Rows
 		for (MetaInfo report : reports) {
-			reportData = new String[5];
+			reportData = new String[9];
 			reportData[0] = report.getDate().toString();
 
 			reportData[1] = Double.toString(report.getRevisionReport().getMean()).replace('.', ',');
 			reportData[2] = Double.toString(report.getRevisionReport().getMedian()).replace('.', ',');
 
 			reportData[3] = String.valueOf(report.getRevisionReport().getYoungestRevisions().get(0).getValue());
-			reportData[4] = String.valueOf(report.getRevisionReport().getOldestRevisions().get(0).getValue());
+			reportData[4] = String.valueOf(report.getRevisionReport().getYoungestRevisions().get(1).getValue());
+			reportData[5] = String.valueOf(report.getRevisionReport().getYoungestRevisions().get(2).getValue());
+
+			reportData[6] = String.valueOf(report.getRevisionReport().getOldestRevisions().get(0).getValue());
+			reportData[7] = String.valueOf(report.getRevisionReport().getOldestRevisions().get(1).getValue());
+			reportData[8] = String.valueOf(report.getRevisionReport().getOldestRevisions().get(2).getValue());
 
 			data.add(reportData);
 		}
@@ -75,6 +88,7 @@ public class TimeseriesStatistics {
 
 		// Header Row
 		reportData[0] = "Date";
+
 		reportData[1] = "SaaS-Centric";
 		reportData[2] = "Generic";
 		reportData[3] = "IaaS-Centric";
@@ -96,22 +110,30 @@ public class TimeseriesStatistics {
 
 	public List<String[]> evalStatus(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
-		String[] reportData = new String[8];
+		String[] reportData = new String[12];
 
 		// Header Row
 		reportData[0] = "Date";
+
 		reportData[1] = "Alpha";
 		reportData[2] = "Beta";
 		reportData[3] = "Production";
+
 		reportData[4] = "Mean StatusSince";
 		reportData[5] = "Median StatusSince";
+
 		reportData[6] = "Youngest StatusSince";
-		reportData[7] = "Oldest StatusSince";
+		reportData[7] = "Second youngest StatusSince";
+		reportData[8] = "Third youngest StatusSince";
+
+		reportData[9] = "Oldest StatusSince";
+		reportData[10] = "Second oldest StatusSince";
+		reportData[11] = "Third oldest StatusSince";
 		data.add(reportData);
 
 		// Table Rows
 		for (PaasReport report : reports) {
-			reportData = new String[8];
+			reportData = new String[12];
 			reportData[0] = report.getMetaInfo().getDate().toString();
 
 			reportData[1] = String.valueOf(report.getBusinessInfo().getStatusReport().getAlphaPercent()).replace('.',
@@ -129,7 +151,16 @@ public class TimeseriesStatistics {
 			reportData[6] = String
 					.valueOf(report.getBusinessInfo().getStatusReport().getYoungestStatusSince().get(0).getValue());
 			reportData[7] = String
+					.valueOf(report.getBusinessInfo().getStatusReport().getYoungestStatusSince().get(1).getValue());
+			reportData[8] = String
+					.valueOf(report.getBusinessInfo().getStatusReport().getYoungestStatusSince().get(2).getValue());
+
+			reportData[9] = String
 					.valueOf(report.getBusinessInfo().getStatusReport().getOldestStatusSince().get(0).getValue());
+			reportData[10] = String
+					.valueOf(report.getBusinessInfo().getStatusReport().getOldestStatusSince().get(1).getValue());
+			reportData[11] = String
+					.valueOf(report.getBusinessInfo().getStatusReport().getOldestStatusSince().get(2).getValue());
 
 			data.add(reportData);
 		}
@@ -316,12 +347,12 @@ public class TimeseriesStatistics {
 			reportsData[4] = String.valueOf(report.getEconomicInfo().getRuntimesReport().getMedianNumberOfRuntimes())
 					.replace('.', ',');
 
-			reportsData[4] = String
-					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(0));
-			reportsData[4] = String
-					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(1));
-			reportsData[4] = String
-					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(2));
+			reportsData[5] = String
+					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(0).getValue());
+			reportsData[6] = String
+					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(1).getValue());
+			reportsData[7] = String
+					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(2).getValue());
 
 			data.add(reportsData);
 		}
@@ -402,23 +433,23 @@ public class TimeseriesStatistics {
 
 			reportsData[0] = report.getMetaInfo().getDate().toString();
 
-			reportsData[1] = String.valueOf(apex);
-			reportsData[2] = String.valueOf(clojure);
-			reportsData[3] = String.valueOf(cobol);
-			reportsData[4] = String.valueOf(dotnet);
-			reportsData[5] = String.valueOf(erlang);
-			reportsData[6] = String.valueOf(go);
-			reportsData[7] = String.valueOf(groovy);
-			reportsData[8] = String.valueOf(haskell);
-			reportsData[9] = String.valueOf(java);
-			reportsData[10] = String.valueOf(lua);
-			reportsData[11] = String.valueOf(node);
-			reportsData[12] = String.valueOf(perl);
-			reportsData[13] = String.valueOf(php);
-			reportsData[14] = String.valueOf(python);
-			reportsData[15] = String.valueOf(ruby);
-			reportsData[16] = String.valueOf(scala);
-			reportsData[17] = String.valueOf(others);
+			reportsData[1] = String.valueOf(apex).replace('.', ',');
+			reportsData[2] = String.valueOf(clojure).replace('.', ',');
+			reportsData[3] = String.valueOf(cobol).replace('.', ',');
+			reportsData[4] = String.valueOf(dotnet).replace('.', ',');
+			reportsData[5] = String.valueOf(erlang).replace('.', ',');
+			reportsData[6] = String.valueOf(go).replace('.', ',');
+			reportsData[7] = String.valueOf(groovy).replace('.', ',');
+			reportsData[8] = String.valueOf(haskell).replace('.', ',');
+			reportsData[9] = String.valueOf(java).replace('.', ',');
+			reportsData[10] = String.valueOf(lua).replace('.', ',');
+			reportsData[11] = String.valueOf(node).replace('.', ',');
+			reportsData[12] = String.valueOf(perl).replace('.', ',');
+			reportsData[13] = String.valueOf(php).replace('.', ',');
+			reportsData[14] = String.valueOf(python).replace('.', ',');
+			reportsData[15] = String.valueOf(ruby).replace('.', ',');
+			reportsData[16] = String.valueOf(scala).replace('.', ',');
+			reportsData[17] = String.valueOf(others).replace('.', ',');
 
 			data.add(reportsData);
 		}
@@ -427,12 +458,13 @@ public class TimeseriesStatistics {
 
 	public List<String[]> evalServices(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
-		String[] reportsData = new String[2];
+		String[] reportsData = new String[3];
 
 		// Header Row
 		reportsData[0] = "Date";
 
 		reportsData[1] = "Profiles with Native Services in percent";
+		reportsData[2] = "Profiles w/o Native Services in percent";
 
 		// reportsData[2] = "Top profile native service";
 		// reportsData[3] = "Second profile native service";
@@ -456,12 +488,15 @@ public class TimeseriesStatistics {
 
 		// Table Rows
 		for (PaasReport report : reports) {
-			reportsData = new String[2];
+			reportsData = new String[3];
 
 			reportsData[0] = report.getMetaInfo().getDate().toString();
 
 			reportsData[1] = String
 					.valueOf(report.getEconomicInfo().getServicesReport().getNativeServicesProfilesPercent())
+					.replace('.', ',');
+			reportsData[2] = String
+					.valueOf(100 - report.getEconomicInfo().getServicesReport().getNativeServicesProfilesPercent())
 					.replace('.', ',');
 
 			// reportsData[2] =
@@ -489,23 +524,27 @@ public class TimeseriesStatistics {
 
 	public List<String[]> evalExtensible(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
-		String[] reportsData = new String[2];
+		String[] reportsData = new String[3];
 
 		// Header Row
 		reportsData[0] = "Date";
 
 		reportsData[1] = "Extensible profiles in percent";
+		reportsData[2] = "Not Extensible profiles in percent";
 
 		data.add(reportsData);
 
 		// Table Rows
 		for (PaasReport report : reports) {
-			reportsData = new String[2];
+			reportsData = new String[3];
 
 			reportsData[0] = report.getMetaInfo().getDate().toString();
 
 			reportsData[1] = String
 					.valueOf(report.getEconomicInfo().getExtensibleReport().getExtensibleProfilesPercent())
+					.replace('.', ',');
+			reportsData[2] = String
+					.valueOf(100 - report.getEconomicInfo().getExtensibleReport().getExtensibleProfilesPercent())
 					.replace('.', ',');
 
 			data.add(reportsData);
@@ -568,12 +607,12 @@ public class TimeseriesStatistics {
 					.valueOf(report.getEconomicInfo().getInfrastructuresReport().getMedianInfrastrcturesPerProfile())
 					.replace('.', ',');
 
-			reportsData[3] = String.valueOf(
-					report.getEconomicInfo().getInfrastructuresReport().getTopFiveInfrastrcturesPerProfile().get(0));
-			reportsData[4] = String.valueOf(
-					report.getEconomicInfo().getInfrastructuresReport().getTopFiveInfrastrcturesPerProfile().get(1));
-			reportsData[5] = String.valueOf(
-					report.getEconomicInfo().getInfrastructuresReport().getTopFiveInfrastrcturesPerProfile().get(2));
+			reportsData[3] = String.valueOf(report.getEconomicInfo().getInfrastructuresReport()
+					.getTopFiveInfrastrcturesPerProfile().get(0).getValue());
+			reportsData[4] = String.valueOf(report.getEconomicInfo().getInfrastructuresReport()
+					.getTopFiveInfrastrcturesPerProfile().get(1).getValue());
+			reportsData[5] = String.valueOf(report.getEconomicInfo().getInfrastructuresReport()
+					.getTopFiveInfrastrcturesPerProfile().get(2).getValue());
 
 			reportsData[6] = String.valueOf(na).replace('.', ',');
 			reportsData[7] = String.valueOf(eu).replace('.', ',');

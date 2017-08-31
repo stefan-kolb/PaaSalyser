@@ -54,7 +54,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of{@link PaasReport} with date,
 	 *         numberOfProfiles and numberOfEolProfiles
 	 */
-	public List<MetaInfo> getProfileAmounts();
+	public List<MetaInfo> getProfilesData();
 
 	/**
 	 * Fetches date and {@link RevisionReport} of a {@link PaasReport}
@@ -62,7 +62,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link RevisionReport}
 	 */
-	public List<MetaInfo> getRevisionAmounts();
+	public List<MetaInfo> getRevisionsData();
 
 	/**
 	 * Fetches date and {@link TypeReport} of a {@link PaasReport}
@@ -70,7 +70,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link TypeReport}
 	 */
-	public List<MetaInfo> getTypeAmounts();
+	public List<MetaInfo> getTypesData();
 
 	/**
 	 * Fetches date and {@link StatusReport} of a {@link PaasReport}
@@ -78,7 +78,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link StatusReport}
 	 */
-	public List<PaasReport> getStatusAmounts();
+	public List<PaasReport> getStatusData();
 
 	/**
 	 * Fetches date and {@link PricingReport} of a {@link PaasReport}
@@ -86,7 +86,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link PricingReport}
 	 */
-	public List<PaasReport> getPricingAmounts();
+	public List<PaasReport> getPricingsData();
 
 	/**
 	 * Fetches date and {@link HostingReport} of a {@link PaasReport}
@@ -94,7 +94,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link HostingReport}
 	 */
-	public List<PaasReport> getHostingAmounts();
+	public List<PaasReport> getHostingsData();
 
 	/**
 	 * Fetches date and {@link ScalingReport} of a {@link PaasReport}
@@ -102,7 +102,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link ScalingReport}
 	 */
-	public List<PaasReport> getScalingAmounts();
+	public List<PaasReport> getScalingsData();
 
 	/**
 	 * Fetches date and {@link RuntimesReport} of a {@link PaasReport}
@@ -110,7 +110,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link RuntimesReport}
 	 */
-	public List<PaasReport> getRuntimesAmounts();
+	public List<PaasReport> getRuntimesData();
 
 	/**
 	 * Fetches date and {@link ServicesReport} of a {@link PaasReport}
@@ -118,7 +118,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link ServicesReport}
 	 */
-	public List<PaasReport> getServicesAmounts();
+	public List<PaasReport> getServicesData();
 
 	/**
 	 * Fetches date and {@link ExtensibleReport} of a {@link PaasReport}
@@ -126,7 +126,7 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link ExtensibleReport}
 	 */
-	public List<PaasReport> getExtensibleAmounts();
+	public List<PaasReport> getExtensibleData();
 
 	/**
 	 * Fetches date and {@link InfrastructuresReport} of a {@link PaasReport}
@@ -134,6 +134,6 @@ public interface DatabaseConnector {
 	 * @return An ascendingly ordered list of {@link PaasReport} with date and
 	 *         {@link InfrastructuresReport}
 	 */
-	public List<PaasReport> getInfrastructuresAmounts();
+	public List<PaasReport> getInfrastructuresData();
 
 }

@@ -84,8 +84,19 @@ public class Executionmanager {
 		TimeseriesStatistics timeseries = new TimeseriesStatistics();
 		TimeseriesCSVPrinter printer = new TimeseriesCSVPrinter(pathOfTimeseriesReports);
 
-		printer.printToCSVFile("ProfileAmounts", timeseries.evalProfileAmounts(database.getProfileAmounts()));
-		printer.printToCSVFile("Revision", timeseries.evalRevision(database.getRevisionAmounts()));
+		printer.printToCSVFile("ProfileAmounts", timeseries.evalProfileAmounts(database.getProfilesData()));
+		printer.printToCSVFile("Revision", timeseries.evalRevision(database.getRevisionsData()));
+		printer.printToCSVFile("Type", timeseries.evalType(database.getTypesData()));
+		printer.printToCSVFile("Status", timeseries.evalStatus(database.getStatusData()));
+		printer.printToCSVFile("Pricing", timeseries.evalPricing(database.getPricingsData()));
+		printer.printToCSVFile("Hosting", timeseries.evalHosting(database.getHostingsData()));
+		printer.printToCSVFile("Scaling", timeseries.evalScaling(database.getScalingsData()));
+		printer.printToCSVFile("Status", timeseries.evalStatus(database.getStatusData()));
+		printer.printToCSVFile("Runtimes Profiles", timeseries.evalRuntimesProfiles(database.getRuntimesData()));
+		printer.printToCSVFile("Runtimes Share", timeseries.evalRuntimesShare(database.getRuntimesData()));
+		printer.printToCSVFile("Services", timeseries.evalServices(database.getServicesData()));
+		printer.printToCSVFile("Extensible", timeseries.evalExtensible(database.getExtensibleData()));
+		printer.printToCSVFile("Infrastructure", timeseries.evalInfraStructure(database.getInfrastructuresData()));
 	}
 
 	/**

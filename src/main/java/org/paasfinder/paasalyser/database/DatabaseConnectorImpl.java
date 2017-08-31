@@ -60,7 +60,7 @@ public class DatabaseConnectorImpl implements DatabaseConnector {
 		datastore.delete(datastore.createQuery(PaasReport.class).field("id").equal(commitHash));
 	}
 
-	public List<MetaInfo> getProfileAmounts() {
+	public List<MetaInfo> getProfilesData() {
 		List<PaasReport> relevantReports = datastore.createQuery(PaasReport.class).order("metainfos.date")
 				.project("metainfos.numberOfProfiles", true).project("metainfos.numberOfEolProfiles", true)
 				.project("metainfos.date", true).asList();
@@ -70,7 +70,7 @@ public class DatabaseConnectorImpl implements DatabaseConnector {
 		}).collect(Collectors.toList());
 	}
 
-	public List<MetaInfo> getRevisionAmounts() {
+	public List<MetaInfo> getRevisionsData() {
 		List<PaasReport> relevantReports = datastore.createQuery(PaasReport.class).order("metainfos.date")
 				.project("metainfos.date", true).project("metainfos.revisionReport", true).asList();
 
@@ -79,7 +79,7 @@ public class DatabaseConnectorImpl implements DatabaseConnector {
 		}).collect(Collectors.toList());
 	}
 
-	public List<MetaInfo> getTypeAmounts() {
+	public List<MetaInfo> getTypesData() {
 		List<PaasReport> relevantReports = datastore.createQuery(PaasReport.class).order("metainfos.date")
 				.project("metainfos.date", true).project("metainfos.typeReport", true).asList();
 
@@ -88,42 +88,42 @@ public class DatabaseConnectorImpl implements DatabaseConnector {
 		}).collect(Collectors.toList());
 	}
 
-	public List<PaasReport> getStatusAmounts() {
+	public List<PaasReport> getStatusData() {
 		return datastore.createQuery(PaasReport.class).order("metainfos.date").project("metainfos.date", true)
 				.project("businessinfos.statusReport", true).asList();
 	}
 
-	public List<PaasReport> getPricingAmounts() {
+	public List<PaasReport> getPricingsData() {
 		return datastore.createQuery(PaasReport.class).order("metainfos.date").project("metainfos.date", true)
 				.project("businessinfos.pricingReport", true).asList();
 	}
 
-	public List<PaasReport> getHostingAmounts() {
+	public List<PaasReport> getHostingsData() {
 		return datastore.createQuery(PaasReport.class).order("metainfos.date").project("metainfos.date", true)
 				.project("economicinfos.hostingReport", true).asList();
 	}
 
-	public List<PaasReport> getScalingAmounts() {
+	public List<PaasReport> getScalingsData() {
 		return datastore.createQuery(PaasReport.class).order("metainfos.date").project("metainfos.date", true)
 				.project("economicinfos.scalingReport", true).asList();
 	}
 
-	public List<PaasReport> getRuntimesAmounts() {
+	public List<PaasReport> getRuntimesData() {
 		return datastore.createQuery(PaasReport.class).order("metainfos.date").project("metainfos.date", true)
 				.project("economicinfos.runtimesReport", true).asList();
 	}
 
-	public List<PaasReport> getServicesAmounts() {
+	public List<PaasReport> getServicesData() {
 		return datastore.createQuery(PaasReport.class).order("metainfos.date").project("metainfos.date", true)
 				.project("economicinfos.servicesReport", true).asList();
 	}
 
-	public List<PaasReport> getExtensibleAmounts() {
+	public List<PaasReport> getExtensibleData() {
 		return datastore.createQuery(PaasReport.class).order("metainfos.date").project("metainfos.date", true)
 				.project("economicinfos.extensibleReport", true).asList();
 	}
 
-	public List<PaasReport> getInfrastructuresAmounts() {
+	public List<PaasReport> getInfrastructuresData() {
 		return datastore.createQuery(PaasReport.class).order("metainfos.date").project("metainfos.date", true)
 				.project("economicinfos.infrastructuresReport", true).asList();
 	}
