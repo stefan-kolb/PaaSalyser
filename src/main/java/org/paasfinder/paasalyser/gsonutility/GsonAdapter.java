@@ -3,8 +3,6 @@ package org.paasfinder.paasalyser.gsonutility;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -53,8 +51,7 @@ public class GsonAdapter {
 			throw new IOException(rootDirectory + " is no existing directory");
 		} else {
 			return Files.walk(rootDirectory).filter(path -> path.toString().endsWith("json")).map(path -> {
-				try (InputStream in = Files.newInputStream(path);
-						BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+				try (BufferedReader reader = Files.newBufferedReader(path)) {
 					PaasProfile profile = gson.fromJson(reader, PaasProfile.class);
 					try {
 						return profile.checkProfileValidity(path);
