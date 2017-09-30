@@ -18,7 +18,16 @@ public class InfrastructureData {
 	public InfrastructureData() {
 		super();
 		infrastructuresPerProfile = new HashMap<>();
+
+		// Initialise all possible continents
 		profileContinents = new HashMap<>();
+		profileContinents.put("NA", (long) 0);
+		profileContinents.put("EU", (long) 0);
+		profileContinents.put("AS", (long) 0);
+		profileContinents.put("OC", (long) 0);
+		profileContinents.put("SA", (long) 0);
+		profileContinents.put("AF", (long) 0);
+
 		continent = new HashMap<>();
 		country = new HashMap<>();
 		region = new HashMap<>();
@@ -50,9 +59,7 @@ public class InfrastructureData {
 	}
 
 	public void addInfraStructureProfile(String name, Infrastructure[] infrastructures) {
-		if (name == null || name.isEmpty() || infrastructures == null || infrastructures.length == 0) {
-			return;
-		}
+		// null- and empty-checks have already been done
 
 		infrastructuresPerProfile.putIfAbsent(name, (long) infrastructures.length);
 
@@ -60,6 +67,7 @@ public class InfrastructureData {
 
 		for (Infrastructure infra : infrastructures) {
 			String continent = infra.getContinent();
+
 			if (continent == null || continent.isEmpty() || continent.equals("null") || continent.equals("empty"))
 				return;
 
@@ -79,34 +87,22 @@ public class InfrastructureData {
 		}
 
 		if (na) {
-			if (profileContinents.putIfAbsent("NA", (long) 1) != null) {
-				profileContinents.replace("NA", profileContinents.get("NA") + 1);
-			}
+			profileContinents.replace("NA", profileContinents.get("NA") + 1);
 		}
 		if (eu) {
-			if (profileContinents.putIfAbsent("EU", (long) 1) != null) {
-				profileContinents.replace("EU", profileContinents.get("EU") + 1);
-			}
+			profileContinents.replace("EU", profileContinents.get("EU") + 1);
 		}
 		if (as) {
-			if (profileContinents.putIfAbsent("AS", (long) 1) != null) {
-				profileContinents.replace("AS", profileContinents.get("AS") + 1);
-			}
+			profileContinents.replace("AS", profileContinents.get("AS") + 1);
 		}
 		if (oc) {
-			if (profileContinents.putIfAbsent("OC", (long) 1) != null) {
-				profileContinents.replace("OC", profileContinents.get("OC") + 1);
-			}
+			profileContinents.replace("OC", profileContinents.get("OC") + 1);
 		}
 		if (sa) {
-			if (profileContinents.putIfAbsent("SA", (long) 1) != null) {
-				profileContinents.replace("SA", profileContinents.get("SA") + 1);
-			}
+			profileContinents.replace("SA", profileContinents.get("SA") + 1);
 		}
 		if (af) {
-			if (profileContinents.putIfAbsent("AF", (long) 1) != null) {
-				profileContinents.replace("AF", profileContinents.get("AF") + 1);
-			}
+			profileContinents.replace("AF", profileContinents.get("AF") + 1);
 		}
 
 	}

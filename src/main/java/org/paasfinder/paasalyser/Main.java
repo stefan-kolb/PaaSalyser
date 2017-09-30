@@ -19,10 +19,7 @@ public class Main {
 			LOGGER.error("IOException occured while executing", e);
 		}
 		try {
-			// executionManager.scanTestProfiles();
-			executionManager.scanRepository();
-			executionManager.createTimeseriesAnalysisFiles();
-
+			executionManager.execute();
 		} catch (IOException e) {
 			LOGGER.error("IOException occured while executing", e);
 			System.exit(1);
@@ -30,7 +27,7 @@ public class Main {
 			LOGGER.error("GitAPIException occured while executing", e);
 			System.exit(1);
 		} finally {
-			LOGGER.info("Database is being closed (0 is ok): " + executionManager.shutdownDatabaseProcess());
+			LOGGER.info("MongoDB-Process is being closed (0 is ok): " + executionManager.shutdownDatabaseProcess());
 		}
 		LOGGER.info("Shutting down properly.");
 	}

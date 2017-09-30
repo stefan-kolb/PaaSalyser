@@ -108,6 +108,28 @@ public class TimeseriesStatistics {
 		return data;
 	}
 
+	public List<String[]> evalPlatform(List<PaasReport> reports) {
+		List<String[]> data = new ArrayList<>(reports.size());
+		String[] reportData = new String[2];
+
+		// Header Row
+		reportData[0] = "Date";
+
+		reportData[1] = "Profiles with platform";
+
+		// Table Rows
+		for (PaasReport report : reports) {
+			reportData = new String[2];
+			reportData[0] = report.getMetaInfo().getDate().toString();
+
+			reportData[1] = String.valueOf(report.getEconomicInfo().getPlatformReport().getPlatformProfilesPercent())
+					.replace('.', ',');
+
+			data.add(reportData);
+		}
+		return data;
+	}
+
 	public List<String[]> evalStatus(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
 		String[] reportData = new String[12];
@@ -347,12 +369,12 @@ public class TimeseriesStatistics {
 			reportsData[4] = String.valueOf(report.getEconomicInfo().getRuntimesReport().getMedianNumberOfRuntimes())
 					.replace('.', ',');
 
-			reportsData[5] = String
-					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(0).getValue());
-			reportsData[6] = String
-					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(1).getValue());
-			reportsData[7] = String
-					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(2).getValue());
+			reportsData[5] = String.valueOf(
+					report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(0).getValue());
+			reportsData[6] = String.valueOf(
+					report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(1).getValue());
+			reportsData[7] = String.valueOf(
+					report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(2).getValue());
 
 			data.add(reportsData);
 		}
