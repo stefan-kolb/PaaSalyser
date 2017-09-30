@@ -15,7 +15,12 @@ import org.paasfinder.paasalyser.report.models.ServicesReport;
 import org.paasfinder.paasalyser.report.models.StatusReport;
 import org.paasfinder.paasalyser.report.models.TypeReport;
 
-public interface DatabaseConnector {
+public interface DatabaseConnector extends AutoCloseable {
+
+	/**
+	 * Closes the connection to the database.
+	 */
+	public void close();
 
 	/**
 	 * Saves a {@link PaasReport} in the database.
@@ -48,10 +53,18 @@ public interface DatabaseConnector {
 	public void deletePaasReport(String commitHash);
 
 	/**
+	 * Fetches the latest {@link PaasReport} that is the current State of the
+	 * art.
+	 * 
+	 * @return Current State of the art {@link PaasReport}.
+	 */
+	public PaasReport getStateOfTheArtReport();
+
+	/**
 	 * Fetches date, numberOfProfiles and numberOfEolProfiles of a
 	 * {@link PaasReport}
 	 * 
-	 * @return An ascendingly ordered list of{@link PaasReport} with date,
+	 * @return An ascendingly ordered list of {@link PaasReport} with date,
 	 *         numberOfProfiles and numberOfEolProfiles
 	 */
 	public List<MetaInfo> getProfilesData();
@@ -95,6 +108,14 @@ public interface DatabaseConnector {
 	 *         {@link HostingReport}
 	 */
 	public List<PaasReport> getHostingsData();
+
+	/**
+	 * Fetches date and {@link PlatformReport} of a {@link PaasReport}
+	 * 
+	 * @return An ascendingly ordered list of {@link PaasReport} with date and
+	 *         {@link PlatformReport}
+	 */
+	public List<PaasReport> getPlatformData();
 
 	/**
 	 * Fetches date and {@link ScalingReport} of a {@link PaasReport}

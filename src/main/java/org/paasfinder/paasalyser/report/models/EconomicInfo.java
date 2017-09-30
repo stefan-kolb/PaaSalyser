@@ -8,6 +8,8 @@ public class EconomicInfo {
 	@Embedded
 	private HostingReport hostingReport;
 	@Embedded
+	private PlatformReport platformReport;
+	@Embedded
 	private ScalingReport scalingReport;
 	@Embedded
 	private RuntimesReport runtimesReport;
@@ -18,11 +20,12 @@ public class EconomicInfo {
 	@Embedded
 	private InfrastructuresReport infrastructuresReport;
 
-	public EconomicInfo(HostingReport hostingReport, ScalingReport scalingReport, RuntimesReport runtimesReport,
-			ServicesReport servicesReport, ExtensibleReport extensibleReport,
+	public EconomicInfo(HostingReport hostingReport, PlatformReport platformReport, ScalingReport scalingReport,
+			RuntimesReport runtimesReport, ServicesReport servicesReport, ExtensibleReport extensibleReport,
 			InfrastructuresReport infrastructuresReport) {
 		super();
 		this.hostingReport = hostingReport;
+		this.platformReport = platformReport;
 		this.scalingReport = scalingReport;
 		this.runtimesReport = runtimesReport;
 		this.servicesReport = servicesReport;
@@ -36,6 +39,10 @@ public class EconomicInfo {
 
 	public HostingReport getHostingReport() {
 		return hostingReport;
+	}
+
+	public PlatformReport getPlatformReport() {
+		return platformReport;
 	}
 
 	public ScalingReport getScalingReport() {

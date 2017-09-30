@@ -45,8 +45,9 @@ public class PaasReport {
 		metaInfo = new MetaInfo(date, statistics.getProfilesCount(), statistics.getEolProfilesCount(),
 				statistics.getInvalidProfilesCount(), statistics.getRevision(), statistics.getType());
 		businessInfo = new BusinessInfo(statistics.getStatus(), statistics.getPricing());
-		economicInfo = new EconomicInfo(statistics.getHosting(), statistics.getScaling(), statistics.getRuntimes(),
-				statistics.getServices(), statistics.getExtensible(), statistics.getInfrastructures());
+		economicInfo = new EconomicInfo(statistics.getHosting(), statistics.getPlatform(), statistics.getScaling(),
+				statistics.getRuntimes(), statistics.getServices(), statistics.getExtensible(),
+				statistics.getInfrastructures());
 	}
 
 	/**

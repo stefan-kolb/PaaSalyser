@@ -10,13 +10,11 @@ import org.paasfinder.paasalyser.profile.models.Runtime;
 import org.paasfinder.paasalyser.profile.models.Scaling;
 import org.paasfinder.paasalyser.profile.models.Services;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 @Deprecated
 public class PaasProfileDeserializer implements JsonDeserializer<PaasProfile> {
 
@@ -37,7 +35,7 @@ public class PaasProfileDeserializer implements JsonDeserializer<PaasProfile> {
 			hosting = context.deserialize(jsonObject.get("hosting"), Hosting.class);
 		} catch (JsonParseException e) {
 			if (jsonObject.get("hosting").isJsonArray()) {
-				JsonArray array = json.getAsJsonArray();
+//				JsonArray array = json.getAsJsonArray();
 			}
 		}
 
