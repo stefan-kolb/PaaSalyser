@@ -22,7 +22,7 @@ public class ServicesReport {
 		this.topNativeServices = topNativeServices;
 		this.topTypesOfServices = topTypesOfServices;
 	}
-	
+
 	public ServicesReport() {
 		super();
 	}
