@@ -1,9 +1,9 @@
 {
   "id": {
-    "timestamp": 1506768332,
-    "machineIdentifier": 10474348,
-    "processIdentifier": 11244,
-    "counter": 8728975
+    "timestamp": 1506839040,
+    "machineIdentifier": 14771785,
+    "processIdentifier": 7324,
+    "counter": 8637569
   },
   "commitHash": "5ece8725bf3dad4fcfdc3170ba6b9134ed178b2f",
   "metaInfo": {
@@ -305,7 +305,7 @@
       "medianNumberOfRuntimes": 5.0,
       "varianceNumberOfRuntimes": 8.821224489795913,
       "stdevNumberOfRuntimes": 2.970054627409387,
-      "topFiveNumberOfRuntimes": [
+      "topNumberOfRuntimes": [
         {
           "key": "Atos Cloud Foundry",
           "value": 12
@@ -440,7 +440,7 @@
     },
     "servicesReport": {
       "nativeServicesProfilesPercent": 72.85714285714285,
-      "topFiveProfilesWithNativeServicesAmount": [
+      "topProfilesWithNativeServicesAmount": [
         {
           "key": "Bluemix",
           "value": 49
@@ -482,7 +482,7 @@
           "value": 8
         }
       ],
-      "topFiveNativeServices": [
+      "topNativeServices": [
         {
           "key": "mysql",
           "value": 36
@@ -524,7 +524,7 @@
           "value": 5
         }
       ],
-      "topFiveTypesOfServices": [
+      "topTypesOfServices": [
         {
           "key": "datastore",
           "value": 204
@@ -575,7 +575,7 @@
       "medianInfrastrcturesPerProfile": 2.0,
       "varianceInfrastrcturesPerProfile": 47.89639999999998,
       "stdevInfrastrcturesPerProfile": 6.920722505634797,
-      "topFiveInfrastructuresPerProfile": [
+      "topInfrastructuresPerProfile": [
         {
           "key": "Cloudways",
           "value": 34
@@ -643,7 +643,7 @@
           "value": 0.0
         }
       ],
-      "topFiveContinents": [
+      "topContinents": [
         {
           "key": "NA",
           "value": 91
@@ -665,7 +665,7 @@
           "value": 16
         }
       ],
-      "topFiveCountries": [
+      "topCountries": [
         {
           "key": "US",
           "value": 84
@@ -707,7 +707,7 @@
           "value": 7
         }
       ],
-      "topFiveRegions": [
+      "topRegions": [
         {
           "key": "Dublin",
           "value": 17
@@ -749,7 +749,7 @@
           "value": 5
         }
       ],
-      "topFiveProviders": [
+      "topProviders": [
         {
           "key": "AWS",
           "value": 82

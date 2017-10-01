@@ -369,12 +369,12 @@ public class TimeseriesStatistics {
 			reportsData[4] = String.valueOf(report.getEconomicInfo().getRuntimesReport().getMedianNumberOfRuntimes())
 					.replace('.', ',');
 
-			reportsData[5] = String.valueOf(
-					report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(0).getValue());
-			reportsData[6] = String.valueOf(
-					report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(1).getValue());
-			reportsData[7] = String.valueOf(
-					report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(2).getValue());
+			reportsData[5] = String
+					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopNumberOfRuntimes().get(0).getValue());
+			reportsData[6] = String
+					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopNumberOfRuntimes().get(1).getValue());
+			reportsData[7] = String
+					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopNumberOfRuntimes().get(2).getValue());
 
 			data.add(reportsData);
 		}
@@ -630,11 +630,11 @@ public class TimeseriesStatistics {
 					.replace('.', ',');
 
 			reportsData[3] = String.valueOf(report.getEconomicInfo().getInfrastructuresReport()
-					.getTopFiveInfrastrcturesPerProfile().get(0).getValue());
+					.getTopInfrastrcturesPerProfile().get(0).getValue());
 			reportsData[4] = String.valueOf(report.getEconomicInfo().getInfrastructuresReport()
-					.getTopFiveInfrastrcturesPerProfile().get(1).getValue());
+					.getTopInfrastrcturesPerProfile().get(1).getValue());
 			reportsData[5] = String.valueOf(report.getEconomicInfo().getInfrastructuresReport()
-					.getTopFiveInfrastrcturesPerProfile().get(2).getValue());
+					.getTopInfrastrcturesPerProfile().get(2).getValue());
 
 			reportsData[6] = String.valueOf(na).replace('.', ',');
 			reportsData[7] = String.valueOf(eu).replace('.', ',');

@@ -33,8 +33,8 @@ public class DatabaseConnectorImpl implements DatabaseConnector {
 
 		logger.info("Database connected");
 
-		// logger.info("Clearing Database");
-		// datastore.getDB().dropDatabase();
+//		 logger.info("Clearing Database");
+//		 datastore.getDB().dropDatabase();
 	}
 
 	public void close() {
