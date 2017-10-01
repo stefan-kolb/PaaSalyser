@@ -9,37 +9,34 @@ import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 public class ServicesReport {
 
 	private double nativeServicesProfilesPercent;
-	private List<SimpleResultLong> topFiveProfilesWithNativeServicesAmount;
-	private List<SimpleResultLong> topFiveNativeServices;
-	private List<SimpleResultLong> topFiveTypesOfServices;
+	private List<SimpleResultLong> topProfilesWithNativeServicesAmount;
+	private List<SimpleResultLong> topNativeServices;
+	private List<SimpleResultLong> topTypesOfServices;
 
 	public ServicesReport(double nativeServicesProfilesPercent,
-			List<SimpleResultLong> topFiveProfilesWithNativeServicesAmount,
-			List<SimpleResultLong> topFiveNativeServices, List<SimpleResultLong> topFiveTypesOfServices) {
+			List<SimpleResultLong> topProfilesWithNativeServicesAmount, List<SimpleResultLong> topNativeServices,
+			List<SimpleResultLong> topTypesOfServices) {
 		super();
 		this.nativeServicesProfilesPercent = nativeServicesProfilesPercent;
-		this.topFiveProfilesWithNativeServicesAmount = topFiveProfilesWithNativeServicesAmount;
-		this.topFiveNativeServices = topFiveNativeServices;
-		this.topFiveTypesOfServices = topFiveTypesOfServices;
-	}
-
-	public ServicesReport() {
-		super();
+		this.topProfilesWithNativeServicesAmount = topProfilesWithNativeServicesAmount;
+		this.topNativeServices = topNativeServices;
+		this.topTypesOfServices = topTypesOfServices;
 	}
 
 	public double getNativeServicesProfilesPercent() {
 		return nativeServicesProfilesPercent;
 	}
 
-	public List<SimpleResultLong> getTopFiveProfilesWithNativeServicesAmount() {
-		return topFiveProfilesWithNativeServicesAmount;
+	public List<SimpleResultLong> getTopProfilesWithNativeServicesAmount() {
+		return topProfilesWithNativeServicesAmount;
 	}
 
-	public List<SimpleResultLong> getTopFiveNativeServices() {
-		return topFiveNativeServices;
+	public List<SimpleResultLong> getTopNativeServices() {
+		return topNativeServices;
 	}
 
-	public List<SimpleResultLong> getTopFiveTypesOfServices() {
-		return topFiveTypesOfServices;
+	public List<SimpleResultLong> getTopTypesOfServices() {
+		return topTypesOfServices;
 	}
+
 }

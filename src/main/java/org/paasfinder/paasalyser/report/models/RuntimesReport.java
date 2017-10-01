@@ -18,20 +18,20 @@ public class RuntimesReport {
 	private double stdevNumberOfRuntimes;
 
 	// Number of runtimes per profile
-	private List<SimpleResultLong> topFiveNumberOfRuntimes;
+	private List<SimpleResultLong> topNumberOfRuntimes;
 
 	// Share of Runtimes in profiles
 	private List<SimpleResultDouble> runtimesShare;
 
 	public RuntimesReport(long languageSpecific, long polyglot, QualitativeData profileNumberOfRuntimesData,
-			List<SimpleResultLong> topFiveNumberOfRuntimes, List<SimpleResultDouble> runtimesShare) {
+			List<SimpleResultLong> topNumberOfRuntimes, List<SimpleResultDouble> runtimesShare) {
 		this.languageSpecific = languageSpecific;
 		this.polyglot = polyglot;
 		this.meanNumberOfRuntimes = profileNumberOfRuntimesData.getMean();
 		this.medianNumberOfRuntimes = profileNumberOfRuntimesData.getMedian();
 		this.varianceNumberOfRuntimes = profileNumberOfRuntimesData.getVariance();
 		this.stdevNumberOfRuntimes = profileNumberOfRuntimesData.getStDev();
-		this.topFiveNumberOfRuntimes = topFiveNumberOfRuntimes;
+		this.topNumberOfRuntimes = topNumberOfRuntimes;
 		this.runtimesShare = runtimesShare;
 	}
 
@@ -63,8 +63,8 @@ public class RuntimesReport {
 		return stdevNumberOfRuntimes;
 	}
 
-	public List<SimpleResultLong> getTopFiveNumberOfRuntimes() {
-		return topFiveNumberOfRuntimes;
+	public List<SimpleResultLong> getTopNumberOfRuntimes() {
+		return topNumberOfRuntimes;
 	}
 
 	public List<SimpleResultDouble> getRuntimesShare() {
