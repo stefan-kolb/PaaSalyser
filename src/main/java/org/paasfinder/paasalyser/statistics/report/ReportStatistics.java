@@ -189,10 +189,11 @@ public class ReportStatistics {
 	}
 
 	private void evalHosting() {
-		double[] percentages = new double[3];
+		double[] percentages = new double[4];
 		percentages[0] = calcPercent(dataPreProcessing.getHostingData().getPrivate(), profilesCount);
 		percentages[1] = calcPercent(dataPreProcessing.getHostingData().getPublic(), profilesCount);
-		percentages[2] = calcPercent(dataPreProcessing.getHostingData().getVirtualPrivate(), profilesCount);
+		percentages[2] = calcPercent(dataPreProcessing.getHostingData().getHybrid(), profilesCount);
+		percentages[3] = calcPercent(dataPreProcessing.getHostingData().getVirtualPrivate(), profilesCount);
 
 		hosting = new HostingReport(percentages);
 	}

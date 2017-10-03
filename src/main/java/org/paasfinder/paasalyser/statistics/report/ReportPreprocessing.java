@@ -237,6 +237,9 @@ public class ReportPreprocessing {
 			if (profile.getHosting().getPrivate()) {
 				hostingData.incrementPrivate();
 			}
+			if (profile.getHosting().getPublic() && profile.getHosting().getPrivate()) {
+				hostingData.incrementHybrid();
+			}
 			if (profile.getHosting().getVirtualPrivate()) {
 				hostingData.incrementVirtualPrivate();
 			}

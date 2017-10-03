@@ -281,25 +281,28 @@ public class TimeseriesStatistics {
 
 	public List<String[]> evalHosting(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
-		String[] reportsData = new String[4];
+		String[] reportsData = new String[5];
 
 		// Header Row
 		reportsData[0] = "Date";
 		reportsData[1] = "Private";
 		reportsData[2] = "Public";
-		reportsData[3] = "Virtual Private";
+		reportsData[3] = "Hybrid";
+		reportsData[4] = "Virtual Private";
 		data.add(reportsData);
 
 		// Table Rows
 		for (PaasReport report : reports) {
-			reportsData = new String[4];
+			reportsData = new String[5];
 			reportsData[0] = report.getMetaInfo().getDate().toString();
 
 			reportsData[1] = String.valueOf(report.getEconomicInfo().getHostingReport().getPrivateHostingPercent())
 					.replace('.', ',');
 			reportsData[2] = String.valueOf(report.getEconomicInfo().getHostingReport().getPublicHostingPercent())
 					.replace('.', ',');
-			reportsData[3] = String
+			reportsData[3] = String.valueOf(report.getEconomicInfo().getHostingReport().getHybridHostingPercent())
+					.replace('.', ',');
+			reportsData[4] = String
 					.valueOf(report.getEconomicInfo().getHostingReport().getVirtualPrivateHostingPercent())
 					.replace('.', ',');
 
