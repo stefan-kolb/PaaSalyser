@@ -20,7 +20,7 @@ public class Main {
 		}
 		try {
 			// executionManager.scanTestProfiles();
-			executionManager.scanRepository();
+			executionManager.extractRelevantCommits();
 			executionManager.createTimeseriesAnalysisFiles();
 
 		} catch (IOException e) {

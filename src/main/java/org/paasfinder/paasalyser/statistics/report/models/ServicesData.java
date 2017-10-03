@@ -21,7 +21,7 @@ public class ServicesData {
 		return profilesWithNativeServices;
 	}
 
-	public void addProfilesWithNativeServices(String name, long amount) {
+	public void addProfileWithNativeServices(String name, long amount) {
 		if (amount > 0)
 			profilesWithNativeServices.put(name, amount);
 	}

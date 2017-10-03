@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.1" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="org.paasfinder.paasalyser.statistics.report.ReportPreprocessing" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/ReportPreprocessing.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="130" width="270" x="394" y="157"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="org.paasfinder.paasalyser.statistics.report.models.RevisionData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/RevisionData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="76" width="220" x="65" y="-105"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="org.paasfinder.paasalyser.statistics.report.models.StatusData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/StatusData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="148" width="220" x="23" y="-7"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="org.paasfinder.paasalyser.statistics.report.models.PricingData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/PricingData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="310" width="220" x="25" y="159"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="org.paasfinder.paasalyser.statistics.report.models.InfrastructureData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/InfrastructureData.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="165" width="275" x="786" y="-125"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="org.paasfinder.paasalyser.statistics.report.models.ScalingData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/ScalingData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="111" width="220" x="790" y="73"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="org.paasfinder.paasalyser.statistics.report.models.ServicesData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/ServicesData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="111" width="269" x="503" y="359"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="org.paasfinder.paasalyser.statistics.report.models.HostingData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/HostingData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="111" width="220" x="551" y="-111"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="org.paasfinder.paasalyser.statistics.report.models.ExtensibleData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/ExtensibleData.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="75" width="220" x="261" y="383"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="org.paasfinder.paasalyser.statistics.report.models.RuntimeData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/RuntimeData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="93" width="231" x="789" y="212"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="org.paasfinder.paasalyser.statistics.report.models.TypeData" project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/TypeData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="110" width="220" x="310" y="-111"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="org.paasfinder.paasalyser.statistics.report.models.PlatformData" 
+    project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/statistics/report/models/PlatformData.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="93" width="220" x="787" y="358"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="13">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="14" name="scalingData">        
+        <position height="18" width="64" x="687" y="141"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="16" width="23" x="699" y="158"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="17" name="statusData">        
+        <position height="18" width="60" x="295" y="116"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="16" width="23" x="338" y="131"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="20" name="extensibleData">        
+        <position height="18" width="79" x="361" y="322"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="16" width="23" x="444" y="328"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="23" name="typeData">        
+        <position height="18" width="51" x="417" y="59"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="16" width="23" x="474" y="58"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="26" name="pricingData">        
+        <position height="18" width="62" x="280" y="252"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="16" width="23" x="316" y="274"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="29" name="runtimesData">        
+        <position height="18" width="71" x="699" y="221"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="0" maximum="1">        
+        <position height="16" width="23" x="728" y="242"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="31">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="32" name="servicesData">        
+        <position height="18" width="72" x="513" y="317"/>      
+      </attribute>      
+      <multiplicity id="33" minimum="0" maximum="1">        
+        <position height="16" width="23" x="591" y="315"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="34">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="35" name="platformData">        
+        <position height="18" width="69" x="706" y="299"/>      
+      </attribute>      
+      <multiplicity id="36" minimum="0" maximum="1">        
+        <position height="16" width="23" x="712" y="322"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="38" name="infrastructuresData">        
+        <position height="18" width="102" x="668" y="44"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="0" maximum="1">        
+        <position height="16" width="23" x="722" y="61"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="41" name="revisionData">        
+        <position height="18" width="68" x="295" y="22"/>      
+      </attribute>      
+      <multiplicity id="42" minimum="0" maximum="1">        
+        <position height="16" width="23" x="325" y="40"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="44" name="hostingData">        
+        <position height="18" width="65" x="535" y="60"/>      
+      </attribute>      
+      <multiplicity id="45" minimum="0" maximum="1">        
+        <position height="16" width="23" x="605" y="62"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

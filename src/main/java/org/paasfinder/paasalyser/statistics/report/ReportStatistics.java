@@ -41,8 +41,6 @@ public class ReportStatistics {
 	private PricingReport pricing;
 	private ScalingReport scaling;
 	private RuntimesReport runtimes;
-	// private MiddlewareReport middleware;
-	// private FrameworksReport frameworks;
 	private ServicesReport services;
 	private ExtensibleReport extensible;
 	private InfrastructuresReport infrastructures;
@@ -83,10 +81,6 @@ public class ReportStatistics {
 		evalScaling();
 		// logger.info("evalRuntimes");
 		evalRuntimes();
-		// logger.info("evalMiddleware");
-		// evalMiddleware();
-		// logger.info("evalFrameworks");
-		// evalFrameworks();
 		// logger.info("evalServices");
 		evalServices();
 		// logger.info("evalExtensible");
@@ -145,14 +139,6 @@ public class ReportStatistics {
 	public RuntimesReport getRuntimes() {
 		return runtimes;
 	}
-
-	// public MiddlewareReport getMiddleware() {
-	// return middleware;
-	// }
-	//
-	// public FrameworksReport getFrameworks() {
-	// return frameworks;
-	// }
 
 	public ServicesReport getServices() {
 		return services;

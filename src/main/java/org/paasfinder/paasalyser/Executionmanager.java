@@ -111,27 +111,27 @@ public class Executionmanager {
 	 *             An error occurred while setting up {@link RepositorySniffer}
 	 *             or an error occurred during scanning the repository
 	 */
-	public void scanRepository() throws GitAPIException, IOException {
+	public void extractRelevantCommits() throws GitAPIException, IOException {
 		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
 				database)) {
 
-			Map<RevCommit, List<PaasProfile>> profilesOfCommits = sniffer.sniffRepository();
-			logger.info("Number of commits to process is: " + profilesOfCommits.size());
+			Map<RevCommit, List<PaasProfile>> commitsToProcess = sniffer.sniffRepository();
+			logger.info("Number of commits to process is: " + commitsToProcess.size());
 
-			for (Map.Entry<RevCommit, List<PaasProfile>> commitProfile : profilesOfCommits.entrySet()) {
-				if (!database.contains(commitProfile.getKey().getName())) {
-					try {
-						database.savePaasReport(processCommitProfiles(commitProfile));
-					} catch (IOException e) {
-						logger.error("IOException occurred - Could not process commit "
-								+ commitProfile.getKey().getName() + " | " + e.getMessage());
-					} catch (RuntimeException e) {
-						logger.error("RuntimeException occurred - Could not process commit "
-								+ commitProfile.getKey().getName() + " | " + e.getMessage());
-					}
-				} else {
-					logger.info("Commit already in database");
+			for (Map.Entry<RevCommit, List<PaasProfile>> commit : commitsToProcess.entrySet()) {
+				// if (!database.contains(commitProfile.getKey().getName())) {
+				try {
+					database.savePaasReport(processCommitProfiles(commit));
+				} catch (IOException e) {
+					logger.error("IOException occurred - Could not process commit " + commit.getKey().getName()
+							+ " | " + e.getMessage());
+				} catch (RuntimeException e) {
+					logger.error("RuntimeException occurred - Could not process commit "
+							+ commit.getKey().getName() + " | " + e.getMessage());
 				}
+				// } else {
+				// logger.info("Commit already in database");
+				// }
 			}
 		}
 	}

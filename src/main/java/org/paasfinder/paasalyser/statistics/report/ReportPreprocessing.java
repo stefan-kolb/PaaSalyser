@@ -44,8 +44,6 @@ public class ReportPreprocessing {
 	private PricingData pricingData;
 	private ScalingData scalingData;
 	private RuntimeData runtimesData;
-	// private Map<String, Long> middlewareData;
-	// private Map<String, Long> frameworksData;
 	private ServicesData servicesData;
 	private ExtensibleData extensibleData;
 	private InfrastructureData infrastructuresData;
@@ -59,6 +57,7 @@ public class ReportPreprocessing {
 		}
 		if (invalidProfilesCount > 0) {
 			logger.warn("Invalid profiles found.");
+			return;
 		}
 
 		this.localDate = localDate;
@@ -80,10 +79,6 @@ public class ReportPreprocessing {
 		evalScaling();
 		// logger.info("evalRuntimes");
 		evalRuntimes();
-		// logger.debug("evalMiddleware");
-		// evalMiddleware();
-		// logger.debug("evalFrameworks");
-		// evalFrameworks();
 		// logger.info("evalServices");
 		evalServices();
 		// logger.info("evalExtensible");
@@ -131,14 +126,6 @@ public class ReportPreprocessing {
 	public RuntimeData getRuntimesData() {
 		return runtimesData;
 	}
-
-	// public Map<String, Long> getMiddlewareData() {
-	// return middlewareData;
-	// }
-	//
-	// public Map<String, Long> getFrameworksData() {
-	// return frameworksData;
-	// }
 
 	public ServicesData getServicesData() {
 		return servicesData;
@@ -362,21 +349,16 @@ public class ReportPreprocessing {
 				// profile.getName());
 				continue;
 			}
-			if (profile.getServices().getNative().length == 0) {
-				// logger.info("NativeServices was empty in: " +
-				// profile.getName());
-				continue;
-			}
-
-			servicesData.addProfilesWithNativeServices(profile.getName(), profile.getServices().getNative().length);
+			servicesData.addProfileWithNativeServices(profile.getName(), profile.getServices().getNative().length);
 			for (NativeService nativeService : profile.getServices().getNative()) {
 				if (nativeService == null || nativeService.getName() == null || nativeService.getName().isEmpty()) {
 					continue;
 				}
 				if (nativeService.getType() == null || nativeService.getType().isEmpty()) {
 					servicesData.addNativeService(nativeService.getName(), "empty");
+				} else {
+					servicesData.addNativeService(nativeService.getName(), nativeService.getType());
 				}
-				servicesData.addNativeService(nativeService.getName(), nativeService.getType());
 			}
 		}
 	}

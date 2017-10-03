@@ -57,7 +57,7 @@ public class RepositorySniffer implements AutoCloseable {
 		logger.info("Resetting and pulling repository");
 		resetAndPullRepository();
 
-		return scanCommits(scanRepositoryForProfilesCommits());
+		return saveRelevantCommits(scanRepositoryForRelevantCommits());
 	}
 
 	public Map.Entry<RevCommit, List<PaasProfile>> getStateOfTheArt() throws GitAPIException, IOException {
@@ -109,7 +109,7 @@ public class RepositorySniffer implements AutoCloseable {
 		}
 	}
 
-	private List<RevCommit> scanRepositoryForProfilesCommits()
+	private List<RevCommit> scanRepositoryForRelevantCommits()
 			throws IncorrectObjectTypeException, IOException, GitAPIException {
 		logger.info("Scanning repository for relevant commits");
 		List<RevCommit> profileChangedCommits = new ArrayList<>();
@@ -127,7 +127,7 @@ public class RepositorySniffer implements AutoCloseable {
 					CanonicalTreeParser newTreeIter = new CanonicalTreeParser();
 					newTreeIter.reset(reader, currentCommit);
 
-					// finally get the list of changed files
+					// get the list of changed files
 					List<DiffEntry> diffs = git.diff().setNewTree(newTreeIter).setOldTree(oldTreeIter).call();
 					for (DiffEntry entry : diffs) {
 						if (entry.toString().contains("profiles/")) {
@@ -144,16 +144,16 @@ public class RepositorySniffer implements AutoCloseable {
 		return profileChangedCommits;
 	}
 
-	private Map<RevCommit, List<PaasProfile>> scanCommits(List<RevCommit> profileChangedCommits) {
+	private Map<RevCommit, List<PaasProfile>> saveRelevantCommits(List<RevCommit> profileChangedCommits) {
 		Map<RevCommit, List<PaasProfile>> profilesOfCommits = new HashMap<>();
 
 		logger.info("Scanning relevant commits");
 		for (RevCommit commit : profileChangedCommits) {
 
-			if (commit.getName().equals("7f132fabb4e220f794b4926309dc8d48c794768c")) {
-				logger.info("Initial commit reached");
-				continue;
-			}
+//			if (commit.getName().equals("7f132fabb4e220f794b4926309dc8d48c794768c")) {
+//				logger.info("Initial commit reached");
+//				continue;
+//			}
 			if (database.contains(commit.getName())) {
 				logger.info("Commit already in Datastore");
 				continue;
