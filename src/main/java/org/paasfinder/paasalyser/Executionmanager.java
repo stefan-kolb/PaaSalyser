@@ -2,6 +2,8 @@ package org.paasfinder.paasalyser;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -31,23 +33,18 @@ public class Executionmanager {
 	private Process mongoDB = null;
 
 	private GsonAdapter gsonAdapter;
-	private DatabaseConnector database;
 
 	private final String gitRemotePath = "git@github.com:stefan-kolb/paas-profiles.git";
 	private final String pathOfProfilesRepository = "paas-profiles";
-	private final String pathOfTimeseriesReports = "Timeseries Reports";
+	private final String pathOfReports = "Reports";
 
 	public Executionmanager() throws IOException {
 		super();
 		logger.info("Starting MongoDB");
 
-		String[] commands = { "cmd", "/c", "start runMongoDB" };
-		File projectDirectory = Paths.get("D:\\Dokumente\\Studium\\PaaSalyser").toFile();
-
-		mongoDB = new ProcessBuilder(commands).directory(projectDirectory).start();
+		mongoDB = startMongoDB();
 
 		gsonAdapter = new GsonAdapter();
-		database = new DatabaseConnectorImpl();
 	}
 
 	public int shutdownDatabaseProcess() {
@@ -55,20 +52,34 @@ public class Executionmanager {
 		return mongoDB.exitValue();
 	}
 
-	public void scanStateOfTheArt() throws IOException, GitAPIException {
-		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
-				database)) {
-			logger.info("Scanning State of the Art");
-			if (database.contains(sniffer.getStateOfTheArtCommitName())) {
-				logger.info("Commit already in database");
-				return;
-			}
-			processCommitProfiles(sniffer.getStateOfTheArt());
+	private Process startMongoDB() throws IOException {
+		String[] commands = { "cmd", "/c", "start runMongoDB" };
+//		File projectDirectory = Paths.get("C:\\Users\\rmuel\\PaaSalyser").toFile();
+		File projectDirectory = Paths.get("D:\\Dokumente\\Studium\\PaaSalyser").toFile();
+
+		return new ProcessBuilder(commands).directory(projectDirectory).start();
+	}
+
+	public void execute() throws GitAPIException, IOException {
+		try (DatabaseConnector database = new DatabaseConnectorImpl()) {
+			scanRepository(database);
+			createStateOfTheArtReport(database);
+			createTimeseriesAnalysisFiles(database);
 		}
+	}
+
+	private void createStateOfTheArtReport(DatabaseConnector database) throws IOException, GitAPIException {
+		logger.info("Retrieving State of the Art");
+		Path outputPath = Paths.get(pathOfReports + "/" + "State-of-the-art" + ".json");
+		Files.deleteIfExists(outputPath);
+		gsonAdapter.createReportAsJsonFile(database.getStateOfTheArtReport(), outputPath);
 		logger.info("Successfully scanned State of the Art");
 	}
 
-	public void scanTestProfiles() throws IllegalStateException, IOException, GitAPIException {
+	// Only for testing purposes.
+	@SuppressWarnings("unused")
+	private void scanTestProfiles(DatabaseConnector database)
+			throws IllegalStateException, IOException, GitAPIException {
 		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
 				database)) {
 			logger.info("Scanning Test Profiles");
@@ -80,13 +91,14 @@ public class Executionmanager {
 	/**
 	 * Creates CSV files with the timeseries data of the reports in the database
 	 */
-	public void createTimeseriesAnalysisFiles() {
+	private void createTimeseriesAnalysisFiles(DatabaseConnector database) {
 		TimeseriesStatistics timeseries = new TimeseriesStatistics();
-		TimeseriesCSVPrinter printer = new TimeseriesCSVPrinter(pathOfTimeseriesReports);
+		TimeseriesCSVPrinter printer = new TimeseriesCSVPrinter(pathOfReports);
 
 		printer.printToCSVFile("ProfileAmounts", timeseries.evalProfileAmounts(database.getProfilesData()));
 		printer.printToCSVFile("Revision", timeseries.evalRevision(database.getRevisionsData()));
 		printer.printToCSVFile("Type", timeseries.evalType(database.getTypesData()));
+		printer.printToCSVFile("Platform", timeseries.evalPlatform(database.getPlatformData()));
 		printer.printToCSVFile("Status", timeseries.evalStatus(database.getStatusData()));
 		printer.printToCSVFile("Pricing", timeseries.evalPricing(database.getPricingsData()));
 		printer.printToCSVFile("Hosting", timeseries.evalHosting(database.getHostingsData()));
@@ -111,7 +123,7 @@ public class Executionmanager {
 	 *             An error occurred while setting up {@link RepositorySniffer}
 	 *             or an error occurred during scanning the repository
 	 */
-	public void extractRelevantCommits() throws GitAPIException, IOException {
+	private void scanRepository(DatabaseConnector database) throws GitAPIException, IOException {
 		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
 				database)) {
 
@@ -119,19 +131,15 @@ public class Executionmanager {
 			logger.info("Number of commits to process is: " + commitsToProcess.size());
 
 			for (Map.Entry<RevCommit, List<PaasProfile>> commit : commitsToProcess.entrySet()) {
-				// if (!database.contains(commitProfile.getKey().getName())) {
 				try {
 					database.savePaasReport(processCommitProfiles(commit));
 				} catch (IOException e) {
-					logger.error("IOException occurred - Could not process commit " + commit.getKey().getName()
-							+ " | " + e.getMessage());
+					logger.error("IOException occurred - Could not process commit " + commit.getKey().getName() + " | "
+							+ e.getMessage());
 				} catch (RuntimeException e) {
-					logger.error("RuntimeException occurred - Could not process commit "
-							+ commit.getKey().getName() + " | " + e.getMessage());
+					logger.error("RuntimeException occurred - Could not process commit " + commit.getKey().getName()
+							+ " | " + e.getMessage());
 				}
-				// } else {
-				// logger.info("Commit already in database");
-				// }
 			}
 		}
 	}

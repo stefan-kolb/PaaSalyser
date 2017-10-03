@@ -67,10 +67,6 @@ public class RepositorySniffer implements AutoCloseable {
 				getProfilesOfCommit(currentCommit.getName()));
 	}
 
-	public String getStateOfTheArtCommitName() throws GitAPIException {
-		return git.log().call().iterator().next().getName();
-	}
-
 	/**
 	 * Clones or reset and pulls the repository.
 	 * 

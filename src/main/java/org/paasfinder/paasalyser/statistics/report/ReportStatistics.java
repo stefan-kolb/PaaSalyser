@@ -154,8 +154,8 @@ public class ReportStatistics {
 
 	private void evalRevision() {
 		revision = new RevisionReport(new QualitativeData(dataPreProcessing.getRevisionData().getRevisions()),
-				getMinFive(dataPreProcessing.getRevisionData().getRevisions()),
-				getTopFive(dataPreProcessing.getRevisionData().getRevisions()));
+				getMinTen(dataPreProcessing.getRevisionData().getRevisions()),
+				getTopTen(dataPreProcessing.getRevisionData().getRevisions()));
 	}
 
 	private void evalStatus() {
@@ -165,8 +165,8 @@ public class ReportStatistics {
 		percentages[2] = calcPercent(dataPreProcessing.getStatusData().getProduction(), profilesCount);
 
 		status = new StatusReport(percentages, new QualitativeData(dataPreProcessing.getStatusData().getStatusSince()),
-				getTopFive(dataPreProcessing.getStatusData().getStatusSince()),
-				getMinFive(dataPreProcessing.getStatusData().getStatusSince()));
+				getTopTen(dataPreProcessing.getStatusData().getStatusSince()),
+				getMinTen(dataPreProcessing.getStatusData().getStatusSince()));
 	}
 
 	private void evalType() {
@@ -185,7 +185,7 @@ public class ReportStatistics {
 
 		platform = new PlatformReport(
 				calcPercent(dataPreProcessing.getPlatformData().getplatformProfiles(), profilesCount),
-				getTopFive(platforms));
+				getTopTen(platforms));
 	}
 
 	private void evalHosting() {
@@ -223,7 +223,7 @@ public class ReportStatistics {
 		periods.add(new SimpleResultLong("Anually", dataPreProcessing.getPricingData().getAnnuallyPariod()));
 		periods.add(new SimpleResultLong("Empty", dataPreProcessing.getPricingData().getEmptyPeriod()));
 
-		pricing = new PricingReport(getTopFive(numberOfModelsPerProfile), getTopFive(models), getTopFive(periods));
+		pricing = new PricingReport(getTopTen(numberOfModelsPerProfile), getTopTen(models), getTopTen(periods));
 	}
 
 	private void evalScaling() {
@@ -246,18 +246,18 @@ public class ReportStatistics {
 				.collect(Collectors.toCollection(ArrayList::new));
 		runtimesShare.sort((a, b) -> Double.compare(b.getValue(), a.getValue()));
 
-		// Summarize all elements after the 9th and put it back into the List
-		if (runtimesShare.size() > 8) {
-			SimpleResultDouble otherRuntimes = new SimpleResultDouble("Others",
-					runtimesShare.subList(9, runtimesShare.size()).stream()
-							.collect(Collectors.summingDouble(entry -> entry.getValue())));
-			runtimesShare = runtimesShare.subList(0, 9);
-			runtimesShare.add(otherRuntimes);
-		}
+		// // Summarize all elements after the 9th and put it back into the List
+		// if (runtimesShare.size() > 8) {
+		// SimpleResultDouble otherRuntimes = new SimpleResultDouble("Others",
+		// runtimesShare.subList(9, runtimesShare.size()).stream()
+		// .collect(Collectors.summingDouble(entry -> entry.getValue())));
+		// runtimesShare = runtimesShare.subList(0, 9);
+		// runtimesShare.add(otherRuntimes);
+		// }
 
 		runtimes = new RuntimesReport(languageSpecific, polyglot,
 				new QualitativeData(dataPreProcessing.getRuntimesData().getNumberPerProfile()),
-				getTopFive(dataPreProcessing.getRuntimesData().getNumberPerProfile()), runtimesShare);
+				getTopTen(dataPreProcessing.getRuntimesData().getNumberPerProfile()), runtimesShare);
 	}
 
 	private void evalServices() {
@@ -265,10 +265,10 @@ public class ReportStatistics {
 				dataPreProcessing.getServicesData().getProfilesWithNativeServices().size(), profilesCount);
 
 		services = new ServicesReport(profilesWithNativeServices,
-				getTopFive(dataPreProcessing.getServicesData().getProfilesWithNativeServices()),
-				getTopFive(dataPreProcessing.getServicesData().getNativeServices()),
-				getTopFive(dataPreProcessing.getServicesData().getTypesOfNativeServices().entrySet().stream()
-						.filter(entry -> !entry.getValue().equals("empty"))
+				getTopTen(dataPreProcessing.getServicesData().getProfilesWithNativeServices()),
+				getTopTen(dataPreProcessing.getServicesData().getNativeServices()),
+				getTopTen(dataPreProcessing.getServicesData().getTypesOfNativeServices().entrySet().stream()
+						.filter(entry -> !entry.getKey().equals("empty"))
 						.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()))));
 	}
 
@@ -281,51 +281,56 @@ public class ReportStatistics {
 	private void evalInfrastructures() {
 		List<SimpleResultDouble> percentOfProfilesPerContinent = dataPreProcessing.getInfrastructuresData()
 				.getProfileContinents().entrySet().stream()
-				.map(entry -> new SimpleResultDouble(entry.getKey(), calcPercent(entry.getValue(), profilesCount)))
+				.map(entry -> new SimpleResultDouble(entry.getKey(),
+						calcPercent(entry.getValue(),
+								// public and virtual_private are hosted in data
+								// centers, private is not
+								dataPreProcessing.getHostingData().getPublic()
+										+ dataPreProcessing.getHostingData().getVirtualPrivate())))
 				.collect(Collectors.toCollection(ArrayList::new));
 
 		infrastructures = new InfrastructuresReport(
-				getTopFive(dataPreProcessing.getInfrastructuresData().getInfrastructuresPerProfile()),
+				getTopTen(dataPreProcessing.getInfrastructuresData().getInfrastructuresPerProfile()),
 				new QualitativeData(dataPreProcessing.getInfrastructuresData().getInfrastructuresPerProfile()),
 				sortDescendingDouble(percentOfProfilesPerContinent),
-				getTopFive(dataPreProcessing.getInfrastructuresData().getContinent()),
-				getTopFive(dataPreProcessing.getInfrastructuresData().getCountry()),
-				getTopFive(dataPreProcessing.getInfrastructuresData().getRegion()),
-				getTopFive(dataPreProcessing.getInfrastructuresData().getProvider()));
+				getTopTen(dataPreProcessing.getInfrastructuresData().getContinent()),
+				getTopTen(dataPreProcessing.getInfrastructuresData().getCountry()),
+				getTopTen(dataPreProcessing.getInfrastructuresData().getRegion()),
+				getTopTen(dataPreProcessing.getInfrastructuresData().getProvider()));
 	}
 
 	// Private Methods that are used to calculate several results
 
-	private List<SimpleResultLong> getTopFive(Map<String, Long> list) {
+	private List<SimpleResultLong> getTopTen(Map<String, Long> list) {
 		List<SimpleResultLong> results = list.entrySet().stream().map(entry -> {
 			return new SimpleResultLong(entry.getKey(), entry.getValue());
 		}).collect(Collectors.toCollection(ArrayList::new));
 		// Sort descending
 		results.sort((x, y) -> Long.compare(y.getValue(), x.getValue()));
 		// Return the Top 5 Elements
-		if (list.size() >= 5) {
-			return results.subList(0, 5);
+		if (list.size() >= 10) {
+			return results.subList(0, 10);
 		} else
 			return results;
 	}
 
-	private List<SimpleResultLong> getTopFive(List<SimpleResultLong> list) {
+	private List<SimpleResultLong> getTopTen(List<SimpleResultLong> list) {
 		// Sort descending
 		list.sort((x, y) -> Long.compare(y.getValue(), x.getValue()));
 		// Return the Top 5 Elements
-		if (list.size() >= 5) {
-			return list.subList(0, 5);
+		if (list.size() >= 10) {
+			return list.subList(0, 10);
 		} else
 			return list;
 	}
 
 	@SuppressWarnings("unused")
-	private List<SimpleResultDouble> getTopFiveDouble(List<SimpleResultDouble> list) {
+	private List<SimpleResultDouble> getTopTenDouble(List<SimpleResultDouble> list) {
 		// Sort descending
 		list.sort((x, y) -> Double.compare(y.getValue(), x.getValue()));
 		// Return the Top 5 Elements
-		if (list.size() >= 5) {
-			return list.subList(0, 5);
+		if (list.size() >= 10) {
+			return list.subList(0, 10);
 		} else
 			return list;
 	}
@@ -336,15 +341,15 @@ public class ReportStatistics {
 		return list;
 	}
 
-	private List<SimpleResultLong> getMinFive(Map<String, Long> list) {
+	private List<SimpleResultLong> getMinTen(Map<String, Long> list) {
 		List<SimpleResultLong> results = list.entrySet().stream().map(entry -> {
 			return new SimpleResultLong(entry.getKey(), entry.getValue());
 		}).collect(Collectors.toCollection(ArrayList::new));
 		// Sort descending
 		results.sort(Comparator.comparingLong(SimpleResultLong::getValue));
 		// Return the Top 5 Elements
-		if (list.size() >= 5) {
-			return results.subList(0, 5);
+		if (list.size() >= 10) {
+			return results.subList(0, 10);
 		} else
 			return results;
 	}

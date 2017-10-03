@@ -108,6 +108,28 @@ public class TimeseriesStatistics {
 		return data;
 	}
 
+	public List<String[]> evalPlatform(List<PaasReport> reports) {
+		List<String[]> data = new ArrayList<>(reports.size());
+		String[] reportData = new String[2];
+
+		// Header Row
+		reportData[0] = "Date";
+
+		reportData[1] = "Profiles with platform";
+
+		// Table Rows
+		for (PaasReport report : reports) {
+			reportData = new String[2];
+			reportData[0] = report.getMetaInfo().getDate().toString();
+
+			reportData[1] = String.valueOf(report.getEconomicInfo().getPlatformReport().getPlatformProfilesPercent())
+					.replace('.', ',');
+
+			data.add(reportData);
+		}
+		return data;
+	}
+
 	public List<String[]> evalStatus(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
 		String[] reportData = new String[12];
@@ -348,11 +370,11 @@ public class TimeseriesStatistics {
 					.replace('.', ',');
 
 			reportsData[5] = String
-					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(0).getValue());
+					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopNumberOfRuntimes().get(0).getValue());
 			reportsData[6] = String
-					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(1).getValue());
+					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopNumberOfRuntimes().get(1).getValue());
 			reportsData[7] = String
-					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopFiveNumberOfRuntimes().get(2).getValue());
+					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopNumberOfRuntimes().get(2).getValue());
 
 			data.add(reportsData);
 		}
@@ -361,7 +383,7 @@ public class TimeseriesStatistics {
 
 	public List<String[]> evalRuntimesShare(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
-		String[] reportsData = new String[18];
+		String[] reportsData = new String[17];
 
 		// Header Row
 		reportsData[0] = "Date";
@@ -382,14 +404,13 @@ public class TimeseriesStatistics {
 		reportsData[14] = "Python";
 		reportsData[15] = "Ruby";
 		reportsData[16] = "Scala";
-		reportsData[17] = "Others";
 
 		data.add(reportsData);
 
 		// Table Rows
 		for (PaasReport report : reports) {
 			double apex = 0, clojure = 0, cobol = 0, dotnet = 0, erlang = 0, go = 0, groovy = 0, haskell = 0, java = 0,
-					lua = 0, node = 0, perl = 0, php = 0, python = 0, ruby = 0, scala = 0, others = 0;
+					lua = 0, node = 0, perl = 0, php = 0, python = 0, ruby = 0, scala = 0;
 
 			for (SimpleResultDouble elem : report.getEconomicInfo().getRuntimesReport().getRuntimesShare()) {
 				if (elem.getKey().equals("apex")) {
@@ -424,12 +445,10 @@ public class TimeseriesStatistics {
 					ruby = elem.getValue();
 				} else if (elem.getKey().equals("scala")) {
 					scala = elem.getValue();
-				} else if (elem.getKey().equals("others")) {
-					others = elem.getValue();
 				}
 			}
 
-			reportsData = new String[18];
+			reportsData = new String[17];
 
 			reportsData[0] = report.getMetaInfo().getDate().toString();
 
@@ -449,7 +468,6 @@ public class TimeseriesStatistics {
 			reportsData[14] = String.valueOf(python).replace('.', ',');
 			reportsData[15] = String.valueOf(ruby).replace('.', ',');
 			reportsData[16] = String.valueOf(scala).replace('.', ',');
-			reportsData[17] = String.valueOf(others).replace('.', ',');
 
 			data.add(reportsData);
 		}
@@ -608,11 +626,11 @@ public class TimeseriesStatistics {
 					.replace('.', ',');
 
 			reportsData[3] = String.valueOf(report.getEconomicInfo().getInfrastructuresReport()
-					.getTopFiveInfrastrcturesPerProfile().get(0).getValue());
+					.getTopInfrastrcturesPerProfile().get(0).getValue());
 			reportsData[4] = String.valueOf(report.getEconomicInfo().getInfrastructuresReport()
-					.getTopFiveInfrastrcturesPerProfile().get(1).getValue());
+					.getTopInfrastrcturesPerProfile().get(1).getValue());
 			reportsData[5] = String.valueOf(report.getEconomicInfo().getInfrastructuresReport()
-					.getTopFiveInfrastrcturesPerProfile().get(2).getValue());
+					.getTopInfrastrcturesPerProfile().get(2).getValue());
 
 			reportsData[6] = String.valueOf(na).replace('.', ',');
 			reportsData[7] = String.valueOf(eu).replace('.', ',');

@@ -81,10 +81,9 @@ public class GsonAdapter {
 	 * @throws IOException
 	 *             Gson was unable to stream or write to stream
 	 */
-	@Deprecated
 	public void createReportAsJsonFile(PaasReport report, Path path) throws IOException {
 		try (BufferedWriter writer = Files.newBufferedWriter(path, Charset.defaultCharset(),
-				StandardOpenOption.CREATE)) {
+				StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE)) {
 			try {
 				gson.toJson(report, writer);
 			} catch (JsonIOException e) {
