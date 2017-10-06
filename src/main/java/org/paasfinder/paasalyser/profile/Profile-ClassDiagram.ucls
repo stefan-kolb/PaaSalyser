@@ -24,7 +24,7 @@
   <class id="3" language="java" name="org.paasfinder.paasalyser.profile.models.Hosting" project="PaaSalyser" 
     file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/profile/models/Hosting.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="112" width="193" x="328" y="-131"/>    
+    <position height="112" width="193" x="342" y="-137"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -73,26 +73,26 @@
   </class>  
   <association id="8">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="9" name="pricings">        
-        <position height="0" width="0" x="-99" y="34"/>      
+      <attribute id="9" name="infrastructures">        
+        <position height="18" width="80" x="37" y="29"/>      
       </attribute>      
       <multiplicity id="10" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="290" y="103"/>      
+        <position height="16" width="21" x="40" y="58"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="11">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="12" name="scaling">        
-        <position height="18" width="42" x="220" y="158"/>      
+      <attribute id="12" name="pricings">        
+        <position height="0" width="0" x="-99" y="34"/>      
       </attribute>      
-      <multiplicity id="13" minimum="0" maximum="1">        
-        <position height="16" width="23" x="274" y="158"/>      
+      <multiplicity id="13" minimum="0" maximum="2147483647">        
+        <position height="16" width="21" x="312" y="76"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="14">    
@@ -101,7 +101,7 @@
         <position height="18" width="50" x="121" y="-72"/>      
       </attribute>      
       <multiplicity id="16" minimum="0" maximum="1">        
-        <position height="16" width="23" x="178" y="-71"/>      
+        <position height="16" width="23" x="174" y="-83"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
@@ -109,38 +109,38 @@
   </association>  
   <association id="17">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="18" name="runtimes">        
-        <position height="18" width="49" x="43" y="157"/>      
+      <attribute id="18" name="scaling">        
+        <position height="18" width="42" x="220" y="158"/>      
       </attribute>      
-      <multiplicity id="19" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="103" y="160"/>      
+      <multiplicity id="19" minimum="0" maximum="1">        
+        <position height="16" width="23" x="276" y="168"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="20">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="21" name="infrastructures">        
-        <position height="18" width="80" x="37" y="29"/>      
+      <attribute id="21" name="hosting">        
+        <position height="18" width="43" x="291" y="-34"/>      
       </attribute>      
-      <multiplicity id="22" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="66" y="58"/>      
+      <multiplicity id="22" minimum="1" maximum="1">        
+        <position height="16" width="11" x="329" y="-20"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="23">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="24" name="hosting">        
-        <position height="18" width="43" x="277" y="-28"/>      
+      <attribute id="24" name="runtimes">        
+        <position height="18" width="49" x="43" y="157"/>      
       </attribute>      
-      <multiplicity id="25" minimum="0" maximum="1">        
-        <position height="16" width="23" x="308" y="-1"/>      
+      <multiplicity id="25" minimum="0" maximum="2147483647">        
+        <position height="16" width="21" x="96" y="167"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

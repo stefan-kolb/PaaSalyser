@@ -54,7 +54,8 @@ public class Executionmanager {
 
 	private Process startMongoDB() throws IOException {
 		String[] commands = { "cmd", "/c", "start runMongoDB" };
-//		File projectDirectory = Paths.get("C:\\Users\\rmuel\\PaaSalyser").toFile();
+		// File projectDirectory =
+		// Paths.get("C:\\Users\\rmuel\\PaaSalyser").toFile();
 		File projectDirectory = Paths.get("D:\\Dokumente\\Studium\\PaaSalyser").toFile();
 
 		return new ProcessBuilder(commands).directory(projectDirectory).start();
@@ -109,6 +110,8 @@ public class Executionmanager {
 		printer.printToCSVFile("Services", timeseries.evalServices(database.getServicesData()));
 		printer.printToCSVFile("Extensible", timeseries.evalExtensible(database.getExtensibleData()));
 		printer.printToCSVFile("Infrastructure", timeseries.evalInfraStructure(database.getInfrastructuresData()));
+		printer.printToCSVFile("InfrastructureContinents",
+				timeseries.evalInfraStructureContinents(database.getInfrastructuresData()));
 	}
 
 	/**

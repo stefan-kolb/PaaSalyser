@@ -1,259 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.1" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="org.paasfinder.paasalyser.report.models.MetaInfo" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/MetaInfo.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="279" width="299" x="393" y="440"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="org.paasfinder.paasalyser.report.models.ServicesReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/ServicesReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="243" width="492" x="1816" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="org.paasfinder.paasalyser.report.models.TypeReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/TypeReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="207" width="180" x="173" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="org.paasfinder.paasalyser.report.models.ScalingReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/ScalingReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="207" width="179" x="2348" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="org.paasfinder.paasalyser.report.models.StatusReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/StatusReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="423" width="444" x="846" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="org.paasfinder.paasalyser.report.models.ExtensibleReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/ExtensibleReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="135" width="206" x="2567" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="org.paasfinder.paasalyser.report.PaasReport" project="PaaSalyser" 
+  <class id="1" language="java" name="org.paasfinder.paasalyser.report.PaasReport" project="PaaSalyser" 
     file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/PaasReport.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1181" y="208"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="93" width="146" x="378" y="121"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="org.paasfinder.paasalyser.report.models.BusinessInfo" project="PaaSalyser" 
+  <class id="2" language="java" name="org.paasfinder.paasalyser.report.models.MetaInfo" project="PaaSalyser" 
+    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/MetaInfo.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="165" width="181" x="90" y="240"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="org.paasfinder.paasalyser.report.models.BusinessInfo" project="PaaSalyser" 
     file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/BusinessInfo.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="135" width="227" x="1284" y="440"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="94" width="179" x="355" y="299"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="org.paasfinder.paasalyser.report.models.EconomicInfo" project="PaaSalyser" 
+  <class id="4" language="java" name="org.paasfinder.paasalyser.report.models.EconomicInfo" project="PaaSalyser" 
     file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/EconomicInfo.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="207" width="584" x="2567" y="440"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="184" width="240" x="612" y="232"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="org.paasfinder.paasalyser.report.models.PlatformReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/PlatformReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="743" y="201"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="org.paasfinder.paasalyser.report.models.RevisionReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/RevisionReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="315" width="413" x="393" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="org.paasfinder.paasalyser.report.models.PricingReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/PricingReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="207" width="446" x="1330" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="org.paasfinder.paasalyser.report.models.RuntimesReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/RuntimesReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="387" width="471" x="2813" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="org.paasfinder.paasalyser.report.models.HostingReport" project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/HostingReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="207" width="221" x="3324" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="15" language="java" name="org.paasfinder.paasalyser.report.models.InfrastructuresReport" 
-    project="PaaSalyser" 
-    file="/PaaSalyser/src/main/java/org/paasfinder/paasalyser/report/models/InfrastructuresReport.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="459" width="921" x="3585" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <association id="16">    
+  <association id="5">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="17" name="typeReport"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+      <attribute id="6" name="businessInfo">        
+        <position height="18" width="70" x="379" y="243"/>      
+      </attribute>      
+      <multiplicity id="7" minimum="1" maximum="1">        
+        <position height="16" width="11" x="452" y="279"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="19">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="20" name="hostingReport"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="22">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="23" name="statusReport"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="26" name="scalingReport"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
+  <association id="8">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="9" name="economicInfo">        
+        <position height="18" width="72" x="540" y="203"/>      
+      </attribute>      
+      <multiplicity id="10" minimum="1" maximum="1">        
+        <position height="16" width="11" x="597" y="231"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="28">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="29" name="extensibleReport"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="31">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="32" name="pricingReport"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="34">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="35" name="servicesReport"/>      
-      <multiplicity id="36" minimum="0" maximum="1"/>    
+  <association id="11">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="12" name="metaInfo">        
+        <position height="18" width="49" x="294" y="214"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="1" maximum="1">        
+        <position height="16" width="11" x="279" y="243"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="37">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="38" name="metaInfo"/>      
-      <multiplicity id="39" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="40">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="41" name="revisionReport"/>      
-      <multiplicity id="42" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="43">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="44" name="economicInfo"/>      
-      <multiplicity id="45" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="46">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="47" name="businessInfo"/>      
-      <multiplicity id="48" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="49">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="50" name="runtimesReport"/>      
-      <multiplicity id="51" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="52">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="53" name="infrastructuresReport"/>      
-      <multiplicity id="54" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
