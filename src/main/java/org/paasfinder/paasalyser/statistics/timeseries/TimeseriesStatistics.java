@@ -125,6 +125,7 @@ public class TimeseriesStatistics {
 
 		reportData[1] = "Profiles with platform";
 
+		data.add(reportData);
 		// Table Rows
 		for (PaasReport report : reports) {
 			reportData = new String[2];
