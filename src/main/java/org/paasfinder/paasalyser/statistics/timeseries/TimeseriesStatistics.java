@@ -582,7 +582,7 @@ public class TimeseriesStatistics {
 		return data;
 	}
 
-	public List<String[]> evalInfraStructure(List<PaasReport> reports) {
+	public List<String[]> evalInfraStructureProfiles(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
 		String[] reportsData = new String[8];
 

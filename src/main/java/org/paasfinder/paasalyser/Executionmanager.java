@@ -109,7 +109,7 @@ public class Executionmanager {
 		printer.printToCSVFile("Runtimes Share", timeseries.evalRuntimesShare(database.getRuntimesData()));
 		printer.printToCSVFile("Services", timeseries.evalServices(database.getServicesData()));
 		printer.printToCSVFile("Extensible", timeseries.evalExtensible(database.getExtensibleData()));
-		printer.printToCSVFile("Infrastructure", timeseries.evalInfraStructure(database.getInfrastructuresData()));
+		printer.printToCSVFile("InfrastructureProfiles", timeseries.evalInfraStructureProfiles(database.getInfrastructuresData()));
 		printer.printToCSVFile("InfrastructureContinents",
 				timeseries.evalInfraStructureContinents(database.getInfrastructuresData()));
 	}
