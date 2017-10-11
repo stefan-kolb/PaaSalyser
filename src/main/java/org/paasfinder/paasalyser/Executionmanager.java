@@ -54,9 +54,8 @@ public class Executionmanager {
 
 	private Process startMongoDB() throws IOException {
 		String[] commands = { "cmd", "/c", "start runMongoDB" };
-		// File projectDirectory =
-		// Paths.get("C:\\Users\\rmuel\\PaaSalyser").toFile();
-		File projectDirectory = Paths.get("D:\\Dokumente\\Studium\\PaaSalyser").toFile();
+		// Run the script in the project's directory to start MongoDB
+		File projectDirectory = Paths.get(".").toFile();
 
 		return new ProcessBuilder(commands).directory(projectDirectory).start();
 	}
@@ -75,18 +74,6 @@ public class Executionmanager {
 		Files.deleteIfExists(outputPath);
 		gsonAdapter.createReportAsJsonFile(database.getStateOfTheArtReport(), outputPath);
 		logger.info("Successfully scanned State of the Art");
-	}
-
-	// Only for testing purposes.
-	@SuppressWarnings("unused")
-	private void scanTestProfiles(DatabaseConnector database)
-			throws IllegalStateException, IOException, GitAPIException {
-		try (RepositorySniffer sniffer = new RepositorySniffer(gsonAdapter, gitRemotePath, pathOfProfilesRepository,
-				database)) {
-			logger.info("Scanning Test Profiles");
-			processTestProfiles(gsonAdapter.scanDirectoryForJsonFiles(Paths.get("test-profiles")));
-		}
-		logger.info("Successfully scanned Test Profiles");
 	}
 
 	/**
@@ -175,21 +162,6 @@ public class Executionmanager {
 			report = new PaasReport();
 		}
 		return report;
-	}
-
-	private void processTestProfiles(List<PaasProfile> commitProfiles) throws IOException, RuntimeException {
-		logger.info("Processing");
-		ReportPreprocessing reportPreprocessing;
-		ReportStatistics reportStatistics;
-		try {
-			reportPreprocessing = new ReportPreprocessing(LocalDate.now(), commitProfiles);
-			System.out.println(reportPreprocessing.toString());
-			System.out.println("--------------------------------------------");
-			reportStatistics = new ReportStatistics(reportPreprocessing);
-			System.out.println(reportStatistics.toString());
-		} catch (IllegalStateException e) {
-			throw new RuntimeException("IllegalStateException occurred while processing test profiles", e);
-		}
 	}
 
 }

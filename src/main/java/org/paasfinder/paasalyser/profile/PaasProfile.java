@@ -1,7 +1,6 @@
 package org.paasfinder.paasalyser.profile;
 
 import java.nio.file.Path;
-import java.util.Arrays;
 
 import org.paasfinder.paasalyser.profile.models.Hosting;
 import org.paasfinder.paasalyser.profile.models.Infrastructure;
@@ -193,15 +192,6 @@ public class PaasProfile {
 
 	public Infrastructure[] getInfrastructures() {
 		return infrastructures;
-	}
-
-	@Override
-	public String toString() {
-		return "PaasProfile [name=" + name + ", revision=" + revision + ", url=" + url + ", status=" + status
-				+ ", statusSince=" + statusSince + ", type=" + type + ", platform=" + platform + ", hosting=" + hosting
-				+ ", pricings=" + Arrays.toString(pricings) + ", scaling=" + scaling + ", runtimes="
-				+ Arrays.toString(runtimes) + ", services=" + services + ", extensible=" + extensible
-				+ ", infrastructures=" + Arrays.toString(infrastructures) + "]";
 	}
 
 }

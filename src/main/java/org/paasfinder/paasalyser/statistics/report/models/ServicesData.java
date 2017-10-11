@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class ServicesData {
 
+	private long serviceProfiles = 0;
 	private Map<String, Long> profilesWithNativeServices;
 	private Map<String, Long> nativeServices;
 	private Map<String, Long> typesOfNativeServices;
@@ -15,6 +16,18 @@ public class ServicesData {
 		this.profilesWithNativeServices = new HashMap<>();
 		this.nativeServices = new HashMap<>();
 		this.typesOfNativeServices = new HashMap<>();
+	}
+
+	public long getServiceProfiles() {
+		return serviceProfiles;
+	}
+
+	public void incrementServiceProfiles() {
+		serviceProfiles++;
+	}
+
+	public void setNativeServices(Map<String, Long> nativeServices) {
+		this.nativeServices = nativeServices;
 	}
 
 	public Map<String, Long> getProfilesWithNativeServices() {
@@ -47,12 +60,6 @@ public class ServicesData {
 
 	public Map<String, Long> getTypesOfNativeServices() {
 		return typesOfNativeServices;
-	}
-
-	@Override
-	public String toString() {
-		return "ServicesData [profilesWithNativeServices=" + profilesWithNativeServices + ", nativeServices="
-				+ nativeServices + ", typesOfNativeServices=" + typesOfNativeServices + "]";
 	}
 
 }

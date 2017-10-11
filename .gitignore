@@ -167,3 +167,5 @@ gradle-app.setting
 *.xml
 *.xlsx
 *.xls
+Reports/*
+paas-profiles/*

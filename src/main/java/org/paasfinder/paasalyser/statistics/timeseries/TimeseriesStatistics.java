@@ -149,17 +149,6 @@ public class TimeseriesStatistics {
 		reportData[1] = "Alpha";
 		reportData[2] = "Beta";
 		reportData[3] = "Production";
-//
-//		reportData[4] = "Mean StatusSince";
-//		reportData[5] = "Median StatusSince";
-//
-//		reportData[6] = "Youngest StatusSince";
-//		reportData[7] = "Second youngest StatusSince";
-//		reportData[8] = "Third youngest StatusSince";
-//
-//		reportData[9] = "Oldest StatusSince";
-//		reportData[10] = "Second oldest StatusSince";
-//		reportData[11] = "Third oldest StatusSince";
 		data.add(reportData);
 
 		// Table Rows
@@ -173,27 +162,6 @@ public class TimeseriesStatistics {
 					',');
 			reportData[3] = String.valueOf(report.getBusinessInfo().getStatusReport().getProductionPercent())
 					.replace('.', ',');
-
-			// reportData[4] =
-			// String.valueOf(report.getBusinessInfo().getStatusReport().getMeanStatusSince()).replace('.',
-			// ',');
-			// reportData[5] =
-			// String.valueOf(report.getBusinessInfo().getStatusReport().getMedianStatusSince())
-			// .replace('.', ',');
-			//
-			// reportData[6] = String
-			// .valueOf(report.getBusinessInfo().getStatusReport().getYoungestStatusSince().get(0).getValue());
-			// reportData[7] = String
-			// .valueOf(report.getBusinessInfo().getStatusReport().getYoungestStatusSince().get(1).getValue());
-			// reportData[8] = String
-			// .valueOf(report.getBusinessInfo().getStatusReport().getYoungestStatusSince().get(2).getValue());
-			//
-			// reportData[9] = String
-			// .valueOf(report.getBusinessInfo().getStatusReport().getOldestStatusSince().get(0).getValue());
-			// reportData[10] = String
-			// .valueOf(report.getBusinessInfo().getStatusReport().getOldestStatusSince().get(1).getValue());
-			// reportData[11] = String
-			// .valueOf(report.getBusinessInfo().getStatusReport().getOldestStatusSince().get(2).getValue());
 
 			data.add(reportData);
 		}
@@ -324,25 +292,28 @@ public class TimeseriesStatistics {
 
 	public List<String[]> evalScaling(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
-		String[] reportsData = new String[4];
+		String[] reportsData = new String[5];
 
 		// Header Row
 		reportsData[0] = "Date";
-		reportsData[1] = "Vertical";
-		reportsData[2] = "Horizontal";
-		reportsData[3] = "Auto";
+		reportsData[1] = "Scalable";
+		reportsData[2] = "Vertical";
+		reportsData[3] = "Horizontal";
+		reportsData[4] = "Auto";
 		data.add(reportsData);
 
 		// Table Rows
 		for (PaasReport report : reports) {
-			reportsData = new String[4];
+			reportsData = new String[5];
 			reportsData[0] = report.getMetaInfo().getDate().toString();
 
-			reportsData[1] = String.valueOf(report.getEconomicInfo().getScalingReport().getVerticalPercent())
+			reportsData[1] = String.valueOf(report.getEconomicInfo().getScalingReport().getScalablePercent())
 					.replace('.', ',');
-			reportsData[2] = String.valueOf(report.getEconomicInfo().getScalingReport().getHorizontalPercent())
+			reportsData[2] = String.valueOf(report.getEconomicInfo().getScalingReport().getVerticalPercent())
 					.replace('.', ',');
-			reportsData[3] = String.valueOf(report.getEconomicInfo().getScalingReport().getAutoPercent()).replace('.',
+			reportsData[3] = String.valueOf(report.getEconomicInfo().getScalingReport().getHorizontalPercent())
+					.replace('.', ',');
+			reportsData[4] = String.valueOf(report.getEconomicInfo().getScalingReport().getAutoPercent()).replace('.',
 					',');
 
 			data.add(reportsData);
@@ -395,7 +366,6 @@ public class TimeseriesStatistics {
 					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopNumberOfRuntimes().get(3).getValue());
 			reportsData[9] = String
 					.valueOf(report.getEconomicInfo().getRuntimesReport().getTopNumberOfRuntimes().get(4).getValue());
-
 
 			data.add(reportsData);
 		}
@@ -504,24 +474,6 @@ public class TimeseriesStatistics {
 
 		reportsData[1] = "Profiles with Native Services in percent";
 
-		// reportsData[2] = "Top profile native service";
-		// reportsData[3] = "Second profile native service";
-		// reportsData[4] = "Third profile native service";
-		// reportsData[5] = "Fourth profile native service";
-		// reportsData[6] = "Fifth profile native service";
-		//
-		// reportsData[2] = "Top native service";
-		// reportsData[3] = "Second native service";
-		// reportsData[4] = "Third native service";
-		// reportsData[5] = "Fourth native service";
-		// reportsData[6] = "Fifth native service";
-		//
-		// reportsData[2] = "Top type native service";
-		// reportsData[3] = "Second type native service";
-		// reportsData[4] = "Third type native service";
-		// reportsData[5] = "Fourth type native service";
-		// reportsData[6] = "Fifth type native service";
-
 		data.add(reportsData);
 
 		// Table Rows
@@ -533,24 +485,6 @@ public class TimeseriesStatistics {
 			reportsData[1] = String
 					.valueOf(report.getEconomicInfo().getServicesReport().getNativeServicesProfilesPercent())
 					.replace('.', ',');
-
-			// reportsData[2] =
-			// String.valueOf(report.getEconomicInfo().getServicesReport().get);
-			// reportsData[3] = String.valueOf(cobol);
-			// reportsData[4] = String.valueOf(dotnet);
-			// reportsData[5] = String.valueOf(erlang);
-			// reportsData[6] = String.valueOf(go);
-			// reportsData[7] = String.valueOf(groovy);
-			// reportsData[8] = String.valueOf(haskell);
-			// reportsData[9] = String.valueOf(java);
-			// reportsData[10] = String.valueOf(lua);
-			// reportsData[11] = String.valueOf(node);
-			// reportsData[12] = String.valueOf(perl);
-			// reportsData[13] = String.valueOf(php);
-			// reportsData[14] = String.valueOf(python);
-			// reportsData[15] = String.valueOf(ruby);
-			// reportsData[16] = String.valueOf(scala);
-			// reportsData[17] = String.valueOf(others);
 
 			data.add(reportsData);
 		}
@@ -596,7 +530,7 @@ public class TimeseriesStatistics {
 		reportsData[3] = "Top infrastructure per profile";
 		reportsData[4] = "Second infrastructure per profile";
 		reportsData[5] = "Third infrastructure per profile";
-		reportsData[6] = "Forth infrastructure per profile";
+		reportsData[6] = "Fourth infrastructure per profile";
 		reportsData[7] = "Fifth infrastructure per profile";
 
 		data.add(reportsData);
@@ -629,7 +563,7 @@ public class TimeseriesStatistics {
 		}
 		return data;
 	}
-	
+
 	public List<String[]> evalInfraStructureContinents(List<PaasReport> reports) {
 		List<String[]> data = new ArrayList<>(reports.size());
 		String[] reportsData = new String[7];
@@ -668,7 +602,7 @@ public class TimeseriesStatistics {
 			}
 
 			reportsData = new String[7];
-			
+
 			reportsData[0] = report.getMetaInfo().getDate().toString();
 
 			reportsData[1] = String.valueOf(na).replace('.', ',');

@@ -1,11 +1,11 @@
 {
   "id": {
-    "timestamp": 1507295154,
+    "timestamp": 1507743822,
     "machineIdentifier": 6742289,
-    "processIdentifier": 6244,
-    "counter": 12793998
+    "processIdentifier": 12492,
+    "counter": 3435180
   },
-  "commitHash": "0a8be27205e6b35346824d10ade7da89e8a7dc18",
+  "commitHash": "5ece8725bf3dad4fcfdc3170ba6b9134ed178b2f",
   "metaInfo": {
     "date": {
       "year": 2017,
@@ -115,95 +115,7 @@
     "statusReport": {
       "alphaPercent": 1.4285714285714286,
       "betaPercent": 11.428571428571429,
-      "productionPercent": 87.14285714285714,
-      "meanStatusSince": 1798.0625,
-      "medianStatusSince": 1667.0,
-      "varianceStatusSince": 1280929.65234375,
-      "stdevStatusSince": 1131.7816274987636,
-      "oldestStatusSince": [
-        {
-          "key": "OutSystems Platform",
-          "value": 5986
-        },
-        {
-          "key": "Mendix",
-          "value": 4633
-        },
-        {
-          "key": "EngineYard",
-          "value": 4025
-        },
-        {
-          "key": "Software AG Live",
-          "value": 3637
-        },
-        {
-          "key": "brightbox",
-          "value": 3616
-        },
-        {
-          "key": "Force.com",
-          "value": 3538
-        },
-        {
-          "key": "OrangeScape",
-          "value": 3203
-        },
-        {
-          "key": "Apprenda",
-          "value": 3202
-        },
-        {
-          "key": "Acquia Cloud",
-          "value": 3110
-        },
-        {
-          "key": "AppScale",
-          "value": 3107
-        }
-      ],
-      "youngestStatusSince": [
-        {
-          "key": "Meshcloud",
-          "value": 2
-        },
-        {
-          "key": "PodSpace",
-          "value": 219
-        },
-        {
-          "key": "d2c",
-          "value": 241
-        },
-        {
-          "key": "APPUiO",
-          "value": 338
-        },
-        {
-          "key": "Swisscom Application Cloud",
-          "value": 343
-        },
-        {
-          "key": "Predix",
-          "value": 382
-        },
-        {
-          "key": "Flynn",
-          "value": 409
-        },
-        {
-          "key": "Tsuru",
-          "value": 433
-        },
-        {
-          "key": "Dokkur",
-          "value": 434
-        },
-        {
-          "key": "devpack",
-          "value": 480
-        }
-      ]
+      "productionPercent": 87.14285714285714
     },
     "pricingReport": {
       "numberOfModelsPerProfile": [
@@ -295,6 +207,7 @@
       ]
     },
     "scalingReport": {
+      "scalable": 91.42857142857143,
       "verticalPercent": 71.42857142857143,
       "horizontalPercent": 82.85714285714286,
       "autoPercent": 44.285714285714285
@@ -572,10 +485,10 @@
       "extensibleProfilesPercent": 57.14285714285714
     },
     "infrastructuresReport": {
-      "meanInfrastrcturesPerProfile": 5.0600000000000005,
-      "medianInfrastrcturesPerProfile": 2.0,
-      "varianceInfrastrcturesPerProfile": 47.89639999999998,
-      "stdevInfrastrcturesPerProfile": 6.920722505634797,
+      "meanInfrastructuresPerProfile": 5.0600000000000005,
+      "medianInfrastructuresPerProfile": 2.0,
+      "varianceInfrastructuresPerProfile": 47.89639999999998,
+      "stdevInfrastructuresPerProfile": 6.920722505634797,
       "topInfrastructuresPerProfile": [
         {
           "key": "Cloudways",

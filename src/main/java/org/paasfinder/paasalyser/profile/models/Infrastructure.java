@@ -36,10 +36,4 @@ public class Infrastructure {
 	public String getProvider() {
 		return provider;
 	}
-
-	@Override
-	public String toString() {
-		return "Infrastructure [continent=" + continent + ", country=" + country + ", region=" + region
-				+ ", region_code=" + region_code + ", provider=" + provider + "]";
-	}
 }

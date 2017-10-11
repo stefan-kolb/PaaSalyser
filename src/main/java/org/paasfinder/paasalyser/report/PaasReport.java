@@ -50,9 +50,6 @@ public class PaasReport {
 				statistics.getInfrastructures());
 	}
 
-	/**
-	 * Generate an empty report.
-	 */
 	public PaasReport() {
 		super();
 	}
@@ -71,12 +68,6 @@ public class PaasReport {
 
 	public EconomicInfo getEconomicInfo() {
 		return economicInfo;
-	}
-
-	@Override
-	public String toString() {
-		return "PaasReport [id=" + id + ", commitHash=" + commitHash + ", metaInfo=" + metaInfo + ", businessInfo="
-				+ businessInfo + ", economicInfo=" + economicInfo + "]";
 	}
 
 }

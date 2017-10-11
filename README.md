@@ -1,4 +1,4 @@
 # PaaSalyser
 An approach to analysing the paas vendor landscape
 
-Build-Befehl für Gradle: `gradlew eclipse`
+Ein Eclipse-Projekt kann mit diesem Befehl erzeugt werden: `gradlew eclipse`

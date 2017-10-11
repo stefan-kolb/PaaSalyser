@@ -42,10 +42,9 @@ public class TimeseriesCSVPrinter {
 			return;
 		}
 
-		try (//
-				BufferedWriter writer = Files.newBufferedWriter(
-						Paths.get(pathOfTimeseriesReports + "/" + fileName + ".csv"), Charset.defaultCharset(),
-						StandardOpenOption.CREATE_NEW);
+		try (BufferedWriter writer = Files.newBufferedWriter(
+				Paths.get(pathOfTimeseriesReports + "/" + fileName + ".csv"), Charset.defaultCharset(),
+				StandardOpenOption.CREATE_NEW);
 				CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.EXCEL.withDelimiter(':'))) {
 			csvPrinter.printRecords(toPrint);
 		} catch (IOException e) {

@@ -17,16 +17,11 @@ public class PlatformData {
 	}
 
 	public void addPlatform(String name) {
-		// Value is always 1 if a platform is found
+		// Value is always 1 if a platform is present
 		if (platforms.putIfAbsent(name, (long) 1) != null) {
 			platforms.replace(name, platforms.get(name) + 1);
 		}
 		platformProfiles++;
-	}
-
-	@Override
-	public String toString() {
-		return "PlatformData [platformProfiles=" + platformProfiles + ", platforms=" + platforms + "]";
 	}
 
 }

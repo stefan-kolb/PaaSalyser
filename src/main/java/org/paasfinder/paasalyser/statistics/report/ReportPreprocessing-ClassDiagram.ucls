@@ -134,132 +134,134 @@
   </class>  
   <association id="13">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="14" name="typeData">        
-        <position height="18" width="51" x="388" y="7"/>      
-      </attribute>      
-      <multiplicity id="15" minimum="1" maximum="1">        
-        <position height="16" width="11" x="453" y="5"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="16">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="17" name="servicesData">        
-        <position height="18" width="72" x="524" y="338"/>      
-      </attribute>      
-      <multiplicity id="18" minimum="1" maximum="1">        
-        <position height="16" width="11" x="607" y="339"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="19">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="20" name="statusData">        
-        <position height="18" width="60" x="247" y="97"/>      
-      </attribute>      
-      <multiplicity id="21" minimum="1" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="22">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="23" name="hostingData">        
-        <position height="18" width="65" x="560" y="3"/>      
-      </attribute>      
-      <multiplicity id="24" minimum="1" maximum="1">        
-        <position height="16" width="11" x="637" y="9"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="26" name="pricingData">        
-        <position height="18" width="62" x="247" y="259"/>      
-      </attribute>      
-      <multiplicity id="27" minimum="1" maximum="1">        
-        <position height="16" width="11" x="264" y="291"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="28">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="29" name="scalingData">        
-        <position height="18" width="64" x="724" y="137"/>      
-      </attribute>      
-      <multiplicity id="30" minimum="1" maximum="1">        
-        <position height="16" width="11" x="773" y="168"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="31">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="32" name="runtimesData">        
-        <position height="18" width="71" x="714" y="225"/>      
-      </attribute>      
-      <multiplicity id="33" minimum="1" maximum="1">        
-        <position height="16" width="11" x="774" y="253"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="34">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="35" name="infrastructuresData">        
-        <position height="18" width="102" x="676" y="29"/>      
-      </attribute>      
-      <multiplicity id="36" minimum="1" maximum="1">        
-        <position height="16" width="11" x="757" y="46"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="37">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="38" name="platformData">        
+      <attribute id="14" name="platformData">        
         <position height="18" width="69" x="744" y="317"/>      
       </attribute>      
-      <multiplicity id="39" minimum="1" maximum="1">        
+      <multiplicity id="15" minimum="1" maximum="1">        
         <position height="16" width="11" x="788" y="335"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="40">    
+  <association id="16">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="41" name="extensibleData">        
+      <attribute id="17" name="infrastructuresData">        
+        <position height="18" width="102" x="676" y="29"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="1" maximum="1">        
+        <position height="16" width="11" x="757" y="46"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="20" name="extensibleData">        
         <position height="18" width="79" x="320" y="358"/>      
       </attribute>      
-      <multiplicity id="42" minimum="1" maximum="1">        
+      <multiplicity id="21" minimum="1" maximum="1">        
         <position height="16" width="11" x="414" y="369"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="43">    
+  <association id="22">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="44" name="revisionData">        
+      <attribute id="23" name="scalingData">        
+        <position height="18" width="64" x="724" y="137"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="1" maximum="1">        
+        <position height="16" width="11" x="773" y="168"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="26" name="servicesData">        
+        <position height="18" width="72" x="524" y="338"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="1" maximum="1">        
+        <position height="16" width="11" x="607" y="339"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="29" name="statusData">        
+        <position height="18" width="60" x="247" y="97"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="1" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="31">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="32" name="revisionData">        
         <position height="18" width="68" x="148" y="-35"/>      
       </attribute>      
-      <multiplicity id="45" minimum="1" maximum="1">        
+      <multiplicity id="33" minimum="1" maximum="1">        
         <position height="16" width="11" x="243" y="-36"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="34">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="35" name="runtimesData">        
+        <position height="18" width="71" x="714" y="225"/>      
+      </attribute>      
+      <multiplicity id="36" minimum="1" maximum="1">        
+        <position height="16" width="11" x="774" y="253"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="38" name="hostingData">        
+        <position height="18" width="65" x="560" y="3"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="1" maximum="1">        
+        <position height="16" width="11" x="637" y="9"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="41" name="typeData">        
+        <position height="18" width="51" x="388" y="7"/>      
+      </attribute>      
+      <multiplicity id="42" minimum="1" maximum="1">        
+        <position height="16" width="11" x="453" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="44" name="pricingData">        
+        <position height="18" width="62" x="247" y="259"/>      
+      </attribute>      
+      <multiplicity id="45" minimum="1" maximum="1">        
+        <position height="16" width="11" x="264" y="291"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

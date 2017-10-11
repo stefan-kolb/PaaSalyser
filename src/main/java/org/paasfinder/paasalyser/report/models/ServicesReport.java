@@ -13,9 +13,9 @@ public class ServicesReport {
 	private List<SimpleResultLong> topNativeServices;
 	private List<SimpleResultLong> topTypesOfServices;
 
-	public ServicesReport(double nativeServicesProfilesPercent,
-			List<SimpleResultLong> topProfilesWithNativeServicesAmount, List<SimpleResultLong> topNativeServices,
-			List<SimpleResultLong> topTypesOfServices) {
+	public ServicesReport(
+			double nativeServicesProfilesPercent, List<SimpleResultLong> topProfilesWithNativeServicesAmount,
+			List<SimpleResultLong> topNativeServices, List<SimpleResultLong> topTypesOfServices) {
 		super();
 		this.nativeServicesProfilesPercent = nativeServicesProfilesPercent;
 		this.topProfilesWithNativeServicesAmount = topProfilesWithNativeServicesAmount;

@@ -2,9 +2,18 @@ package org.paasfinder.paasalyser.statistics.report.models;
 
 public class ScalingData {
 
+	private long scalable = 0;
 	private long horizontal = 0;
 	private long vertical = 0;
 	private long auto = 0;
+
+	public long getScalable() {
+		return scalable;
+	}
+
+	public void incrementScalable() {
+		scalable++;
+	}
 
 	public long getHorizontal() {
 		return horizontal;
@@ -28,11 +37,6 @@ public class ScalingData {
 
 	public void incrementAuto() {
 		auto++;
-	}
-
-	@Override
-	public String toString() {
-		return "ScalingData [horizontal=" + horizontal + ", vertical=" + vertical + ", auto=" + auto + "]";
 	}
 
 }

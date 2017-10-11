@@ -13,9 +13,4 @@ public class RevisionData {
 	public void addRevision(String key, long value) {
 		revision.put(key, value);
 	}
-
-	@Override
-	public String toString() {
-		return "RevisionData [revision=" + revision + "]";
-	}
 }

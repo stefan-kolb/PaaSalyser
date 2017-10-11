@@ -20,13 +20,8 @@ import org.paasfinder.paasalyser.report.models.StatusReport;
 import org.paasfinder.paasalyser.report.models.TypeReport;
 import org.paasfinder.paasalyser.statistics.report.models.SimpleResultDouble;
 import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ReportStatistics {
-
-	@SuppressWarnings("unused")
-	private final Logger logger = LoggerFactory.getLogger(ReportStatistics.class);
 
 	private ReportPreprocessing dataPreProcessing;
 
@@ -62,36 +57,21 @@ public class ReportStatistics {
 
 		// Evaluate Report
 		profilesCount = reportPreprocessing.getProfiles().size();
-		// logger.info("eolProfiles");
 		eolProfiles = (int) reportPreprocessing.getStatusData().getEol();
 		invalidProfilesCount = reportPreprocessing.getInvalidProfilesCount();
-		// logger.info("evalRevision");
 		evalRevision();
-		// logger.info("evalStatus");
 		evalStatus();
-		// logger.info("evalType");
 		evalType();
-		// logger.info("evalPlatform");
 		evalPlatform();
-		// logger.info("evalHosting");
 		evalHosting();
-		// logger.info("evalPricing");
 		evalPricing();
-		// logger.info("evalScaling");
 		evalScaling();
-		// logger.info("evalRuntimes");
 		evalRuntimes();
-		// logger.info("evalServices");
 		evalServices();
-		// logger.info("evalExtensible");
 		evalExtensible();
-		// logger.info("evalInfrastructures");
 		evalInfrastructures();
 	}
 
-	/**
-	 * Generates empty statistics.
-	 */
 	public ReportStatistics() {
 		super();
 	}
@@ -164,9 +144,7 @@ public class ReportStatistics {
 		percentages[1] = calcPercent(dataPreProcessing.getStatusData().getBeta(), profilesCount);
 		percentages[2] = calcPercent(dataPreProcessing.getStatusData().getProduction(), profilesCount);
 
-		status = new StatusReport(percentages, new QualitativeData(dataPreProcessing.getStatusData().getStatusSince()),
-				getTopTen(dataPreProcessing.getStatusData().getStatusSince()),
-				getMinTen(dataPreProcessing.getStatusData().getStatusSince()));
+		status = new StatusReport(percentages);
 	}
 
 	private void evalType() {
@@ -228,10 +206,11 @@ public class ReportStatistics {
 	}
 
 	private void evalScaling() {
-		double[] percentages = new double[3];
-		percentages[0] = calcPercent(dataPreProcessing.getScalingData().getVertical(), profilesCount);
-		percentages[1] = calcPercent(dataPreProcessing.getScalingData().getHorizontal(), profilesCount);
-		percentages[2] = calcPercent(dataPreProcessing.getScalingData().getAuto(), profilesCount);
+		double[] percentages = new double[4];
+		percentages[0] = calcPercent(dataPreProcessing.getScalingData().getScalable(), profilesCount);
+		percentages[1] = calcPercent(dataPreProcessing.getScalingData().getVertical(), profilesCount);
+		percentages[2] = calcPercent(dataPreProcessing.getScalingData().getHorizontal(), profilesCount);
+		percentages[3] = calcPercent(dataPreProcessing.getScalingData().getAuto(), profilesCount);
 
 		scaling = new ScalingReport(percentages);
 	}
@@ -246,15 +225,6 @@ public class ReportStatistics {
 				.map(entry -> new SimpleResultDouble(entry.getKey(), calcPercent(entry.getValue(), profilesCount)))
 				.collect(Collectors.toCollection(ArrayList::new));
 		runtimesShare.sort((a, b) -> Double.compare(b.getValue(), a.getValue()));
-
-		// // Summarize all elements after the 9th and put it back into the List
-		// if (runtimesShare.size() > 8) {
-		// SimpleResultDouble otherRuntimes = new SimpleResultDouble("Others",
-		// runtimesShare.subList(9, runtimesShare.size()).stream()
-		// .collect(Collectors.summingDouble(entry -> entry.getValue())));
-		// runtimesShare = runtimesShare.subList(0, 9);
-		// runtimesShare.add(otherRuntimes);
-		// }
 
 		runtimes = new RuntimesReport(languageSpecific, polyglot,
 				new QualitativeData(dataPreProcessing.getRuntimesData().getNumberPerProfile()),
@@ -284,8 +254,6 @@ public class ReportStatistics {
 				.getProfileContinents().entrySet().stream()
 				.map(entry -> new SimpleResultDouble(entry.getKey(),
 						calcPercent(entry.getValue(),
-								// public and virtual_private are hosted in data
-								// centers, private is not
 								dataPreProcessing.getHostingData().getPublic()
 										+ dataPreProcessing.getHostingData().getVirtualPrivate())))
 				.collect(Collectors.toCollection(ArrayList::new));
@@ -300,15 +268,13 @@ public class ReportStatistics {
 				getTopTen(dataPreProcessing.getInfrastructuresData().getProvider()));
 	}
 
-	// Private Methods that are used to calculate several results
+	// Private Methods to calculate several results
 
 	private List<SimpleResultLong> getTopTen(Map<String, Long> list) {
 		List<SimpleResultLong> results = list.entrySet().stream().map(entry -> {
 			return new SimpleResultLong(entry.getKey(), entry.getValue());
 		}).collect(Collectors.toCollection(ArrayList::new));
-		// Sort descending
 		results.sort((x, y) -> Long.compare(y.getValue(), x.getValue()));
-		// Return the Top 5 Elements
 		if (list.size() >= 10) {
 			return results.subList(0, 10);
 		} else
@@ -316,20 +282,7 @@ public class ReportStatistics {
 	}
 
 	private List<SimpleResultLong> getTopTen(List<SimpleResultLong> list) {
-		// Sort descending
 		list.sort((x, y) -> Long.compare(y.getValue(), x.getValue()));
-		// Return the Top 5 Elements
-		if (list.size() >= 10) {
-			return list.subList(0, 10);
-		} else
-			return list;
-	}
-
-	@SuppressWarnings("unused")
-	private List<SimpleResultDouble> getTopTenDouble(List<SimpleResultDouble> list) {
-		// Sort descending
-		list.sort((x, y) -> Double.compare(y.getValue(), x.getValue()));
-		// Return the Top 5 Elements
 		if (list.size() >= 10) {
 			return list.subList(0, 10);
 		} else
@@ -337,7 +290,6 @@ public class ReportStatistics {
 	}
 
 	private List<SimpleResultDouble> sortDescendingDouble(List<SimpleResultDouble> list) {
-		// Sort descending
 		list.sort((x, y) -> Double.compare(y.getValue(), x.getValue()));
 		return list;
 	}
@@ -346,24 +298,11 @@ public class ReportStatistics {
 		List<SimpleResultLong> results = list.entrySet().stream().map(entry -> {
 			return new SimpleResultLong(entry.getKey(), entry.getValue());
 		}).collect(Collectors.toCollection(ArrayList::new));
-		// Sort descending
 		results.sort(Comparator.comparingLong(SimpleResultLong::getValue));
-		// Return the Top 5 Elements
 		if (list.size() >= 10) {
 			return results.subList(0, 10);
 		} else
 			return results;
-	}
-
-	@SuppressWarnings("unused")
-	private List<SimpleResultLong> getMinFive(List<SimpleResultLong> list) {
-		// Sort descending
-		list.sort(Comparator.comparingLong(SimpleResultLong::getValue));
-		// Return the Min 5 Elements
-		if (list.size() >= 5) {
-			return list.subList(0, 5);
-		} else
-			return list;
 	}
 
 	private double calcPercent(Number a, Number b) {

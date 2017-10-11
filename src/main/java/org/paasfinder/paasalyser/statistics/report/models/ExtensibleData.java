@@ -12,9 +12,4 @@ public class ExtensibleData {
 		_true++;
 	}
 
-	@Override
-	public String toString() {
-		return "ExtensibleData [_true=" + _true + "]";
-	}
-
 }

@@ -63,27 +63,16 @@ public class ReportPreprocessing {
 		this.localDate = localDate;
 
 		// Execute all evaluations
-		// logger.info("evalRevision");
 		evalRevision();
-		// logger.info("evalStatus");
 		evalStatus();
-		// logger.info("evalType");
 		evalType();
-		// logger.info("evalPlatform");
 		evalPlatform();
-		// logger.info("evalHosting");
 		evalHosting();
-		// logger.info("evalPricing");
 		evalPricing();
-		// logger.info("evalScaling");
 		evalScaling();
-		// logger.info("evalRuntimes");
 		evalRuntimes();
-		// logger.info("evalServices");
 		evalServices();
-		// logger.info("evalExtensible");
 		evalExtensible();
-		// logger.info("evalInfrastructures");
 		evalInfrastructures();
 	}
 
@@ -173,7 +162,6 @@ public class ReportPreprocessing {
 
 	private void evalStatus() {
 		for (PaasProfile profile : profiles) {
-			// Evaluate Status
 			if (profile.getStatus().equalsIgnoreCase("production")) {
 				statusData.incrementProduction();
 			} else if (profile.getStatus().equalsIgnoreCase("alpha")) {
@@ -181,21 +169,6 @@ public class ReportPreprocessing {
 			} else if (profile.getStatus().equalsIgnoreCase("beta")) {
 				statusData.incrementBeta();
 			}
-
-			// Evaluate StatusSince
-			if (profile.getStatusSince() == null || profile.getStatusSince().length() < 10) {
-				// The first 10 chars of any datetime-format is always the date
-				continue;
-			}
-			try {
-				statusData.addStatusSince(profile.getName(),
-						ChronoUnit.DAYS.between(LocalDate.parse(profile.getStatusSince().substring(0, 10)), localDate));
-			} catch (DateTimeParseException e) {
-				logger.error("Failed to parse StatusSince");
-				// Failing here isn't too crucial.
-				continue;
-			}
-
 		}
 	}
 
@@ -216,12 +189,9 @@ public class ReportPreprocessing {
 		platformData = new PlatformData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getPlatform() == null) {
-				// logger.info("Platform was null in: " + profile.getName());
 				continue;
 			}
 			if (profile.getPlatform().equals("null")) {
-				// logger.info("Platform was String:null in: " +
-				// profile.getName());
 				continue;
 			}
 			platformData.addPlatform(profile.getPlatform());
@@ -250,15 +220,12 @@ public class ReportPreprocessing {
 		pricingData = new PricingData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getPricings() == null) {
-				// logger.info("Pricings was null in: " + profile.getName());
 				continue;
 			}
 
 			if (profile.getPricings().length == 0) {
 				pricingData.incrementZeroModels();
-				// logger.info("Pricings was empty in: " + profile.getName());
 				continue;
-
 			} else if (profile.getPricings().length == 1) {
 				pricingData.incrementOneModel();
 			} else if (profile.getPricings().length == 2) {
@@ -281,8 +248,6 @@ public class ReportPreprocessing {
 				}
 
 				if (profilePricing.getPeriod() == null) {
-					// logger.info("PricingPeriod was null in: " +
-					// profile.getName());
 					continue;
 				}
 				if (profilePricing.getModel().equals(PricingModel.free)) {
@@ -305,18 +270,26 @@ public class ReportPreprocessing {
 
 		for (PaasProfile profile : profiles) {
 			if (profile.getScaling() == null) {
-				// logger.info("Scaling was null in: " + profile.getName());
 				continue;
 			}
 
+			boolean scalable = false;
+
 			if (profile.getScaling().getVertical()) {
 				scalingData.incrementVertical();
+				scalable = true;
 			}
 			if (profile.getScaling().getHorizontal()) {
 				scalingData.incrementHorizontal();
+				scalable = true;
 			}
 			if (profile.getScaling().getAuto()) {
 				scalingData.incrementAuto();
+				scalable = true;
+			}
+
+			if (scalable) {
+				scalingData.incrementScalable();
 			}
 		}
 	}
@@ -325,11 +298,9 @@ public class ReportPreprocessing {
 		runtimesData = new RuntimeData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getRuntimes() == null) {
-				// logger.info("Runtimes was null in: " + profile.getName());
 				continue;
 			}
 			if (profile.getRuntimes().length == 0) {
-				// logger.info("Runtimes was empty in: " + profile.getName());
 				continue;
 			}
 
@@ -344,14 +315,13 @@ public class ReportPreprocessing {
 		servicesData = new ServicesData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getServices() == null) {
-				// logger.info("Services was null in: " + profile.getName());
 				continue;
 			}
+
 			if (profile.getServices().getNative() == null) {
-				// logger.info("NativeServices was null in: " +
-				// profile.getName());
 				continue;
 			}
+
 			servicesData.addProfileWithNativeServices(profile.getName(), profile.getServices().getNative().length);
 			for (NativeService nativeService : profile.getServices().getNative()) {
 				if (nativeService == null || nativeService.getName() == null || nativeService.getName().isEmpty()) {
@@ -369,7 +339,6 @@ public class ReportPreprocessing {
 	private void evalExtensible() {
 		extensibleData = new ExtensibleData();
 		for (PaasProfile profile : profiles) {
-			// boolean can only be false or true, not null!
 			if (profile.isExtensible() == true) {
 				extensibleData.incrementTrue();
 			}
@@ -380,13 +349,14 @@ public class ReportPreprocessing {
 		infrastructuresData = new InfrastructureData();
 		for (PaasProfile profile : profiles) {
 			if (profile.getInfrastructures() == null) {
-				// logger.info("Infrastructures was null in: " +
-				// profile.getName());
 				continue;
 			}
 			if (profile.getInfrastructures().length == 0) {
-				// logger.info("Infrastructures was empty in: " +
-				// profile.getName());
+				continue;
+			}
+			if (!(profile.getHosting().getPublic() || profile.getHosting().getVirtualPrivate())) {
+				// There are no infrastructures if no public or virtual-private
+				// hosting is offered
 				continue;
 			}
 
@@ -398,16 +368,7 @@ public class ReportPreprocessing {
 				infrastructuresData.addRegion(infrastructure.getRegion());
 				infrastructuresData.addProvider(infrastructure.getProvider());
 			}
-		}
-	}
 
-	@Override
-	public String toString() {
-		return "ReportPreprocessing [profiles=" + profiles + "\n invalidProfilesCount=" + invalidProfilesCount
-				+ "\n revisionData=" + revisionData + "\n statusData=" + statusData + "\n typeData=" + typeData
-				+ "\n platformData=" + platformData + "\n hostingData=" + hostingData + "\n pricingData=" + pricingData
-				+ "\n scalingData=" + scalingData + "\n runtimesData=" + runtimesData + "\n servicesData="
-				+ servicesData + "\n extensibleData=" + extensibleData + "\n infrastructuresData=" + infrastructuresData
-				+ "]";
+		}
 	}
 }

@@ -9,10 +9,10 @@ import org.paasfinder.paasalyser.statistics.report.models.SimpleResultLong;
 @Embedded
 public class InfrastructuresReport {
 
-	private double meanInfrastrcturesPerProfile;
-	private double medianInfrastrcturesPerProfile;
-	private double varianceInfrastrcturesPerProfile;
-	private double stdevInfrastrcturesPerProfile;
+	private double meanInfrastructuresPerProfile;
+	private double medianInfrastructuresPerProfile;
+	private double varianceInfrastructuresPerProfile;
+	private double stdevInfrastructuresPerProfile;
 	private List<SimpleResultLong> topInfrastructuresPerProfile;
 
 	private List<SimpleResultDouble> percentOfProfilesPerContinent;
@@ -23,14 +23,14 @@ public class InfrastructuresReport {
 	private List<SimpleResultLong> topProviders;
 
 	public InfrastructuresReport(List<SimpleResultLong> topInfrastructuresPerProfile,
-			QualitativeData infrastrcturesPerProfile, List<SimpleResultDouble> percentOfProfilesPerContinent,
+			QualitativeData infrastructuresPerProfile, List<SimpleResultDouble> percentOfProfilesPerContinent,
 			List<SimpleResultLong> topContinents, List<SimpleResultLong> topCountries,
 			List<SimpleResultLong> topRegions, List<SimpleResultLong> topProviders) {
 		super();
-		this.meanInfrastrcturesPerProfile = infrastrcturesPerProfile.getMean();
-		this.medianInfrastrcturesPerProfile = infrastrcturesPerProfile.getMedian();
-		this.varianceInfrastrcturesPerProfile = infrastrcturesPerProfile.getVariance();
-		this.stdevInfrastrcturesPerProfile = infrastrcturesPerProfile.getStDev();
+		this.meanInfrastructuresPerProfile = infrastructuresPerProfile.getMean();
+		this.medianInfrastructuresPerProfile = infrastructuresPerProfile.getMedian();
+		this.varianceInfrastructuresPerProfile = infrastructuresPerProfile.getVariance();
+		this.stdevInfrastructuresPerProfile = infrastructuresPerProfile.getStDev();
 		this.topInfrastructuresPerProfile = topInfrastructuresPerProfile;
 		this.percentOfProfilesPerContinent = percentOfProfilesPerContinent;
 		this.topContinents = topContinents;
@@ -48,19 +48,19 @@ public class InfrastructuresReport {
 	}
 
 	public double getMeanInfrastrcturesPerProfile() {
-		return meanInfrastrcturesPerProfile;
+		return meanInfrastructuresPerProfile;
 	}
 
 	public double getMedianInfrastrcturesPerProfile() {
-		return medianInfrastrcturesPerProfile;
+		return medianInfrastructuresPerProfile;
 	}
 
 	public double getVarianceInfrastrcturesPerProfile() {
-		return varianceInfrastrcturesPerProfile;
+		return varianceInfrastructuresPerProfile;
 	}
 
 	public double getStdevInfrastrcturesPerProfile() {
-		return stdevInfrastrcturesPerProfile;
+		return stdevInfrastructuresPerProfile;
 	}
 
 	public List<SimpleResultDouble> getPercentOfProfilesPerContinent() {

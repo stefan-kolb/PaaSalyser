@@ -145,11 +145,6 @@ public class RepositorySniffer implements AutoCloseable {
 
 		logger.info("Scanning relevant commits");
 		for (RevCommit commit : profileChangedCommits) {
-
-//			if (commit.getName().equals("7f132fabb4e220f794b4926309dc8d48c794768c")) {
-//				logger.info("Initial commit reached");
-//				continue;
-//			}
 			if (database.contains(commit.getName())) {
 				logger.info("Commit already in Datastore");
 				continue;
