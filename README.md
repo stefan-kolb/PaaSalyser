@@ -1,4 +1,6 @@
 # PaaSalyser
 An approach to analysing the paas vendor landscape
 
-Ein Eclipse-Projekt kann mit diesem Befehl erzeugt werden: `gradlew eclipse`
+An Eclipse project can be created via this command: `cmd gradlew eclipse`
+
+Tested only in Windows10
